@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relativeLayout"
+    android:id="@+id/layout_action_bar"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
 
+    <!-- 标题背景 -->
 
+    <com.hoyotech.ctgames.viewdef.TitleRoundImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/action_bar_bg_horizontal" />
+
+    <!-- home图标 -->
+    <ImageView
+        android:id="@+id/action_bar_button_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/action_bar_button"
+        android:onClick="onClick"
+        android:src="@drawable/action_bar_home"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dip"
+        android:visibility="gone" />
+
+    <!-- 标题文字 -->
     <TextView
         android:id="@+id/action_bar_title"
         android:layout_width="wrap_content"
@@ -17,8 +40,42 @@
         android:shadowDy="2.5"
         android:shadowRadius="1.0"
         android:singleLine="true"
-        android:text="@string/home"
-        android:textColor="#ffd8e0e9"
+        android:text="@string/play_app"
+        android:textColor="#FFFFFFFF"
         android:textSize="18.0sp" />
 
+    <!-- 下载管理 -->
+    <RelativeLayout
+        android:id="@+id/action_bar_download_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true" >
+
+        <!-- 下载管理按钮 -->
+        <ImageView
+            android:id="@+id/action_bar_button_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dip"
+            android:paddingRight="5dip"
+            android:paddingTop="5dip"
+            android:src="@drawable/action_bar_download"
+            android:visibility="gone"/>
+
+        <!-- 应用提示数目 -->
+        <TextView
+            android:id="@+id/action_bar_download_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/action_bar_button_download"
+            android:layout_alignRight="@id/action_bar_button_download"
+            android:gravity="center"
+            android:background="@drawable/notice_dot"
+            android:textColor="#ffffff"
+            android:textSize="6sp"
+            android:text="5"
+            android:visibility="gone" />
+    </RelativeLayout>
 </RelativeLayout>

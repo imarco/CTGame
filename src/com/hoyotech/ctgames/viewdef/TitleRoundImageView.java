@@ -10,8 +10,9 @@ import android.widget.ImageView;
 
 /**
  * 自定义圆角矩形图片类
+ * 
  * @author Tian
- *
+ * 
  */
 public class TitleRoundImageView extends ImageView {
 
@@ -31,12 +32,16 @@ public class TitleRoundImageView extends ImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         Path clipPath = new Path();
+        Path clipPath2 = new Path();
         int w = this.getWidth();
         int h = this.getHeight();
-        
-        clipPath.addRoundRect(new RectF(0, 0, w, h), 4.0f, 4.0f,
+
+        clipPath.addRoundRect(new RectF(0, 0, w, h * 2), 15f, 15f,
                 Path.Direction.CW);
+        clipPath2.addRect(new RectF(0, 0, w, h), Path.Direction.CW);
+
         canvas.clipPath(clipPath);
+        canvas.clipPath(clipPath2);
         super.onDraw(canvas);
     }
 }
