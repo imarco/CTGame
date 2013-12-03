@@ -1,0 +1,4 @@
+<resources>
+<color name="color_text_normal">#80000000</color>
+<color name="color_text_selected">#FFFFFFFF</color>
+    </resources>

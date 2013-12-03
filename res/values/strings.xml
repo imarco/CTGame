@@ -5,4 +5,8 @@
     <string name="big_wheel">大转盘</string>
     <string name="play_app">玩应用</string>
 
+    <!-- 玩应用首页 -->
+    <string name="app_recommend">精品推荐</string>
+    <string name="app_collection">大礼包</string>
+    <string name="app_categories">分类</string>
 </resources>

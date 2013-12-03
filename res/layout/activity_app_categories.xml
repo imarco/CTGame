@@ -7,5 +7,8 @@
     android:shadowDx="5"
     android:shadowDy="5"
     android:shadowRadius="10">
-    <include layout="@layout/action_bar_layout"></include>
-</RelativeLayout>
+    <TextView
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:text="@string/app_categories"/>
+    </RelativeLayout>
