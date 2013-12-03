@@ -1,4 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-<color name="color_text_normal">#80000000</color>
-<color name="color_text_selected">#FFFFFFFF</color>
-    </resources>
+
+    <color name="home_traffic_left_bg">#f8f3f0</color>
+    <color name="home_line">#f5f1ee</color>
+    <color name="frame_bg">#f4f5f8</color>
+    <color name="tab_text">#7c889b</color>
+    <color name="tab_text_normal">#ffffff</color>
+
+</resources>
