@@ -21,6 +21,8 @@ import android.view.SurfaceView;
  */
 public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 
+
+
     private float screenHight, screenWidth;// 屏幕的宽和高
     private float radius;// 绘制圆的半径
     private float circleRadius; // 半径
@@ -34,6 +36,7 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 
     private int[] itemColor;// 选项颜色
     private String[] itemText;// 选项文字
+
 
     private Paint mPaint;
     private Paint textPaint;
@@ -53,7 +56,7 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
         super(context, attr);
     }
 
-    public void initAll(int[] itemColor, String[] itemText) {
+    public void initAll(int[] itemColor, String[] itemText, float awardRadius) {
         // 创建一个新的SurfaceHolder， 并分配这个类作为它的回调(callback)
         holder = getHolder();
         holder.addCallback(this);
@@ -70,7 +73,8 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
         textPaint.setColor(itemColor[itemColor.length - 1]);
 
         // 半径
-        radius = 180;
+        radius = awardRadius;
+        Log.i("wheel", awardRadius + "");
         circleRadius = 30;
         startAngle = 0;
         // 加速度
@@ -166,10 +170,10 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         // *********************************画上各个Item的名称*********************************
-        public void drawText(RectF localRectf, float localStartAngle,
-                             float localSweepAngle, String str) {
+        public void drawAward(RectF localRectf, float localStartAngle,
+                              float localSweepAngle, String str) {
             // 旋转弧度
-            float l = (float) ((-(localStartAngle + sweepAngle / 2) * Math.PI) / 180);
+            float rotateAngle = (float) ((-(localStartAngle + sweepAngle / 2) * Math.PI) / 180);
 
             // 中心点坐标
             float centerX = screenWidth / 2;
@@ -178,10 +182,10 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
             // 初始位置
             float pointX = screenWidth / 2 + radius;
             float pointY = screenHight / 2;
-            float newX = (float) ((pointX - centerX) * Math.cos(l)
-                    + (pointY - centerY) * Math.sin(l) + centerX);
-            float newY = (float) (-(pointX - centerX) * Math.sin(l)
-                    + (pointY - centerY) * Math.cos(l) + centerY);
+            float newX = (float) ((pointX - centerX) * Math.cos(rotateAngle)
+                    + (pointY - centerY) * Math.sin(rotateAngle) + centerX);
+            float newY = (float) (-(pointX - centerX) * Math.sin(rotateAngle)
+                    + (pointY - centerY) * Math.cos(rotateAngle) + centerY);
 
             path = new Path();
             path.moveTo(screenWidth / 2, screenHight / 2);
@@ -197,7 +201,7 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
         public void drawItem(RectF localRectf) {
             float temp = startAngle;
             for (int i = 0; i < itemCount; i++) {
-                mPaint.setColor(itemColor[i]);
+                mPaint.setColor(getResources().getColor(itemColor[i]));
                 // startAngle为每次移动的角度大小
                 sweepAngle = (float) (360 / itemCount);
 				/*
@@ -207,7 +211,7 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 				 */
                 mCanvas.drawArc(localRectf, temp, sweepAngle, true, mPaint);
                 mCanvas.save();
-                drawText(localRectf, temp, sweepAngle, itemText[i]);
+                drawAward(localRectf, temp, sweepAngle, itemText[i]);
                 temp += sweepAngle;
             }
         }

@@ -13,7 +13,19 @@
 
     <color name="info_bg_color">#438CB9</color>
     <color name="info_txt_color">#FFDE00</color>
-
     <color name="bg_color">#639EC3</color>
+
+    <!-- 大转盘的各个扇形颜色 -->
+    <color name="wheel_award_color1">#ffd2a01b</color>
+    <color name="wheel_award_color2">#ff437810</color>
+    <color name="wheel_award_color3">#ff03ca55</color>
+    <color name="wheel_award_color4">#ff05767e</color>
+    <color name="wheel_award_color5">#ff114c4f</color>
+    <color name="wheel_award_color6">#ff0e5ac9</color>
+    <color name="wheel_award_color7">#ff312974</color>
+    <color name="wheel_award_color8">#ffbe4899</color>
+    <color name="wheel_award_color9">#ffaf390b</color>
+    <color name="wheel_award_color10">#ff842223</color>
+
 
 </resources>

@@ -8,6 +8,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.viewdef.DynamicImage;
@@ -37,9 +41,24 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
 
     private int[] itemColor;//选项颜色
     private String[] itemText;//选项文字
+    private int[] allWheelAwardColors = new int[] {
+            R.color.wheel_award_color1,
+            R.color.wheel_award_color2,
+            R.color.wheel_award_color3,
+            R.color.wheel_award_color4,
+            R.color.wheel_award_color5,
+            R.color.wheel_award_color6,
+            R.color.wheel_award_color7,
+            R.color.wheel_award_color8,
+            R.color.wheel_award_color9,
+            R.color.wheel_award_color10}; // 转盘奖品的颜色
+
     public ArrayList<String> arrayList;
     private float surfacViewWidth = 0;
     private float surfacViewHeight = 0;
+
+    private float radius;
+    private boolean hasMeasured = false;
 
     private SoundPool soundPool = null;
     private int explosionId = 0;    //内存加载ID
@@ -49,7 +68,30 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actity_layout_big_wheel_award);
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        initView();
+
+
+        final FrameLayout layout = (FrameLayout)findViewById(R.id.wheel_award);
+        ViewTreeObserver vto = layout.getViewTreeObserver();
+
+
+        vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener()
+        {
+            public boolean onPreDraw()
+            {
+                if (hasMeasured == false)
+                {
+                    radius = findViewById(R.id.bg).getMeasuredWidth() / 2 * (200/211f);
+
+                    //获取到宽度和高度后，可用于计算
+                    hasMeasured = true;
+
+                    initView();
+
+                }
+                return true;
+            }
+        });
+
     }
 
     protected void onResume() {
@@ -85,7 +127,7 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
         lotteryView = (LotteryView) this.findViewById(R.id.lotteryView);
 
         arrowBtn.setOnClickListener(this);
-        lotteryView.initAll(itemColor, itemText);
+        lotteryView.initAll(itemColor, itemText, radius);
         lotteryView.setRotateListener(this);
         lotteryView.start();
 
@@ -104,16 +146,11 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
 
         // 图片和文字在之前已经获取到，直接拿来用
         // 转盘选项的颜色
-        itemColor = new int[]{
-                0xFFB0E0E6,// 粉蓝色　
-                0xFF444444,// 深灰色
-                0xFF008B8B,// 暗青色
-                0xFFFFA500,// 橙色
-                0xFF7FFF00,// 黄绿色
-                0xFFF08080,// 亮珊瑚色
-                0xFFB0C4DE,// 亮钢兰色
-                0xFFFFFFFF // 白色
-        };
+        int totalAwardCount = 8;
+        itemColor = new int[totalAwardCount];
+        for (int i = 0; i < totalAwardCount; i++) {
+            itemColor[i] = allWheelAwardColors[i % allWheelAwardColors.length];
+        }
 
         // 转盘选项的名称
         itemText = new String[]{"恭喜发财", "智能手机", "5元话费", "2元话费", "1元话费", "恭喜发财"};

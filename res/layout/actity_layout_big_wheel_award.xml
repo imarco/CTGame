@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/big_wheel"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@color/info_bg_color">
@@ -24,17 +25,21 @@
             android:textSize="25sp"/>
 
     <FrameLayout
+            android:id="@+id/wheel_award"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_below="@id/info"
             android:gravity="center">
 
+        <!-- 转盘中间的扇形区域，也就是奖项设置 -->
         <com.hoyotech.ctgames.viewdef.LotteryView
                 android:id="@+id/lotteryView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"/>
 
+        <!-- 转盘的箭头 -->
         <ImageView
                 android:id="@+id/arrow"
                 android:layout_gravity="center"
@@ -44,15 +49,16 @@
                 />
 
 
+        <!-- 转盘的外框 -->
         <ImageView
                 android:id="@+id/bg"
-                android:contentDescription="@string/bg_desc"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:background="@drawable/bg"
+                android:background="@drawable/wheel_bg"
                 />
 
+        <!-- 转盘的按钮 -->
         <com.hoyotech.ctgames.viewdef.DynamicImage
                 android:id="@+id/arrowBtn"
                 android:layout_width="wrap_content"
