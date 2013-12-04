@@ -55,7 +55,7 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/button_small_blue"
-                android:text="下载"
+                android:text="安装"
                 android:textColor="@color/tab_text_normal"
                 android:textSize="@dimen/button_blue_text_size"
                 >
