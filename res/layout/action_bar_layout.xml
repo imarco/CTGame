@@ -23,7 +23,15 @@
         android:onClick="onClick"
         android:src="@drawable/action_bar_home"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dip"
+        android:visibility="visible" />
+    <ImageView
+        android:id="@+id/action_bar_button_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="onClick"
+        android:src="@drawable/action_bar_down"
+        android:layout_centerVertical="true"
         android:visibility="gone" />
 
     <!-- 标题文字 -->
@@ -57,19 +65,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="5dip"
-            android:paddingRight="5dip"
-            android:paddingTop="5dip"
             android:src="@drawable/action_bar_download"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <!-- 应用提示数目 -->
         <TextView
             android:id="@+id/action_bar_download_notice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/action_bar_button_download"
-            android:layout_alignRight="@id/action_bar_button_download"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="8dip"
+            android:layout_marginTop="5dip"
             android:gravity="center"
             android:background="@drawable/notice_dot"
             android:textColor="#ffffff"

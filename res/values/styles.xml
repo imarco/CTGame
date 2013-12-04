@@ -17,4 +17,18 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+
+
+    <style name="tab_app_home_style">
+        <item name="android:textSize">@dimen/home_tab_font_size</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingTop">@dimen/home_tab_padding_top</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:button">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingBottom">@dimen/home_tab_padding_bottom</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
 </resources>

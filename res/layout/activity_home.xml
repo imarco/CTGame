@@ -23,8 +23,7 @@
             android:layout_alignParentBottom="true"
             android:layout_below="@id/action_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tabhost_home" >
+            android:layout_height="wrap_content" >
         <include layout="@layout/tabhost_home"></include>"
     </RelativeLayout>
 
