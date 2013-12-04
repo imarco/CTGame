@@ -42,58 +42,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/layout_app_task_download_left"
-            android:layout_toLeftOf="@id/button_app_task_download_manager"
             android:layout_alignTop="@id/layout_app_task_download_left"
             android:layout_alignBottom="@id/layout_app_task_download_left"
             android:layout_marginLeft="5dp"
             >
-
-        <!-- 应用的名字和大小 -->
-        <TextView
-                android:id="@+id/text_app_task_download_name"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_alignParentTop="true"
-                android:text="aaa">
-
-        </TextView>
-
-
-        <!-- 下载管理按钮 -->
-        <ProgressBar
-                android:id="@+id/progress_bar_app_task_download"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@id/text_app_task_download_speed"
-                android:layout_alignParentLeft="true"
-
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                >
-        </ProgressBar>
-
-        <!-- 下载速度 -->
-        <TextView
-                android:id="@+id/text_app_task_download_speed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/button_app_task_download_manager"
-                android:layout_marginRight="5dp"
-                android:text="20k/s"
-                android:textColor="@color/tab_text">
-        </TextView>
-
-        <!-- 应用所获得的奖励 -->
-        <TextView
-                android:id="@+id/text_simple_info_app_bonus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="hhh">
-        </TextView>
-
 
         <!-- 下载管理按钮 -->
         <Button
@@ -109,8 +61,51 @@
                 >
         </Button>
 
+        <!-- 下载速度 -->
+        <TextView
+                android:id="@+id/text_app_task_download_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/button_app_task_download_manager"
+                android:layout_marginRight="5dp"
+                android:text="20k/s"
+                android:textColor="@color/tab_text">
+        </TextView>
+
+        <!-- 下载管理按钮 -->
+        <ProgressBar
+                android:id="@+id/progress_bar_app_task_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/text_app_task_download_speed"
+                android:layout_alignParentLeft="true"
+
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                >
+        </ProgressBar>
+
+        <!-- 应用的名字和大小 -->
+        <TextView
+                android:id="@+id/text_app_task_download_name"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
+                android:text="aaa">
+
+        </TextView>
+
+        <!-- 应用所获得的奖励 -->
+        <TextView
+                android:id="@+id/text_simple_info_app_bonus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="hhh">
+        </TextView>
 
     </RelativeLayout>
-
 
 </RelativeLayout>

@@ -42,11 +42,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/layout_app_package_info_left"
-            android:layout_toLeftOf="@id/button_app_task_install_download_manager"
-            android:layout_alignTop="@id/layout_app_task_install_left"
+            android:layout_alignTop="@id/layout_app_package_info_left"
             android:layout_alignBottom="@id/layout_app_package_info_left"
             android:layout_marginLeft="5dp"
             >
+
+        <!-- 打开应用包的按钮 -->
+        <Button
+                android:id="@+id/button_package_info_open_package"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_small_blue"
+                android:text="打开礼包"
+                android:gravity="center"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="@dimen/button_blue_text_size"
+                >
+        </Button>
 
         <!-- 应用的名字和大小 -->
         <TextView
@@ -84,24 +98,6 @@
                 android:text="3010">
         </TextView>
 
-
-        <!-- 打开应用包的按钮 -->
-        <Button
-                android:id="@+id/button_package_info_open_package"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/button_small_blue"
-                android:text="打开礼包"
-                android:gravity="center"
-                android:textColor="@color/tab_text_normal"
-                android:textSize="@dimen/button_blue_text_size"
-                >
-        </Button>
-
-
     </RelativeLayout>
-
 
 </RelativeLayout>

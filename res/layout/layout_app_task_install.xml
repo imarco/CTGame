@@ -42,11 +42,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/layout_app_task_install_left"
-            android:layout_toLeftOf="@id/button_app_task_install_download_manager"
             android:layout_alignTop="@id/layout_app_task_install_left"
             android:layout_alignBottom="@id/layout_app_task_install_left"
             android:layout_marginLeft="5dp"
             >
+
+        <!-- 下载管理按钮 -->
+        <Button
+                android:id="@+id/button_app_task_install_download_manager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_small_blue"
+                android:text="下载"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="@dimen/button_blue_text_size"
+                >
+        </Button>
 
         <!-- 应用的名字和大小 -->
         <TextView
@@ -82,23 +95,6 @@
                 android:text="hhh">
         </TextView>
 
-
-        <!-- 下载管理按钮 -->
-        <Button
-                android:id="@+id/button_app_task_install_download_manager"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/button_small_blue"
-                android:text="下载"
-                android:textColor="@color/tab_text_normal"
-                android:textSize="@dimen/button_blue_text_size"
-                >
-        </Button>
-
-
     </RelativeLayout>
-
 
 </RelativeLayout>

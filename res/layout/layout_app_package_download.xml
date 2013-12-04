@@ -41,11 +41,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/layout_app_package_download_left"
-            android:layout_toLeftOf="@id/button_app_package_download_manager"
             android:layout_alignTop="@id/layout_app_package_download_left"
             android:layout_alignBottom="@id/layout_app_package_download_left"
             android:layout_marginLeft="5dp"
             >
+
+        <!-- 下载管理按钮 -->
+        <Button
+                android:id="@+id/button_app_package_download_manager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_small_blue"
+                android:text="开始下载"
+                android:gravity="center"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="@dimen/button_blue_text_size"
+                >
+        </Button>
 
         <!-- 应用包的介绍 -->
         <TextView
@@ -71,24 +85,6 @@
                 android:text="6次 3010">
         </TextView>
 
-
-        <!-- 下载管理按钮 -->
-        <Button
-                android:id="@+id/button_app_package_download_manager"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/button_small_blue"
-                android:text="开始下载"
-                android:gravity="center"
-                android:textColor="@color/tab_text_normal"
-                android:textSize="@dimen/button_blue_text_size"
-                >
-        </Button>
-
-
     </RelativeLayout>
-
 
 </RelativeLayout>
