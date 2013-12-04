@@ -1,7 +1,6 @@
 package com.hoyotech.ctgames.activity;
 
 import android.widget.TextView;
-import com.hoyotech.ctgames.R;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +9,8 @@ import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+
+import com.hoyotech.ctgames.R;
 
 public class HomeActivity extends FragmentActivity implements OnClickListener {
 
