@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <RelativeLayout
+            android:id="@+id/layout_app_package_download_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            >
+
+        <!-- 应用包的图标 -->
+        <ImageView
+                android:id="@+id/image_app_package"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image_app_package"
+                >
+        </ImageView>
+
+        <!-- 应用包的大小 -->
+        <TextView
+                android:id="@+id/button_app_package_download_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_app_package"
+                android:layout_alignLeft="@id/image_app_package"
+                android:layout_alignRight="@id/image_app_package"
+                android:layout_marginTop="3dp"
+                android:text="100M"
+                android:gravity="center"
+                android:textAlignment="center"
+                >
+        </TextView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/layout_app_package_download_middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/layout_app_package_download_left"
+            android:layout_toLeftOf="@id/button_app_package_download_manager"
+            android:layout_alignTop="@id/layout_app_package_download_left"
+            android:layout_alignBottom="@id/layout_app_package_download_left"
+            android:layout_marginLeft="5dp"
+            >
+
+        <!-- 应用包的介绍 -->
+        <TextView
+                android:id="@+id/text_app_package_download_name"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@id/button_app_package_download_manager"
+                android:textSize="12sp"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentLeft="true"
+                android:text="这个礼包包含了一些信息这个礼包包含了一些信息这个礼包包含了一些信息这个礼包包含了一些信息">
+
+        </TextView>
+
+
+        <!-- 应用所获得的奖励和摇奖次数 -->
+        <TextView
+                android:id="@+id/text_app_package_download_bonus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="6次 3010">
+        </TextView>
+
+
+        <!-- 下载管理按钮 -->
+        <Button
+                android:id="@+id/button_app_package_download_manager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_small_blue"
+                android:text="开始下载"
+                android:gravity="center"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="@dimen/button_blue_text_size"
+                >
+        </Button>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

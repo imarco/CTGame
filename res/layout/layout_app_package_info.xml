@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <RelativeLayout
+            android:id="@+id/layout_app_package_info_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            >
+
+        <!-- 应用包的图标 -->
+        <ImageView
+                android:id="@+id/image_app_package"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image_app_package"
+                >
+        </ImageView>
+
+        <!-- 可以抽奖的次数 -->
+        <TextView
+                android:id="@+id/button_app_package_info_wheel_time_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_app_package"
+                android:layout_alignLeft="@id/image_app_package"
+                android:layout_alignRight="@id/image_app_package"
+                android:layout_marginTop="3dp"
+                android:text="6次"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/tab_text"
+                >
+        </TextView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/layout_app_package_info_middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/layout_app_package_info_left"
+            android:layout_toLeftOf="@id/button_app_task_install_download_manager"
+            android:layout_alignTop="@id/layout_app_task_install_left"
+            android:layout_alignBottom="@id/layout_app_package_info_left"
+            android:layout_marginLeft="5dp"
+            >
+
+        <!-- 应用的名字和大小 -->
+        <TextView
+                android:id="@+id/text_app_package_info_name"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
+                android:textSize="16sp"
+                android:text="游戏礼包1">
+
+        </TextView>
+
+
+        <!-- 应用简单描述 -->
+        <TextView
+                android:id="@+id/text_app_package_info_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/button_package_info_open_package"
+                android:layout_alignParentLeft="true"
+                android:text="这是礼包的信息这是礼包的信息这是礼包的信息这是礼包的信息"
+                android:textSize="12sp"
+
+                >
+        </TextView>
+
+        <!-- 应用包中的奖励 -->
+        <TextView
+                android:id="@+id/text_app_package_info_bonus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="3010">
+        </TextView>
+
+
+        <!-- 打开应用包的按钮 -->
+        <Button
+                android:id="@+id/button_package_info_open_package"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_small_blue"
+                android:text="打开礼包"
+                android:gravity="center"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="@dimen/button_blue_text_size"
+                >
+        </Button>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
