@@ -5,4 +5,7 @@
     <string name="big_wheel">大转盘</string>
     <string name="play_app">玩应用</string>
 
+    <string name="title_start">点击抽奖按钮开始抽奖</string>
+    <string name="bg_desc">背景描述</string>
+
 </resources>

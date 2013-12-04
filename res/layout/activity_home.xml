@@ -13,6 +13,7 @@
             android:id="@+id/action_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/background_dark"
             >
         <include layout="@layout/action_bar_layout"></include>
     </RelativeLayout>
@@ -23,7 +24,7 @@
             android:layout_below="@id/action_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tabhost_home">
+            android:id="@+id/tabhost_home" >
         <include layout="@layout/tabhost_home"></include>"
     </RelativeLayout>
 

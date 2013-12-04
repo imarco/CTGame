@@ -1,5 +1,6 @@
 package com.hoyotech.ctgames.activity;
 
+import android.content.Intent;
 import android.widget.TextView;
 import com.hoyotech.ctgames.R;
 import android.os.Bundle;
@@ -119,12 +120,6 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         }
     }
 
-    /**
-     * 显示PopupWindow弹出菜单
-     */
-    private void showPopupWindow(View parent) {
-
-    }
 
     /**
      * 点击了“动态”按钮
@@ -223,8 +218,12 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
      * 点击了中间按钮
      */
     private void clickBigWheelButton() {
-        showPopupWindow(bigWheelIv);
         bigWheelIv.setSelected(true);
+
+        Intent intent = new Intent();
+        intent.setClass(HomeActivity.this, BigWheelAwardActivity.class);
+        startActivity(intent);
+
     }
 
     /**
