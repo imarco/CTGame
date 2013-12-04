@@ -11,7 +11,9 @@
     <color name="title_bg_color">#30648A</color>
     <color name="title_txt_color">#FEFEFE</color>
 
-    <color name="info_bg_color">#438CB9</color>
+    <color name="big_wheel_bg_color">#ffffff</color>
+    <color name="big_wheel_title_color">#f2f4fa</color>
+    <color name="big_wheel_title_line_color">#cccdd2</color>
     <color name="info_txt_color">#FFDE00</color>
     <color name="bg_color">#639EC3</color>
 
