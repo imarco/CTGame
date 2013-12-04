@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_task_home"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:shadowColor="#ff0000ff"
+    android:shadowDx="5"
+    android:shadowDy="5"
+    android:shadowRadius="10">
+
+    <!-- 标题栏 -->
+    <include
+        android:id="@+id/task_home_action_bar"
+        layout="@layout/action_bar_layout"></include>
+
+    <RelativeLayout
+        android:layout_below="@id/task_home_action_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <com.viewpagerindicator.TabPageIndicator
+            android:id="@+id/indicator"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </RelativeLayout>
+</RelativeLayout>

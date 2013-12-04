@@ -9,22 +9,15 @@
                 android:shadowRadius="10">
 
     <!-- 标题栏 -->
-    <RelativeLayout
-            android:id="@+id/action_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/background_dark"
-            >
-        <include layout="@layout/action_bar_layout"></include>
-    </RelativeLayout>
+    <include
+        android:id="@+id/action_bar"
+        layout="@layout/action_bar_layout"></include>
 
     <!-- 底部和中间的框架信息 -->
-    <RelativeLayout
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/action_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        <include layout="@layout/tabhost_home"></include>"
-    </RelativeLayout>
-
+    <include
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/tabhost_home"></include>
 </RelativeLayout>

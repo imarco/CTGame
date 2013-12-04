@@ -41,10 +41,18 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     // 定义PopupWindow
     private PopupWindow popWindow;
 
+    // Actionbar标题
+    private TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // 显示标题栏
+        title = (TextView) findViewById(R.id.action_bar_title);
+        title.setText(R.string.home);
+
         initView();
         initData();
     }
@@ -97,6 +105,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Intent intent = null;
         switch (v.getId()) {
             // 点击动态按钮
             case R.id.button_app:
@@ -118,6 +127,16 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
             case R.id.button_big_wheel:
                 clickBigWheelButton();
                 break;
+            // 点击actionbar home按钮
+            case R.id.action_bar_button_home:
+                intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+                break;
+            // 点击actionbar 任务管理按钮
+            case R.id.action_bar_button_task:
+                intent = new Intent(this, TaskHomeActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -138,6 +157,13 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
         setItemSelected(0);
 
+        // 标题栏标题更改为玩应用
+        title.setText(R.string.play_app);
+        // 显示首页和管理button
+        ImageView btHome = (ImageView) findViewById(R.id.action_bar_button_home);
+        ImageView btDownload = (ImageView) findViewById(R.id.action_bar_button_task);
+        btHome.setVisibility(View.VISIBLE);
+        btDownload.setVisibility(View.VISIBLE);
     }
 
     /**

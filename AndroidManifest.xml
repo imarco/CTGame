@@ -11,7 +11,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/CTGameTheme" >
         <activity
                 android:name=".activity.HomeActivity"
                 >
@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.BigWheelAwardActivity" />
+        <activity android:name=".activity.TaskHomeActivity" />
     </application>
 
 </manifest>

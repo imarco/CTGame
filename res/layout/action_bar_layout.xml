@@ -3,7 +3,7 @@
     android:id="@+id/layout_action_bar"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    android:background="@android:color/background_dark">
 
     <!-- 标题背景 -->
 
@@ -23,9 +23,9 @@
         android:onClick="onClick"
         android:src="@drawable/action_bar_home"
         android:layout_centerVertical="true"
-        android:visibility="visible" />
+        android:visibility="gone" />
     <ImageView
-        android:id="@+id/action_bar_button_home"
+        android:id="@+id/action_bar_button_down"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -47,30 +47,31 @@
         android:shadowDy="2.5"
         android:shadowRadius="1.0"
         android:singleLine="true"
-        android:text="@string/play_app"
+        android:text=""
         android:textColor="#FFFFFFFF"
         android:textSize="18.0sp" />
 
-    <!-- 下载管理 -->
+    <!-- 任务管理 -->
     <RelativeLayout
-        android:id="@+id/action_bar_download_layout"
+        android:id="@+id/action_bar_task_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true" >
 
         <!-- 下载管理按钮 -->
         <ImageView
-            android:id="@+id/action_bar_button_download"
+            android:id="@+id/action_bar_button_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:onClick="onClick"
             android:src="@drawable/action_bar_download"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
         <!-- 应用提示数目 -->
         <TextView
-            android:id="@+id/action_bar_download_notice"
+            android:id="@+id/action_bar_task_notice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -84,4 +85,15 @@
             android:text="5"
             android:visibility="gone" />
     </RelativeLayout>
+
+    <!-- 我的地盘 -->
+    <ImageView
+        android:id="@+id/action_bar_button_zone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:onClick="onClick"
+        android:src="@drawable/action_bar_down"
+        android:visibility="gone"/>
 </RelativeLayout>
