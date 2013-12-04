@@ -10,5 +10,7 @@
 
     <dimen name="button_blue_width">60dip</dimen>
     <dimen name="button_blue_height">20dip</dimen>
-    <dimen name="button_blue_text_size">15sp</dimen>
+    <dimen name="button_blue_text_size">10sp</dimen>
+
+    <dimen name="button_small_download_text_size">8sp</dimen>
 </resources>

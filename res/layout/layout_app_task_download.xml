@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <RelativeLayout
+            android:id="@+id/layout_app_task_download_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            >
+
+        <!-- 应用的图标 -->
+        <ImageView
+                android:id="@+id/image_app_task_download_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image_app_sample"
+                >
+        </ImageView>
+
+        <!-- 所有奖励的按钮 -->
+        <Button
+                android:id="@+id/button_app_task_download_bonus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_app_task_download_app"
+                android:layout_alignLeft="@id/image_app_task_download_app"
+                android:layout_alignRight="@id/image_app_task_download_app"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/button_small_white"
+                android:text="所有奖励"
+                android:textColor="@color/tab_text"
+                android:textSize="@dimen/button_small_download_text_size"
+                >
+
+        </Button>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/layout_app_task_download_middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/layout_app_task_download_left"
+            android:layout_toLeftOf="@id/button_app_task_download_manager"
+            android:layout_alignTop="@id/layout_app_task_download_left"
+            android:layout_alignBottom="@id/layout_app_task_download_left"
+            android:layout_marginLeft="5dp"
+            >
+
+        <!-- 应用的名字和大小 -->
+        <TextView
+                android:id="@+id/text_app_task_download_name"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
+                android:text="aaa">
+
+        </TextView>
+
+
+        <!-- 下载管理按钮 -->
+        <ProgressBar
+                android:id="@+id/button_app_task_download_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/text_app_task_download_speed"
+                android:layout_alignParentLeft="true"
+
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                >
+        </ProgressBar>
+
+        <!-- 下载速度 -->
+        <TextView
+                android:id="@+id/text_app_task_download_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/button_app_task_download_manager"
+                android:layout_marginRight="5dp"
+                android:text="20k/s"
+                android:textColor="@color/tab_text">
+        </TextView>
+
+        <!-- 应用所获得的奖励 -->
+        <TextView
+                android:id="@+id/text_simple_info_app_bonus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="hhh">
+        </TextView>
+
+
+        <!-- 下载管理按钮 -->
+        <Button
+                android:id="@+id/button_app_task_download_manager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_small_blue"
+                android:text="下载"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="@dimen/button_blue_text_size"
+                >
+        </Button>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
