@@ -12,11 +12,13 @@ import com.hoyotech.ctgames.activity.AppRecommendFragment;
  * Created by GGCoke on 13-12-3.
  */
 public class AppStoreAdapter extends FragmentStatePagerAdapter {
-    private static final String[] APP_FRAGMENTS = new String[] {"recommend", "collection", "categories"};
-    private int mCount = APP_FRAGMENTS.length;
+    private static String[] APP_FRAGMENTS = new String[] {};
+    private int mCount = 0;
 
-    public AppStoreAdapter(FragmentManager fm) {
+    public AppStoreAdapter(FragmentManager fm, String[] titles) {
         super(fm);
+        this.APP_FRAGMENTS = titles;
+        this.mCount = this.APP_FRAGMENTS.length;
     }
 
     @Override

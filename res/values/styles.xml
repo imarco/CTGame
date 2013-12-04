@@ -15,10 +15,25 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
     </style>
 
+    <!-- 玩应用首页标签样式 -->
+    <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
+        <item name="android:background">@drawable/custom_tab_indicator</item>
+        <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
+        <item name="android:textColor">@drawable/vpi_text_color</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:divider">@drawable/custom_tab_indicator_divider</item>
+        <item name="android:dividerPadding">10dp</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">8dp</item>
+    </style>
 
-
+    <!-- 底部标签栏样式 -->
     <style name="tab_app_home_style">
         <item name="android:textSize">@dimen/home_tab_font_size</item>
         <item name="android:ellipsize">marquee</item>

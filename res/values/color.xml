@@ -27,5 +27,7 @@
     <color name="wheel_award_color9">#ffaf390b</color>
     <color name="wheel_award_color10">#ff842223</color>
 
-
+    <!-- 玩应用标签字体颜色 -->
+    <color name="app_text_unselected">#5D5F73</color>
+    <color name="app_text_selected">#0189E6</color>
 </resources>
