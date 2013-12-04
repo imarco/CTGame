@@ -12,6 +12,8 @@
         -->
     </style>
 
+    <style name="ButtonTheme" parent="android:Theme.NoTitleBar"></style>
+
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
@@ -21,6 +23,7 @@
     <style name="CTGameTheme" parent="AppBaseTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
+        <item name="android:buttonStyle">@style/ButtonTheme</item>
     </style>
 
     <!-- 玩应用首页标签样式 -->

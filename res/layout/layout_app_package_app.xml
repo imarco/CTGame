@@ -28,7 +28,7 @@
             android:layout_toRightOf="@id/layout_app_package_app_left"
             android:layout_alignTop="@id/layout_app_package_app_left"
             android:layout_alignBottom="@id/layout_app_package_app_left"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/button_small_margin_right"
             >
 
         <!-- 下载选中多选框 -->
@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/button_small_margin_right"
                 android:visibility="gone"
                 android:gravity="center" >
 
@@ -52,7 +53,10 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/button_small_blue"
                 android:text="打开"
-                android:gravity="center"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/button_small_padding_top_bottom"
+                android:paddingBottom="@dimen/button_small_padding_top_bottom"
+                android:layout_marginRight="@dimen/button_small_margin_right"
                 android:textColor="@color/tab_text_normal"
                 android:textSize="@dimen/button_blue_text_size"
                 >
@@ -65,7 +69,10 @@
                 android:layout_width="match_parent"
                 android:layout_alignParentTop="true"
                 android:textSize="16sp"
-                android:text="古墓逃脱 20M">
+                android:text="古墓逃脱 20M"
+                android:lines="1"
+                android:ellipsize="end"
+                >
 
         </TextView>
 
@@ -82,7 +89,8 @@
                 android:layout_alignParentBottom="true"
                 android:text="这是应用的介绍这是这是应用的介绍这是这是应用的介绍这是这是应用的介绍这是"
                 android:textSize="12sp"
-
+                android:lines="2"
+                android:ellipsize="end"
                 >
         </TextView>
 
@@ -98,7 +106,8 @@
                 android:text="20k/s"
                 android:layout_alignParentBottom="true"
                 android:visibility="gone"
-
+                android:lines="1"
+                android:ellipsize="end"
                 android:textColor="@color/tab_text">
         </TextView>
 

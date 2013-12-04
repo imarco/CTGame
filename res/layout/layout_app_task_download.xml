@@ -27,8 +27,11 @@
                 android:layout_below="@id/image_app_task_download_app"
                 android:layout_alignLeft="@id/image_app_task_download_app"
                 android:layout_alignRight="@id/image_app_task_download_app"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="@dimen/button_small_padding_margin_top"
                 android:background="@drawable/button_small_white"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/button_small_padding_top_bottom"
+                android:paddingBottom="@dimen/button_small_padding_top_bottom"
                 android:text="所有奖励"
                 android:textColor="@color/tab_text"
                 android:textSize="@dimen/button_small_download_text_size"
@@ -56,6 +59,10 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/button_small_blue"
                 android:text="下载"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/button_small_padding_top_bottom"
+                android:paddingBottom="@dimen/button_small_padding_top_bottom"
+                android:layout_marginRight="@dimen/button_small_margin_right"
                 android:textColor="@color/tab_text_normal"
                 android:textSize="@dimen/button_blue_text_size"
                 >
@@ -69,6 +76,8 @@
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/button_app_task_download_manager"
                 android:layout_marginRight="5dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="20k/s"
                 android:textColor="@color/tab_text">
         </TextView>
@@ -93,6 +102,8 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_alignParentTop="true"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="aaa">
 
         </TextView>
@@ -103,6 +114,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="hhh">
         </TextView>
 

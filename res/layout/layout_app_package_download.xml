@@ -30,7 +30,8 @@
                 android:layout_marginTop="3dp"
                 android:text="100M"
                 android:gravity="center"
-                android:textAlignment="center"
+                android:lines="1"
+                android:ellipsize="end"
                 >
         </TextView>
 
@@ -55,26 +56,14 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/button_small_blue"
                 android:text="开始下载"
-                android:gravity="center"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/button_small_padding_top_bottom"
+                android:paddingBottom="@dimen/button_small_padding_top_bottom"
+                android:layout_marginRight="@dimen/button_small_margin_right"
                 android:textColor="@color/tab_text_normal"
                 android:textSize="@dimen/button_blue_text_size"
                 >
         </Button>
-
-        <!-- 应用包的介绍 -->
-        <TextView
-                android:id="@+id/text_app_package_download_name"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@id/button_app_package_download_manager"
-                android:textSize="12sp"
-                android:layout_marginRight="30dp"
-                android:layout_alignParentLeft="true"
-                android:text="这个礼包包含了一些信息这个礼包包含了一些信息这个礼包包含了一些信息这个礼包包含了一些信息">
-
-        </TextView>
-
 
         <!-- 应用所获得的奖励和摇奖次数 -->
         <TextView
@@ -82,8 +71,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="6次 3010">
         </TextView>
+
+        <!-- 应用包的介绍 -->
+        <TextView
+                android:id="@+id/text_app_package_download_name"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_above="@id/text_app_package_download_bonus"
+                android:layout_toLeftOf="@id/button_app_package_download_manager"
+                android:textSize="12sp"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentLeft="true"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:text="这个礼包包含了一些信息这个礼包包含了一些信息这个礼包包含了一些信息这个礼包包含了一些信息">
+
+        </TextView>
+
+
+
 
     </RelativeLayout>
 
