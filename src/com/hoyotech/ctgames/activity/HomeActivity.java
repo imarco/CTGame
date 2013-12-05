@@ -1,6 +1,8 @@
 package com.hoyotech.ctgames.activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.util.Log;
 import android.widget.TextView;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.service.CTGameReceiver;
 
 public class HomeActivity extends FragmentActivity implements OnClickListener {
 
@@ -44,6 +47,8 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     // Actionbar标题
     private TextView title;
 
+    private CTGameReceiver receiver = new CTGameReceiver();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
         initView();
         initData();
+        startService();
     }
 
     /**
@@ -260,4 +266,15 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         bigWheelIv.setSelected(false);
     }
 
+    private void startService(){
+        Log.e("TAG_HomeActivity", "============> HomeActivity.startService");
+        IntentFilter filter = new IntentFilter(Intent.ACTION_TIME_TICK);
+        registerReceiver(receiver, filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
 }
