@@ -20,7 +20,7 @@
     </style>
 
     <!-- 应用样式 -->
-    <style name="CTGameTheme" parent="AppBaseTheme">
+    <style name="CTGameTheme" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>
         <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
         <item name="android:buttonStyle">@style/ButtonTheme</item>
@@ -53,5 +53,13 @@
         <item name="android:singleLine">true</item>
         <item name="android:paddingBottom">@dimen/home_tab_padding_bottom</item>
         <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <style name="MyDialog" parent="@android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/dialog_panel_yellow</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 </resources>

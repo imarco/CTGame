@@ -17,4 +17,7 @@
     <dimen name="button_small_padding_margin_top">3dp</dimen>
     <dimen name="button_small_padding_top_bottom">3dp</dimen>
     <dimen name="button_small_margin_right">5dp</dimen>
+
+    <dimen name="progress_bar_download_radius">10dp</dimen>
+    <dimen name="progress_bar_download_height">20dp</dimen>
 </resources>
