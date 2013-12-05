@@ -20,4 +20,13 @@
 
     <dimen name="progress_bar_download_radius">10dp</dimen>
     <dimen name="progress_bar_download_height">20dp</dimen>
+
+    <!-- 对话框的尺寸 -->
+    <dimen name="dialog_title_text_size">15sp</dimen>
+    <dimen name="dialog_content_text_size">12sp</dimen>
+    <dimen name="dialog_padding">10dp</dimen>
+    <dimen name="dialog_content_margin">5dp</dimen>
+    <dimen name="dialog_button_margin">15dp</dimen>
+    <dimen name="dialog_button_width">100dp</dimen>
+
 </resources>

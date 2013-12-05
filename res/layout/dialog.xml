@@ -1,59 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:gravity="center_vertical|center_horizontal"
-            android:background="@drawable/dialog_panel_yellow">
-    <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="30dip"
-            android:paddingTop="10dip">
-        <TextView
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:layout_centerInParent="true"
-                android:text="Title"
-                android:textColor="#000000"
-                android:textSize="20sp"/>
-
-    </RelativeLayout>
+                android:layout_gravity="center"
+                android:background="@drawable/dialog_panel_yellow"
+                android:paddingBottom="@dimen/dialog_padding"
+                android:paddingTop="@dimen/dialog_padding">
     <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="1dip"
-            android:background="#FFFFFF"
-            android:layout_marginTop="5dip"/>
-    <TextView
-            android:layout_width="fill_parent"
+            android:id="@+id/dialog_text_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="This is title"
+            android:textColor="@color/tab_text"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textSize="@dimen/dialog_title_text_size"/>
+    <TextView
+            android:id="@+id/dialog_text_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dialog_text_title"
             android:text="This is a custom dialog"
-            android:textColor="#000000"
-            android:layout_marginTop="10dip"
-            android:layout_marginLeft="30dip"/>
+            android:layout_marginTop="@dimen/dialog_content_margin"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/dialog_content_text_size"
+            android:textColor="@color/tab_text"/>
     <RelativeLayout
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="10dip"
-            android:gravity="bottom|center_horizontal"
-            android:paddingBottom="10dip">
+            android:layout_below="@id/dialog_text_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dialog_content_margin"
+            android:gravity="bottom|center_horizontal">
         <Button
                 android:id="@+id/dialog_button_cancel"
                 android:layout_alignParentLeft="true"
-                android:layout_width="100dip"
+                android:layout_width="@dimen/dialog_button_width"
                 android:layout_height="wrap_content"
                 android:text="确定"
                 android:gravity="center"
                 android:background="@drawable/button_yellow"/>
         <Button
                 android:id="@+id/dialog_button_ok"
-                android:layout_width="100dip"
+                android:layout_width="@dimen/dialog_button_width"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/dialog_button_cancel"
-                android:layout_marginLeft="35dip"
+                android:layout_marginLeft="@dimen/dialog_button_margin"
                 android:gravity="center"
                 android:background="@drawable/button_yellow"
                 android:text="取消"/>
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>
