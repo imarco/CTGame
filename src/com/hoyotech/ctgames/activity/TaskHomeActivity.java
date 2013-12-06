@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.AppStoreAdapter;
 import com.hoyotech.ctgames.adapter.TaskAdapter;
+import com.hoyotech.ctgames.util.CTGameConstans;
+import com.hoyotech.ctgames.viewdef.CTGameViewPager;
 import com.viewpagerindicator.TabPageIndicator;
 
 /**
@@ -19,7 +21,7 @@ import com.viewpagerindicator.TabPageIndicator;
  */
 public class TaskHomeActivity extends FragmentActivity implements View.OnClickListener {
     private TaskAdapter mAdapter;
-    private ViewPager mPager;
+    private CTGameViewPager mPager;
     private TabPageIndicator mIndicator;
     private static int mCurrentSubFragmentSeq = 0;
 
@@ -67,7 +69,8 @@ public class TaskHomeActivity extends FragmentActivity implements View.OnClickLi
         };
 
         mAdapter = new TaskAdapter(getSupportFragmentManager(), titles);
-        mPager = (ViewPager) findViewById(R.id.task_pager);
+        mPager = (CTGameViewPager) findViewById(R.id.task_pager);
+        mPager.setScrollable(CTGameConstans.CTGAME_VIEWPAGER_SCROLL_NO);
         mPager.setAdapter(mAdapter);
 
         mIndicator = (TabPageIndicator) findViewById(R.id.task_indicator);

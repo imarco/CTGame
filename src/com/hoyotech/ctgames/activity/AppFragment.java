@@ -1,6 +1,8 @@
 package com.hoyotech.ctgames.activity;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.AppStoreAdapter;
+import com.hoyotech.ctgames.util.CTGameConstans;
+import com.hoyotech.ctgames.viewdef.CTGameViewPager;
 import com.viewpagerindicator.TabPageIndicator;
 
 import android.os.Bundle;
@@ -13,7 +15,7 @@ import android.widget.TextView;
 
 public class AppFragment extends Fragment {
     private AppStoreAdapter mAdapter;
-    private ViewPager mPager;
+    private CTGameViewPager mPager;
     private TabPageIndicator mIndicator;
     private static int mCurrentSubFragmentSeq = 0;
 
@@ -35,7 +37,8 @@ public class AppFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_app, container, false);
         mAdapter = new AppStoreAdapter(getFragmentManager(), titles);
-        mPager = (ViewPager) v.findViewById(R.id.pager);
+        mPager = (CTGameViewPager) v.findViewById(R.id.pager);
+        mPager.setScrollable(CTGameConstans.CTGAME_VIEWPAGER_SCROLL_NO);
         mPager.setAdapter(mAdapter);
 
         mIndicator = (TabPageIndicator) v.findViewById(R.id.indicator);
