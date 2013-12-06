@@ -9,12 +9,11 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.adapter.bean.AppInfo;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * 应用用到的公用方法
@@ -98,24 +97,25 @@ public class CTGameUtils {
      * @param context
      * @return
      */
-    public static ArrayList<HashMap<String, Object>> getAppInfos(Context context) {
-        ArrayList<HashMap<String, Object>> infos = new ArrayList<HashMap<String, Object>>();
+    public static ArrayList<AppInfo> getAppInfos(Context context) {
+        ArrayList<AppInfo> infos = new ArrayList<AppInfo>();
         Drawable d = context.getResources().getDrawable(
                 R.drawable.image_app_sample);
         for (int i = 0; i < 6; i++) {
-            HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("drawable", d);
-            map.put("name", "神庙逃亡" + i);
-            map.put("size", i * i);
+            AppInfo appInfo = new AppInfo();
+            appInfo.setImg(d);
+            appInfo.setAppName("神庙逃亡" + i);
+            appInfo.setAppSize(i * i);
             if (i % 2 == 0) {
-                map.put("state", 0);
+                appInfo.setState(0);
             } else {
-                map.put("state", 1);
+                appInfo.setState(1);
             }
-            map.put("download", 6 - i + i * i);
-            map.put("bonus", 300);
-            infos.add(map);
+            appInfo.setPrizeCount(6 - i + i * i);
+            appInfo.setLuckybeanCount(300);
+            infos.add(appInfo);
         }
+
         return infos;
     }
 
@@ -128,7 +128,8 @@ public class CTGameUtils {
 
         for (int i = 0; i < 4; i ++){
             state = i;
-            infos.add(new AppInfo(d, "神庙逃亡" + i, i * i, state, 6 - i + i * i, 300, "测试简介部分" + i));
+            infos.add(new AppInfo(d, "tianyu" + i, 124.0f * i, 1, "好游戏啊", i * i, 70));
+
         }
         return infos;
     }

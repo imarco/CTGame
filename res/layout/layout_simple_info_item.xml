@@ -13,14 +13,15 @@
         android:layout_marginTop="10dip"
         android:background="@drawable/image_app_sample" />
 
-    <TextView
-        android:id="@+id/app_bonus"
+    <Button
+        android:id="@+id/btn_app_bonus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/app_img_head"
         android:layout_below="@id/app_img_head"
         android:layout_marginTop="5dip"
         android:background="@drawable/button_small_white"
+        android:textColor="@color/tab_text"
         android:text="所有奖励"
         android:textSize="12sp" />
 
@@ -31,6 +32,7 @@
         android:layout_alignTop="@id/app_img_head"
         android:layout_marginLeft="8dip"
         android:layout_toRightOf="@id/app_img_head"
+        android:textColor="@color/tab_text"
         android:text="神庙逃亡"
         android:textSize="18sp" />
 
@@ -41,6 +43,7 @@
         android:layout_alignBottom="@id/app_name"
         android:layout_marginLeft="3dip"
         android:layout_toRightOf="@id/app_name"
+        android:textColor="@color/tab_text"
         android:text="10M"
         android:textSize="15sp" />
 
@@ -52,32 +55,34 @@
         android:layout_below="@id/app_name"
         android:layout_marginTop="8dip"
         android:background="@drawable/button_small_white"
+        android:textColor="@color/tab_text"
         android:text="下载" />
 
     <TextView
-        android:id="@+id/tv_download_number"
+        android:id="@+id/tv_prize_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/app_bonus"
+        android:layout_alignBottom="@id/btn_app_bonus"
         android:layout_alignLeft="@id/btn_options"
         android:drawableLeft="@drawable/icon_play_chance"
         android:gravity="center"
         android:paddingLeft="3dip"
+        android:textColor="@color/tab_text"
         android:text="12 次"
         android:textSize="10sp" />
 
     <TextView
-        android:id="@+id/tv_download_money"
+        android:id="@+id/tv_luckybean_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_download_number"
+        android:layout_alignBottom="@id/tv_prize_count"
         android:layout_marginLeft="10dip"
-        android:layout_toRightOf="@id/tv_download_number"
+        android:layout_toRightOf="@id/tv_prize_count"
         android:drawableLeft="@drawable/icon_play_chance"
         android:gravity="center"
         android:paddingLeft="3dip"
+        android:textColor="@color/tab_text"
         android:text="3010"
-        android:textColor="#ffff0000"
         android:textSize="10sp" />
 
 </RelativeLayout>

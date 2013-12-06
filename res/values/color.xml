@@ -39,4 +39,7 @@
 
     <!-- dialog background -->
     <color name="dialog_bg_color">#7FFFFFFF</color>
+
+    <!-- 任务管理分割线中任务的分割线颜色 -->
+    <color name="task_download_line_color">#f5f1ee</color>
 </resources>

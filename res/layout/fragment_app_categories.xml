@@ -7,8 +7,11 @@
     android:shadowDx="5"
     android:shadowDy="5"
     android:shadowRadius="10">
-    <TextView
-    android:layout_height="fill_parent"
-    android:layout_width="fill_parent"
-    android:text="@string/app_categories"/>
+    <ListView
+            android:id="@+id/list_app_cat"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:dividerHeight="1dip"
+            android:divider="#CED3D6"
+            />
     </RelativeLayout>
