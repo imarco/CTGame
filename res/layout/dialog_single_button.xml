@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+    <RelativeLayout
+            android:id="@+id/layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_panel_yellow"
+            android:paddingBottom="@dimen/dialog_padding"
+            android:layout_marginTop="16dip"
+            android:paddingTop="@dimen/dialog_padding">
+        <TextView
+                android:id="@+id/dialog_single_button_text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This is title"
+                android:textColor="@color/tab_text"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:textSize="@dimen/dialog_title_text_size"/>
+        <TextView
+                android:id="@+id/dialog_single_button_text_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialog_single_button_text_title"
+                android:text="This is a custom dialog"
+                android:layout_marginTop="@dimen/dialog_content_margin"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/dialog_content_text_size"
+                android:textColor="@color/tab_text"/>
+        <Button
+                android:id="@+id/dialog_single_button_conform"
+                android:layout_width="@dimen/dialog_button_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialog_single_button_text_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dialog_content_margin"
+                android:text="确定"
+                android:gravity="center"
+                android:background="@drawable/button_yellow"/>
+    </RelativeLayout>
+
+    <ImageView
+            android:id="@+id/image_prize_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/image_prize_mark"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentTop="true"
+            >
+    </ImageView>
+
+
+</RelativeLayout>
