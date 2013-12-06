@@ -16,17 +16,37 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 /**
- * 应用用到的公用方法
+ * 网络相关公用方法
  * Created by GGCoke on 13-12-5.
  */
-public class CTGameUtils {
+public class NetworkUtils {
     public static boolean DEBUG = true;
-    private static final String TAG = "CTGameUtils";
+    private static final String TAG = "NetworkUtils";
     public static final boolean NEWWORK_WIFI_STATUS_OPEN = true;
     public static final boolean NEWWORK_WIFI_STATUS_CLOSED = false;
     public static final boolean NEWWORK_3G_STATUS_OPEN = true;
     public static final boolean NEWWORK_3G_STATUS_CLOSED = false;
 
+    /**
+     * 是否连接网络，包括wifi和数据网络
+     * @param context
+     * @return
+     */
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager manager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (manager != null) {
+            NetworkInfo[] info = manager.getAllNetworkInfo();
+            if (info != null) {
+                for (int i = 0; i < info.length; i++) {
+                    // 已经连接上或者正在连接都是有网络连接
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED || info[i].getState() == NetworkInfo.State.CONNECTING) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * wifi是否开启
@@ -92,45 +112,13 @@ public class CTGameUtils {
         }
     }
 
+
     /**
-     * 测试方法，以后要删除
-     * @param context
-     * @return
+     * 判断字符串是否为空
+     * @param src
+     * @return 字符串为空返回true，否则返回false
      */
-    public static ArrayList<AppInfo> getAppInfos(Context context) {
-        ArrayList<AppInfo> infos = new ArrayList<AppInfo>();
-        Drawable d = context.getResources().getDrawable(
-                R.drawable.image_app_sample);
-        for (int i = 0; i < 6; i++) {
-            AppInfo appInfo = new AppInfo();
-            appInfo.setImg(d);
-            appInfo.setAppName("神庙逃亡" + i);
-            appInfo.setAppSize(i * i);
-            if (i % 2 == 0) {
-                appInfo.setState(0);
-            } else {
-                appInfo.setState(1);
-            }
-            appInfo.setPrizeCount(6 - i + i * i);
-            appInfo.setLuckybeanCount(300);
-            infos.add(appInfo);
-        }
-
-        return infos;
-    }
-
-    //应用安装部分数据
-    public static ArrayList<AppInfo> getAPPInstallInfos (Context context){
-        ArrayList<AppInfo> infos = new ArrayList<AppInfo>();
-        Drawable d = context.getResources().getDrawable(
-                R.drawable.image_app_sample);
-        int state = 0;
-
-        for (int i = 0; i < 4; i ++){
-            state = i;
-            infos.add(new AppInfo(d, "tianyu" + i, 124.0f * i, 1, "好游戏啊", i * i, 70));
-
-        }
-        return infos;
+    public static boolean isEmpty(String src) {
+        return src == null || src.equals("");
     }
 }

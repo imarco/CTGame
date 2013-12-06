@@ -1,11 +1,13 @@
 package com.hoyotech.ctgames.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.activity.PackageDetailActivity;
 import com.hoyotech.ctgames.adapter.bean.AppPackageInfo;
 import com.hoyotech.ctgames.adapter.holder.AppPackageInfoHolder;
 
@@ -90,6 +92,10 @@ public class PackageInfoAdapter extends BaseAdapter {
 
             switch (v.getId()) {
                 case R.id.btn_open:
+                    // 打开PackageDetailActivity
+                    System.out.println("打开礼包详情");
+                    Intent intent = new Intent(context, PackageDetailActivity.class);
+                    context.startActivity(intent);
                     break;
             }
         }

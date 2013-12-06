@@ -2,6 +2,7 @@ package com.hoyotech.ctgames.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.hoyotech.ctgames.activity.AppCategoriesFragment;
@@ -11,7 +12,7 @@ import com.hoyotech.ctgames.activity.AppRecommendFragment;
 /**
  * Created by GGCoke on 13-12-3.
  */
-public class AppStoreAdapter extends FragmentStatePagerAdapter {
+public class AppStoreAdapter extends FragmentPagerAdapter {
     private static String[] APP_FRAGMENTS = new String[] {};
     private int mCount = 0;
 
@@ -31,8 +32,8 @@ public class AppStoreAdapter extends FragmentStatePagerAdapter {
             return new AppCategoriesFragment();
         } else {
             System.out.println("创建子AppFragment_" + position + "失败");
+            return null;
         }
-        return null;
     }
 
     @Override

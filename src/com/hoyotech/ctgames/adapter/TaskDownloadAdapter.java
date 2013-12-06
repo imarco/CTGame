@@ -1,33 +1,34 @@
 package com.hoyotech.ctgames.adapter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-
+import android.widget.*;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.bean.AppInfo;
-import com.hoyotech.ctgames.adapter.holder.AppInstallInfoHolder;
-import com.hoyotech.ctgames.util.TaskState;
+import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
 
+import java.util.List;
 
-public class AppInstallAdapter extends BaseAdapter {
+/**
+ * Created with IntelliJ IDEA.
+ * User: Tian
+ * Date: 13-12-6
+ * Time: 下午8:26
+ * To change this template use File | Settings | File Templates.
+ */
+public class TaskDownloadAdapter extends BaseAdapter{
 
-    //定义相应的变量
-    private ArrayList<AppInfo> data;
+    //定义相关的变量
     private Context context;
-    private AppInfo info;
+    private List<AppInfo> data;
+    AppInfo info;
 
     //构造函数
-    public AppInstallAdapter(ArrayList<AppInfo> data, Context context) {
-        this.data = data;
+    public TaskDownloadAdapter(Context context, List<AppInfo> data){
         this.context = context;
+        this.data = data;
     }
 
     @Override
@@ -46,59 +47,59 @@ public class AppInstallAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        AppInstallInfoHolder holder = null;
-
+    public View getView(final int position, View convertView, ViewGroup arg2) {
+        TaskDownloadHolder holder = null;
         if (convertView == null){
-            holder = new AppInstallInfoHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.app_install_item, null);
-            holder.appImageHeader = (ImageView) convertView.findViewById(R.id.app_install_img);
+            holder = new TaskDownloadHolder();
+            convertView = LayoutInflater.from(context).inflate(R.layout.layout_task_download_item, null);
+            holder.appImageHeader = (ImageView) convertView.findViewById(R.id.image_app);
             holder.appName = (TextView) convertView.findViewById(R.id.tv_app_name);
             holder.appPackageSize = (TextView) convertView.findViewById(R.id.tv_app_size);
             holder.btnOptions = (Button) convertView.findViewById(R.id.btn_options);
             holder.btnAppBonus = (Button) convertView.findViewById(R.id.btn_app_bonus);
             holder.tvPrizeCount = (TextView) convertView.findViewById(R.id.tv_prize_count);
-            holder.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckybean_count);
-            holder.tvSummary = (TextView) convertView.findViewById(R.id.tv_summary);
+            holder.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckypean_count);
+            holder.tvDownloadRate = (TextView) convertView.findViewById(R.id.tv_download_rate);
+            holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
             convertView.setTag(holder);
-        } else {
-            holder = (AppInstallInfoHolder) convertView.getTag();
+        }else {
+            holder = (TaskDownloadHolder) convertView.getTag();
         }
-
         info = data.get(position);
         holder.appImageHeader.setBackgroundDrawable(info.getImg());
         holder.appName.setText(info.getAppName());
         holder.appPackageSize.setText(String.valueOf(info.getAppSize())+"M");
-        holder.btnOptions.setText(TaskState.getTaskStateMap().get(info.getState()));
         holder.tvPrizeCount.setText(String.valueOf(info.getPrizeCount()));
         holder.tvLuckyBeanCount.setText(String.valueOf(info.getLuckybeanCount()));
-        holder.tvSummary.setText(info.getSummary());
+        holder.tvDownloadRate.setText(String.valueOf(info.getRate())+"KB/S");
+        holder.progressBar.setProgress(info.getProgress());
 
         //设置事件监听响应
-        holder.btnOptions.setOnClickListener(new ButtonListener());
-        holder.btnAppBonus.setOnClickListener(new ButtonListener());
-
+        holder.btnOptions.setOnClickListener(new ButtonClickListener());
+        holder.btnAppBonus.setOnClickListener(new ButtonClickListener());
         return convertView;
     }
 
-    // view中按钮的点击事件处理
-    private class ButtonListener implements View.OnClickListener {
+    private class ButtonClickListener implements View.OnClickListener {
 
-        public ButtonListener() {
+        public ButtonClickListener() {
         }
 
         @Override
         public void onClick(View v) {
 
             switch (v.getId()) {
-                case R.id.btn_options:
-                    break;
                 case R.id.btn_app_bonus:
+                    // 补充响应
+                    break;
+                case R.id.btn_options:
+                    // 补充响应
                     break;
                 default:
+                    // 补充默认情况
                     break;
             }
         }
-    }
 
+    }
 }

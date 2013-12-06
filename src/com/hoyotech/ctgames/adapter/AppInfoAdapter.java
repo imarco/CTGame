@@ -63,7 +63,7 @@ public class AppInfoAdapter extends BaseAdapter {
         holder.appImageHeader.setBackgroundDrawable(info.getImg());
         holder.appName.setText(info.getAppName());
         holder.appPackageSize.setText(String.valueOf(info.getAppSize()));
-        holder.btnOptions.setText(TaskState.getMap().get(info.getState()));
+        holder.btnOptions.setText(TaskState.getTaskStateMap().get(info.getState()));
         holder.tvPrizeCount.setText(String.valueOf(info.getPrizeCount()));
         holder.tvLuckyBeanCount.setText(String.valueOf(info.getLuckybeanCount()));
 

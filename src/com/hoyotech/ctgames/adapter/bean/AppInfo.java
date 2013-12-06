@@ -14,7 +14,34 @@ public class AppInfo {
     private String summary = ""; //应用的简介
     private int prizeCount;
     private int luckybeanCount;
-    private int progress;        // 下载进度
+    private boolean isInstall = false;
+    private boolean isDownloading = false; // 是否正在下载
+
+    public boolean isInstall() {
+        return isInstall;
+    }
+
+    public void setInstall(boolean install) {
+        isInstall = install;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+
+    private int progress;        // 下载进度 0-100
     private int rate;            // 下载速度
 
     public AppInfo() {
@@ -74,5 +101,13 @@ public class AppInfo {
     }
     public void setLuckybeanCount(int luckybeanCount) {
         this.luckybeanCount = luckybeanCount;
+    }
+
+    public boolean isDownloading() {
+        return isDownloading;
+    }
+
+    public void setDownloading(boolean downloading) {
+        isDownloading = downloading;
     }
 }

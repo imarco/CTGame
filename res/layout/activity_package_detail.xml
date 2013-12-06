@@ -4,13 +4,12 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <include
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar_layout">
+    </include>
 
-    <ListView
-            android:id="@+id/list_task_download"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:dividerHeight="1dip"
-            android:divider="#CED3D6"
-            />
-
+    <include android:id="@+id/list_content"
+             layout="@layout/layout_package_app_download">
+    </include>
 </LinearLayout>

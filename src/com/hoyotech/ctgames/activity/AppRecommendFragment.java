@@ -18,7 +18,8 @@ import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.AppInfoAdapter;
 import com.hoyotech.ctgames.adapter.GalleryAdapter;
 import com.hoyotech.ctgames.util.CTGameConstans;
-import com.hoyotech.ctgames.util.CTGameUtils;
+import com.hoyotech.ctgames.util.DataUtils;
+import com.hoyotech.ctgames.util.NetworkUtils;
 import com.hoyotech.ctgames.viewdef.FlowIndicator;
 
 import java.util.Timer;
@@ -43,6 +44,7 @@ public class AppRecommendFragment extends Fragment {
         if ((savedInstanceState != null) && savedInstanceState.containsKey(KEY_CONTENT)) {
             bundle = savedInstanceState.getBundle(KEY_CONTENT);
         }
+        setRetainInstance(true);
     }
 
     @Override
@@ -63,7 +65,7 @@ public class AppRecommendFragment extends Fragment {
         gallery.setOnItemSelectedListener(selected_listener);
 
 
-        AppInfoAdapter adapter = new AppInfoAdapter(CTGameUtils.getAppInfos(getActivity()), getActivity());
+        AppInfoAdapter adapter = new AppInfoAdapter(DataUtils.getAppInfos(getActivity()), getActivity());
 
         gridView.setAdapter(adapter);
 

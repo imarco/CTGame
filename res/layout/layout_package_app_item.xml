@@ -1,133 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-    <RelativeLayout
-            android:id="@+id/layout_app_package_app_left"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:paddingBottom="10dip" >
+
+    <ImageView
+            android:id="@+id/image_app"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            >
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/image_app_sample" />
 
-        <!-- 应用的图标 -->
-        <ImageView
-                android:id="@+id/image_app_package_app"
+    <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/image_app"
+            android:layout_marginLeft="8dip"
+            android:layout_toRightOf="@id/image_app"
+            android:text="神庙逃亡"
+            android:textColor="#57596E"
+            android:textSize="18sp" />
+
+    <TextView
+            android:id="@+id/tv_app_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_app_name"
+            android:layout_marginLeft="3dip"
+            android:layout_toRightOf="@id/tv_app_name"
+            android:text="10M"
+            android:textColor="#7B7D8D"
+            android:textSize="12sp" />
+
+    <!-- 右侧的操作部分，包含选择框和按钮两个部分，根据状态不同，显示和隐藏 -->
+
+    <RelativeLayout
+            android:id="@+id/layout_options"
+            android:layout_width="80dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dip" >
+
+        <Button
+                android:id="@+id/btn_options"
+                android:layout_width="80dip"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_option_selector"
+                android:gravity="center"
+                android:text="打开" />
+
+        <CheckBox
+                android:id="@+id/cb_download"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/image_app_sample"
-                >
-        </ImageView>
-
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:maxHeight="80dip"
+                android:maxWidth="80dip"
+                android:visibility="gone"/>
     </RelativeLayout>
 
     <RelativeLayout
-            android:id="@+id/layout_app_package_info_middle"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/layout_app_package_app_left"
-            android:layout_alignTop="@id/layout_app_package_app_left"
-            android:layout_alignBottom="@id/layout_app_package_app_left"
-            android:layout_marginLeft="@dimen/button_small_margin_right"
-            >
+            android:layout_alignLeft="@id/tv_app_name"
+            android:layout_below="@id/tv_app_name"
+            android:layout_marginTop="8dip"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/layout_options" >
 
-        <!-- 下载选中多选框 -->
-        <CheckBox
-                android:id="@+id/checkbox_app_package_app_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/button_small_margin_right"
-                android:visibility="gone"
-                android:gravity="center" >
-
-        </CheckBox>
-
-        <!-- 打开应用包的按钮 -->
-        <Button
-                android:id="@+id/button_app_package_app_download_manager"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/button_small_blue"
-                android:text="打开"
-                android:gravity="center_horizontal"
-                android:paddingTop="@dimen/button_small_padding_top_bottom"
-                android:paddingBottom="@dimen/button_small_padding_top_bottom"
-                android:layout_marginRight="@dimen/button_small_margin_right"
-                android:textColor="@color/tab_text_normal"
-                android:textSize="@dimen/button_blue_text_size"
-                >
-        </Button>
-
-        <!-- 应用的名字和大小 -->
         <TextView
-                android:id="@+id/text_app_package_app_name"
+                android:id="@+id/tv_summary"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_alignParentTop="true"
-                android:textSize="16sp"
-                android:text="古墓逃脱 20M"
-                android:lines="1"
-                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="《猴子猜拳（Monkey Boxing）》是一款趣味性十足的全集游戏，游戏中...."
+                android:textSize="10sp"
+                android:textColor="#8F8F8F"
+                />
+
+        <!-- 右侧的下载速度的部分 -->
+        <RelativeLayout
+                android:id="@+id/layout_download"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_app_name"
+                android:layout_marginTop="10dip"
                 >
 
-        </TextView>
+            <TextView
+                    android:id="@+id/tv_download_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text="20K/S"
+                    android:textColor="#68697D"
+                    android:visibility="gone"
+                    android:textSize="13sp" />
 
-
-        <!-- 应用简单描述 -->
-        <TextView
-                android:id="@+id/text_app_package_app_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text_app_package_app_name"
-                android:layout_toLeftOf="@id/button_app_package_app_download_manager"
-                android:layout_marginRight="35dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentBottom="true"
-                android:text="这是应用的介绍这是这是应用的介绍这是这是应用的介绍这是这是应用的介绍这是"
-                android:textSize="12sp"
-                android:lines="2"
-                android:ellipsize="end"
-                >
-        </TextView>
-
-        <!-- 应用下载速度 -->
-        <TextView
-                android:id="@+id/text_app_package_app_download_speed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/button_app_package_app_download_manager"
-                android:layout_marginRight="5dp"
-                android:gravity="center"
-                android:text="20k/s"
-                android:layout_alignParentBottom="true"
-                android:visibility="gone"
-                android:lines="1"
-                android:ellipsize="end"
-                android:textColor="@color/tab_text">
-        </TextView>
-
-        <!-- 应用下载管理按钮 -->
-        <ProgressBar
-                android:id="@+id/progress_bar_app_package_app"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@id/text_app_package_app_download_speed"
-                android:layout_alignBottom="@id/text_app_package_app_download_speed"
-                android:layout_alignTop="@id/text_app_package_app_download_speed"
-                android:layout_alignParentLeft="true"
-                android:visibility="gone"
-
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                >
-        </ProgressBar>
-
+            <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dip"
+                    android:layout_toLeftOf="@id/tv_download_rate"
+                    android:max="100"
+                    android:progress="20"
+                    android:visibility="gone"
+                    android:progressDrawable="@drawable/progress_bar_style" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>
