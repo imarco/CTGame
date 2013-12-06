@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.util.AppInfoHolder;
+import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.HashMap;
 import java.util.List;
@@ -61,11 +62,7 @@ public class AppInfoAdapter extends BaseAdapter {
         holder.app_img_head.setBackgroundDrawable((Drawable) map.get("drawable"));
         holder.app_name.setText((String)map.get("name"));
         holder.app_package_size.setText(map.get("size").toString());
-        if ((Integer)map.get("state") == 0){
-            holder.btn_options.setText("下载");
-        }else {
-            holder.btn_options.setText("安装");
-        }
+        holder.btn_options.setText(TaskState.getTaskStateMap().get((Integer)map.get("state")));
         holder.tv_download_number.setText(map.get("download").toString());
         holder.tv_download_money.setText(map.get("bonus").toString());
 
@@ -74,7 +71,7 @@ public class AppInfoAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "****" + position, 0).show();
+                
             }
         });
 

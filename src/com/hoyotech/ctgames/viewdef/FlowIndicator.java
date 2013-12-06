@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.util.CTGameUtils;
+import com.hoyotech.ctgames.util.NetworkUtils;
 
 /**
  * Created by GGCoke on 13-12-6.
@@ -39,7 +39,7 @@ public class FlowIndicator extends View {
                 R.styleable.FlowIndicator_point_seleted_color, 0xffff07);
 
         int sum = attrs.getAttributeCount();
-        if (CTGameUtils.DEBUG) {
+        if (NetworkUtils.DEBUG) {
             String str = "";
             for (int i = 0; i < sum; i++) {
                 String name = attrs.getAttributeName(i);

@@ -1,16 +1,15 @@
 package com.hoyotech.ctgames.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.adapter.AppStoreAdapter;
 import com.hoyotech.ctgames.adapter.TaskAdapter;
 import com.hoyotech.ctgames.util.CTGameConstans;
 import com.hoyotech.ctgames.viewdef.CTGameViewPager;
@@ -24,6 +23,7 @@ public class TaskHomeActivity extends FragmentActivity implements View.OnClickLi
     private CTGameViewPager mPager;
     private TabPageIndicator mIndicator;
     private static int mCurrentSubFragmentSeq = 0;
+    private TaskHomeFragment taskHomeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +41,13 @@ public class TaskHomeActivity extends FragmentActivity implements View.OnClickLi
         btHome.setVisibility(View.VISIBLE);
         btZone.setVisibility(View.VISIBLE);
 
-        // 初始化任务管理标签
-        initTaskTabs();
+        taskHomeFragment = new TaskHomeFragment();
+        // 得到Fragment事务管理器
+        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
+        // 替换当前的页面
+        fragmentTransaction.replace(R.id.task_frame_content, taskHomeFragment);
+        // 事务管理提交
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -69,11 +74,11 @@ public class TaskHomeActivity extends FragmentActivity implements View.OnClickLi
         };
 
         mAdapter = new TaskAdapter(getSupportFragmentManager(), titles);
-        mPager = (CTGameViewPager) findViewById(R.id.task_pager);
+//        mPager = (CTGameViewPager) findViewById(R.id.task_pager);
         mPager.setScrollable(CTGameConstans.CTGAME_VIEWPAGER_SCROLL_NO);
         mPager.setAdapter(mAdapter);
 
-        mIndicator = (TabPageIndicator) findViewById(R.id.task_indicator);
+//        mIndicator = (TabPageIndicator) findViewById(R.id.task_indicator);
         mIndicator.setViewPager(mPager, mCurrentSubFragmentSeq);
 
         mIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
