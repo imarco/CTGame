@@ -277,4 +277,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         super.onDestroy();
         unregisterReceiver(receiver);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

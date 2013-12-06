@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ctgames="http://schemas.android.com/apk/res/com.hoyotech.ctgames"
     android:id="@+id/rlHomeFrame"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -7,8 +8,34 @@
     android:shadowDx="5"
     android:shadowDy="5"
     android:shadowRadius="10">
-    <TextView
-        android:layout_height="fill_parent"
+    <Gallery
+        android:id="@+id/gallery_app_recommend"
         android:layout_width="fill_parent"
-        android:text="@string/app_recommend"/>
+        android:layout_height="wrap_content"
+        android:spacing="5dip" />
+
+    <com.hoyotech.ctgames.viewdef.FlowIndicator
+        android:id="@+id/fi_app_commend"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/gallery_app_recommend"
+        android:gravity="center"
+        ctgames:count="4"
+        ctgames:point_normal_color="#ffff0000"
+        ctgames:point_seleted_color="#ffffff"
+        ctgames:point_size="5dip"
+        ctgames:space="10dip" />
+
+    <GridView
+        android:id="@+id/gv_app_recommend"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/gallery_app_recommend"
+        android:cacheColorHint="#00000000"
+        android:horizontalSpacing="1dip"
+        android:listSelector="#DBDCE0"
+        android:numColumns="2"
+        android:verticalSpacing="1dip" >
+    </GridView>
+
 </RelativeLayout>

@@ -67,10 +67,10 @@ public class TaskHomeActivity extends FragmentActivity implements View.OnClickLi
         };
 
         mAdapter = new TaskAdapter(getSupportFragmentManager(), titles);
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = (ViewPager) findViewById(R.id.task_pager);
         mPager.setAdapter(mAdapter);
 
-        mIndicator = (TabPageIndicator) findViewById(R.id.indicator);
+        mIndicator = (TabPageIndicator) findViewById(R.id.task_indicator);
         mIndicator.setViewPager(mPager, mCurrentSubFragmentSeq);
 
         mIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

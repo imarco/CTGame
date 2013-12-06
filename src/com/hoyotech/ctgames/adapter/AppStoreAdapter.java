@@ -31,8 +31,8 @@ public class AppStoreAdapter extends FragmentStatePagerAdapter {
             return new AppCategoriesFragment();
         } else {
             System.out.println("创建子AppFragment_" + position + "失败");
-            return null;
         }
+        return null;
     }
 
     @Override

@@ -1,95 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:paddingBottom="10dip" >
 
-    <RelativeLayout
-            android:id="@+id/layout_simple_info_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            >
+    <ImageView
+        android:id="@+id/app_img_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/image_app_sample" />
 
-        <!-- 应用的图标 -->
-        <ImageView
-                android:id="@+id/image_simple_info_app"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/image_app_sample"
-                >
-        </ImageView>
+    <TextView
+        android:id="@+id/app_bonus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/app_img_head"
+        android:layout_below="@id/app_img_head"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/button_small_white"
+        android:text="所有奖励"
+        android:textSize="12sp" />
 
-        <!-- 所有奖励的按钮 -->
-        <Button
-                android:id="@+id/button_simple_info_app_bonus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/image_simple_info_app"
-                android:layout_alignLeft="@id/image_simple_info_app"
-                android:layout_alignRight="@id/image_simple_info_app"
-                android:layout_marginTop="@dimen/button_small_padding_margin_top"
-                android:background="@drawable/button_small_white"
-                android:text="所有奖励"
-                android:gravity="center_horizontal"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                android:textColor="@color/tab_text"
-                android:textSize="@dimen/button_small_download_text_size"
-                >
-        </Button>
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/app_img_head"
+        android:layout_marginLeft="8dip"
+        android:layout_toRightOf="@id/app_img_head"
+        android:text="神庙逃亡"
+        android:textSize="18sp" />
 
-    <RelativeLayout
-            android:id="@+id/layout_simple_info_right"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/layout_simple_info_left"
-            android:layout_alignTop="@id/layout_simple_info_left"
-            android:layout_alignBottom="@id/layout_simple_info_left"
-            android:layout_marginLeft="5dp"
-            >
+    <TextView
+        android:id="@+id/app_package_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/app_name"
+        android:layout_marginLeft="3dip"
+        android:layout_toRightOf="@id/app_name"
+        android:text="10M"
+        android:textSize="15sp" />
 
-        <!-- 应用的名字和大小 -->
-        <TextView
-                android:id="@+id/text_simple_info_app_name"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_alignParentTop="true"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:text="aaa">
+    <Button
+        android:id="@+id/btn_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/app_name"
+        android:layout_below="@id/app_name"
+        android:layout_marginTop="8dip"
+        android:background="@drawable/button_small_white"
+        android:text="下载" />
 
-        </TextView>
+    <TextView
+        android:id="@+id/tv_download_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/app_bonus"
+        android:layout_alignLeft="@id/btn_options"
+        android:drawableLeft="@drawable/icon_play_chance"
+        android:gravity="center"
+        android:paddingLeft="3dip"
+        android:text="12 次"
+        android:textSize="10sp" />
 
-
-        <!-- 下载管理按钮 -->
-        <Button
-                android:id="@+id/button_simple_info_download_manager"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:background="@drawable/button_small_blue"
-                android:gravity="center_horizontal"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                android:text="下载"
-                android:textColor="@color/tab_text_normal"
-                android:textSize="@dimen/button_blue_text_size"
-                >
-        </Button>
-
-        <!-- 应用所获得的奖励 -->
-        <TextView
-                android:id="@+id/text_simple_info_app_bonus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:text="hhh">
-        </TextView>
-
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_download_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_download_number"
+        android:layout_marginLeft="10dip"
+        android:layout_toRightOf="@id/tv_download_number"
+        android:drawableLeft="@drawable/icon_play_chance"
+        android:gravity="center"
+        android:paddingLeft="3dip"
+        android:text="3010"
+        android:textColor="#ffff0000"
+        android:textSize="10sp" />
 
 </RelativeLayout>
