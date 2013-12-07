@@ -15,11 +15,15 @@ import java.text.DecimalFormat;
  */
 public class StorageUtils {
     /**
-     * SD卡是否可写
+     * 是否挂载了SD卡
      * @return
      */
     public static boolean hasSDCard() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
+
+    public static boolean isSDCardReadOnly() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED_READ_ONLY);
     }
 
     /**

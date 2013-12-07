@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ConfigUtils {
     public static final String PREFERENCE_NAME = "com.hoyotech.ctgames";
-    public static final String PREFERENCE_URL_KEY = "url";    // 在SharedPreferences中存储的下载url的key
+    public static final String PREFERENCE_URL_KEY = "url_";    // 在SharedPreferences中存储的下载url的key
 
     public static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_WORLD_WRITEABLE);
@@ -35,15 +35,15 @@ public class ConfigUtils {
         }
     }
 
-    public static void storeURL(Context context, int index, String url) {
+    public static void storeURL(Context context, long index, String url) {
         setString(context, PREFERENCE_URL_KEY+index, url);
     }
 
-    public static void clearURL(Context context, int index) {
+    public static void clearURL(Context context, long index) {
         setString(context, PREFERENCE_URL_KEY+index, "");
     }
 
-    public static String getURL(Context context, int index, String defaultURL) {
+    public static String getURL(Context context, long index, String defaultURL) {
         return getString(context, PREFERENCE_URL_KEY+index, defaultURL);
     }
 
