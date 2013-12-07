@@ -152,13 +152,4 @@ public class NetworkUtils {
         }
         return infos;
     }
-
-    /**
-     * 判断字符串是否为空
-     * @param src
-     * @return 字符串为空返回true，否则返回false
-     */
-    public static boolean isEmpty(String src) {
-        return src == null || src.equals("");
-    }
 }
