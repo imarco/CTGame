@@ -29,4 +29,17 @@
     <dimen name="dialog_button_margin">15dp</dimen>
     <dimen name="dialog_button_width">100dp</dimen>
 
+    <!-- 字体大小 -->
+    <dimen name="text_size_item_name">18sp</dimen>
+    <dimen name="text_size_item_size">12sp</dimen>
+    <dimen name="text_size_item_summary">12sp</dimen>
+    <dimen name="text_size_item_prize_count">12sp</dimen>
+    <dimen name="text_size_item_luckypean_count">12sp</dimen>
+    <dimen name="text_size_item_all_bonus">12sp</dimen>
+
+    <dimen name="button_options_text_size">12sp</dimen>
+    <dimen name="text_size_download_rate_size">13sp</dimen>
+    <dimen name="text_size_download_percent_size">13sp</dimen>
+
+
 </resources>

@@ -18,6 +18,7 @@ import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.AppInfoAdapter;
 import com.hoyotech.ctgames.adapter.GalleryAdapter;
 import com.hoyotech.ctgames.util.CTGameConstans;
+import com.hoyotech.ctgames.util.DataUtils;
 import com.hoyotech.ctgames.util.NetworkUtils;
 import com.hoyotech.ctgames.viewdef.FlowIndicator;
 
@@ -64,7 +65,7 @@ public class AppRecommendFragment extends Fragment {
         gallery.setOnItemSelectedListener(selected_listener);
 
 
-        AppInfoAdapter adapter = new AppInfoAdapter(NetworkUtils.getAppInfos(getActivity()), getActivity());
+        AppInfoAdapter adapter = new AppInfoAdapter(DataUtils.getAppInfos(getActivity()), getActivity());
 
         gridView.setAdapter(adapter);
 

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:paddingBottom="10dip" >
+
+    <ImageView
+            android:id="@+id/image_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/image_app_sample" />
+
+    <Button
+            android:id="@+id/btn_app_bonus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/image_app"
+            android:layout_below="@id/image_app"
+            android:layout_marginTop="5dip"
+            android:background="@drawable/button_small_white"
+            android:gravity="center"
+            android:textColor="@color/tab_text"
+            android:text="所有奖励"
+            android:textSize="@dimen/text_size_item_all_bonus" />
+
+    <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/image_app"
+            android:layout_marginLeft="8dip"
+            android:layout_toRightOf="@id/image_app"
+            android:text="神庙逃亡"
+            android:textColor="@color/tab_text"
+            android:textSize="@dimen/text_size_item_name" />
+
+    <TextView
+            android:id="@+id/tv_app_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_app_name"
+            android:layout_marginLeft="3dip"
+            android:layout_toRightOf="@id/tv_app_name"
+            android:text="10M"
+            android:textColor="@color/tab_text"
+            android:textSize="@dimen/text_size_item_size" />
+
+    <Button
+            android:id="@+id/btn_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停"
+            android:background="@drawable/button_small_blue"
+            android:textColor="@color/tab_text_normal"
+            android:textSize="@dimen/button_options_text_size"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dip"
+            android:layout_alignParentRight="true"
+            />
+
+    <!-- 因为相对布局的需要，因此，中间的内容是最后一部分放 -->
+    <TextView
+            android:id="@+id/tv_prize_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/btn_app_bonus"
+            android:layout_alignLeft="@id/tv_app_name"
+            android:drawableLeft="@drawable/icon_play_chance"
+            android:gravity="center"
+            android:paddingLeft="3dip"
+            android:text=" 12 次"
+            android:textColor="@color/tab_text"
+            android:textSize="@dimen/text_size_item_prize_count" />
+
+    <TextView
+            android:id="@+id/tv_luckypean_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_prize_count"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@id/tv_prize_count"
+            android:drawableLeft="@drawable/icon_pea"
+            android:gravity="center"
+            android:paddingLeft="3dip"
+            android:text=" 3010"
+            android:textColor="@color/tab_text"
+            android:textSize="@dimen/text_size_item_luckypean_count" />
+
+    <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_alignLeft="@id/tv_app_name"
+            android:layout_below="@id/tv_app_name"
+            android:layout_toLeftOf="@id/btn_options"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="8dip"
+            android:layout_centerVertical="true"
+            >
+
+        <!-- 右侧的下载速度的部分 -->
+        <TextView
+                android:id="@+id/tv_download_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_download_rate_size"
+                android:text="20K/S"
+                android:textColor="@color/tab_text"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                />
+
+
+        <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/tv_download_rate"
+                android:progressDrawable="@drawable/progress_bar_style"
+                android:layout_centerVertical="true"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_marginRight="5dip"
+                android:max="100"
+                android:progress="20"
+                />
+
+        <TextView
+                android:id="@+id/tv_download_percent"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tab_text"
+                android:textSize="@dimen/text_size_download_percent_size"
+                android:text="20%"
+                android:layout_alignTop="@id/progress_bar"
+                android:layout_alignBottom="@id/progress_bar"
+                android:layout_toLeftOf="@id/tv_download_rate"
+                android:layout_marginRight="5dip"
+                android:gravity="center"
+                />
+    </RelativeLayout>
+
+</RelativeLayout>

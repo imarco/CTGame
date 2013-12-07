@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#ffffff" >
+
+    <RelativeLayout
+            android:id="@+id/layout_package_app_download"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/big_wheel_title_color"
+            android:paddingBottom="10dip"
+            >
+
+        <ImageView
+                android:id="@+id/image_package"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="10dip"
+                android:background="@drawable/image_app_package" />
+
+        <TextView
+                android:id="@+id/tv_package_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/image_package"
+                android:layout_alignRight="@id/image_package"
+                android:layout_below="@id/image_package"
+                android:layout_marginTop="10dip"
+                android:gravity="center"
+                android:text="共 100 M"
+                android:textColor="@color/tab_text"
+                android:textSize="@dimen/text_size_item_size" />
+
+        <Button
+                android:id="@+id/btn_package_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dip"
+                android:gravity="center"
+                android:background="@drawable/button_small_blue"
+                android:textSize="@dimen/button_options_text_size"
+                android:textColor="@color/tab_text_normal"
+                android:text="开始下载" />
+
+        <TextView
+                android:id="@+id/tv_package_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/image_package"
+                android:layout_alignTop="@id/image_package"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_toLeftOf="@id/btn_package_download"
+                android:layout_toRightOf="@id/image_package"
+                android:gravity="center_vertical"
+                android:text="这个大礼包里包括各种类型的精品游戏。包括动作类，剧情类，射击类，游戏类，搞笑类，益智类。"
+                android:textColor="@color/tab_text"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textSize="@dimen/text_size_item_summary" />
+
+        <ImageView
+                android:id="@+id/image_line_divider"
+                android:layout_width="1dip"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_package_size"
+                android:layout_alignLeft="@id/tv_package_summary"
+                android:layout_alignTop="@id/tv_package_size"
+                android:background="@color/app_divider_line_color" />
+
+        <TextView
+                android:id="@+id/tv_prize_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_package_size"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/image_line_divider"
+                android:drawableLeft="@drawable/icon_play_chance"
+                android:gravity="center"
+                android:paddingLeft="3dip"
+                android:text=" 12 次"
+                android:textColor="@color/tab_text"
+                android:textSize="@dimen/text_size_item_prize_count" />
+
+        <TextView
+                android:id="@+id/tv_luckypean_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_prize_count"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/tv_prize_count"
+                android:drawableLeft="@drawable/icon_pea"
+                android:gravity="center"
+                android:paddingLeft="3dip"
+                android:text=" 3010"
+                android:textColor="@color/tab_text"
+                android:textSize="@dimen/text_size_item_luckypean_count" />
+    </RelativeLayout>
+
+    <ListView
+            android:id="@+id/list_package_app"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_below="@id/layout_package_app_download"
+            android:layout_marginTop="1dip"
+            android:divider="@color/app_divider_line_color"
+            android:dividerHeight="1dip"
+            />
+
+</RelativeLayout>

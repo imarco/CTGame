@@ -1,4 +1,5 @@
-package com.hoyotech.ctgames.activity;
+package com.hoyotech.ctgames.fragment;
+
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,13 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.AppInstallAdapter;
+import com.hoyotech.ctgames.util.DataUtils;
 import com.hoyotech.ctgames.util.NetworkUtils;
 
 /**
  * Created by GGCoke on 13-12-3.
  */
-public class AppCategoriesFragment extends Fragment {
-    private static final String KEY_CONTENT = "AppCategoriesFragment:Content";
+public class TaskInstallFragment extends Fragment {
+    private static final String KEY_CONTENT = "TaskInstallFragment:Content";
     private Bundle bundle;
 
     @Override
@@ -29,8 +31,13 @@ public class AppCategoriesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_app_categories, container, false);
+        View v = inflater.inflate(R.layout.fragment_task_install, container, false);
 
+        ListView lv = (ListView) v.findViewById(R.id.list_task_install);
+
+        AppInstallAdapter adapter = new AppInstallAdapter(DataUtils.getAPPInstallInfos(getActivity()), getActivity());
+
+        lv.setAdapter(adapter);
 
         return v;
     }
@@ -39,5 +46,10 @@ public class AppCategoriesFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBundle(KEY_CONTENT, bundle);
+
+
     }
+
+
+
 }

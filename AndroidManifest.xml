@@ -31,6 +31,7 @@
         </activity>
         <activity android:name=".activity.BigWheelAwardActivity" />
         <activity android:name=".activity.TaskHomeActivity" />
+        <activity android:name=".activity.PackageDetailActivity"/>
 
         <receiver android:name=".service.CTGameReceiver">
             <intent-filter>

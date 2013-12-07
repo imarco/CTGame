@@ -9,6 +9,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.adapter.bean.AppInfo;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
