@@ -24,5 +24,6 @@ public class TaskDownloadHolder {
     public TextView tvSummary; // 应用的简介
     public ProgressBar progressBar; // 下载进度条
     public TextView tvDownloadRate; // 下载速度
+    public TextView tvDownloadPercent; // 下载百分比
 
 }

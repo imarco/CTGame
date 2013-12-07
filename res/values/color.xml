@@ -42,4 +42,7 @@
 
     <!-- 任务管理分割线中任务的分割线颜色 -->
     <color name="task_download_line_color">#f5f1ee</color>
+
+    <!-- list中app分割线的颜色 -->
+    <color name="app_divider_line_color">#C8C8C9</color>
 </resources>

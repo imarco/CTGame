@@ -22,8 +22,8 @@
             android:layout_marginLeft="8dip"
             android:layout_toRightOf="@id/image_app"
             android:text="神庙逃亡"
-            android:textColor="#57596E"
-            android:textSize="18sp" />
+            android:textColor="@color/tab_text"
+            android:textSize="@dimen/text_size_item_name" />
 
     <TextView
             android:id="@+id/tv_app_size"
@@ -33,14 +33,14 @@
             android:layout_marginLeft="3dip"
             android:layout_toRightOf="@id/tv_app_name"
             android:text="10M"
-            android:textColor="#7B7D8D"
-            android:textSize="12sp" />
+            android:textColor="@color/tab_text"
+            android:textSize="@dimen/text_size_item_size" />
 
     <!-- 右侧的操作部分，包含选择框和按钮两个部分，根据状态不同，显示和隐藏 -->
 
     <RelativeLayout
             android:id="@+id/layout_options"
-            android:layout_width="80dip"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -48,10 +48,12 @@
 
         <Button
                 android:id="@+id/btn_options"
-                android:layout_width="80dip"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_option_selector"
                 android:gravity="center"
+                android:textColor="@color/tab_text_normal"
+                android:textSize="@dimen/button_options_text_size"
                 android:text="打开" />
 
         <CheckBox
@@ -79,9 +81,10 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
+                android:ellipsize="end"
                 android:text="《猴子猜拳（Monkey Boxing）》是一款趣味性十足的全集游戏，游戏中...."
-                android:textSize="10sp"
-                android:textColor="#8F8F8F"
+                android:textSize="@dimen/text_size_item_summary"
+                android:textColor="@color/tab_text"
                 />
 
         <!-- 右侧的下载速度的部分 -->
@@ -101,9 +104,9 @@
                     android:layout_centerVertical="true"
                     android:gravity="center"
                     android:text="20K/S"
-                    android:textColor="#68697D"
+                    android:textColor="@color/tab_text"
                     android:visibility="gone"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/text_size_download_rate_size" />
 
             <ProgressBar
                     android:id="@+id/progress_bar"
@@ -117,6 +120,21 @@
                     android:progress="20"
                     android:visibility="gone"
                     android:progressDrawable="@drawable/progress_bar_style" />
+
+            <TextView
+                    android:id="@+id/tv_download_percent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tab_text"
+                    android:textSize="@dimen/text_size_download_percent_size"
+                    android:text="20%"
+                    android:layout_alignTop="@id/progress_bar"
+                    android:layout_alignBottom="@id/progress_bar"
+                    android:layout_toLeftOf="@id/tv_download_rate"
+                    android:layout_marginRight="5dip"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    />
         </RelativeLayout>
     </RelativeLayout>
 

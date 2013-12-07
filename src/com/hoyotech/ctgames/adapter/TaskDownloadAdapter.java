@@ -58,9 +58,11 @@ public class TaskDownloadAdapter extends BaseAdapter{
             holder.btnOptions = (Button) convertView.findViewById(R.id.btn_options);
             holder.btnAppBonus = (Button) convertView.findViewById(R.id.btn_app_bonus);
             holder.tvPrizeCount = (TextView) convertView.findViewById(R.id.tv_prize_count);
+            holder.tvSummary = (TextView) convertView.findViewById(R.id.tv_summary);
             holder.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckypean_count);
             holder.tvDownloadRate = (TextView) convertView.findViewById(R.id.tv_download_rate);
             holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
+            holder.tvDownloadPercent = (TextView) convertView.findViewById(R.id.tv_download_percent);
             convertView.setTag(holder);
         }else {
             holder = (TaskDownloadHolder) convertView.getTag();
@@ -73,6 +75,7 @@ public class TaskDownloadAdapter extends BaseAdapter{
         holder.tvLuckyBeanCount.setText(String.valueOf(info.getLuckybeanCount()));
         holder.tvDownloadRate.setText(String.valueOf(info.getRate())+"KB/S");
         holder.progressBar.setProgress(info.getProgress());
+        holder.tvDownloadPercent.setText(info.getProgress() + "%");
 
         //设置事件监听响应
         holder.btnOptions.setOnClickListener(new ButtonClickListener());

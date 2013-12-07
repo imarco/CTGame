@@ -19,5 +19,6 @@ public class PackageDownloadHolder {
     public ProgressBar progressBar; // 下载进度条
     public CheckBox checkBoxToDownload; // 应用是否已经安装
     public TextView tvDownloadRate; // 下载速度
+    public TextView tvDownloadPercent; // 下载百分比
 
 }

@@ -70,6 +70,7 @@ public class PackageDownloadAdapter extends BaseAdapter{
             holder.tvSummary = (TextView) convertView.findViewById(R.id.tv_summary);
             holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
             holder.tvDownloadRate = (TextView) convertView.findViewById(R.id.tv_download_rate);
+            holder.tvDownloadPercent = (TextView) convertView.findViewById(R.id.tv_download_percent);
             convertView.setTag(holder);
         }else {
             holder = (PackageDownloadHolder) convertView.getTag();
@@ -111,6 +112,7 @@ public class PackageDownloadAdapter extends BaseAdapter{
             holder.tvSummary.setVisibility(View.GONE);
             holder.progressBar.setVisibility(View.VISIBLE);
             holder.tvDownloadRate.setVisibility(View.VISIBLE);
+            holder.tvDownloadPercent.setVisibility(View.VISIBLE);
         }
 
         return convertView;

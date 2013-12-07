@@ -51,11 +51,11 @@ public class AppInstallAdapter extends BaseAdapter {
 
         if (convertView == null){
             holder = new AppInstallInfoHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.app_install_item, null);
-            holder.appImageHeader = (ImageView) convertView.findViewById(R.id.app_install_img);
+            convertView = LayoutInflater.from(context).inflate(R.layout.layout_task_install_item, null);
+            holder.appImageHeader = (ImageView) convertView.findViewById(R.id.image_app);
             holder.appName = (TextView) convertView.findViewById(R.id.tv_app_name);
             holder.appPackageSize = (TextView) convertView.findViewById(R.id.tv_app_size);
-            holder.btnOptions = (Button) convertView.findViewById(R.id.btn_options);
+            holder.btnOptions = (Button) convertView.findViewById(R.id.btn_app_options);
             holder.btnAppBonus = (Button) convertView.findViewById(R.id.btn_app_bonus);
             holder.tvPrizeCount = (TextView) convertView.findViewById(R.id.tv_prize_count);
             holder.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckybean_count);
