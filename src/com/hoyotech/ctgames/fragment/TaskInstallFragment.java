@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 
 import android.widget.ListView;
 import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.adapter.AppInstallAdapter;
+import com.hoyotech.ctgames.adapter.TaskInstallAdapter;
 import com.hoyotech.ctgames.util.DataUtils;
-import com.hoyotech.ctgames.util.NetworkUtils;
 
 /**
  * Created by GGCoke on 13-12-3.
@@ -35,7 +34,7 @@ public class TaskInstallFragment extends Fragment {
 
         ListView lv = (ListView) v.findViewById(R.id.list_task_install);
 
-        AppInstallAdapter adapter = new AppInstallAdapter(DataUtils.getAPPInstallInfos(getActivity()), getActivity());
+        TaskInstallAdapter adapter = new TaskInstallAdapter(DataUtils.getTaskInstallInfos(getActivity()), getActivity());
 
         lv.setAdapter(adapter);
 

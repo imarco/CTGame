@@ -6,10 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.ListView;
 import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.adapter.AppInstallAdapter;
-import com.hoyotech.ctgames.util.NetworkUtils;
 
 /**
  * Created by GGCoke on 13-12-3.

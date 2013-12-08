@@ -10,20 +10,38 @@ public class AppInfo {
     private Drawable img;        // 图标
     private String appName;      // 名称
     private float appSize;       // 大小
-    private int state;           //目前的状态，下载还是安装 数字在AppTaskManagerState中定义
+    private int state;           //目前的状态，下载还是安装 数字在TaskState中定义
     private String summary = ""; //应用的简介
     private int prizeCount;
     private int luckybeanCount;
-    private boolean isInstall = false;
-    private boolean isDownloading = false; // 是否正在下载
 
-    public boolean isInstall() {
-        return isInstall;
+    // 便于在礼包中的应用进行操作，为应用设置三种模式，供选择是否下载的模式，下载中的模式，安装的模式
+    // 数字在TaskState中定义
+    private int mode = 0;
+
+    private String url; // 下载的地址
+    private int progress;        // 下载进度 0-100%
+    private int rate;            // 下载速度 bps
+
+
+    public AppInfo(Drawable img, String appName, float appSize, int state, String summary, int prizeCount, int luckybeanCount) {
+        this.img = img;
+        this.appName = appName;
+        this.appSize = appSize;
+        this.state = state;
+        this.summary = summary;
+        this.prizeCount = prizeCount;
+        this.luckybeanCount = luckybeanCount;
     }
 
-    public void setInstall(boolean install) {
-        isInstall = install;
+    public String getUrl() {
+        return url;
     }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
 
     public int getProgress() {
         return progress;
@@ -41,9 +59,6 @@ public class AppInfo {
         this.rate = rate;
     }
 
-    private int progress;        // 下载进度 0-100
-    private int rate;            // 下载速度
-
     public AppInfo() {
     }
 
@@ -52,62 +67,65 @@ public class AppInfo {
 
     }
 
-    public AppInfo(Drawable img, String appName, float appSize, int state, String summary, int prizeCount, int luckybeanCount) {
-        this.img = img;
-        this.appName = appName;
-        this.appSize = appSize;
-        this.state = state;
-        this.summary = summary;
-        this.prizeCount = prizeCount;
-        this.luckybeanCount = luckybeanCount;
-    }
-
     public void setSummary(String summary) {
 
         this.summary = summary;
     }
+
     public Drawable getImg() {
         return img;
     }
+
     public void setImg(Drawable img) {
         this.img = img;
     }
+
     public String getAppName() {
         return appName;
     }
+
     public void setAppName(String app_name) {
         this.appName = app_name;
     }
+
     public float getAppSize() {
         return appSize;
     }
+
     public void setAppSize(float appSize) {
         this.appSize = appSize;
     }
+
     public int getState() {
         return state;
     }
+
     public void setState(int state) {
         this.state = state;
     }
+
     public int getPrizeCount() {
         return prizeCount;
     }
+
     public void setPrizeCount(int prizeCount) {
         this.prizeCount = prizeCount;
     }
+
     public int getLuckybeanCount() {
         return luckybeanCount;
     }
+
     public void setLuckybeanCount(int luckybeanCount) {
         this.luckybeanCount = luckybeanCount;
     }
 
-    public boolean isDownloading() {
-        return isDownloading;
+    public int getMode() {
+        return mode;
     }
 
-    public void setDownloading(boolean downloading) {
-        isDownloading = downloading;
+    public void setMode(int mode) {
+        this.mode = mode;
     }
+
 }

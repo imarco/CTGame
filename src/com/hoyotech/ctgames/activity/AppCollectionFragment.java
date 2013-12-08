@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.PackageInfoAdapter;
-import com.hoyotech.ctgames.adapter.bean.AppPackageInfo;
+import com.hoyotech.ctgames.adapter.bean.PackageInfo;
 
 import java.util.ArrayList;
 
@@ -53,12 +53,12 @@ public class AppCollectionFragment extends Fragment {
 
     }
 
-    public static ArrayList<AppPackageInfo> getPackageInfos(Context context) {
-        ArrayList<AppPackageInfo> infos = new ArrayList<AppPackageInfo>();
+    public static ArrayList<PackageInfo> getPackageInfos(Context context) {
+        ArrayList<PackageInfo> infos = new ArrayList<PackageInfo>();
         Drawable d = context.getResources().getDrawable(
                 R.drawable.image_app_package);
         for (int i = 0; i < 3; i++) {
-            AppPackageInfo packageInfo = new AppPackageInfo();
+            PackageInfo packageInfo = new PackageInfo();
             packageInfo.setImg(d);
             packageInfo.setName("礼包" + i);
             packageInfo.setSize(i * i);
