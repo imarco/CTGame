@@ -31,9 +31,9 @@ public class DataUtils {
             appInfo.setAppName("神庙逃亡" + i);
             appInfo.setAppSize(i * i);
             if (i % 2 == 0) {
-                appInfo.setState(0);
+                appInfo.setState(TaskState.STATE_DOWNLOAD);
             } else {
-                appInfo.setState(1);
+                appInfo.setState(TaskState.STATE_INSTALL);
             }
             appInfo.setPrizeCount(6 - i + i * i);
             appInfo.setLuckybeanCount(300);
@@ -44,15 +44,19 @@ public class DataUtils {
     }
 
     //应用安装部分数据
-    public static ArrayList<AppInfo> getAPPInstallInfos (Context context){
+    public static ArrayList<AppInfo> getTaskInstallInfos(Context context){
         ArrayList<AppInfo> infos = new ArrayList<AppInfo>();
         Drawable d = context.getResources().getDrawable(
                 R.drawable.image_app_sample);
         int state = 0;
 
         for (int i = 0; i < 4; i ++){
-            state = i;
-            infos.add(new AppInfo(d, "tianyu" + i, 124.0f * i, 1, "好游戏啊", i * i, 70));
+            if (i % 2 == 0) {
+                state = TaskState.STATE_INSTALL;
+            } else {
+                state = TaskState.STATE_OPEN;
+            }
+            infos.add(new AppInfo(d, "tianyu" + i, 124.0f * i, state, "好游戏啊", i * i, 70));
 
         }
         return infos;
@@ -74,9 +78,9 @@ public class DataUtils {
             appInfo.setAppName("神庙逃亡" + i);
             appInfo.setAppSize(i * i);
             if (i % 2 == 0) {
-                appInfo.setState(0);
+                appInfo.setState(TaskState.STATE_DOWNLOAD);
             } else {
-                appInfo.setState(1);
+                appInfo.setState(TaskState.STATE_PAUSE);
             }
             appInfo.setPrizeCount(6 - i + i * i);
             appInfo.setLuckybeanCount(300);
@@ -103,11 +107,12 @@ public class DataUtils {
             appInfo.setAppName("神庙逃亡" + i);
             appInfo.setAppSize(i * i);
             if (i % 2 == 0) {
-                appInfo.setState(0);
+                appInfo.setState(TaskState.STATE_DOWNLOAD);
+                appInfo.setMode(TaskState.MODE_SELECTION);
             } else {
-                appInfo.setState(1);
+                appInfo.setState(TaskState.STATE_INSTALL);
+                appInfo.setMode(TaskState.MODE_INSTALL);
             }
-            appInfo.setInstall(Math.random() - 0.5f > 0);
             appInfo.setPrizeCount(6 - i + i * i);
             appInfo.setLuckybeanCount(300);
             appInfo.setRate(25*i);

@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.activity.PackageDetailActivity;
-import com.hoyotech.ctgames.adapter.bean.AppPackageInfo;
-import com.hoyotech.ctgames.adapter.holder.AppPackageInfoHolder;
+import com.hoyotech.ctgames.adapter.bean.AppInfo;
+import com.hoyotech.ctgames.adapter.bean.PackageInfo;
+import com.hoyotech.ctgames.adapter.holder.PackageInfoHolder;
+import com.hoyotech.ctgames.adapter.holder.TaskInstallHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,12 +26,12 @@ import java.util.ArrayList;
 public class PackageInfoAdapter extends BaseAdapter {
 
     //定义相应的变量
-    private ArrayList<AppPackageInfo> data;
+    private List<PackageInfo> data;
     private Context context;
-    private AppPackageInfo info;
+    private PackageInfo packageInfo;
 
     //构造函数
-    public PackageInfoAdapter(ArrayList<AppPackageInfo> data, Context context) {
+    public PackageInfoAdapter(List<PackageInfo> data, Context context) {
         this.data = data;
         this.context = context;
     }
@@ -50,41 +53,33 @@ public class PackageInfoAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        AppPackageInfoHolder holder = null;
+        PackageInfoHolder holder = null;
 
         if (convertView == null){
-            holder = new AppPackageInfoHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.layout_package_info_item, null);
-            holder.image = (ImageView) convertView.findViewById(R.id.image_app_package);
-            holder.tvPackageName = (TextView) convertView.findViewById(R.id.tv_name);
-            holder.tvPackageSize = (TextView) convertView.findViewById(R.id.package_size);
-            holder.btnOpen = (Button) convertView.findViewById(R.id.btn_open);
-            holder.tvPrizeCount = (TextView) convertView.findViewById(R.id.btn_play_chance);
-            holder.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_bonus);
-            holder.tvSummary = (TextView) convertView.findViewById(R.id.tv_summary);
+            holder = new PackageInfoHolder(convertView);
             convertView.setTag(holder);
         } else {
-            holder = (AppPackageInfoHolder) convertView.getTag();
+            holder = (PackageInfoHolder) convertView.getTag();
         }
 
-        info = data.get(position);
-        holder.image.setBackgroundDrawable(info.getImg());
-        holder.tvPackageName.setText(info.getName());
-        holder.tvPackageSize.setText(String.valueOf(info.getSize())+"M");
-        holder.tvPrizeCount.setText(String.valueOf(info.getPrizeCount()));
-        holder.tvLuckyBeanCount.setText(String.valueOf(info.getLuckybeanCount()));
-        holder.tvSummary.setText(info.getSummary());
+        packageInfo = data.get(position);
+        holder.setData(context, packageInfo);
 
         //设置事件监听响应
-        holder.btnOpen.setOnClickListener(new ButtonListener());
+        holder.btnOpen.setOnClickListener(new ButtonClickListener(packageInfo, holder));
 
         return convertView;
     }
 
-    // view中按钮的点击事件处理
-    private class ButtonListener implements View.OnClickListener {
+    // 处理按钮的点击事件
+    private class ButtonClickListener implements View.OnClickListener {
+        private PackageInfoHolder holder;
+        private PackageInfo info;
 
-        public ButtonListener() {
+        public ButtonClickListener(PackageInfo info, PackageInfoHolder holder) {
+            this.info = info;
+            this.holder = holder;
         }
 
         @Override
@@ -92,12 +87,13 @@ public class PackageInfoAdapter extends BaseAdapter {
 
             switch (v.getId()) {
                 case R.id.btn_open:
-                    // 打开PackageDetailActivity
-                    System.out.println("打开礼包详情");
+                    // 打开礼包的详情，打开PackageDetailActivity
                     Intent intent = new Intent(context, PackageDetailActivity.class);
                     context.startActivity(intent);
                     break;
             }
         }
+
     }
+
 }

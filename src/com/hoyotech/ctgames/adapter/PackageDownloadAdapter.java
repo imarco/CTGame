@@ -8,6 +8,7 @@ import android.widget.*;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.PackageDownloadHolder;
+import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,11 @@ public class PackageDownloadAdapter extends BaseAdapter{
 
     private List<AppInfo> data;
     private Context context;
-    AppInfo info;
+    AppInfo appInfo;
 
     //这个地方并不准确，因为如果要标志一个程序被选中，最好有很多的变量，这里Demo只有一个id，不过如果
     //可以大礼包的记录顺序也可以了。
-    List<Integer> cbClick = new ArrayList<Integer>();
+    private List<Integer> cbClick = new ArrayList<Integer>();
 
     //构造函数
     public PackageDownloadAdapter(ArrayList<AppInfo> data, Context context) {
@@ -60,41 +61,15 @@ public class PackageDownloadAdapter extends BaseAdapter{
 
         PackageDownloadHolder holder = null;
         if (convertView == null){
-            holder = new PackageDownloadHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.layout_package_app_item, null);
-            holder.appImageHeader = (ImageView) convertView.findViewById(R.id.image_app);
-            holder.appName = (TextView) convertView.findViewById(R.id.tv_app_name);
-            holder.appPackageSize = (TextView) convertView.findViewById(R.id.tv_app_size);
-            holder.btnOptions = (Button) convertView.findViewById(R.id.btn_options);
-            holder.checkBoxToDownload = (CheckBox) convertView.findViewById(R.id.cb_download);
-            holder.tvSummary = (TextView) convertView.findViewById(R.id.tv_summary);
-            holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
-            holder.tvDownloadRate = (TextView) convertView.findViewById(R.id.tv_download_rate);
-            holder.tvDownloadPercent = (TextView) convertView.findViewById(R.id.tv_download_percent);
+            holder = new PackageDownloadHolder(convertView);
             convertView.setTag(holder);
         }else {
             holder = (PackageDownloadHolder) convertView.getTag();
         }
 
-        info = data.get(position);
-        holder.appImageHeader.setBackgroundDrawable(info.getImg());
-        holder.appName.setText(info.getAppName());
-        holder.appPackageSize.setText(String.valueOf(info.getAppSize())+"M");
-
-        boolean is_install = info.isInstall();
-
-        //两种状态，安装或者没有安装
-        if(is_install) {
-            holder.btnOptions.setVisibility(View.VISIBLE);
-            holder.checkBoxToDownload.setVisibility(View.GONE);
-        } else {
-            holder.btnOptions.setVisibility(View.GONE);
-            holder.checkBoxToDownload.setVisibility(View.VISIBLE);
-        }
-
-        if (holder.btnOptions.isShown()){//只有当其是显示的时候才可以有相关的事件响应
-            holder.btnOptions.setOnClickListener(new ButtonClickListener());
-        }
+        appInfo = data.get(position);
+        holder.setData(context, appInfo);
 
         //复选框的点击部分
         holder.checkBoxToDownload.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -107,20 +82,21 @@ public class PackageDownloadAdapter extends BaseAdapter{
             }
         });
 
-        //表示正在下载部分，或者下载完成，根据progree来判定，所以还要加progress属性
-        if (info.isDownloading()){
-            holder.tvSummary.setVisibility(View.GONE);
-            holder.progressBar.setVisibility(View.VISIBLE);
-            holder.tvDownloadRate.setVisibility(View.VISIBLE);
-            holder.tvDownloadPercent.setVisibility(View.VISIBLE);
+        // 只有当不是选择模式的时候才进行按钮事件的响应
+        if (!holder.isSelectionMode()){
+            holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo, holder));
         }
 
         return convertView;
     }
 
     private class ButtonClickListener implements View.OnClickListener {
+        private AppInfo info;
+        private PackageDownloadHolder holder;
 
-        public ButtonClickListener() {
+        public ButtonClickListener(AppInfo info, PackageDownloadHolder holder) {
+            this.info = info;
+            this.holder = holder;
         }
 
         @Override
@@ -129,9 +105,51 @@ public class PackageDownloadAdapter extends BaseAdapter{
             switch (v.getId()) {
                 case R.id.btn_app_bonus:
                     // 补充响应
+                    // 应该弹出应用详情信息
                     break;
                 case R.id.btn_options:
                     // 补充响应
+                    // 根据按钮的状态决定操作
+                    // 点击下载-暂停 点击暂停-继续 点击继续-暂停 点击安装-安装中
+                    // 打开-领取奖励 (中间状态 安装完成之后变成打开)
+                    // 点击领取奖励再进行跳转
+                    System.out.println("被点击了");
+                    if(info.getState() == TaskState.STATE_DOWNLOAD) {
+                        info.setState(TaskState.STATE_PAUSE);
+                        info.setMode(TaskState.MODE_DOWNLOADING);
+                        holder.setData(context, info);
+                        // 通知service开始下载
+
+                    } else if(info.getState() == TaskState.STATE_PAUSE) {
+                        info.setState(TaskState.STATE_CONTINUE);
+                        info.setMode(TaskState.MODE_DOWNLOADING);
+                        holder.setData(context, info);
+                        // 通知service暂停下载
+
+                    } else if(info.getState() == TaskState.STATE_CONTINUE) {
+                        info.setState(TaskState.STATE_PAUSE);
+                        info.setMode(TaskState.MODE_DOWNLOADING);
+                        holder.setData(context, info);
+                        // 通知service继续下载
+
+                    } else if(info.getState() == TaskState.STATE_INSTALL) {
+                        info.setState(TaskState.STATE_INSTALLING);
+                        info.setMode(TaskState.MODE_INSTALL);
+                        holder.setData(context, info);
+                        // 当安装完成之后，在这个时候需要更新状态表示打开
+                        // 通知service安装
+
+                    } else if(info.getState() == TaskState.STATE_OPEN) {
+                        info.setState(TaskState.STATE_GET_PRIZE);
+                        info.setMode(TaskState.MODE_INSTALL);
+                        holder.setData(context, info);
+                        // 通知service打开安装好的应用
+
+                    } else if(info.getState() == TaskState.STATE_GET_PRIZE) {
+                        info.setMode(TaskState.MODE_INSTALL);
+                        holder.setData(context, info);
+                        // 点击获取奖励之后的动作
+                    }
                     break;
                 default:
                     // 补充默认情况

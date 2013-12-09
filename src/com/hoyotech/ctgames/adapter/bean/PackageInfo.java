@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable;
  * Time: 下午4:59
  * To change this template use File | Settings | File Templates.
  */
-public class AppPackageInfo {
+public class PackageInfo {
 
     private Drawable img;        // 图标
     private String name;      // 名称
@@ -19,7 +19,7 @@ public class AppPackageInfo {
     private int prizeCount;       // 抽奖次数
     private int luckybeanCount;   // 幸运豆个数
 
-    public AppPackageInfo(Drawable img, String name, float size, int state, String summary, int prizeCount, int luckybeanCount) {
+    public PackageInfo(Drawable img, String name, float size, int state, String summary, int prizeCount, int luckybeanCount) {
         this.img = img;
         this.name = name;
         this.size = size;
@@ -29,7 +29,7 @@ public class AppPackageInfo {
         this.luckybeanCount = luckybeanCount;
     }
 
-    public AppPackageInfo() {
+    public PackageInfo() {
 
     }
 
