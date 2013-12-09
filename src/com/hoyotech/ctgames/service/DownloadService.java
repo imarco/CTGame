@@ -17,7 +17,12 @@ import com.hoyotech.ctgames.util.TaskState;
  * Created by GGCoke on 13-12-6.
  */
 public class DownloadService extends Service {
+    boolean downloadOnly3G;
     private DownloadManager manager;
+
+    public void setDownloadOnly3G(boolean downloadOnly3G) {
+        manager.setDownloadOnly3G(downloadOnly3G);
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -32,36 +37,51 @@ public class DownloadService extends Service {
         boolean downloadOnly3G = intent.getBooleanExtra("downloadOnly3G", true);
         manager.init(path, action, downloadOnly3G);
 
+        // 接收界面点击事件发送的intent，调用downloadmanager的对应方法
         if (intent.getAction().equals("com.hoyotech.ctgames.service.IAIDLDownloadService")) {
             int type = intent.getIntExtra(TaskState.DOWNLOAD_STATE, -1);
             String url;
 
             switch (type) {
+                case TaskState.STATE_START:
+                    // 启动service
+                    if (!manager.isRunning()) {
+                        manager.startManager();
+                    } else {
+                        manager.reBroadcastAddAllTask();
+                    }
+                    break;
                 case TaskState.STATE_DOWNLOAD:
+                    // 添加下载任务
                     url = intent.getStringExtra(TaskState.DOWNLOAD_URL);
                     if (!StringUtils.isEmpty(url) && !manager.hasTask(url)) {
                         manager.addTask(url);
                     }
                     break;
                 case TaskState.STATE_PAUSE:
+                    // 暂停
                     url = intent.getStringExtra(TaskState.DOWNLOAD_URL);
                     if (!StringUtils.isEmpty(url)) {
                         manager.pauseTask(url);
                     }
                     break;
                 case TaskState.STATE_PAUSE_ALL:
+                    // 暂停所有
                     manager.pauseAllTask();
                     break;
                 case TaskState.STATE_CONTINUE:
+                    // 继续
                     url = intent.getStringExtra(TaskState.DOWNLOAD_URL);
                     if (!StringUtils.isEmpty(url)) {
                         manager.continueTask(url);
                     }
                     break;
                 case TaskState.STATE_CONTINUE_ALL:
+                    // 继续所有
                     manager.continueAllTask();
                     break;
                 case TaskState.STATE_STOP:
+                    // 停止
                     manager.close();
                     break;
 
