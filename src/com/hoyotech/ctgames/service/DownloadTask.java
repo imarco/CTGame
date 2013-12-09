@@ -68,6 +68,10 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
         this.url = url;
         this.srcURL = new URL(url);
         String fileName = new File(srcURL.getFile()).getName();
+        File dir = new File(path);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
         this.file = new File(path, fileName);
         this.tmpFile = new File(path, fileName + TEMP_SUFFIX);
         this.downloadOnly3G = downloadOnly3G;
@@ -139,6 +143,7 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
         try {
             result = download();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             this.error = e;
         } finally {
             if (null != client) {
@@ -177,7 +182,7 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
         if (-1 == result || interrupt || null != error) {
             // 下载中发生错误
             if (CTGameConstans.DEBUG) {
-                Log.e(TAG, "Download failed: " + error.getMessage());
+                Log.e(TAG, "Download failed: " + (null == error ? "" : error.getMessage()));
             }
 
             if (null != listener) {

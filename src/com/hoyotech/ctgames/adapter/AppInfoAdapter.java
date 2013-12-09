@@ -54,7 +54,7 @@ public class AppInfoAdapter extends BaseAdapter {
             holder.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckybean_count);
             holder.btnAppBonus = (Button) convertView.findViewById(R.id.btn_app_bonus);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (AppInfoHolder) convertView.getTag();
         }
         info = data.get(position);

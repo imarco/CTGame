@@ -77,15 +77,12 @@ public class DataUtils {
             appInfo.setImg(d);
             appInfo.setAppName("神庙逃亡" + i);
             appInfo.setAppSize(i * i);
-            if (i % 2 == 0) {
-                appInfo.setState(TaskState.STATE_DOWNLOAD);
-            } else {
-                appInfo.setState(TaskState.STATE_PAUSE);
-            }
+            appInfo.setState(TaskState.STATE_DOWNLOAD);
             appInfo.setPrizeCount(6 - i + i * i);
             appInfo.setLuckybeanCount(300);
-            appInfo.setRate(25*i);
-            appInfo.setProgress(i*10);
+            appInfo.setRate(0);
+            appInfo.setProgress(0);
+            appInfo.setUrl(URLS[i]);
             infos.add(appInfo);
         }
         return infos;
@@ -121,4 +118,14 @@ public class DataUtils {
         }
         return infos;
     }
+
+    public static final String[] URLS =
+            {
+                    "http://img.yingyonghui.com/apk/16457/com.rovio.angrybirdsspace.ads.1332528395706.apk",
+                    "http://img.yingyonghui.com/apk/15951/com.galapagossoft.trialx2_winter.1328012793227.apk",
+                    "http://cdn1.down.apk.gfan.com/asdf/Pfiles/2012/3/26/181157_0502c0c3-f9d1-460b-ba1d-a3bad959b1fa.apk",
+                    "http://static.nduoa.com/apk/258/258681/com.gameloft.android.GAND.GloftAsp6.asphalt6.apk",
+                    "http://cdn1.down.apk.gfan.com/asdf/Pfiles/2011/12/5/100522_b73bb8d2-2c92-4399-89c7-07a9238392be.apk",
+                    "http://file.m.163.com/app/free/201106/16/com.gameloft.android.TBFV.GloftGTHP.ML.apk"
+            };
 }

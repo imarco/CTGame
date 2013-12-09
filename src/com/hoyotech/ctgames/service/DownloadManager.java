@@ -128,7 +128,7 @@ public class DownloadManager extends Thread {
             task = newDownloadTask(url);
             addTask(task);
         } catch (MalformedURLException e) {
-            return CTGameConstans.DOWNLOAD_TASK_ADD_OTHER_ERROR;
+            System.out.println(5 + url + getClass().getName());
         }
 
         return CTGameConstans.DOWNLOAD_TASK_ADD_OK;
@@ -145,9 +145,8 @@ public class DownloadManager extends Thread {
             @Override
             public void updateProcess(DownloadTask task) {
                 Intent updateIntent = new Intent(action);
-                updateIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_PAUSE);
-                updateIntent.putExtra(TaskState.DOWNLOAD_SPEED, task.getDownloadSpeed() + "kbps | "
-                        + task.getDownloadSize() + " / " + task.getTotalSize());
+                updateIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_PROGRESS);
+                updateIntent.putExtra(TaskState.DOWNLOAD_SPEED, task.getDownloadSpeed() + "kbps");
                 updateIntent.putExtra(TaskState.DOWNLOAD_PROGRESS, task.getDownloadPercent() + "");
                 updateIntent.putExtra(TaskState.DOWNLOAD_URL, task.getUrl());
                 mContext.sendBroadcast(updateIntent);
@@ -246,9 +245,16 @@ public class DownloadManager extends Thread {
         task.onCancelled();
         String url = task.getUrl();
 
-        // 将下载任务放到暂停任务列表里
-        mDownloadingTasks.remove(task);
-        mPausingTasks.add(task);
+
+        try {
+            // 将下载任务放到暂停任务列表里
+            mDownloadingTasks.remove(task);
+            task = newDownloadTask(url);
+            mPausingTasks.add(task);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

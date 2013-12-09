@@ -1,6 +1,7 @@
 package com.hoyotech.ctgames.adapter.holder;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.bean.AppInfo;
 import com.hoyotech.ctgames.util.TaskState;
+
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -67,6 +70,24 @@ public class TaskDownloadHolder {
         this.btnOptions.setText(TaskState.getTaskStateMap().get(appInfo.getState()));
         TaskState.setButtonView(appInfo.getState(), context, btnOptions);
 
+    }
+
+    public void updateProgress(Context context, String speed, String progress) {
+
+        if(speed != null)
+            tvDownloadRate.setText(speed);
+        if (TextUtils.isEmpty(progress)) {
+            progressBar.setProgress(0);
+        } else {
+            progressBar.setProgress(Integer.parseInt(progress));
+            tvDownloadPercent.setText(progress + "%");
+        }
+
+    }
+
+    public void setButtonState(Context context, AppInfo appInfo) {
+        btnOptions.setText(TaskState.getTaskStateMap().get(appInfo.getState()));
+        TaskState.setButtonView(appInfo.getState(), context, btnOptions);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.hoyotech.ctgames.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,13 @@ import android.widget.*;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
+import com.hoyotech.ctgames.fragment.TaskDownloadFragment;
+import com.hoyotech.ctgames.service.DownloadService;
 import com.hoyotech.ctgames.util.TaskState;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -49,16 +54,14 @@ public class TaskDownloadAdapter extends BaseAdapter{
 
     @Override
     public View getView(final int position, View convertView, ViewGroup arg2) {
-        TaskDownloadHolder holder = null;
-        if (convertView == null){
+        if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.layout_task_download_item, null);
-            holder = new TaskDownloadHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (TaskDownloadHolder) convertView.getTag();
         }
 
         appInfo = data.get(position);
+        convertView.setTag(appInfo.getUrl());// 便于通过url找view
+
+        TaskDownloadHolder holder = new TaskDownloadHolder(convertView);
         holder.setData(convertView.getContext(), appInfo);
 
         //设置事件监听响应
@@ -80,6 +83,7 @@ public class TaskDownloadAdapter extends BaseAdapter{
 
         @Override
         public void onClick(View v) {
+            Intent downloadIntet = new Intent(DownloadService.DOWNLOAD_SERVICE_NAME);
 
             switch (v.getId()) {
                 case R.id.btn_app_bonus:
@@ -92,18 +96,31 @@ public class TaskDownloadAdapter extends BaseAdapter{
                     // 点击下载-暂停 点击暂停-继续 点击继续-暂停
                     if(info.getState() == TaskState.STATE_DOWNLOAD) {
                         info.setState(TaskState.STATE_PAUSE);
-                        holder.setData(context, info);
+                        holder.setButtonState(context, info);
                         // 通知service开始下载
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOAD);
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getUrl());
+                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME);
+                        System.out.println("点击按钮下载" + getClass().getName());
+                        context.startService(downloadIntet);
 
                     } else if(info.getState() == TaskState.STATE_PAUSE) {
                         info.setState(TaskState.STATE_CONTINUE);
-                        holder.setData(context, info);
+                        holder.setButtonState(context, info);
                         // 通知service暂停下载
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_PAUSE);
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getUrl());
+                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME);
+                        context.startService(downloadIntet);
 
                     } else if(info.getState() == TaskState.STATE_CONTINUE) {
                         info.setState(TaskState.STATE_PAUSE);
-                        holder.setData(context, info);
+                        holder.setButtonState(context, info);
                         // 通知service继续下载
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_CONTINUE);
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getUrl());
+                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME);
+                        context.startService(downloadIntet);
 
                     }
                     break;

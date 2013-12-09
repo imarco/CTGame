@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
 
+import com.hoyotech.ctgames.util.CTGameConstans;
+import com.hoyotech.ctgames.util.StorageUtils;
 import com.hoyotech.ctgames.util.StringUtils;
 import com.hoyotech.ctgames.util.TaskState;
 
@@ -19,6 +21,7 @@ import com.hoyotech.ctgames.util.TaskState;
 public class DownloadService extends Service {
     boolean downloadOnly3G;
     private DownloadManager manager;
+    public static final String DOWNLOAD_SERVICE_NAME = "com.hoyotech.ctgames.service.IDownloadService";
 
     public void setDownloadOnly3G(boolean downloadOnly3G) {
         manager.setDownloadOnly3G(downloadOnly3G);
@@ -33,18 +36,18 @@ public class DownloadService extends Service {
     public void onStart(Intent intent, int startId) {
         super.onStart(intent, startId);
         String action = intent.getStringExtra("action");
-        String path = intent.getStringExtra("path");
-        boolean downloadOnly3G = intent.getBooleanExtra("downloadOnly3G", true);
-        manager.init(path, action, downloadOnly3G);
+        boolean downloadOnly3G = intent.getBooleanExtra("downloadOnly3G", false);
+        manager.init(CTGameConstans.CTGAME_ROOT, action, downloadOnly3G);
 
         // 接收界面点击事件发送的intent，调用downloadmanager的对应方法
-        if (intent.getAction().equals("com.hoyotech.ctgames.service.IAIDLDownloadService")) {
+        if (intent.getAction().equals(DOWNLOAD_SERVICE_NAME)) {
             int type = intent.getIntExtra(TaskState.DOWNLOAD_STATE, -1);
             String url;
 
             switch (type) {
                 case TaskState.STATE_START:
                     // 启动service
+                    System.out.println("启动download service" + getClass().getName());
                     if (!manager.isRunning()) {
                         manager.startManager();
                     } else {
@@ -53,6 +56,7 @@ public class DownloadService extends Service {
                     break;
                 case TaskState.STATE_DOWNLOAD:
                     // 添加下载任务
+                    System.out.println("添加下载任务" + getClass().getName());
                     url = intent.getStringExtra(TaskState.DOWNLOAD_URL);
                     if (!StringUtils.isEmpty(url) && !manager.hasTask(url)) {
                         manager.addTask(url);

@@ -16,6 +16,8 @@ import android.widget.PopupWindow;
 
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.service.CTGameReceiver;
+import com.hoyotech.ctgames.service.DownloadService;
+import com.hoyotech.ctgames.util.TaskState;
 
 public class HomeActivity extends FragmentActivity implements OnClickListener {
 
@@ -264,6 +266,11 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         Log.e("TAG_HomeActivity", "============> HomeActivity.startService");
         IntentFilter filter = new IntentFilter(Intent.ACTION_TIME_TICK);
         registerReceiver(receiver, filter);
+
+        // start download service
+        Intent downloadIntent = new Intent(DownloadService.DOWNLOAD_SERVICE_NAME);
+        downloadIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_START);
+        startService(downloadIntent);
     }
 
     @Override
