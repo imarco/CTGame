@@ -2,6 +2,9 @@ package com.hoyotech.ctgames.service;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.util.Log;
 
 import com.hoyotech.ctgames.util.CTGameConstans;
 import com.hoyotech.ctgames.util.ConfigUtils;
@@ -19,6 +22,7 @@ import java.util.Queue;
  * Created by GGCoke on 13-12-6.
  */
 public class DownloadManager extends Thread {
+    private static final String TAG = DownloadManager.class.getSimpleName();
     private Context mContext;
     private TaskQueue mTaskQueue;    // 等待下载
     private List<DownloadTask> mDownloadingTasks; // 正在下载
@@ -51,9 +55,17 @@ public class DownloadManager extends Thread {
         while (isRunning) {
             DownloadTask task = mTaskQueue.poll();
             if (null != task) {
+                Log.e(TAG, "New download task added. Downloading count = " + mDownloadingTasks.size() + " Url = " + task.getUrl());
                 mDownloadingTasks.add(task);
-                task.execute();
+
+                // SDK 11之后AsyncTask默认是串行执行，需要调用executeOnExecutor，传入并行执行的executor THREAD_POOL_EXECUTOR
+                if (Build.VERSION.SDK_INT >= 11) {
+                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                } else {
+                    task.execute();
+                }
             }
+
         }
     }
 
@@ -410,7 +422,6 @@ public class DownloadManager extends Thread {
             return task;
         }
         public DownloadTask get(int position) {
-
             if (position >= size()) {
                 return null;
             }

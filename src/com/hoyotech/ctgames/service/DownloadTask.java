@@ -130,6 +130,7 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
 
     @Override
     protected void onPreExecute() {
+        Log.e(TAG, "New Task Start to Run: task = " + this.getUrl());
         previousTime = System.currentTimeMillis();
         if (null != listener) {
             listener.preDownload(this);
@@ -143,13 +144,11 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
         try {
             result = download();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             this.error = e;
         } finally {
             if (null != client) {
                 client.close();
             }
-
         }
 
         return result;
