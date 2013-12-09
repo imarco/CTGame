@@ -8,12 +8,14 @@ import com.viewpagerindicator.TabPageIndicator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class AppFragment extends Fragment {
+    private static final String TAG = AppFragment.class.getSimpleName();
     private AppStoreAdapter mAdapter;
     private CTGameViewPager mPager;
     private TabPageIndicator mIndicator;
@@ -35,8 +37,10 @@ public class AppFragment extends Fragment {
                 getString(R.string.app_categories)
         };
 
+        Log.e(TAG, "In AppFragment.onCreateView");
+
         View v = inflater.inflate(R.layout.fragment_app, container, false);
-        mAdapter = new AppStoreAdapter(getFragmentManager(), titles);
+        mAdapter = new AppStoreAdapter(getChildFragmentManager(), titles);
         mPager = (CTGameViewPager) v.findViewById(R.id.pager);
         mPager.setScrollable(CTGameConstans.CTGAME_VIEWPAGER_SCROLL_NO);
         mPager.setAdapter(mAdapter);

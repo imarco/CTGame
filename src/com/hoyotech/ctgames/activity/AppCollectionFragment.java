@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +27,15 @@ public class AppCollectionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if ((savedInstanceState != null) && savedInstanceState.containsKey(KEY_CONTENT)) {
             bundle = savedInstanceState.getBundle(KEY_CONTENT);
         }
+        Log.e(KEY_CONTENT, "In AppCollectionFragment.onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.e(KEY_CONTENT, "In AppCollectionFragment.onCreateView");
         View v = inflater.inflate(R.layout.fragment_app_collection, container, false);
 
         //相关的资源变量的索取

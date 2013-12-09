@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -44,11 +45,13 @@ public class AppRecommendFragment extends Fragment {
         if ((savedInstanceState != null) && savedInstanceState.containsKey(KEY_CONTENT)) {
             bundle = savedInstanceState.getBundle(KEY_CONTENT);
         }
-        setRetainInstance(true);
+
+        Log.e(KEY_CONTENT, "In AppRecommendFrament.onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.e(KEY_CONTENT, "In AppRecommendFrament.onCreateView");
         View v = inflater.inflate(R.layout.fragment_app_recommend, container, false);
         gallery = (Gallery) v.findViewById(R.id.gallery_app_recommend);
         gridView = (GridView) v.findViewById(R.id.gv_app_recommend);

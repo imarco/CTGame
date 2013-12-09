@@ -2,6 +2,7 @@ package com.hoyotech.ctgames.activity;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.TextView;
 import android.os.Bundle;
@@ -23,6 +24,10 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private VideoFragment fragmentVideo;
     private AwardFragment fragmentAward;
     private ZoneFragment fragmentZone;
+
+    // 切换Fragment
+    private Fragment from;
+    private Fragment to;
 
     // 定义布局对象
     private FrameLayout appFg, videoFg, awardFg, zoneFg;
@@ -153,14 +158,11 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private void clickAppButton() {
         // 实例化Fragment页面
         fragmentApp = new AppFragment();
-        // 得到Fragment事务管理器
-        FragmentTransaction fragmentTransaction = this
-                .getSupportFragmentManager().beginTransaction();
-        // 替换当前的页面
-        fragmentTransaction.replace(R.id.frame_content, fragmentApp);
-        // 事务管理提交
-        fragmentTransaction.commit();
+        from = to;
+        to = fragmentApp;
 
+        // 切换Fragm
+        switchContent(from, to);
         setItemSelected(0);
 
         // 标题栏标题更改为玩应用
@@ -178,16 +180,12 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private void clickVideoButton() {
         // 实例化Fragment页面
         fragmentVideo = new VideoFragment();
-        // 得到Fragment事务管理器
-        FragmentTransaction fragmentTransaction = this
-                .getSupportFragmentManager().beginTransaction();
-        // 替换当前的页面
-        fragmentTransaction.replace(R.id.frame_content, fragmentVideo);
-        // 事务管理提交
-        fragmentTransaction.commit();
+        from = to;
+        to = fragmentVideo;
 
+        // 切换Fragm
+        switchContent(from, to);
         setItemSelected(1);
-
     }
 
     /**
@@ -196,13 +194,11 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private void clickAwardButton() {
         // 实例化Fragment页面
         fragmentAward = new AwardFragment();
-        // 得到Fragment事务管理器
-        FragmentTransaction fragmentTransaction = this
-                .getSupportFragmentManager().beginTransaction();
-        // 替换当前的页面
-        fragmentTransaction.replace(R.id.frame_content, fragmentAward);
-        // 事务管理提交
-        fragmentTransaction.commit();
+        from = to;
+        to = fragmentAward;
+
+        // 切换Fragm
+        switchContent(from, to);
 
         setItemSelected(2);
 
@@ -214,13 +210,11 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private void clickZoneButton() {
         // 实例化Fragment页面
         fragmentZone = new ZoneFragment();
-        // 得到Fragment事务管理器
-        FragmentTransaction fragmentTransaction = this
-                .getSupportFragmentManager().beginTransaction();
-        // 替换当前的页面
-        fragmentTransaction.replace(R.id.frame_content, fragmentZone);
-        // 事务管理提交
-        fragmentTransaction.commit();
+        from = to;
+        to = fragmentZone;
+
+        // 切换Fragm
+        switchContent(from, to);
 
         setItemSelected(3);
 
@@ -281,5 +275,23 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    /**
+     * 切换Fragment
+     * @param from
+     * @param to
+     */
+    private void switchContent(Fragment from, Fragment to) {
+        // 得到Fragment事务管理器
+        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
+
+        if (null != from) {
+            fragmentTransaction.hide(from);
+        }
+
+        if (!to.isAdded()) {
+            fragmentTransaction.add(R.id.frame_content, to).show(to).commit();
+        }
     }
 }

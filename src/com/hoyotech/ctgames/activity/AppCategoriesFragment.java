@@ -2,6 +2,7 @@ package com.hoyotech.ctgames.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +26,12 @@ public class AppCategoriesFragment extends Fragment {
         if ((savedInstanceState != null) && savedInstanceState.containsKey(KEY_CONTENT)) {
             bundle = savedInstanceState.getBundle(KEY_CONTENT);
         }
+        Log.e(KEY_CONTENT, "In AppCategoriesFragment.onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.e(KEY_CONTENT, "In AppCategoriesFragment.onCreateView");
         View v = inflater.inflate(R.layout.fragment_app_categories, container, false);
 
 
