@@ -1,4 +1,4 @@
-package com.hoyotech.ctgames.activity;
+package com.hoyotech.ctgames.fragment;
 
 
 import android.content.Context;

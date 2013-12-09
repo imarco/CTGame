@@ -1,4 +1,4 @@
-package com.hoyotech.ctgames.activity;
+package com.hoyotech.ctgames.fragment;
 
 
 import android.os.Bundle;
@@ -41,7 +41,7 @@ public class TaskHomeFragment extends Fragment {
         };
 
         View v = inflater.inflate(R.layout.fragment_task, container, false);
-        mAdapter = new TaskAdapter(getFragmentManager(), titles);
+        mAdapter = new TaskAdapter(getChildFragmentManager(), titles);
         mPager = (CTGameViewPager) v.findViewById(R.id.task_pager);
         mPager.setScrollable(CTGameConstans.CTGAME_VIEWPAGER_SCROLL_NO);
         mPager.setAdapter(mAdapter);

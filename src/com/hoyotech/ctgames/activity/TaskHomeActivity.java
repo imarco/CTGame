@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.TaskAdapter;
+import com.hoyotech.ctgames.fragment.TaskHomeFragment;
 import com.hoyotech.ctgames.util.CTGameConstans;
 import com.hoyotech.ctgames.viewdef.CTGameViewPager;
 import com.viewpagerindicator.TabPageIndicator;

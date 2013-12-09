@@ -55,7 +55,6 @@ public class DownloadManager extends Thread {
         while (isRunning) {
             DownloadTask task = mTaskQueue.poll();
             if (null != task) {
-                Log.e(TAG, "New download task added. Downloading count = " + mDownloadingTasks.size() + " Url = " + task.getUrl());
                 mDownloadingTasks.add(task);
 
                 // SDK 11之后AsyncTask默认是串行执行，需要调用executeOnExecutor，传入并行执行的executor THREAD_POOL_EXECUTOR

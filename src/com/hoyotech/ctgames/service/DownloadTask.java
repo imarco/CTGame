@@ -130,7 +130,6 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
 
     @Override
     protected void onPreExecute() {
-        Log.e(TAG, "New Task Start to Run: task = " + this.getUrl());
         previousTime = System.currentTimeMillis();
         if (null != listener) {
             listener.preDownload(this);

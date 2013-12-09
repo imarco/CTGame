@@ -3,11 +3,7 @@ package com.hoyotech.ctgames.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.hoyotech.ctgames.activity.AppCategoriesFragment;
-import com.hoyotech.ctgames.activity.AppCollectionFragment;
-import com.hoyotech.ctgames.activity.AppRecommendFragment;
 import com.hoyotech.ctgames.fragment.TaskActiviteFragment;
 import com.hoyotech.ctgames.fragment.TaskDownloadFragment;
 import com.hoyotech.ctgames.fragment.TaskInstallFragment;

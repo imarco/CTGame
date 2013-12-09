@@ -15,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.fragment.AppFragment;
+import com.hoyotech.ctgames.fragment.AwardFragment;
+import com.hoyotech.ctgames.fragment.VideoFragment;
+import com.hoyotech.ctgames.fragment.ZoneFragment;
 import com.hoyotech.ctgames.service.CTGameReceiver;
 import com.hoyotech.ctgames.service.DownloadService;
 import com.hoyotech.ctgames.util.TaskState;
