@@ -23,6 +23,7 @@ public class TaskState {
     public static final String DOWNLOAD_ID = "id";
     public static final String DOWNLOAD_PAUSED = "paused";
 
+    public static final int STATE_START = 0;
     public static final int STATE_DOWNLOAD = 1;
     public static final int STATE_DOWNLOAD_ALL = 2;
     public static final int STATE_PAUSE = 3;

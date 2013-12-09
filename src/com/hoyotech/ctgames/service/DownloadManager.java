@@ -41,6 +41,10 @@ public class DownloadManager extends Thread {
         this.downloadOnly3G = downloadOnly3G;
     }
 
+    public void setDownloadOnly3G(boolean downloadOnly3G) {
+        this.downloadOnly3G = downloadOnly3G;
+    }
+
     @Override
     public void run() {
         super.run();
