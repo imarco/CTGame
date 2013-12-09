@@ -35,6 +35,8 @@ public class TaskState {
     public static final int STATE_INSTALLING = 10;
     public static final int STATE_OPEN = 11;
     public static final int STATE_GET_PRIZE = 12;
+    public static final int STATE_PROGRESS = 12;
+
 
 
     // app task的各种状态描述
