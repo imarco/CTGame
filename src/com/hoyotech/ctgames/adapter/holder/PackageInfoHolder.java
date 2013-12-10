@@ -30,6 +30,8 @@ public class PackageInfoHolder {
     //应用的简介部分
     public TextView tvSummary; // 应用的简介
 
+    public PackageInfo info;
+
     /**
      * 从界面中获取view构件holder
      * @param convertView parentView

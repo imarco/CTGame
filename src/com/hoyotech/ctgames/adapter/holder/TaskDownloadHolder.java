@@ -35,6 +35,8 @@ public class TaskDownloadHolder {
     public TextView tvDownloadRate; // 下载速度
     public TextView tvDownloadPercent; // 下载百分比
 
+    public AppInfo info;
+
     /**
      * 从界面中获取view构件holder
      * @param convertView parentView

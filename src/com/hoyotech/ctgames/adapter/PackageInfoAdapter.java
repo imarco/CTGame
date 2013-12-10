@@ -65,6 +65,7 @@ public class PackageInfoAdapter extends BaseAdapter {
 
         packageInfo = data.get(position);
         holder.setData(context, packageInfo);
+        holder.info = packageInfo;
 
         //设置事件监听响应
         holder.btnOpen.setOnClickListener(new ButtonClickListener(packageInfo, holder));

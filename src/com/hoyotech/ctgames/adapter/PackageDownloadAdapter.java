@@ -70,6 +70,7 @@ public class PackageDownloadAdapter extends BaseAdapter{
 
         appInfo = data.get(position);
         holder.setData(context, appInfo);
+        holder.info = appInfo;
 
         //复选框的点击部分
         holder.checkBoxToDownload.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

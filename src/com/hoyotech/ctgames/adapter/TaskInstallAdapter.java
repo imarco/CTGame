@@ -29,6 +29,31 @@ public class TaskInstallAdapter extends BaseAdapter {
         this.context = context;
     }
 
+    /**
+     * 添加一条信息
+     * @param info appinfo信息
+     */
+    public void addItem(AppInfo info) {
+        data.add(info);
+        this.notifyDataSetChanged();
+    }
+
+    /**
+     * 根据url删除一条信息
+     * @param url url
+     */
+    public void removeItem(String url) {
+        String tmp;
+        for (int i = 0; i < data.size(); i++) {
+            tmp = data.get(i).getUrl();
+            if (tmp.equals(url)) {
+                data.remove(i);
+                this.notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
     @Override
     public int getCount() {
         return data.size();
@@ -58,6 +83,7 @@ public class TaskInstallAdapter extends BaseAdapter {
 
         appInfo = data.get(position);
         holder.setData(context, appInfo);
+        holder.info = appInfo;
 
         //设置事件监听响应
         holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getUrl(), appInfo, holder));

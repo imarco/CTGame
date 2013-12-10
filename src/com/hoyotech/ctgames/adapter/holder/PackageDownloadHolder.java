@@ -28,6 +28,8 @@ public class PackageDownloadHolder {
     public TextView tvDownloadPercent; // 下载百分比
     private Mode mode = Mode.none;
 
+    public AppInfo info;
+
     // 此控件有三种模式，选择，下载和安装，三种都不是就是none
     private enum Mode {
         none, selection, download, install
