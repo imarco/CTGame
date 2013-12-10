@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.Random;
+
 /**
  * <dl>
  * <dt>LotteryView.java</dt>
@@ -36,6 +38,7 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 
     private int[] itemColor;// 选项颜色
     private String[] itemText;// 选项文字
+    private int[] hitPercent; // 中奖概率，按10000来分
 
 
     private Paint mPaint;
@@ -56,7 +59,7 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
         super(context, attr);
     }
 
-    public void initAll(int[] itemColor, String[] itemText, float awardRadius) {
+    public void initAll(int[] itemColor, String[] itemText, float awardRadius, int[] hitPercent) {
         // 创建一个新的SurfaceHolder， 并分配这个类作为它的回调(callback)
         holder = getHolder();
         holder.addCallback(this);
@@ -64,6 +67,7 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
         this.itemColor = itemColor;
         this.itemText = itemText;
         this.itemCount = itemText.length;
+        this.hitPercent = hitPercent;
 
         // 图像画笔
         mPaint = new Paint();
@@ -74,7 +78,6 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 
         // 半径
         radius = awardRadius;
-        Log.i("wheel", awardRadius + "");
         circleRadius = 30;
         startAngle = 0;
         // 加速度
@@ -268,7 +271,6 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
     public void proRotateStop(float startAngle) {
         float testfloat = startAngle + 90;
         testfloat %= 360.0;
-        // Log.e("TAG", "startAngle2=" + startAngle + ",testfloat=" + testfloat);
         for (int i = 0; i < itemText.length; i++) {
             // 中奖角度范围
             float lotteryAngleFrom = 90 + 270 - (i + 1) * (360 / itemCount);
@@ -276,7 +278,6 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 
             if ((testfloat > lotteryAngleFrom) && (testfloat < lotteryAngleTo)) {
                 listern.showEndRotate(itemText[i]);
-                Log.d("Wheel", itemText[i]);
                 return;
             }
         }
@@ -313,8 +314,41 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
      * @param item
      */
     public void setAwards(int item) {
+        //this.startAngle = 0;
+        //this.calcBeginSpeed(item);
+    }
+
+    /**
+     * 根据奖项抽中的概率设置最终的获得项目
+     */
+    public void setAwardsByPercent() {
         this.startAngle = 0;
-        this.calcBeginSpeed(item);
+
+        int[] helpArray = new int[hitPercent.length];
+        for (int i = 0; i < hitPercent.length; i++) {
+            helpArray[i] = 0;
+            for (int j = i; j >= 0; j--) {
+                helpArray[i] += hitPercent[j];
+            }
+        }
+
+        // 按照概率计算命中的选项
+        int hitItem = -1;
+        int num = new Random().nextInt(helpArray[helpArray.length - 1]); // [0, 99]的随机整数
+
+        for (int i = -1; i < helpArray.length - 1; i ++) {
+            if(i == -1 && num >= 0 && num < helpArray[i + 1]) {
+                hitItem = i + 1;
+                break;
+            }
+
+            if((i > -1) && num >= helpArray[i] && num < helpArray[i + 1]) {
+                hitItem = i + 1;
+                break;
+            }
+        }
+
+        this.calcBeginSpeed(hitItem);
     }
 
     public boolean isRoating() {
