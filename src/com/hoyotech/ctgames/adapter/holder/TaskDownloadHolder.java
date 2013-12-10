@@ -10,6 +10,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.bean.AppInfo;
+import com.hoyotech.ctgames.util.CTGameImageLoader;
+import com.hoyotech.ctgames.util.StorageUtils;
 import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.HashMap;
@@ -61,9 +63,10 @@ public class TaskDownloadHolder {
      */
     public void setData(Context context, AppInfo appInfo) {
 
-        this.appImageHeader.setBackgroundDrawable(appInfo.getImg());
+//        this.appImageHeader.setBackgroundDrawable(appInfo.getImg());
+        CTGameImageLoader.loadImage(context, appInfo.getImgUrl(), this.appImageHeader);
         this.appName.setText(appInfo.getAppName());
-        this.appPackageSize.setText(String.valueOf(appInfo.getAppSize())+"M");
+        this.appPackageSize.setText(StorageUtils.getSizeFormatted(appInfo.getAppSize()));
         this.tvPrizeCount.setText(String.valueOf(appInfo.getPrizeCount()));
         this.tvLuckyBeanCount.setText(String.valueOf(appInfo.getLuckybeanCount()));
         this.tvDownloadRate.setText(String.valueOf(appInfo.getRate())+"KB/S");

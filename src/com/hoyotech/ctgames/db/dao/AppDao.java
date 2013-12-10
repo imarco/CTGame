@@ -47,6 +47,43 @@ public class AppDao {
     }
 
     /**
+     * 添加一条app的信息
+     * @param app app实例
+     * @return
+     */
+    public boolean addAPP(App app) {
+        boolean flag = false;
+        SQLiteDatabase database = null;
+        ContentValues values = new ContentValues();
+
+        // 填充键值对
+        values.put(App.NAME, app.getName());
+        values.put(App.IMAGE_PATH, app.getImage_path());
+        values.put(App.SIZE, app.getSize());
+        values.put(App.LUCKPEAN_COUNT, app.getLuckypean_count());
+        values.put(App.PRIZE_COUNT, app.getPrize_count());
+        values.put(App.SUMMARY, app.getSummary());
+        values.put(App.STATE, app.getState());
+        values.put(App.VERSION_CODE, app.getVersion_code());
+        values.put(App.VERSION_NAME, app.getVersion_name());
+        values.put(App.URL, app.getUrl());
+
+        try {
+            database = helper.getWritableDatabase();
+            database.insert(App.TABLE_NAME, null, values);
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(database != null) {
+                database.close();
+            }
+        }
+
+        return flag;
+    }
+
+    /**
      * 通过url找app信息
      * @param url
      * @return
@@ -71,7 +108,7 @@ public class AppDao {
             app.setVersion_code(cursor.getInt(2));
             app.setVersion_name(cursor.getString(3));
             app.setUrl(cursor.getString(4));
-            app.setSize(cursor.getInt(5));
+            app.setSize(cursor.getLong(5));
             app.setImage_path(cursor.getString(6));
             app.setSummary(cursor.getString(7));
             app.setPrize_count(cursor.getInt(8));
@@ -120,7 +157,7 @@ public class AppDao {
                 app.setVersion_code(cursor.getInt(2));
                 app.setVersion_name(cursor.getString(3));
                 app.setUrl(cursor.getString(4));
-                app.setSize(cursor.getInt(5));
+                app.setSize(cursor.getLong(5));
                 app.setImage_path(cursor.getString(6));
                 app.setSummary(cursor.getString(7));
                 app.setPrize_count(cursor.getInt(8));

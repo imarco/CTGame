@@ -7,9 +7,10 @@ import android.graphics.drawable.Drawable;
  * Created by GGCoke on 13-12-6.
  */
 public class AppInfo {
-    private Drawable img;        // 图标
+    private Drawable img;
+    private String imgUrl;        // 图标
     private String appName;      // 名称
-    private float appSize;       // 大小
+    private long appSize;       // 大小
     private int state;           //目前的状态，下载还是安装 数字在TaskState中定义
     private String summary = ""; //应用的简介
     private int prizeCount;
@@ -24,7 +25,17 @@ public class AppInfo {
     private int rate;            // 下载速度 bps
 
 
-    public AppInfo(Drawable img, String appName, float appSize, int state, String summary, int prizeCount, int luckybeanCount) {
+    public AppInfo(String imgUrl, String appName, long appSize, int state, String summary, int prizeCount, int luckybeanCount) {
+        this.imgUrl = imgUrl;
+        this.appName = appName;
+        this.appSize = appSize;
+        this.state = state;
+        this.summary = summary;
+        this.prizeCount = prizeCount;
+        this.luckybeanCount = luckybeanCount;
+    }
+
+    public AppInfo(Drawable img, String appName, long appSize, int state, String summary, int prizeCount, int luckybeanCount) {
         this.img = img;
         this.appName = appName;
         this.appSize = appSize;
@@ -32,6 +43,14 @@ public class AppInfo {
         this.summary = summary;
         this.prizeCount = prizeCount;
         this.luckybeanCount = luckybeanCount;
+    }
+
+    public void setImg(Drawable img) {
+        this.img = img;
+    }
+
+    public Drawable getImg() {
+        return this.img;
     }
 
     public String getUrl() {
@@ -72,12 +91,12 @@ public class AppInfo {
         this.summary = summary;
     }
 
-    public Drawable getImg() {
-        return img;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImg(Drawable img) {
-        this.img = img;
+    public void setImg(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getAppName() {
@@ -88,11 +107,11 @@ public class AppInfo {
         this.appName = app_name;
     }
 
-    public float getAppSize() {
+    public long getAppSize() {
         return appSize;
     }
 
-    public void setAppSize(float appSize) {
+    public void setAppSize(long appSize) {
         this.appSize = appSize;
     }
 

@@ -35,7 +35,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "version_code INTEGER, " +
                 "version_name TEXT, " +
                 "url TEXT, " +
-                "size INTEGER, " +
+                "size BIGINT, " +
                 "image_path TEXT, " +
                 "summary TEXT, " +
                 "prize_count INTEGER, " +

@@ -28,7 +28,7 @@ public class App {
     private int version_code;
     private String version_name;
     private String url;
-    private int size;
+    private long size;
     private String image_path;
     private String summary;
     private int prize_count;
@@ -75,11 +75,11 @@ public class App {
         this.url = url;
     }
 
-    public int getSize() {
+    public long getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(long size) {
         this.size = size;
     }
 

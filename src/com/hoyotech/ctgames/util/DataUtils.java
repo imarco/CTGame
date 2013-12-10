@@ -56,7 +56,7 @@ public class DataUtils {
             } else {
                 state = TaskState.STATE_OPEN;
             }
-            infos.add(new AppInfo(d, "tianyu" + i, 124.0f * i, state, "好游戏啊", i * i, 70));
+            infos.add(new AppInfo(d, "tianyu" + i, 124 * i, state, "好游戏啊", i * i, 70));
 
         }
         return infos;

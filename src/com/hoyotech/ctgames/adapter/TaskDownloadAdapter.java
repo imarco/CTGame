@@ -36,6 +36,11 @@ public class TaskDownloadAdapter extends BaseAdapter{
         this.data = data;
     }
 
+    public void setData(List<AppInfo> data) {
+        this.data = data;
+    }
+
+
     /**
      * 添加一条信息
      * @param info appinfo信息

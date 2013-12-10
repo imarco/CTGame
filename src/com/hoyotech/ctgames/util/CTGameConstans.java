@@ -67,4 +67,8 @@ public class CTGameConstans {
     public static final int DOWNLOAD_TASK_ADD_SDCARD_READONLY = 2;
     public static final int DOWNLOAD_TASK_ADD_TASKQUEUE_FULL = 3;
     public static final int DOWNLOAD_TASK_ADD_OTHER_ERROR = 4;
+
+    /*  */
+    public static final int TASK_DOWNLOAD_GET_APP_INFO_SUCCESS = 0;
+    public static final int TASK_DOWNLOAD_GET_APP_INFO_FAILED = 1;
 }
