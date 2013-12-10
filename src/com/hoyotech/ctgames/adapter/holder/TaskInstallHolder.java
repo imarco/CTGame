@@ -27,6 +27,8 @@ public class TaskInstallHolder {
     public TextView tvLuckyBeanCount; // 幸运豆个数
     public TextView tvSummary; // 应用的简介
 
+    public AppInfo info;
+
     /**
      * 从界面中获取view构件holder
      * @param convertView parentView

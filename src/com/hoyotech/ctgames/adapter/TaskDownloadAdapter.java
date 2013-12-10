@@ -15,7 +15,6 @@ import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -35,6 +34,31 @@ public class TaskDownloadAdapter extends BaseAdapter{
     public TaskDownloadAdapter(Context context, List<AppInfo> data){
         this.context = context;
         this.data = data;
+    }
+
+    /**
+     * 添加一条信息
+     * @param info appinfo信息
+     */
+    public void addItem(AppInfo info) {
+        data.add(info);
+        this.notifyDataSetChanged();
+    }
+
+    /**
+     * 根据url删除一条信息
+     * @param url url
+     */
+    public void removeItem(String url) {
+        String tmp;
+        for (int i = 0; i < data.size(); i++) {
+            tmp = data.get(i).getUrl();
+            if (tmp.equals(url)) {
+                data.remove(i);
+                this.notifyDataSetChanged();
+                break;
+            }
+        }
     }
 
     @Override
@@ -63,6 +87,7 @@ public class TaskDownloadAdapter extends BaseAdapter{
 
         TaskDownloadHolder holder = new TaskDownloadHolder(convertView);
         holder.setData(convertView.getContext(), appInfo);
+        holder.info = appInfo;
 
         //设置事件监听响应
         holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getUrl(), appInfo, holder));
@@ -100,7 +125,7 @@ public class TaskDownloadAdapter extends BaseAdapter{
                         // 通知service开始下载
                         downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOAD);
                         downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getUrl());
-                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME);
+                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD);
                         System.out.println("点击按钮下载" + getClass().getName());
                         context.startService(downloadIntet);
 
@@ -110,7 +135,7 @@ public class TaskDownloadAdapter extends BaseAdapter{
                         // 通知service暂停下载
                         downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_PAUSE);
                         downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getUrl());
-                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME);
+                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD);
                         context.startService(downloadIntet);
 
                     } else if(info.getState() == TaskState.STATE_CONTINUE) {
@@ -119,7 +144,7 @@ public class TaskDownloadAdapter extends BaseAdapter{
                         // 通知service继续下载
                         downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_CONTINUE);
                         downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getUrl());
-                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME);
+                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD);
                         context.startService(downloadIntet);
 
                     }
@@ -129,6 +154,25 @@ public class TaskDownloadAdapter extends BaseAdapter{
                     break;
             }
         }
+
+    }
+
+    /**
+     * 通过url找info
+     * @param url
+     * @return
+     */
+    public AppInfo getAppInfoByUrl(String url) {
+
+        String tmp;
+        for (int i = 0; i < data.size(); i++) {
+            tmp = data.get(i).getUrl();
+            if (tmp.equals(url)) {
+                return data.get(i);
+            }
+        }
+
+        return new AppInfo();
 
     }
 }

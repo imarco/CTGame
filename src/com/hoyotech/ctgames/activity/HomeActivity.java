@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.db.DBOpenHelper;
+import com.hoyotech.ctgames.db.DBText;
 import com.hoyotech.ctgames.fragment.AppFragment;
 import com.hoyotech.ctgames.fragment.AwardFragment;
 import com.hoyotech.ctgames.fragment.VideoFragment;
@@ -64,6 +66,10 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // 加载数据库
+        DBOpenHelper helper = new DBOpenHelper(HomeActivity.this);
+        helper.getWritableDatabase();
 
         // 显示标题栏
         title = (TextView) findViewById(R.id.action_bar_title);
