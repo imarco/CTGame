@@ -23,6 +23,8 @@ import com.hoyotech.ctgames.service.CTGameReceiver;
 import com.hoyotech.ctgames.service.DownloadService;
 import com.hoyotech.ctgames.util.TaskState;
 
+import cn.sharesdk.framework.ShareSDK;
+
 public class HomeActivity extends FragmentActivity implements OnClickListener {
 
     // 定义Fragment页面
@@ -68,6 +70,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         // 显示标题栏
         title = (TextView) findViewById(R.id.action_bar_title);
         title.setText(R.string.home);
+
+        // 初始化分享组件
+        ShareSDK.initSDK(this);
 
         initView();
         initData();
@@ -281,6 +286,8 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     public void onDestroy() {
         super.onDestroy();
         unregisterReceiver(receiver);
+        // 结束分享组件的统计功能
+        ShareSDK.stopSDK(this);
     }
 
     @Override

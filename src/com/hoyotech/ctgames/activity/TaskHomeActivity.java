@@ -8,13 +8,21 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.TaskAdapter;
 import com.hoyotech.ctgames.fragment.TaskHomeFragment;
 import com.hoyotech.ctgames.util.CTGameConstans;
+import com.hoyotech.ctgames.util.SocialShareUtils;
 import com.hoyotech.ctgames.viewdef.CTGameViewPager;
 import com.viewpagerindicator.TabPageIndicator;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.sina.weibo.SinaWeibo;
 
 /**
  * Created by GGCoke on 13-12-4.
@@ -60,6 +68,9 @@ public class TaskHomeActivity extends FragmentActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.action_bar_button_zone:
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("text", "好冷啊");
+                SocialShareUtils.share(this,false,SinaWeibo.NAME,params,null,null);
                 break;
             default:
                 break;

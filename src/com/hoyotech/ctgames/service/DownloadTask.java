@@ -222,12 +222,11 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
         totalSize = response.getEntity().getContentLength();
 
         if (file.exists() && totalSize == file.length()) {
-            // 文件已经存在，并且是同一个版本
+            // 文件已经存在，并且是同一个版本，删掉之后重新下载
             if (CTGameConstans.DEBUG) {
                 Log.i(TAG, "File already exists. Skipped downloading file");
             }
-
-            throw new Exception(String.valueOf(CTGameConstans.DOWNLOAD_ERROR_FILE_ALREADY_EXIST));
+            file.delete();
         } else if (tmpFile.exists()) {
             // 已经下载了一部分，续传
             client.close();
