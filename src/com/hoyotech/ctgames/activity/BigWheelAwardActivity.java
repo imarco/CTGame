@@ -1,12 +1,14 @@
 package com.hoyotech.ctgames.activity;
 
 import android.app.Activity;
+import android.inputmethodservice.Keyboard;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -30,6 +32,16 @@ import java.util.ArrayList;
  */
 public class BigWheelAwardActivity extends Activity implements RotateListener, View.OnClickListener {
 
+    // FIXME
+    // 注意这个地方，设置一个转盘需要设置initItem()方法中的项目
+    // 也就是 itemColor itemText和hitPercent
+    // 其中itemText代表奖项的表项形式，不一定是text可以是图片也可以是两者的混合
+    // hitPercent是每一项奖项的中奖概率，参见
+    // itemText = new String[]{"土豪金", "幸运豆400", "幸运豆300", "幸运豆200", "幸运豆100", "谢谢参与"};
+    // hitPercent = new int[] {0, 60, 60, 80, 100, 9700}; // 中奖概率分别为 0% 0.6% 0.8% 0.6% 0.4% 97% 加起来应该是1
+    // 程序会根据这个概率数组自动抽奖
+    // public void onClick(View v)方法中设置了开始是扣除幸运豆的操作，以及最后控制转盘停下来的位置
+
     //文字提示
     private TextView title;
     //中奖显示
@@ -41,6 +53,7 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
 
     private int[] itemColor;//选项颜色
     private String[] itemText;//选项文字
+    private int[] hitPercent; // 命中所占的比重
     private int[] allWheelAwardColors = new int[] {
             R.color.wheel_award_color1,
             R.color.wheel_award_color2,
@@ -127,18 +140,17 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
         lotteryView = (LotteryView) this.findViewById(R.id.lotteryView);
 
         arrowBtn.setOnClickListener(this);
-        lotteryView.initAll(itemColor, itemText, radius);
+        lotteryView.initAll(itemColor, itemText, radius, hitPercent);
         lotteryView.setRotateListener(this);
         lotteryView.start();
 
         surfacViewHeight = lotteryView.getHeight();
         surfacViewWidth = lotteryView.getWidth();
 
-        Log.d("Log", "width = " + surfacViewWidth + ":height = " + surfacViewHeight);
     }
 
     /**
-     * Description:初始化转盘的颜色，奖品的图片，文字等信息
+     * Description:初始化转盘的颜色，奖品的图片，文字，每一项的获奖概率等信息
      * 颜色和奖品文字一一对应
      * 在这个地方设置获奖的奖项
      */
@@ -153,7 +165,8 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
         }
 
         // 转盘选项的名称
-        itemText = new String[]{"恭喜发财", "智能手机", "5元话费", "2元话费", "1元话费", "恭喜发财"};
+        itemText = new String[]{"土豪金", "幸运豆400", "幸运豆300", "幸运豆200", "幸运豆100", "谢谢参与"};
+        hitPercent = new int[] {0, 60, 60, 80, 100, 9700}; // 中奖概率分别为0% 0.6% 0.8% 0.6% 0.4% 97%加起来应该是1
     }
 
     /**
@@ -172,7 +185,8 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
         public void handleMessage(android.os.Message msg) {
             info.setText((CharSequence) msg.obj);
             if (!lotteryView.isRotateEnabled()) {
-                soundPool.stop(playSourceId);
+                if(soundPool != null)
+                    soundPool.stop(playSourceId);
                 title.setText("恭喜您获得");
                 arrowBtn.stopRotation();
             }
@@ -205,12 +219,22 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
             if (!lotteryView.isRoating()) {
 
                 //在这个地方设置获奖的奖项
-                lotteryView.setAwards(0);
+                //lotteryView.setAwards(0);
+                lotteryView.setAwardsByPercent(); // 根据奖项抽中的概率设置最终的获得项目
 
                 //设置为缓慢停止
                 lotteryView.setRoating(true);
                 title.setText("");
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode,KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            overridePendingTransition(R.anim.anim_activity_normal_enter, R.anim.anim_activity_exit);
+        }
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

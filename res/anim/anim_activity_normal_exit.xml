@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 大转盘进入时当前将要退出的activity的退出动画 -->
+<set android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+     xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha android:fromAlpha="1.0" android:toAlpha="0.0" android:duration="500" />
+</set>

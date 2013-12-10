@@ -267,6 +267,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         Intent intent = new Intent();
         intent.setClass(HomeActivity.this, BigWheelAwardActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.anim_activity_enter, R.anim.anim_activity_normal_exit);
 
     }
 
