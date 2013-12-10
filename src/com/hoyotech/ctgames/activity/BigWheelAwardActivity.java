@@ -1,12 +1,14 @@
 package com.hoyotech.ctgames.activity;
 
 import android.app.Activity;
+import android.inputmethodservice.Keyboard;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -225,5 +227,14 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
                 title.setText("");
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode,KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            overridePendingTransition(R.anim.anim_activity_normal_enter, R.anim.anim_activity_exit);
+        }
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

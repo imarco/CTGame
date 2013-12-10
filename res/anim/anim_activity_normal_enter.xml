@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 大转盘退出时当前将要进入的activity的进入动画 -->
+<set android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+     xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha android:fromAlpha="0.0" android:toAlpha="1.0" android:duration="500" />
+</set>
