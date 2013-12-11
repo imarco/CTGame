@@ -18,14 +18,8 @@ import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.TaskDownloadAdapter;
 import com.hoyotech.ctgames.adapter.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
-import com.hoyotech.ctgames.service.CTGameRequest;
-import com.hoyotech.ctgames.service.CTGameResponse;
 import com.hoyotech.ctgames.util.CTGameConstans;
 import com.hoyotech.ctgames.util.TaskState;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +29,6 @@ import java.util.List;
  */
 public class TaskDownloadFragment extends Fragment {
     private static final String KEY_CONTENT = "TaskDownloadFragment:Content";
-    private static final String APP_INFO_URL = "http://localhost/doa/test.php";
     private DownloadReceiver mReceiver;
     private TaskDownloadAdapter adapter;
     private List<AppInfo> apps;
@@ -51,7 +44,6 @@ public class TaskDownloadFragment extends Fragment {
             switch (msg.what) {
                 case CTGameConstans.RESPONSE_SUCCESS:
                     String data = msg.getData().getString("data", "");
-                    apps = CTGameResponse.getApps(data);
                     adapter.setData(apps);
                     adapter.notifyDataSetChanged();
                     break;
@@ -84,7 +76,6 @@ public class TaskDownloadFragment extends Fragment {
         IntentFilter filter = new IntentFilter();
         filter.addAction(INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD);
         getActivity().registerReceiver(mReceiver, filter);
-        CTGameRequest.getHotAppList(getActivity(), handler, 0, 10);
         return v;
     }
 
