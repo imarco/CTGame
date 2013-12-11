@@ -24,7 +24,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.AppInfoAdapter;
 import com.hoyotech.ctgames.adapter.GalleryAdapter;
-import com.hoyotech.ctgames.response.RecommendResponse;
 import com.hoyotech.ctgames.util.CTGameConstans;
 import com.hoyotech.ctgames.util.Constant;
 import com.hoyotech.ctgames.util.DataUtils;
