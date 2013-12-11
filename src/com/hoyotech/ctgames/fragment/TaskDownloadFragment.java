@@ -18,7 +18,8 @@ import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.TaskDownloadAdapter;
 import com.hoyotech.ctgames.adapter.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
-import com.hoyotech.ctgames.service.TaskService;
+import com.hoyotech.ctgames.service.CTGameRequest;
+import com.hoyotech.ctgames.service.CTGameResponse;
 import com.hoyotech.ctgames.util.CTGameConstans;
 import com.hoyotech.ctgames.util.TaskState;
 
@@ -48,51 +49,19 @@ public class TaskDownloadFragment extends Fragment {
         @Override
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
-                case CTGameConstans.TASK_DOWNLOAD_GET_APP_INFO_SUCCESS:
-                    String data = msg.getData().getString("result", "");
-                    getApp(data);
+                case CTGameConstans.RESPONSE_SUCCESS:
+                    String data = msg.getData().getString("data", "");
+                    apps = CTGameResponse.getApps(data);
                     adapter.setData(apps);
                     adapter.notifyDataSetChanged();
                     break;
-                case CTGameConstans.TASK_DOWNLOAD_GET_APP_INFO_FAILED:
-                    Toast.makeText(getActivity(), "Get app failed!!!", Toast.LENGTH_SHORT).show();
+                case CTGameConstans.RESPONSE_FAILED:
+                    String errorMsg = msg.getData().getString("errorMsg");
+                    Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
                     break;
             }
         }
     };
-
-    private void getApp(String data) {
-        try {
-            JSONArray array = new JSONArray(data);
-            if (null != array && array.length() > 0) {
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject obj = array.getJSONObject(i);
-                    AppInfo info = getAppFromJSON(obj);
-                    apps.add(info);
-                }
-            }
-
-        } catch (JSONException e) {
-            Toast.makeText(getActivity(), "解析数据错误", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private AppInfo getAppFromJSON(JSONObject obj) {
-        AppInfo info = new AppInfo();
-        try {
-            info.setImg(obj.getString("image_path"));
-            info.setUrl(obj.getString("url"));
-            info.setAppName(obj.getString("name"));
-            info.setAppSize(obj.getLong("size"));
-            info.setState(obj.getInt("state"));
-            info.setSummary(obj.getString("summary"));
-            info.setPrizeCount(obj.getInt("prize_count"));
-        } catch (JSONException e) {
-            return null;
-        }
-
-        return info;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,7 +84,7 @@ public class TaskDownloadFragment extends Fragment {
         IntentFilter filter = new IntentFilter();
         filter.addAction(INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD);
         getActivity().registerReceiver(mReceiver, filter);
-        TaskService.getTaskDownloadAppList(getActivity(), handler);
+        CTGameRequest.getHotAppList(getActivity(), handler, 0, 10);
         return v;
     }
 

@@ -101,4 +101,20 @@ public class StorageUtils {
 
         return result;
     }
+
+    public static String getSessionID() {
+        return "aslgkfdhaohga";
+    }
+
+    public static String getUserPhoneNumber() {
+        return "15527015802";
+    }
+
+    public static String getIMSI() {
+        return "";
+    }
+
+    public static String getPhoneType() {
+        return "";
+    }
 }

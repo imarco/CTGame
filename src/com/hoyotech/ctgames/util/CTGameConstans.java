@@ -10,6 +10,9 @@ public class CTGameConstans {
     /* DEBUG模式 */
     public static final boolean DEBUG = true;
 
+    /* 应用版本 */
+    public static final String VERSION = "2.0.0.0";
+
     /* viewpager是否可以滑动 */
     public static final boolean CTGAME_VIEWPAGER_SCROLL_YES = true;
     public static final boolean CTGAME_VIEWPAGER_SCROLL_NO = false;
@@ -68,7 +71,35 @@ public class CTGameConstans {
     public static final int DOWNLOAD_TASK_ADD_TASKQUEUE_FULL = 3;
     public static final int DOWNLOAD_TASK_ADD_OTHER_ERROR = 4;
 
-    /*  */
-    public static final int TASK_DOWNLOAD_GET_APP_INFO_SUCCESS = 0;
-    public static final int TASK_DOWNLOAD_GET_APP_INFO_FAILED = 1;
+    /* 请求结果 */
+    public static final int RESPONSE_SUCCESS = 0;
+    public static final int RESPONSE_FAILED = 1;
+
+    /* 响应返回代码 */
+    public static final String RESPONSE_RETURN_CODE_SUCCESS = "000";
+
+
+    /* 接口请求类型 */
+    public static final String REQUEST_TYPE_CHECKUPDATE = "CHECKUPDATE";
+    public static final String REQUEST_TYPE_GETCAPTCHA = "GETCAPTCHA";
+    public static final String REQUEST_TYPE_SIGNIN = "SIGNIN";
+    public static final String REQUEST_TYPE_QUERYUSERINFO = "QUERYUSERINFO";
+    public static final String REQUEST_TYPE_GETADINFO = "GETADINFO";
+    public static final String REQUEST_TYPE_GETRECOMMENDLIST = "GETRECOMMENDLIST";
+    public static final String REQUEST_TYPE_GETHOTAPPLIST = "GETHOTAPPLIST";
+    public static final String REQUEST_TYPE_GETCLASSLIST = "GETCLASSLIST";
+    public static final String REQUEST_TYPE_GETAPPLISTBYCLASS = "GETAPPLISTBYCLASS";
+    public static final String REQUEST_TYPE_GETPACKLIST = "GETPACKLIST";
+    public static final String REQUEST_TYPE_GETAPPLISTBYPACK = "GETAPPLISTBYPACK";
+    public static final String REQUEST_TYPE_GETDRAWPICLIST = "GETDRAWPICLIST";
+    public static final String REQUEST_TYPE_LOTTERY = "LOTTERY";
+    public static final String REQUEST_TYPE_DOWNLOADAPP = "DOWNLOADAPP";
+    public static final String REQUEST_TYPE_DOWNLOADPACK = "DOWNLOADPACK";
+    public static final String REQUEST_TYPE_GETGOODSLIST = "GETGOODSLIST";
+    public static final String REQUEST_TYPE_LUCKYBEANEXCHANGE = "LUCKYBEANEXCHANGE";
+    public static final String REQUEST_TYPE_GETPRODUCTLIST = "GETPRODUCTLIST";
+    public static final String REQUEST_TYPE_ORDERPRODUCT = "ORDERPRODUCT";
+    public static final String REQUEST_TYPE_GETMARQUEECONTENT = "GETMARQUEECONTENT";
+    public static final String REQUEST_TYPE_FEEDBACK = "FEEDBACK";
+    public static final String REQUEST_TYPE_REPLY = "REPLY";
 }
