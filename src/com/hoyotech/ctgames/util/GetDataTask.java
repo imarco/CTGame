@@ -1,5 +1,7 @@
 package com.hoyotech.ctgames.util;
 
+import com.hoyotech.ctgames.test.TestResponse;
+
 import android.os.AsyncTask;
 
 public class GetDataTask extends AsyncTask<String, Integer, String> {
@@ -43,45 +45,10 @@ public class GetDataTask extends AsyncTask<String, Integer, String> {
 //		response = http.HttpPost(url);
 		switch(mFlag){
 		case Constant.GETRECOMMENDLIST: // 获取推荐轮播列表
-			response = 
-				"{"+
-					"returnCode: '000', "+//返回代码
-					"message: '请求成功',"+ //返回信息描述
-					"data: {"+
-						"adList: "+
-						"["+
-							"{"+
-								"adId: '1',"+ 			//广告ID
-								"adType: '0', "+			//广告类型
-								"adName: '1', "+			//广告名称
-								"adUrl: 'http://58.53.197.136/sp/image/t1.png', "+			//广告图片的URL
-								"luckyBeansNum: '10',"+ 	//幸运豆数量
-								"targetUrl: '10002156' "+		//广告跳转地址
-							"},"+
-							"{"+
-								"adId: '2',"+ 			//广告ID
-								"adType: '0', "+			//广告类型
-								"adName: '1', "+			//广告名称
-								"adUrl: 'http://58.53.197.136/sp/image/t2.png', "+			//广告图片的URL
-								"luckyBeansNum: '10',"+ 	//幸运豆数量
-								"targetUrl: '10002156' "+		//广告跳转地址
-							"},"+
-							"{"+
-								"adId: '3',"+ 			//广告ID
-								"adType: '0', "+			//广告类型
-								"adName: '1', "+			//广告名称
-								"adUrl: 'http://58.53.197.136/sp/image/t3.png', "+			//广告图片的URL
-								"luckyBeansNum: '10',"+ 	//幸运豆数量
-								"targetUrl: '10002156' "+		//广告跳转地址
-							"}"+
-						"]"+
-					"}"+
-				"}";
+			response = TestResponse.GETRECOMMENDLIST;
 			break;
 		case Constant.GETHOTAPPLIST: // 获取热门应用列表
-			response = "abc";
-			
-			
+			response = TestResponse.GETHOTAPPLIST;
 			break;
 		default:
 			response = "";

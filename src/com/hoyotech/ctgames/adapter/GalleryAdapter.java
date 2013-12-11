@@ -14,14 +14,14 @@ import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.util.BitmapHelp;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
+import com.lidroid.xutils.bitmap.core.BitmapSize;
 
 /**
  * Created by GGCoke on 13-12-6.
  */
 public class GalleryAdapter extends BaseAdapter {
     Context context;
-//    int[] res = new int[]{R.drawable.t1, R.drawable.t2, R.drawable.t3};
-//    List<String> imgSrcList;
+    //int[] res = new int[]{R.drawable.t1, R.drawable.t2, R.drawable.t3};
     JSONArray jsonArray;
     
     public static BitmapUtils bitmapUtils;
@@ -56,9 +56,13 @@ public class GalleryAdapter extends BaseAdapter {
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.gallery_item, null);
         }
+        ImageView img = (ImageView) view.findViewById(R.id.iv_app_recommend);
+//        img.setImageResource(res[position]);
         
         BitmapDisplayConfig displayConfig = new BitmapDisplayConfig();
-        ImageView img = (ImageView) view.findViewById(R.id.iv_app_recommend);
+        BitmapSize bitmapMaxSize = new BitmapSize();
+        bitmapMaxSize.setWidth(img.getWidth());
+        displayConfig.setBitmapMaxSize(bitmapMaxSize);
         bitmapUtils.display(img, ((JSONObject)jsonArray.get(position)).get("adUrl").toString(), displayConfig);
         return view;
     }
