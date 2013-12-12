@@ -1,7 +1,5 @@
 package com.hoyotech.ctgames.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,7 +24,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.AppInfoAdapter;
 import com.hoyotech.ctgames.adapter.GalleryAdapter;
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
+import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.util.CTGameConstans;
 import com.hoyotech.ctgames.util.Constant;
 import com.hoyotech.ctgames.util.GetDataCallback;
@@ -157,7 +155,7 @@ public class AppRecommendFragment extends Fragment implements GetDataCallback {
 		        break;
 			case Constant.GETHOTAPPLIST:
 				Log.v(TAG, "GETHOTAPPLIST");
-		        AppInfoAdapter adapter = new AppInfoAdapter(getActivity(), AppInfo.parseJson((JSONArray)((JSONObject)JsonObject.get("data")).get("appList")));
+		        AppInfoAdapter adapter = new AppInfoAdapter(getActivity(), AppInfo.parseJson((JSONArray) ((JSONObject) JsonObject.get("data")).get("appList")));
 		        gridView.setAdapter(adapter);
 		        break;
 		    default:

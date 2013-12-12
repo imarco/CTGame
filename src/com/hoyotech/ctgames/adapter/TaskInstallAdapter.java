@@ -7,9 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
+import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.TaskInstallHolder;
-import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.List;
 

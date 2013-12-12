@@ -1,4 +1,4 @@
-package com.hoyotech.ctgames.adapter.bean;
+package com.hoyotech.ctgames.db.bean;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;

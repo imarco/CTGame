@@ -2,7 +2,6 @@ package com.hoyotech.ctgames.fragment;
 
 
 import android.content.BroadcastReceiver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -16,13 +15,12 @@ import android.widget.ListView;
 
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.TaskDownloadAdapter;
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
+import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
 import com.hoyotech.ctgames.db.dao.AppDao;
 import com.hoyotech.ctgames.service.DownloadTask;
 import com.hoyotech.ctgames.util.Constant;
 import com.hoyotech.ctgames.util.GetDataCallback;
-import com.hoyotech.ctgames.util.GetDataTask;
 import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.ArrayList;

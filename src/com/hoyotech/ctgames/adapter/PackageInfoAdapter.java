@@ -8,12 +8,9 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.activity.PackageDetailActivity;
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
-import com.hoyotech.ctgames.adapter.bean.PackageInfo;
+import com.hoyotech.ctgames.db.bean.PackageInfo;
 import com.hoyotech.ctgames.adapter.holder.PackageInfoHolder;
-import com.hoyotech.ctgames.adapter.holder.TaskInstallHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

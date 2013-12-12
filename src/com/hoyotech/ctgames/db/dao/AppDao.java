@@ -5,10 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
+import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.db.DBOpenHelper;
-import com.hoyotech.ctgames.db.bean.App;
-import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.ArrayList;
 import java.util.List;

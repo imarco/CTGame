@@ -1,12 +1,5 @@
 package com.hoyotech.ctgames.util;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
-
-import java.util.ArrayList;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Tian

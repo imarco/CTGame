@@ -5,9 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.util.Log;
 
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
+import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.db.dao.AppDao;
 import com.hoyotech.ctgames.util.CTGameConstans;
 import com.hoyotech.ctgames.util.ConfigUtils;

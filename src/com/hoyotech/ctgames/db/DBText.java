@@ -1,13 +1,9 @@
 package com.hoyotech.ctgames.db;
 
-import android.content.ContentValues;
 import android.content.Context;
 
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
-import com.hoyotech.ctgames.db.bean.App;
+import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.db.dao.AppDao;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.

@@ -4,8 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.*;
 import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
-import com.hoyotech.ctgames.adapter.bean.PackageInfo;
+import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.util.CTGameImageLoader;
 import com.hoyotech.ctgames.util.TaskState;
 

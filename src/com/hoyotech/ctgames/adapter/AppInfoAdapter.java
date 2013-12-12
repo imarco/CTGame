@@ -1,6 +1,5 @@
 package com.hoyotech.ctgames.adapter;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,10 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
+import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.AppInfoHolder;
 import com.hoyotech.ctgames.db.dao.AppDao;
-import com.hoyotech.ctgames.fragment.TaskDownloadFragment;
 import com.hoyotech.ctgames.service.DownloadService;
 import com.hoyotech.ctgames.service.DownloadTask;
 import com.hoyotech.ctgames.util.TaskState;

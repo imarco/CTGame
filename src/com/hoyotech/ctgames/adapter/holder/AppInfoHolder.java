@@ -1,14 +1,12 @@
 package com.hoyotech.ctgames.adapter.holder;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
+import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.util.CTGameImageLoader;
 import com.hoyotech.ctgames.util.TaskState;
 
