@@ -27,8 +27,8 @@ public class PackageDetailActivity extends Activity {
 
         ListView lv = (ListView)findViewById(R.id.list_package_app);
 
-        PackageDownloadAdapter adapter = new PackageDownloadAdapter(DataUtils.getPackageAppInfos(this), this);
-
-        lv.setAdapter(adapter);
+//        PackageDownloadAdapter adapter = new PackageDownloadAdapter(DataUtils.getPackageAppInfos(this), this);
+//
+//        lv.setAdapter(adapter);
     }
 }

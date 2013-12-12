@@ -1,21 +1,20 @@
 package com.hoyotech.ctgames.adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.AppInfoHolder;
-import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
+import com.hoyotech.ctgames.db.dao.AppDao;
 import com.hoyotech.ctgames.fragment.TaskDownloadFragment;
 import com.hoyotech.ctgames.service.DownloadService;
+import com.hoyotech.ctgames.service.DownloadTask;
 import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.List;
@@ -29,9 +28,9 @@ public class AppInfoAdapter extends BaseAdapter {
     private AppInfo appInfo;
 
     //构造函数
-    public AppInfoAdapter(List<AppInfo> data, Context context) {
-        this.data = data;
+    public AppInfoAdapter(Context context, List<AppInfo> data) {
         this.context = context;
+        this.data = data;
     }
 
     @Override
@@ -51,15 +50,15 @@ public class AppInfoAdapter extends BaseAdapter {
         }
 
         appInfo = data.get(position);
-        convertView.setTag(appInfo.getUrl());// 便于通过url找view
+        convertView.setTag(appInfo.getAppUrl());// 便于通过url找view
 
         AppInfoHolder holder = new AppInfoHolder(convertView);
         holder.setData(convertView.getContext(), appInfo);
         holder.info = appInfo;
 
         //设置事件监听响应
-        holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getUrl(), appInfo, holder));
-        holder.btnAppBonus.setOnClickListener(new ButtonClickListener(appInfo.getUrl(), appInfo, holder));
+        holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
+        holder.btnAppBonus.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
 
         return convertView;
     }
@@ -93,33 +92,34 @@ public class AppInfoAdapter extends BaseAdapter {
                     // 补充响应
                     // 根据按钮的状态决定操作
                     // 点击下载-暂停 点击暂停-继续 点击继续-暂停
-                    if(info.getState() == TaskState.STATE_DOWNLOAD) {
-                        info.setState(TaskState.STATE_PAUSE);
+                    if(info.getState() == TaskState.STATE_PREPARE) {
+                        info.setState(TaskState.STATE_DOWNLOADING);
                         holder.setButtonState(context, info);
                         // 通知service开始下载
-                        downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOAD);
-                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getUrl());
-                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD);
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
+                        downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
                         context.startService(downloadIntet);
 
-                    } else if(info.getState() == TaskState.STATE_PAUSE) {
-                        info.setState(TaskState.STATE_CONTINUE);
+                        // 将下载任务放入数据库备用
+                        AppDao appDao = new AppDao(context);
+                        appDao.addApp(info);
+                    } else if(info.getState() == TaskState.STATE_DOWNLOADING) {
+                        info.setState(TaskState.STATE_PAUSED);
                         holder.setButtonState(context, info);
                         // 通知service暂停下载
-                        downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_PAUSE);
-                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getUrl());
-                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD);
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_PAUSED);
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
+                        downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
                         context.startService(downloadIntet);
-
-                    } else if(info.getState() == TaskState.STATE_CONTINUE) {
-                        info.setState(TaskState.STATE_PAUSE);
+                    } else if(info.getState() == TaskState.STATE_PAUSED) {
+                        info.setState(TaskState.STATE_DOWNLOADING);
                         holder.setButtonState(context, info);
                         // 通知service继续下载
                         downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_CONTINUE);
-                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getUrl());
-                        downloadIntet.putExtra("action", TaskDownloadFragment.INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD);
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
+                        downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
                         context.startService(downloadIntet);
-
                     }
                     break;
                 default:
@@ -127,6 +127,5 @@ public class AppInfoAdapter extends BaseAdapter {
                     break;
             }
         }
-
     }
 }

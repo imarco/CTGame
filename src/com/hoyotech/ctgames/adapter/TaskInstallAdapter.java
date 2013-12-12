@@ -1,8 +1,5 @@
 package com.hoyotech.ctgames.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +8,10 @@ import android.widget.BaseAdapter;
 
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.bean.AppInfo;
-import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
 import com.hoyotech.ctgames.adapter.holder.TaskInstallHolder;
 import com.hoyotech.ctgames.util.TaskState;
+
+import java.util.List;
 
 
 public class TaskInstallAdapter extends BaseAdapter {
@@ -45,7 +43,7 @@ public class TaskInstallAdapter extends BaseAdapter {
     public void removeItem(String url) {
         String tmp;
         for (int i = 0; i < data.size(); i++) {
-            tmp = data.get(i).getUrl();
+            tmp = data.get(i).getAppUrl();
             if (tmp.equals(url)) {
                 data.remove(i);
                 this.notifyDataSetChanged();
@@ -86,8 +84,8 @@ public class TaskInstallAdapter extends BaseAdapter {
         holder.info = appInfo;
 
         //设置事件监听响应
-        holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getUrl(), appInfo, holder));
-        holder.btnAppBonus.setOnClickListener(new ButtonClickListener(appInfo.getUrl(), appInfo, holder));
+        holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
+        holder.btnAppBonus.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
 
         return convertView;
     }
@@ -113,24 +111,7 @@ public class TaskInstallAdapter extends BaseAdapter {
                     // 应该弹出应用详情信息
                     break;
                 case R.id.btn_app_options:
-                    // 补充响应
-                    // 根据按钮的状态决定操作
-                    // 点击安装-安装中 打开-领取奖励 (中间状态 安装完成之后变成打开)
-                    // 点击领取奖励再进行跳转
-                    if(info.getState() == TaskState.STATE_INSTALL) {
-                        info.setState(TaskState.STATE_INSTALLING);
-                        holder.setData(context, info);
-                        // 当安装完成之后，在这个时候需要更新状态表示打开
-                        // 通知service安装
-
-                    } else if(info.getState() == TaskState.STATE_OPEN) {
-                        info.setState(TaskState.STATE_GET_PRIZE);
-                        holder.setData(context, info);
-                        // 通知service打开安装好的应用
-
-                    } else if(info.getState() == TaskState.STATE_GET_PRIZE) {
-                        // 点击获取奖励之后的动作
-                    }
+                    // TODO button点击事件
                     break;
                 default:
                     // 补充默认情况

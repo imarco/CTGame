@@ -36,9 +36,9 @@ public class TaskInstallFragment extends Fragment {
 
         ListView lv = (ListView) v.findViewById(R.id.list_task_install);
 
-        TaskInstallAdapter adapter = new TaskInstallAdapter(DataUtils.getTaskInstallInfos(getActivity()), getActivity());
-
-        lv.setAdapter(adapter);
+//        TaskInstallAdapter adapter = new TaskInstallAdapter(DataUtils.getTaskInstallInfos(getActivity()), getActivity());
+//
+//        lv.setAdapter(adapter);
 
         return v;
     }

@@ -1,5 +1,7 @@
 package com.hoyotech.ctgames.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,9 +26,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.AppInfoAdapter;
 import com.hoyotech.ctgames.adapter.GalleryAdapter;
+import com.hoyotech.ctgames.adapter.bean.AppInfo;
 import com.hoyotech.ctgames.util.CTGameConstans;
 import com.hoyotech.ctgames.util.Constant;
-import com.hoyotech.ctgames.util.DataUtils;
 import com.hoyotech.ctgames.util.GetDataCallback;
 import com.hoyotech.ctgames.util.GetDataTask;
 import com.hoyotech.ctgames.viewdef.FlowIndicator;
@@ -70,7 +72,7 @@ public class AppRecommendFragment extends Fragment implements GetDataCallback {
         gallery.setOnItemClickListener(listener);
         gallery.setOnItemSelectedListener(selected_listener);
 
-        new GetDataTask(this, Constant.GETRECOMMENDLIST).execute("");// 获取推荐轮播的图片列表
+        // new GetDataTask(this, Constant.GETRECOMMENDLIST).execute("");// 获取推荐轮播的图片列表
         new GetDataTask(this, Constant.GETHOTAPPLIST).execute(""); // 获取热门应用列表
 
         return v;
@@ -146,16 +148,16 @@ public class AppRecommendFragment extends Fragment implements GetDataCallback {
 	@Override
 	public void AddData(String response, int flag) {
 //		Log.v(TAG, response);
+        JSONObject JsonObject = JSON.parseObject(response);
 		switch(flag){
 			case Constant.GETRECOMMENDLIST:
 				Log.v(TAG, "GETRECOMMENDLIST");
-				JSONObject JsonObject = JSON.parseObject(response);
 		        GalleryAdapter adapter_g = new GalleryAdapter(getActivity(), (JSONArray)((JSONObject)JsonObject.get("data")).get("adList"));
 		        gallery.setAdapter(adapter_g);
 		        break;
 			case Constant.GETHOTAPPLIST:
 				Log.v(TAG, "GETHOTAPPLIST");
-		        AppInfoAdapter adapter = new AppInfoAdapter(DataUtils.getAppInfos(getActivity()), getActivity());
+		        AppInfoAdapter adapter = new AppInfoAdapter(getActivity(), AppInfo.parseJson((JSONArray)((JSONObject)JsonObject.get("data")).get("appList")));
 		        gridView.setAdapter(adapter);
 		        break;
 		    default:

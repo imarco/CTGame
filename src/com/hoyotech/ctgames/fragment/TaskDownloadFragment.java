@@ -2,6 +2,7 @@ package com.hoyotech.ctgames.fragment;
 
 
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -12,13 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.TaskDownloadAdapter;
 import com.hoyotech.ctgames.adapter.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
-import com.hoyotech.ctgames.util.CTGameConstans;
+import com.hoyotech.ctgames.db.dao.AppDao;
+import com.hoyotech.ctgames.service.DownloadTask;
+import com.hoyotech.ctgames.util.Constant;
+import com.hoyotech.ctgames.util.GetDataCallback;
+import com.hoyotech.ctgames.util.GetDataTask;
 import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.ArrayList;
@@ -27,33 +31,15 @@ import java.util.List;
 /**
  * Created by GGCoke on 13-12-3.
  */
-public class TaskDownloadFragment extends Fragment {
+public class TaskDownloadFragment extends Fragment implements GetDataCallback {
     private static final String KEY_CONTENT = "TaskDownloadFragment:Content";
     private DownloadReceiver mReceiver;
     private TaskDownloadAdapter adapter;
-    private List<AppInfo> apps;
+    private List<AppInfo> apps = new ArrayList<AppInfo>();
     private Bundle bundle;
     private ListView lv;
 
     public static final String INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD = "com.hoyitech.ctgames.fragment.TaskDownloadFragment";
-
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            switch (msg.what) {
-                case CTGameConstans.RESPONSE_SUCCESS:
-                    String data = msg.getData().getString("data", "");
-                    adapter.setData(apps);
-                    adapter.notifyDataSetChanged();
-                    break;
-                case CTGameConstans.RESPONSE_FAILED:
-                    String errorMsg = msg.getData().getString("errorMsg");
-                    Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,15 +53,27 @@ public class TaskDownloadFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_task_download, container, false);
         lv = (ListView) v.findViewById(R.id.list_task_download);
-        apps = new ArrayList<AppInfo>();
-        adapter = new TaskDownloadAdapter(getActivity(), apps);
 
-        lv.setAdapter(adapter);
+        // TODO 获取用户流量信息
+//        new GetDataTask(this, Constant.GETUSERINFO).execute();
 
         mReceiver = new DownloadReceiver();
         IntentFilter filter = new IntentFilter();
-        filter.addAction(INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD);
+        filter.addAction(DownloadTask.ACTION_DOWNLOAD);
         getActivity().registerReceiver(mReceiver, filter);
+
+        // 获取正在下载的应用列表
+        AppDao appDao = new AppDao(getActivity());
+        List<AppInfo> downloading = appDao.queryAppsByState(TaskState.STATE_DOWNLOADING);
+        List<AppInfo> paused = appDao.queryAppsByState(TaskState.STATE_PAUSED);
+        if (null != downloading && downloading.size() > 0) {
+            apps.addAll(downloading);
+        }
+        if (null != paused && paused.size() > 0) {
+            apps.addAll(paused);
+        }
+        adapter = new TaskDownloadAdapter(getActivity(), apps);
+        lv.setAdapter(adapter);
         return v;
     }
 
@@ -83,8 +81,6 @@ public class TaskDownloadFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBundle(KEY_CONTENT, bundle);
-
-
     }
 
     @Override
@@ -92,6 +88,20 @@ public class TaskDownloadFragment extends Fragment {
         if(mReceiver != null)
             getActivity().unregisterReceiver(mReceiver);
         super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void AddData(String data, int flag) {
+        switch (flag) {
+            // TODO 添加用户流量信息
+            case Constant.GETUSERINFO:
+                break;
+        }
+    }
+
+    @Override
+    public Handler GetHandle() {
+        return null;
     }
 
 
@@ -106,27 +116,34 @@ public class TaskDownloadFragment extends Fragment {
 
         private void handleIntent(Intent downloadIntent) {
 
-            if (downloadIntent != null && downloadIntent.getAction().equals(INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD)) {
+            if (downloadIntent != null && downloadIntent.getAction().equals(DownloadTask.ACTION_DOWNLOAD)) {
                 int state = downloadIntent.getIntExtra(TaskState.DOWNLOAD_STATE, -1);
                 String url;
                 View convertView;
                 TaskDownloadHolder holder;
 
                 switch (state) {
-                    case TaskState.STATE_DOWNLOAD:
+                    case TaskState.STATE_PREPARE:
+
                         break;
-                    case TaskState.STATE_PROGRESS:
+                    case TaskState.STATE_DOWNLOADING:
                         url = downloadIntent.getStringExtra(TaskState.DOWNLOAD_URL);
                         convertView = lv.findViewWithTag(url);
-                        holder = new TaskDownloadHolder(convertView);
-                        holder.updateProgress(getActivity(), downloadIntent.getStringExtra(TaskState.DOWNLOAD_SPEED),
-                                downloadIntent.getStringExtra(TaskState.DOWNLOAD_PROGRESS));
+                        if (null != convertView) {
+                            holder = new TaskDownloadHolder(convertView);
+                            holder.updateProgress(getActivity(), downloadIntent.getStringExtra(TaskState.DOWNLOAD_SPEED),
+                                    downloadIntent.getStringExtra(TaskState.DOWNLOAD_PROGRESS));
+                        }
                         break;
-                    case TaskState.STATE_INSTALL:
+                    case TaskState.STATE_COMPLETE:
+                        // TODO 下载完成应该从下载列表中删除，加入到完成列表中
                         url = downloadIntent.getStringExtra(TaskState.DOWNLOAD_URL);
                         convertView = lv.findViewWithTag(url);
-                        holder = new TaskDownloadHolder(convertView);
-                        TaskState.setButtonView(TaskState.STATE_INSTALL, getActivity(), holder.btnOptions);
+                        if (null != convertView) {
+                            holder = new TaskDownloadHolder(convertView);
+                            apps.remove(holder.info);
+                            adapter.notifyDataSetChanged();
+                        }
                         break;
                     case TaskState.STATE_STOP:
                         break;
@@ -136,5 +153,4 @@ public class TaskDownloadFragment extends Fragment {
             }
         }
     }
-
 }

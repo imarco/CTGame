@@ -6,6 +6,7 @@ import android.widget.*;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.bean.PackageInfo;
+import com.hoyotech.ctgames.util.CTGameImageLoader;
 import com.hoyotech.ctgames.util.TaskState;
 
 /**
@@ -57,9 +58,9 @@ public class PackageDownloadHolder {
      */
     public void setData(Context context, AppInfo appInfo) {
 
-        this.appImageHeader.setBackgroundDrawable(appInfo.getImg());
-        this.appName.setText(appInfo.getAppName());
-        this.appPackageSize.setText(String.valueOf(appInfo.getAppSize())+"M");
+        CTGameImageLoader.loadImage(context, appInfo.getAppLogoUrl(), this.appImageHeader);// app logo
+        this.appName.setText(appInfo.getAppName());         // app name
+        this.appPackageSize.setText(String.valueOf(appInfo.getAppSize())+"M");    // app size
 
         //三种状态，选择状态，下载状态，安装状态
         if(appInfo.getMode() == TaskState.MODE_SELECTION) {

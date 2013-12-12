@@ -28,6 +28,7 @@ import java.net.URL;
  * Created by GGCoke on 13-12-6.
  */
 public class DownloadTask extends AsyncTask<Void, Integer, Long> {
+    public static final String ACTION_DOWNLOAD = "com.hoyotech.ctgames.service.DownloadTask";
     private static final String TAG = DownloadTask.class.getSimpleName();
     private static final String TEMP_SUFFIX = ".download";
     private long id;
@@ -49,7 +50,7 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
     private long previousTime;          // 开始下载时间
     private long totalTime;             // 下载所用时间
     private Throwable error = null;     // 下载发生的异常
-    private boolean interrupt = false;  // 下载是否中断
+    private boolean interrupt = false;  // 下载是否暂停
 
     private AndroidHttpClient client;
     private HttpGet httpGet;
@@ -177,7 +178,7 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
 
     @Override
     protected void onPostExecute(Long result) {
-        if (-1 == result || interrupt || null != error) {
+        if (-1 == result || null != error) {
             // 下载中发生错误
             if (CTGameConstans.DEBUG) {
                 Log.e(TAG, "Download failed: " + (null == error ? "" : error.getMessage()));
@@ -186,14 +187,15 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
             if (null != listener) {
                 listener.errorDownload(this, error);
             }
-
             return;
         }
 
-        // 下载成功，将临时文件重命名为正式文件
-        tmpFile.renameTo(file);
-        if (null != listener) {
-            listener.finishDownload(this);
+        if (!interrupt) {
+            // 下载成功，将临时文件重命名为正式文件
+            tmpFile.renameTo(file);
+            if (null != listener) {
+                listener.finishDownload(this);
+            }
         }
     }
 

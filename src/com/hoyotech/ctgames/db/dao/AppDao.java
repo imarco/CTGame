@@ -4,8 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.hoyotech.ctgames.adapter.bean.AppInfo;
 import com.hoyotech.ctgames.db.DBOpenHelper;
 import com.hoyotech.ctgames.db.bean.App;
+import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,240 +28,240 @@ public class AppDao {
     }
 
     /**
-     * 添加一条app的信息
-     * @param values 插入的键值对信息
-     * @return
-     */
-    public boolean addAPP(ContentValues values) {
-        boolean flag = false;
-        SQLiteDatabase database = null;
-        try {
-            database = helper.getWritableDatabase();
-            database.insert(App.TABLE_NAME, null, values);
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if(database != null) {
-                database.close();
-            }
-        }
-        return flag;
-    }
-
-    /**
-     * 添加一条app的信息
-     * @param app app实例
-     * @return
-     */
-    public boolean addAPP(App app) {
-        boolean flag = false;
-        SQLiteDatabase database = null;
-        ContentValues values = new ContentValues();
-
-        // 填充键值对
-        values.put(App.NAME, app.getName());
-        values.put(App.IMAGE_PATH, app.getImage_path());
-        values.put(App.SIZE, app.getSize());
-        values.put(App.LUCKPEAN_COUNT, app.getLuckypean_count());
-        values.put(App.PRIZE_COUNT, app.getPrize_count());
-        values.put(App.SUMMARY, app.getSummary());
-        values.put(App.STATE, app.getState());
-        values.put(App.VERSION_CODE, app.getVersion_code());
-        values.put(App.VERSION_NAME, app.getVersion_name());
-        values.put(App.URL, app.getUrl());
-
-        try {
-            database = helper.getWritableDatabase();
-            database.insert(App.TABLE_NAME, null, values);
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if(database != null) {
-                database.close();
-            }
-        }
-
-        return flag;
-    }
-
-    /**
-     * 通过url找app信息
-     * @param url
-     * @return
-     */
-    public App queryAppByUrl(String url) {
-        SQLiteDatabase database = null;
-        try {
-            database = helper.getReadableDatabase();
-            Cursor cursor = database.rawQuery("select * from app where url = ? limit 1",
-                    new String[] { url });
-
-            if (cursor.getCount() == 0) {
-                cursor.close();
-                return new App();
-            }
-
-            App app = new App();
-            cursor.moveToFirst();
-
-            app.setId(cursor.getInt(0));
-            app.setName(cursor.getString(1));
-            app.setVersion_code(cursor.getInt(2));
-            app.setVersion_name(cursor.getString(3));
-            app.setUrl(cursor.getString(4));
-            app.setSize(cursor.getLong(5));
-            app.setImage_path(cursor.getString(6));
-            app.setSummary(cursor.getString(7));
-            app.setPrize_count(cursor.getInt(8));
-            app.setLuckypean_count(cursor.getInt(9));
-            app.setState(cursor.getInt(10));
-
-            cursor.close();
-
-            return app;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new App();
-        } finally {
-            if(database != null) {
-                database.close();
-            }
-        }
-    }
-
-    /**
-     * 根据歌曲简写查询歌曲所有信息
+     * 插入app信息
      *
-     * @param state app的状态
+     * @param appInfo
      * @return
      */
-    public List<App> queryAppByState(int state) {
+    public boolean addApp(AppInfo appInfo) {
+        boolean flag = false;
+        SQLiteDatabase database = null;
+
+        try {
+            database = helper.getWritableDatabase();
+            ContentValues values = contentWrapper(appInfo);
+            // 插入应用信息
+            long result = database.insert(AppInfo.APPINFO_TABLE_NAME, null, values);
+            if (-1 == result) {
+                System.out.println("Insert into result is " + result);
+            }
+            flag = true;
+        } catch (Exception e) {
+            return flag;
+        } finally {
+            if (null != database) {
+                database.close();
+                ;
+            }
+        }
+
+        return flag;
+    }
+
+
+    private ContentValues contentWrapper(AppInfo appInfo) {
+        ContentValues values = new ContentValues();
+        values.put(AppInfo.APPINFO_APPID, appInfo.getAppId());
+        values.put(AppInfo.APPINFO_APPLOGOURL, appInfo.getAppLogoUrl());
+        values.put(AppInfo.APPINFO_APPNAME, appInfo.getAppName());
+        values.put(AppInfo.APPINFO_APPSIZE, appInfo.getAppSize());
+        values.put(AppInfo.APPINFO_LUCKYBEANSNUM, appInfo.getLuckyBeansNum());
+        values.put(AppInfo.APPINFO_LOTTERYNUM, appInfo.getLotteryNum());
+        values.put(AppInfo.APPINFO_APPDESC, appInfo.getAppDesc());
+        values.put(AppInfo.APPINFO_VERSION, appInfo.getVersion());
+        values.put(AppInfo.APPINFO_APPURL, appInfo.getAppUrl());
+        values.put(AppInfo.APPINFO_APPMD5, appInfo.getMD5());
+        values.put(AppInfo.APPINFO_AD, appInfo.getAd());
+        values.put(AppInfo.APPINFO_APPPICURLS, appInfo.getAppPicUrls());
+        values.put(AppInfo.APPINFO_MODE, appInfo.getMode());
+        values.put(AppInfo.APPINFO_STATE, appInfo.getState());
+
+        return values;
+    }
+
+    private List<AppInfo> appInfoWrapper (Cursor cursor) {
+        if (null == cursor || cursor.getCount() == 0) {
+            return new ArrayList<AppInfo>();
+        }
+
+        List<AppInfo> apps = new ArrayList<AppInfo>();
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            AppInfo appInfo = new AppInfo(
+                    cursor.getLong(0),          // addId
+                    cursor.getString(1),        // appLogUrl
+                    cursor.getString(2),        // appName
+                    cursor.getLong(3),          // appSize
+                    cursor.getInt(4),           // luckyBeansNum
+                    cursor.getInt(5),           // lotteryNum
+                    cursor.getString(6),        // appDesc
+                    cursor.getString(7),        // version
+                    cursor.getString(8),        // appUrl
+                    cursor.getString(9),        // MD5
+                    cursor.getString(10),       // ad
+                    cursor.getString(11)        // appPicUrls
+            );
+
+            appInfo.setMode(cursor.getInt(12));     // mode
+            appInfo.setState(cursor.getInt(13));    // state
+
+            apps.add(appInfo);
+            cursor.moveToNext();
+        }
+        return apps;
+    }
+
+    /**
+     * 根据应用ID获取应用信息
+     * @param appId 应用ID
+     * @return 应用信息，如果没有对应记录，返回null
+     */
+    public AppInfo queryAppById(long appId) {
         SQLiteDatabase database = null;
         try {
             database = helper.getReadableDatabase();
             Cursor cursor = database.rawQuery(
-                    "select * from app where state = ? ",
-                    new String[] { String.valueOf(state) });
-
-            if (cursor.getCount() == 0) {
-                cursor.close();
-                return new ArrayList<App>();
-            }
-
-            List<App> l = new ArrayList<App>();
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                App app = new App();
-
-                app.setId(cursor.getInt(0));
-                app.setName(cursor.getString(1));
-                app.setVersion_code(cursor.getInt(2));
-                app.setVersion_name(cursor.getString(3));
-                app.setUrl(cursor.getString(4));
-                app.setSize(cursor.getLong(5));
-                app.setImage_path(cursor.getString(6));
-                app.setSummary(cursor.getString(7));
-                app.setPrize_count(cursor.getInt(8));
-                app.setLuckypean_count(cursor.getInt(9));
-                app.setState(cursor.getInt(10));
-
-                l.add(app);
-                cursor.moveToNext();
-            }
-
+                    "select * from app where appId = ? limit 1",
+                    new String[]{String.valueOf(appId)});
+            List<AppInfo> apps = appInfoWrapper(cursor);
             cursor.close();
-
-            return l;
+            return (null == apps || apps.size() <= 0) ? null : apps.get(0);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ArrayList<App>();
+            return null;
         } finally {
-            if(database != null) {
+            if (database != null) {
                 database.close();
             }
         }
     }
 
     /**
-     * 通过url删除一条app的信息
-     * @param url
-     * @return
+     * 根据URL获取应用信息
+     * @param url 应用下载url
+     * @return 应用信息，如果没有对应记录，返回null
      */
-    public boolean deleteAppByUrl(String url) {
-        boolean flag = false;
+    public AppInfo queryAppByUrl(String url) {
         SQLiteDatabase database = null;
+        List<AppInfo> apps = new ArrayList<AppInfo>();
         try {
-            database = helper.getWritableDatabase();
-            String sql = "delete from app where url = ? ";
-            database.execSQL(sql, new String[] { url });
-            flag = true;
+            database = helper.getReadableDatabase();
+            Cursor cursor = database.rawQuery(
+                    "select * from app where appUrl = ? limit 1",
+                    new String[]{url});
+            apps = appInfoWrapper(cursor);
+            cursor.close();
+            return (null == apps || apps.size() <= 0) ? null : apps.get(0);
         } catch (Exception e) {
             e.printStackTrace();
-            return flag;
+            return null;
         } finally {
-            if(database != null) {
+            if (database != null) {
                 database.close();
             }
         }
-
-        return flag;
     }
 
     /**
-     * 删除app表中的一些信息(参数参见api中SQLiteDatabase)
-     * @param whereClause
-     * @param whereArgs
-     * @return
+     * 根据礼包应用状态获取应用信息
+     * @param mode 礼包应用状态
+     * @return 应用信息，如果没有对应记录，返回null
+     */
+    public List<AppInfo> queryAppsByMode(int mode) {
+        SQLiteDatabase database = null;
+        List<AppInfo> apps = new ArrayList<AppInfo>();
+        try {
+            database = helper.getReadableDatabase();
+            Cursor cursor = database.rawQuery(
+                    "select * from app where mode = ? ",
+                    new String[]{String.valueOf(mode)});
+            apps = appInfoWrapper(cursor);
+            cursor.close();
+            return apps;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return apps;
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+    }
+
+    /**
+     * 根据应用状态获取应用信息
+     * @param state 礼包应用状态
+     * @return 应用信息，如果没有对应记录，返回null
+     */
+    public List<AppInfo> queryAppsByState(int state) {
+        SQLiteDatabase database = null;
+        List<AppInfo> apps = new ArrayList<AppInfo>();
+        try {
+            database = helper.getReadableDatabase();
+            Cursor cursor = database.rawQuery(
+                    "select * from app where state = ? ",
+                    new String[]{String.valueOf(state)});
+            apps = appInfoWrapper(cursor);
+            cursor.close();
+            return apps;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return apps;
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+    }
+
+    /**
+     * 根据条件删除应用记录
+     * @param whereClause where语句
+     * @param whereArgs where语句中“?”对应的值
+     * @return 删除成功返回true，否则返回false
      */
     public boolean deleteApp(String whereClause, String[] whereArgs) {
-
         boolean flag = false;
         SQLiteDatabase database = null;
         try {
             database = helper.getWritableDatabase();
-            database.delete(App.TABLE_NAME, whereClause, whereArgs);
+            database.delete(AppInfo.APPINFO_TABLE_NAME, whereClause, whereArgs);
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             return flag;
         } finally {
-            if(database != null) {
+            if (database != null) {
                 database.close();
             }
         }
 
         return flag;
-
     }
 
     /**
-     * 更新一条信息(参数参见api中SQLiteDatabase)
-     * @param values
-     * @param whereClause
-     * @param whereArgs
-     * @return
+     * 更新应用信息
+     * @param values 更新后的值
+     * @param whereClause where语句
+     * @param whereArgs where语句中“?”对应的值
+     * @return 更新成功返回true，否则返回false
      */
     public boolean updateApp(ContentValues values, String whereClause, String[] whereArgs) {
         boolean flag = false;
         SQLiteDatabase database = null;
         try {
             database = helper.getWritableDatabase();
-            database.update(App.TABLE_NAME, values, whereClause, whereArgs);
+            database.update(AppInfo.APPINFO_TABLE_NAME, values, whereClause, whereArgs);
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
             return flag;
         } finally {
-            if(database != null) {
+            if (database != null) {
                 database.close();
             }
         }
 
         return flag;
     }
-
-
-
 }

@@ -109,47 +109,18 @@ public class PackageDownloadAdapter extends BaseAdapter{
                     // 应该弹出应用详情信息
                     break;
                 case R.id.btn_options:
+                    // TODO 按键处理
                     // 补充响应
                     // 根据按钮的状态决定操作
                     // 点击下载-暂停 点击暂停-继续 点击继续-暂停 点击安装-安装中
                     // 打开-领取奖励 (中间状态 安装完成之后变成打开)
                     // 点击领取奖励再进行跳转
-                    System.out.println("被点击了");
-                    if(info.getState() == TaskState.STATE_DOWNLOAD) {
-                        info.setState(TaskState.STATE_PAUSE);
+                    if(info.getState() == TaskState.STATE_PREPARE) {
+                        info.setState(TaskState.STATE_DOWNLOADING);
                         info.setMode(TaskState.MODE_DOWNLOADING);
                         holder.setData(context, info);
                         // 通知service开始下载
 
-                    } else if(info.getState() == TaskState.STATE_PAUSE) {
-                        info.setState(TaskState.STATE_CONTINUE);
-                        info.setMode(TaskState.MODE_DOWNLOADING);
-                        holder.setData(context, info);
-                        // 通知service暂停下载
-
-                    } else if(info.getState() == TaskState.STATE_CONTINUE) {
-                        info.setState(TaskState.STATE_PAUSE);
-                        info.setMode(TaskState.MODE_DOWNLOADING);
-                        holder.setData(context, info);
-                        // 通知service继续下载
-
-                    } else if(info.getState() == TaskState.STATE_INSTALL) {
-                        info.setState(TaskState.STATE_INSTALLING);
-                        info.setMode(TaskState.MODE_INSTALL);
-                        holder.setData(context, info);
-                        // 当安装完成之后，在这个时候需要更新状态表示打开
-                        // 通知service安装
-
-                    } else if(info.getState() == TaskState.STATE_OPEN) {
-                        info.setState(TaskState.STATE_GET_PRIZE);
-                        info.setMode(TaskState.MODE_INSTALL);
-                        holder.setData(context, info);
-                        // 通知service打开安装好的应用
-
-                    } else if(info.getState() == TaskState.STATE_GET_PRIZE) {
-                        info.setMode(TaskState.MODE_INSTALL);
-                        holder.setData(context, info);
-                        // 点击获取奖励之后的动作
                     }
                     break;
                 default:
