@@ -1,11 +1,13 @@
 package com.hoyotech.ctgames.service;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.util.Log;
 
+import com.hoyotech.ctgames.db.bean.AppInfo;
+import com.hoyotech.ctgames.db.dao.AppDao;
 import com.hoyotech.ctgames.util.CTGameConstans;
 import com.hoyotech.ctgames.util.ConfigUtils;
 import com.hoyotech.ctgames.util.StorageUtils;
@@ -156,7 +158,7 @@ public class DownloadManager extends Thread {
             @Override
             public void updateProcess(DownloadTask task) {
                 Intent updateIntent = new Intent(action);
-                updateIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_PROGRESS);
+                updateIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
                 updateIntent.putExtra(TaskState.DOWNLOAD_SPEED, task.getDownloadSpeed() + "kbps");
                 updateIntent.putExtra(TaskState.DOWNLOAD_PROGRESS, task.getDownloadPercent() + "");
                 updateIntent.putExtra(TaskState.DOWNLOAD_URL, task.getUrl());
@@ -192,7 +194,7 @@ public class DownloadManager extends Thread {
 
     private void broadcastAddTask(long id, String url, boolean isInterrupt) {
         Intent nofityIntent = new Intent(action);
-        nofityIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOAD);
+        nofityIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
         nofityIntent.putExtra(TaskState.DOWNLOAD_ID, id);
         nofityIntent.putExtra(TaskState.DOWNLOAD_URL, url);
         nofityIntent.putExtra(TaskState.DOWNLOAD_PAUSED, isInterrupt);
@@ -262,6 +264,13 @@ public class DownloadManager extends Thread {
             mDownloadingTasks.remove(task);
             task = newDownloadTask(url);
             mPausingTasks.add(task);
+
+            // 更新任务状态为暂停
+            AppDao appDao = new AppDao(mContext);
+            AppInfo info = appDao.queryAppByUrl(task.getUrl());
+            ContentValues values = new ContentValues();
+            values.put(AppInfo.APPINFO_STATE, TaskState.STATE_PAUSED);
+            appDao.updateApp(values, AppInfo.APPINFO_APPURL + "=?", new String[] {info.getAppUrl()});
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -316,6 +325,13 @@ public class DownloadManager extends Thread {
             if (!this.isAlive()) {
                 this.startManager();
             }
+
+            // 更新任务状态为下载
+            AppDao appDao = new AppDao(mContext);
+            AppInfo info = appDao.queryAppByUrl(task.getUrl());
+            ContentValues values = new ContentValues();
+            values.put(AppInfo.APPINFO_STATE, TaskState.STATE_DOWNLOADING);
+            appDao.updateApp(values, AppInfo.APPINFO_APPURL + "=?", new String[] {info.getAppUrl()});
         }
     }
 
@@ -387,8 +403,15 @@ public class DownloadManager extends Thread {
             ConfigUtils.clearURL(mContext, task.getId());
             mDownloadingTasks.remove(task);
 
+            // 更新任务状态为完成
+            AppDao appDao = new AppDao(mContext);
+            AppInfo info = appDao.queryAppByUrl(task.getUrl());
+            ContentValues values = new ContentValues();
+            values.put(AppInfo.APPINFO_STATE, TaskState.STATE_COMPLETE);
+            appDao.updateApp(values, AppInfo.APPINFO_APPURL + "=?", new String[] {info.getAppUrl()});
+
             Intent nofityIntent = new Intent(action);
-            nofityIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_INSTALL);
+            nofityIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_COMPLETE);
             nofityIntent.putExtra(TaskState.DOWNLOAD_ID, task.getId());
             nofityIntent.putExtra(TaskState.DOWNLOAD_URL, task.getUrl());
             mContext.sendBroadcast(nofityIntent);

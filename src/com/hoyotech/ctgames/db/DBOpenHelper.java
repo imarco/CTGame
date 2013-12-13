@@ -30,17 +30,21 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         // state 下载状态，包含了正常状态(0), 下载中(1)，下载完成未安装(2), 下载完成已安装(3), 已安装并打开(4)
         // 需要添加其它状态的可以自己指定
         String sql = "CREATE TABLE app(" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "name TEXT," +
-                "version_code INTEGER, " +
-                "version_name TEXT, " +
-                "url TEXT, " +
-                "size BIGINT, " +
-                "image_path TEXT, " +
-                "summary TEXT, " +
-                "prize_count INTEGER, " +
-                "luckypean_count INTEGER, " +
-                "state INTEGER)";
+                "appId BIGINT PRIMARY KEY, " +
+                "appLogUrl TEXT, " +
+                "appName TEXT, " +
+                "appSize BIGINT, " +
+                "luckyBeansNum INTEGER, " +
+                "lotteryNum INTEGER, " +
+                "appDesc TEXT, " +
+                "appUrl TEXT, " +
+                "version TEXT, " +
+                "MD5 TEXT, " +
+                "ad TEXT, " +
+                "appPicUrls TEXT, " +
+                "mode INTEGER DEFAULT 0, " +
+                "state INTEGER DEFAULT 0)";
+
         db.execSQL(sql);
     }
 

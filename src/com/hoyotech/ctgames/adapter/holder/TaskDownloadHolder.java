@@ -2,19 +2,17 @@ package com.hoyotech.ctgames.adapter.holder;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
+import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.util.CTGameImageLoader;
 import com.hoyotech.ctgames.util.StorageUtils;
 import com.hoyotech.ctgames.util.TaskState;
-
-import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -62,13 +60,11 @@ public class TaskDownloadHolder {
      * @param appInfo app 的信息
      */
     public void setData(Context context, AppInfo appInfo) {
-
-//        this.appImageHeader.setBackgroundDrawable(appInfo.getImg());
-        CTGameImageLoader.loadImage(context, appInfo.getImgUrl(), this.appImageHeader);
+        CTGameImageLoader.loadImage(context, appInfo.getAppLogoUrl(), this.appImageHeader);
         this.appName.setText(appInfo.getAppName());
         this.appPackageSize.setText(StorageUtils.getSizeFormatted(appInfo.getAppSize()));
-        this.tvPrizeCount.setText(String.valueOf(appInfo.getPrizeCount()));
-        this.tvLuckyBeanCount.setText(String.valueOf(appInfo.getLuckybeanCount()));
+        this.tvPrizeCount.setText(String.valueOf(appInfo.getLotteryNum()));
+        this.tvLuckyBeanCount.setText(String.valueOf(appInfo.getLuckyBeansNum()));
         this.tvDownloadRate.setText(String.valueOf(appInfo.getRate())+"KB/S");
         this.progressBar.setProgress(appInfo.getProgress());
         this.tvDownloadPercent.setText(appInfo.getProgress() + "%");

@@ -1,21 +1,14 @@
 package com.hoyotech.ctgames.util;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
-
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * 网络相关公用方法
@@ -112,45 +105,5 @@ public class NetworkUtils {
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
-    }
-
-    /**
-     * 测试方法，以后要删除
-     * @param context
-     * @return
-     */
-    public static ArrayList<HashMap<String, Object>> getAppInfos(Context context) {
-        ArrayList<HashMap<String, Object>> infos = new ArrayList<HashMap<String, Object>>();
-        Drawable d = context.getResources().getDrawable(
-                R.drawable.image_app_sample);
-        for (int i = 0; i < 6; i++) {
-            HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("drawable", d);
-            map.put("name", "神庙逃亡" + i);
-            map.put("size", i * i);
-            if (i % 2 == 0) {
-                map.put("state", 0);
-            } else {
-                map.put("state", 1);
-            }
-            map.put("download", 6 - i + i * i);
-            map.put("bonus", 300);
-            infos.add(map);
-        }
-        return infos;
-    }
-
-    //应用安装部分数据
-    public static ArrayList<AppInfo> getAPPInstallInfos (Context context){
-        ArrayList<AppInfo> infos = new ArrayList<AppInfo>();
-        Drawable d = context.getResources().getDrawable(
-                R.drawable.image_app_sample);
-        int state = 0;
-
-        for (int i = 0; i < 4; i ++){
-            state = i;
-            infos.add(new AppInfo(d, "神庙逃亡" + i, i * i, state, "测试简介部分" + i, 6 - i + i * i, 300));
-        }
-        return infos;
     }
 }

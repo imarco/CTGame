@@ -19,26 +19,24 @@ public class TaskState {
     public static final String DOWNLOAD_STATE = "state";
     public static final String DOWNLOAD_SPEED = "download_speed";
     public static final String DOWNLOAD_PROGRESS = "download_progress";
+    public static final String DOWNLOAD_APPINFO = "download_appinfo";
     public static final String DOWNLOAD_URL = "url";
     public static final String DOWNLOAD_ID = "id";
     public static final String DOWNLOAD_PAUSED = "paused";
 
-    public static final int STATE_START = 0;
-    public static final int STATE_DOWNLOAD = 1;
-    public static final int STATE_DOWNLOAD_ALL = 2;
-    public static final int STATE_PAUSE = 3;
-    public static final int STATE_PAUSE_ALL = 4;
-    public static final int STATE_CONTINUE = 5;
-    public static final int STATE_CONTINUE_ALL = 6;
-    public static final int STATE_STOP = 7;
-    public static final int STATE_INSTALL = 8;
-    public static final int STATE_UPGRADE = 9;
-    public static final int STATE_INSTALLING = 10;
-    public static final int STATE_OPEN = 11;
-    public static final int STATE_GET_PRIZE = 12;
-    public static final int STATE_PROGRESS = 12;
-
-
+    public static final int STATE_START = 0;            // 启动下载service
+    public static final int STATE_PREPARE = 1;          // 应用未下载，对应文字为下载
+    public static final int STATE_DOWNLOADING = 2;      // 下载中，对应文字暂停
+    public static final int STATE_PAUSED = 3;           // 暂停中，对应文字继续
+    public static final int STATE_COMPLETE = 4;         // 下载完成，对应文字安装
+    public static final int STATE_INSTALLING = 5;      // 安装中，对应文字安装中
+    public static final int STATE_INSTALLED = 6;        // 安装完成，显示文字打开
+    public static final int STATE_OPENED = 7;           // 完成打开，显示文字获取奖励
+    public static final int STATE_CONTINUE = 8;
+    public static final int STATE_DOWNLOAD_ALL = 9;
+    public static final int STATE_PAUSE_ALL = 10;
+    public static final int STATE_CONTINUE_ALL = 11;
+    public static final int STATE_STOP = 12;            // 取消下载,暂时没用到
 
     // app task的各种状态描述
     public static final String TEXT_DOWNLOAD = "下载";
@@ -63,18 +61,16 @@ public class TaskState {
 
     static {
         map = new HashMap<Integer, String>();
-        map.put(STATE_DOWNLOAD, TEXT_DOWNLOAD);
-        map.put(STATE_DOWNLOAD_ALL, TEXT_DOWNLOAD_ALL);
-        map.put(STATE_PAUSE, TEXT_PAUSE);
-        map.put(STATE_PAUSE_ALL, TEXT_PAUSE_ALL);
-        map.put(STATE_CONTINUE, TEXT_CONTINUE);
-        map.put(STATE_CONTINUE_ALL, TEXT_CONTINUE_ALL);
-        map.put(STATE_STOP, TEXT_STOP);
-        map.put(STATE_INSTALL, TEXT_INSTALL);
-        map.put(STATE_UPGRADE, TEXT_UPGRADE);
+        map.put(STATE_PREPARE, TEXT_DOWNLOAD);
+        map.put(STATE_DOWNLOADING, TEXT_PAUSE);
+        map.put(STATE_PAUSED, TEXT_CONTINUE);
+        map.put(STATE_COMPLETE, TEXT_INSTALL);
         map.put(STATE_INSTALLING, TEXT_INSTALLING);
-        map.put(STATE_OPEN, TEXT_OPEN);
-        map.put(STATE_GET_PRIZE, TEXT_GET_PRIZE);
+        map.put(STATE_INSTALLED, TEXT_OPEN);
+        map.put(STATE_OPENED, TEXT_GET_PRIZE);
+        map.put(STATE_DOWNLOAD_ALL, TEXT_DOWNLOAD_ALL);
+        map.put(STATE_PAUSE_ALL, TEXT_PAUSE_ALL);
+        map.put(STATE_CONTINUE_ALL, TEXT_CONTINUE_ALL);
     }
 
     /**
@@ -85,19 +81,19 @@ public class TaskState {
      */
     public static void setButtonView(int stateCode, Context context, Button button) {
         switch (stateCode) {
-            case STATE_DOWNLOAD:
-            case STATE_CONTINUE:
-            case STATE_PAUSE:
+            case STATE_PREPARE:
+            case STATE_DOWNLOADING:
+            case STATE_PAUSED:
+            case STATE_INSTALLED:
+            case STATE_OPENED:
             case STATE_DOWNLOAD_ALL:
-            case STATE_CONTINUE_ALL:
             case STATE_PAUSE_ALL:
-            case STATE_GET_PRIZE:
-            case STATE_STOP:
+            case STATE_CONTINUE_ALL:
                 button.setText(map.get(stateCode));
                 button.setTextColor(context.getResources().getColor(R.color.tab_text_normal));
                 button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.button_small_blue));
                 break;
-            case STATE_INSTALL:
+            case STATE_COMPLETE:
                 button.setText(map.get(stateCode));
                 button.setTextColor(context.getResources().getColor(R.color.tab_text_normal));
                 button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.button_small_green));

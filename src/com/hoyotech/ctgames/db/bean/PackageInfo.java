@@ -1,4 +1,4 @@
-package com.hoyotech.ctgames.adapter.bean;
+package com.hoyotech.ctgames.db.bean;
 
 import android.graphics.drawable.Drawable;
 

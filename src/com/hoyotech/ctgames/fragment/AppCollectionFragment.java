@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.PackageInfoAdapter;
-import com.hoyotech.ctgames.adapter.bean.PackageInfo;
+import com.hoyotech.ctgames.db.bean.PackageInfo;
 
 import java.util.ArrayList;
 

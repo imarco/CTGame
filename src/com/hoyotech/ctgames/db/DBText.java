@@ -1,11 +1,9 @@
 package com.hoyotech.ctgames.db;
 
-import android.content.ContentValues;
 import android.content.Context;
-import com.hoyotech.ctgames.db.bean.App;
-import com.hoyotech.ctgames.db.dao.AppDao;
 
-import java.util.List;
+import com.hoyotech.ctgames.db.bean.AppInfo;
+import com.hoyotech.ctgames.db.dao.AppDao;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,54 +14,18 @@ import java.util.List;
  */
 public class DBText {
 
-    public void textApp(Context context) {
-
-        /*AppDao dao = new AppDao(context);
-
-
-        ContentValues values = new ContentValues();
-        values.put(App.NAME, "天天跑酷");
-        values.put(App.IMAGE_PATH, "http://www.baidu.com");
-        values.put(App.SIZE, 100);
-        values.put(App.LUCKPEAN_COUNT, 500);
-        values.put(App.PRIZE_COUNT, 2);
-        values.put(App.SUMMARY, "玩到爽的游戏");
-        values.put(App.STATE, 1);
-        values.put(App.VERSION_CODE, 1);
-        values.put(App.VERSION_NAME, "1.9.20");
-        values.put(App.URL, "http://www.ichangge.net");
-
-        System.out.println(dao.addAPP(values));
-        values.put(App.IMAGE_PATH, "http://www.google.com");
-        System.out.println(dao.addAPP(values));
-
-        List<App> lists = dao.queryAppByState(1);
-
-        for (int i = 0; i < lists.size(); i++) {
-            System.out.println(lists.get(i));
-        }*/
-
-
-        /*App app = dao.queryAppByUrl("http://www.ichangge.net");
-        System.out.println(app);
-
-        dao.deleteAppByUrl("http://www.ichangge.net");
-        app = dao.queryAppByUrl("http://www.ichangge.net");
-        System.out.println(app);*/
-
-        /*dao.deleteApp("url = ?", new String[]{"http://www.ichangge.net"});
-        App app = dao.queryAppByUrl("http://www.ichangge.net");
-        System.out.println(app);*/
-
-        /*values = new ContentValues();
-        values.put(App.STATE, 10);
-        values.put(App.LUCKPEAN_COUNT, 1000);
-        values.put(App.VERSION_CODE, 2);
-        values.put(App.VERSION_NAME, "2.0");
-
-        dao.updateApp(values, "url = ?" , new String[] {"http://www.ichangge.net"});
-        System.out.println(dao.queryAppByUrl("http://www.ichangge.net"));*/
-
+    public static void textApp(Context context) {
+        AppDao dao = new AppDao(context);
+        AppInfo appInfo = new AppInfo(1,
+                "http://appimg1.3g.qq.com/android_new/852/792852/16912286/icon_72.png",
+                "海豚浏览器",
+                13830717,
+                10,
+                2,
+                "谢谢大家的支持",
+                "http://122.193.23.63/down.myapp.com/android_new/852/792852/16912286/com.dolphin.browser.xf_133.apk?mkey=52a6f7dbb3c26326&f=d688&p=.apk",
+                "10.4.0", "aaaaaaaaaaaaaaaa", "", "");
+        dao.addApp(appInfo);
     }
 
 }

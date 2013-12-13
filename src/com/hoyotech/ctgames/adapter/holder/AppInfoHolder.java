@@ -1,14 +1,13 @@
 package com.hoyotech.ctgames.adapter.holder;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.hoyotech.ctgames.R;
-import com.hoyotech.ctgames.adapter.bean.AppInfo;
+import com.hoyotech.ctgames.db.bean.AppInfo;
+import com.hoyotech.ctgames.util.CTGameImageLoader;
 import com.hoyotech.ctgames.util.TaskState;
 
 /**
@@ -47,13 +46,12 @@ public class AppInfoHolder {
      * @param appInfo app 的信息
      */
     public void setData(Context context, AppInfo appInfo) {
-
-        this.appImageHeader.setBackgroundDrawable(appInfo.getImg());
+        CTGameImageLoader.loadImage(context, appInfo.getAppLogoUrl(), this.appImageHeader);
         this.appName.setText(appInfo.getAppName());
         this.appPackageSize.setText(String.valueOf(appInfo.getAppSize()));
         this.btnOptions.setText(TaskState.getTaskStateMap().get(appInfo.getState()));
-        this.tvPrizeCount.setText(String.valueOf(appInfo.getPrizeCount()));
-        this.tvLuckyBeanCount.setText(String.valueOf(appInfo.getLuckybeanCount()));
+        this.tvPrizeCount.setText(String.valueOf(appInfo.getLotteryNum()));
+        this.tvLuckyBeanCount.setText(String.valueOf(appInfo.getLuckyBeansNum()));
         TaskState.setButtonView(appInfo.getState(), context, btnOptions);
 
     }
