@@ -18,8 +18,8 @@
     <dimen name="button_small_padding_top_bottom">3dp</dimen>
     <dimen name="button_small_margin_right">5dp</dimen>
 
-    <dimen name="progress_bar_download_radius">10dp</dimen>
-    <dimen name="progress_bar_download_height">20dp</dimen>
+    <dimen name="progress_bar_download_radius">6dp</dimen>
+    <dimen name="progress_bar_download_height">12dp</dimen>
 
     <!-- 对话框的尺寸 -->
     <dimen name="dialog_title_text_size">15sp</dimen>
@@ -30,7 +30,7 @@
     <dimen name="dialog_button_width">100dp</dimen>
 
     <!-- 字体大小 -->
-    <dimen name="text_size_item_name">18sp</dimen>
+    <dimen name="text_size_item_name">16sp</dimen>
     <dimen name="text_size_item_size">12sp</dimen>
     <dimen name="text_size_item_summary">12sp</dimen>
     <dimen name="text_size_item_prize_count">12sp</dimen>
@@ -40,6 +40,35 @@
     <dimen name="button_options_text_size">12sp</dimen>
     <dimen name="text_size_download_rate_size">13sp</dimen>
     <dimen name="text_size_download_percent_size">13sp</dimen>
+
+
+
+
+
+    <!-- 新橙色风格中低栏的一些大小和文字的大小信息 -->
+    <dimen name = "new_home_margin_footer">30dp</dimen>
+    <dimen name = "new_footer_img_height">33.33dp</dimen>
+    <dimen name = "new_footer_img_width">38.33dp</dimen>
+    <dimen name = "new_footer_margin_top">5dp</dimen>
+    <dimen name = "new_footer_margin_bottom">4dp</dimen>
+    <dimen name = "new_footer_text_size">8sp</dimen>
+
+    <!-- action bar -->
+    <dimen name = "new_action_bar_image_margin_left">5dp</dimen>
+    <dimen name = "new_action_bar_image_margin_right">10dp</dimen>
+    <dimen name = "new_action_bar_title_text_size">18sp</dimen>
+
+    <!-- app简单信息-->
+    <dimen name="new_app_info_button_text_size">10sp</dimen>
+    <dimen name="new_app_info_app_name_text_size">15sp</dimen>
+    <dimen name="new_app_info_app_version_text_size">10sp</dimen>
+
+    <!-- task download-->
+    <dimen name="task_download_prize_count_text_size">12sp</dimen>
+
+    <!-- task install-->
+    <dimen name="task_install_prize_count_text_size">12sp</dimen>
+    <dimen name="task_install_text_summary">10sp</dimen>
 
 
 </resources>

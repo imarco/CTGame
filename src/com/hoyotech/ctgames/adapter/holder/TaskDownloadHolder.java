@@ -46,7 +46,6 @@ public class TaskDownloadHolder {
         this.appName = (TextView) convertView.findViewById(R.id.tv_app_name);
         this.appPackageSize = (TextView) convertView.findViewById(R.id.tv_app_size);
         this.btnOptions = (Button) convertView.findViewById(R.id.btn_options);
-        this.btnAppBonus = (Button) convertView.findViewById(R.id.btn_app_bonus);
         this.tvPrizeCount = (TextView) convertView.findViewById(R.id.tv_prize_count);
         this.tvSummary = (TextView) convertView.findViewById(R.id.tv_summary);
         this.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckypean_count);

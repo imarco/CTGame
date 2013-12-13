@@ -83,13 +83,13 @@ public class PackageInfoAdapter extends BaseAdapter {
         @Override
         public void onClick(View v) {
 
-            switch (v.getId()) {
+            /*switch (v.getId()) {
                 case R.id.btn_open:
                     // 打开礼包的详情，打开PackageDetailActivity
                     Intent intent = new Intent(context, PackageDetailActivity.class);
                     context.startActivity(intent);
                     break;
-            }
+            }*/
         }
 
     }

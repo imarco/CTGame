@@ -1,11 +1,335 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
     <include
-        android:id="@+id/action_bar_app_detail"
-        layout="@layout/action_bar_layout"></include>
+            android:id="@+id/action_bar_app_detail"
+            layout="@layout/action_bar_layout"></include>
 
-</RelativeLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="@color/new_bg_secondary_color"
+            >
+
+        <!-- app的图像 -->
+        <ImageView
+                android:id="@+id/image_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/image_app_sample"/>
+
+        <!-- app的名字 -->
+        <TextView
+                android:id="@+id/tv_app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_toRightOf="@id/image_app"
+                android:text="神庙逃亡"
+                android:textColor="@color/new_text_grey_color"
+                android:textSize="@dimen/text_size_item_name"/>
+
+        <!-- app的版本 -->
+        <TextView
+                android:id="@+id/tv_app_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_app_name"
+                android:text="（1.0.5）"
+                android:textColor="@color/new_text_grey_color"
+                android:textSize="@dimen/text_size_item_name"/>
+
+        <!-- app的大小 -->
+        <TextView
+                android:id="@+id/tv_app_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/tv_app_name"
+                android:layout_alignBottom="@id/image_app"
+                android:text="10M"
+                android:textColor="@color/new_text_grey_color"
+                android:textSize="@dimen/text_size_item_name"/>
+
+
+    </RelativeLayout>
+
+    <!-- 分割线-->
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/new_border_color"
+            />
+
+    <!-- 详情-->
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/new_bg_secondary_color"
+            >
+
+        <TextView
+                android:id="@+id/detail_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:gravity="left"
+                android:text="详情"
+                android:textColor="@color/new_text_grey_color"
+                android:textSize="13sp"
+                />
+        <!-- 上拉和下拉的剪头-->
+        <ImageView
+                android:id="@+id/image_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/detail_label"
+                android:layout_alignBottom="@id/detail_label"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/app_detail_image_down"
+                android:visibility="gone"
+                />
+        <!-- 上拉和下拉的剪头-->
+        <ImageView
+                android:id="@+id/image_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/detail_label"
+                android:layout_alignBottom="@id/detail_label"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/app_detail_image_up"
+                android:visibility="visible"
+                />
+
+        <!-- 应用详情内容-->
+        <TextView
+                android:id="@+id/tv_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_below="@id/detail_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:gravity="left"
+                android:text="这是一款爽到极点的游戏"
+                android:textColor="@color/new_text_grey_color"
+                android:textSize="10sp"
+                android:maxLines="5"
+                android:ellipsize="end"
+                android:visibility="visible"
+                />
+
+    </RelativeLayout>
+
+
+    <!-- 分割线-->
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/new_border_color"
+            />
+
+    <!-- 截图展示-->
+    <Gallery
+            android:id="@+id/app_img_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/new_bg_color"
+            android:paddingTop="8dp"
+            android:paddingLeft="8dp"
+            android:padding="8dp"
+            android:spacing="10dp"
+            />
+
+    <!-- 分割线-->
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/new_border_color"
+            />
+
+    <!-- 下载和安装的奖励信息-->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:weightSum="2"
+            android:background="@color/new_bg_secondary_color"
+            >
+
+        <!-- 下载奖励信息-->
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/app_detail_award_bg"
+                >
+            <!-- 顶部文字-->
+            <TextView
+                    android:id="@+id/text_title_download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="2dp"
+                    android:lines="1"
+                    android:text="下载奖励介绍"
+                    android:textColor="@color/new_text_white_color"
+                    android:textSize="12sp"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_title_download"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="5dip"
+                    android:orientation="vertical"
+                    >
+
+                <TextView
+                        android:id="@+id/tv_prize_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="bottom"
+                        android:text="3G网络下载此应用可获得"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/new_text_grey_color"
+                        />
+
+                <TextView
+                        android:id="@+id/tv_prize_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="12dp"
+                        android:drawableLeft="@drawable/myzone_button_wheel_chance"
+                        android:lines="1"
+                        android:gravity="bottom"
+                        android:text=" 抽奖机会18次"
+                        android:textSize="12sp"
+                        android:textColor="@color/new_text_grey_color"
+                        />
+
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+                        android:paddingLeft="25dp"
+                        android:paddingRight="25dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:text="下载"
+                        android:textColor="@color/new_text_white_color"
+                        android:background="@drawable/button_orange"
+                        />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <!-- 下载奖励信息-->
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/app_detail_award_bg"
+                >
+            <!-- 顶部文字-->
+            <TextView
+                    android:id="@+id/text_title_install"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="2dp"
+                    android:lines="1"
+                    android:text="安装打开奖励介绍"
+                    android:textColor="@color/new_text_white_color"
+                    android:textSize="12sp"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_title_install"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="5dip"
+                    android:orientation="vertical"
+                    >
+
+                <TextView
+                        android:id="@+id/tv_prize_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="bottom"
+                        android:text="安装打开应用可获得"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/new_text_grey_color"
+                        />
+
+                <TextView
+                        android:id="@+id/tv_luckypean_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="12dp"
+                        android:drawableLeft="@drawable/myzone_button_luckypean"
+                        android:lines="1"
+                        android:gravity="bottom"
+                        android:text=" 幸运豆5"
+                        android:textSize="12sp"
+                        android:textColor="@color/new_text_grey_color"
+                        />
+
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+                        android:paddingLeft="25dp"
+                        android:paddingRight="25dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:text="安装"
+                        android:textColor="@color/new_text_white_color"
+                        android:background="@drawable/button_grey"
+                        />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

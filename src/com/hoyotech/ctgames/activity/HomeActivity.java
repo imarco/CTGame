@@ -4,19 +4,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.widget.TextView;
+import android.widget.*;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
 
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.db.DBOpenHelper;
-import com.hoyotech.ctgames.db.DBText;
 import com.hoyotech.ctgames.fragment.AppFragment;
 import com.hoyotech.ctgames.fragment.AwardFragment;
 import com.hoyotech.ctgames.fragment.VideoFragment;
@@ -40,7 +36,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private Fragment to;
 
     // 定义布局对象
-    private FrameLayout appFg, videoFg, awardFg, zoneFg;
+    private RelativeLayout appFg, videoFg, awardFg, zoneFg;
 
     // 定义图片组件对象
     private ImageView appIv, videoIv, awardIv, zoneIv;
@@ -50,7 +46,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
     // 定义布局组件和图片组件数组，便于管理
     private ImageView[] imageViews;
-    private FrameLayout[] frameLayouts;
+    private RelativeLayout[] relativeLayouts;
     private TextView[] textViews;
 
     // 定义按钮图片组件
@@ -90,10 +86,10 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
      */
     private void initView() {
         // 实例化布局对象
-        appFg = (FrameLayout) findViewById(R.id.button_app);
-        videoFg = (FrameLayout) findViewById(R.id.button_video);
-        awardFg = (FrameLayout) findViewById(R.id.button_award);
-        zoneFg = (FrameLayout) findViewById(R.id.button_zone);
+        appFg = (RelativeLayout) findViewById(R.id.button_app);
+        videoFg = (RelativeLayout) findViewById(R.id.button_video);
+        awardFg = (RelativeLayout) findViewById(R.id.button_award);
+        zoneFg = (RelativeLayout) findViewById(R.id.button_zone);
 
         // 实例化图片组件对象
         appIv = (ImageView) findViewById(R.id.image_app);
@@ -111,7 +107,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         bigWheelIv = (ImageView) findViewById(R.id.button_big_wheel);
 
         // 放入数组，便于管理
-        frameLayouts = new FrameLayout[] {appFg, videoFg, awardFg, zoneFg};
+        relativeLayouts = new RelativeLayout[] {appFg, videoFg, awardFg, zoneFg};
         imageViews = new ImageView[] {appIv, videoIv, awardIv, zoneIv};
         textViews = new TextView[] {appTv, videoTv, awardTv, zoneTv};
     }
@@ -244,11 +240,11 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
      */
     private void setItemSelected(int positionSelected) {
         for (int i = 0; i < imageViews.length; i++) {
-            frameLayouts[i].setSelected(false);
+            relativeLayouts[i].setSelected(false);
             imageViews[i].setSelected(false);
             textViews[i].setSelected(false);
             if (positionSelected == i) {
-                frameLayouts[i].setSelected(true);
+                relativeLayouts[i].setSelected(true);
                 imageViews[i].setSelected(true);
                 textViews[i].setSelected(true);
             }

@@ -1,129 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-    <RelativeLayout
-            android:id="@+id/layout_app_package_info_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:layout_gravity="top|center"
+              android:paddingBottom="8dp"
+              android:paddingTop="8dp"
+              android:background="@color/new_bg_color">
 
-        <!-- 应用包的图标 -->
-        <ImageView
-                android:id="@+id/image_app_package"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/image_app_package"
-                >
-        </ImageView>
-
-        <!-- 可以抽奖的次数 -->
-        <TextView
-                android:id="@+id/btn_play_chance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/image_app_package"
-                android:layout_alignLeft="@id/image_app_package"
-                android:layout_marginTop="3dp"
-                android:drawableLeft="@drawable/icon_play_chance"
-                android:text=" 6次"
-                android:gravity="center"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textSize="@dimen/text_size_item_prize_count"
-                android:textColor="@color/tab_text"
-                >
-        </TextView>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-            android:id="@+id/layout_package_info_middle"
+    <!-- 礼包名-->
+    <TextView
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/layout_app_package_info_left"
-            android:layout_alignTop="@id/layout_app_package_info_left"
-            android:layout_alignBottom="@id/layout_app_package_info_left"
-            android:layout_marginLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="塔防游戏礼包"
+            android:textColor="@color/new_text_grey_color"
+            android:background="@color/new_bg_secondary_color"
+            />
+
+    <!-- 下面的内容-->
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             >
 
-        <!-- 打开应用包的按钮 -->
-        <Button
-                android:id="@+id/btn_open"
+        <!-- 礼包的图片-->
+        <ImageView
+                android:id="@+id/image_package"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/button_small_blue"
-                android:text="打开礼包"
-                android:gravity="center"
-                android:paddingTop="@dimen/button_small_padding_top_bottom"
-                android:paddingBottom="@dimen/button_small_padding_top_bottom"
-                android:layout_marginRight="@dimen/button_small_margin_right"
-                android:textColor="@color/tab_text_normal"
-                android:textSize="@dimen/button_blue_text_size"
+                android:src="@drawable/package_image_sample"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                />
+
+
+        <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/package_image_tranangle"
+                android:layout_alignTop="@id/image_package"
+                android:layout_alignLeft="@id/image_package"
                 >
-        </Button>
-
-        <!-- 应用的名字和大小 -->
-        <TextView
-                android:id="@+id/tv_name"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_alignParentTop="true"
-                android:textSize="@dimen/text_size_item_name"
-                android:textColor="@color/tab_text"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:text="游戏礼包1">
-
-        </TextView>
-
-        <TextView
-                android:id="@+id/package_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/tv_name"
-                android:layout_alignBottom="@id/tv_name"
-                android:textColor="@color/tab_text"
-                android:layout_marginLeft="3dp"
-                android:text="10M"
-                android:textSize="@dimen/text_size_item_size" />
+            <TextView
+                    android:id="@+id/package_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:paddingBottom="20dp"
+                    android:rotation="-45"
+                    android:text="共100M"
+                    android:textColor="@color/new_text_white_color"
+                    android:textSize="14sp"
+                    />
+        </RelativeLayout>
+        <!-- 大小-->
 
 
-        <!-- 应用简单描述 -->
-        <TextView
-                android:id="@+id/tv_summary"
+        <!-- 右下角的奖励信息-->
+        <LinearLayout
+                android:id="@+id/layout_prize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@id/btn_open"
-                android:layout_alignParentLeft="true"
-                android:text="这是礼包的信息这是信息这是信息这是礼包的信息这是礼包的信息这是礼包的信息"
-                android:textSize="@dimen/text_size_item_summary"
-                android:textColor="@color/tab_text"
-                android:maxLines="2"
-                android:ellipsize="end"
+                android:layout_alignRight="@id/image_package"
+                android:layout_alignBottom="@id/image_package"
+                android:orientation="horizontal"
+                android:background="@drawable/package_bg_prize_info"
+                android:paddingRight="5dp"
                 >
-        </TextView>
 
-        <!-- 应用包中的奖励 -->
-        <TextView
-                android:id="@+id/tv_bonus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:drawableLeft="@drawable/icon_pea"
-                android:text=" 3010"
-                android:textColor="@color/tab_text"
-                android:textSize="@dimen/text_size_item_luckypean_count"
-                android:maxLines="1"
-                android:ellipsize="end">
-        </TextView>
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="bottom"
+                    >
+
+                <TextView
+                        android:id="@+id/chance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/myzone_button_wheel_chance"
+                        android:lines="1"
+                        android:gravity="bottom"
+                        android:text=" 机会"
+                        android:textSize="12sp"
+                        android:textColor="@color/new_text_grey_color"
+                        />
+
+                <TextView
+                        android:id="@+id/pea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/myzone_button_luckypean"
+                        android:lines="1"
+                        android:gravity="bottom"
+                        android:text=" 幸运豆"
+                        android:textSize="12sp"
+                        android:textColor="@color/new_text_grey_color"
+                        />
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="bottom"
+                    >
+
+                <!-- 抽奖次数-->
+                <TextView
+                        android:id="@+id/tv_prize_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|bottom"
+                        android:lines="1"
+                        android:text="10"
+                        android:textSize="14sp"
+                        android:textColor="@color/new_text_orange_color"/>
+
+                <!-- 幸运豆个数-->
+                <TextView
+                        android:id="@+id/tv_luckypean_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:layout_gravity="right"
+                        android:gravity="bottom"
+                        android:text="5"
+                        android:textSize="14sp"
+                        android:textColor="@color/new_text_orange_color"
+                        />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 
-</RelativeLayout>
+
+</LinearLayout>

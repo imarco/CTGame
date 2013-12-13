@@ -38,7 +38,6 @@ public class AppInfoHolder {
         this.btnOptions = (Button) convertView.findViewById(R.id.btn_options);
         this.tvPrizeCount = (TextView) convertView.findViewById(R.id.tv_prize_count);
         this.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckybean_count);
-        this.btnAppBonus = (Button) convertView.findViewById(R.id.btn_app_bonus);
     }
 
     /**

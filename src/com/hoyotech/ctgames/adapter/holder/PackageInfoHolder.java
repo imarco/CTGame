@@ -37,9 +37,8 @@ public class PackageInfoHolder {
         this.image = (ImageView) convertView.findViewById(R.id.image_app_package);
         this.tvPackageName = (TextView) convertView.findViewById(R.id.tv_name);
         this.tvPackageSize = (TextView) convertView.findViewById(R.id.package_size);
-        this.btnOpen = (Button) convertView.findViewById(R.id.btn_open);
-        this.tvPrizeCount = (TextView) convertView.findViewById(R.id.btn_play_chance);
-        this.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_bonus);
+        this.tvPrizeCount = (TextView) convertView.findViewById(R.id.tv_prize_count);
+        this.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckypean_count);
         this.tvSummary = (TextView) convertView.findViewById(R.id.tv_summary);
     }
 

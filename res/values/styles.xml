@@ -32,7 +32,7 @@
         <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
         <item name="android:textColor">@drawable/vpi_text_color</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:divider">@drawable/custom_tab_indicator_divider</item>
+        <item name="android:divider">@color/new_divider_line_color</item>
         <item name="android:dividerPadding">10dp</item>
         <item name="android:showDividers">middle</item>
         <item name="android:paddingLeft">8dp</item>

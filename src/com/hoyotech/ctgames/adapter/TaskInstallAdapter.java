@@ -105,10 +105,6 @@ public class TaskInstallAdapter extends BaseAdapter {
         public void onClick(View v) {
 
             switch (v.getId()) {
-                case R.id.btn_app_bonus:
-                    // 补充响应
-                    // 应该弹出应用详情信息
-                    break;
                 case R.id.btn_app_options:
                     // TODO button点击事件
                     break;

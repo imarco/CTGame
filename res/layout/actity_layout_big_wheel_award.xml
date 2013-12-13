@@ -1,166 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/big_wheel"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@color/big_wheel_bg_color">
-
-    <!-- info of big wheel title -->
-    <LinearLayout
-            android:id="@+id/big_wheel_info"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:background="@color/big_wheel_title_color"
-            android:gravity="top"
-            android:orientation="horizontal" >
-
-        <!-- traffic left -->
-        <TextView
-                android:id="@+id/title_traffic_left"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_weight="2.5"
-                android:textColor="@color/tab_text"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:lines="4"
-                android:maxLines="3"
-                android:textSize="12sp"
-                android:text="您还有很多次抽奖机会您还有很多次抽奖机会您还有很多次抽奖机会" />
+                android:layout_height="match_parent">
 
-        <!-- line -->
-        <ImageView
-                android:id="@+id/big_wheel_title_line"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/big_wheel_title_line_color"
-                ></ImageView>
+    <include
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar_layout" ></include>
 
-
-        <!-- more info app, video and so on -->
-        <RelativeLayout
-                android:id="@+id/title_more_layout"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:gravity="center_vertical"
-                android:layout_weight="1" >
-
-            <!-- text info -->
-            <TextView
-                    android:id="@+id/title_more_text"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="5dp"
-                    android:text="您还有十二次抽奖机会"
-                    android:textColor="@color/tab_text"
-                    android:textSize="12sp"
-                    >
-            </TextView>
-
-            <!-- app button -->
-            <Button
-                    android:id="@+id/title_button_app"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_blue_big_wheel"
-                    android:layout_below="@id/title_more_text"
-                    android:layout_alignLeft="@id/title_more_text"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:text="去玩应用"
-                    android:textColor="@color/tab_text_normal"
-                    android:textSize="@dimen/button_blue_text_size" />
-
-            <!-- video button -->
-            <Button
-                    android:id="@+id/title_button_video"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_blue_big_wheel"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@id/title_button_app"
-                    android:layout_alignTop="@id/title_button_app"
-                    android:gravity="center"
-                    android:text="去看视频"
-                    android:textColor="@color/tab_text_normal"
-                    android:textSize="@dimen/button_blue_text_size" />
-
-        </RelativeLayout>
-    </LinearLayout>
-
-    <!-- bottom line -->
     <ImageView
-            android:id="@+id/big_wheel_title_line"
+            android:id="@+id/image_title"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/big_wheel_info"
-            android:layout_alignLeft="@id/big_wheel_info"
-            android:background="@color/big_wheel_title_line_color"
-            ></ImageView>
-
-    <TextView
-            android:id="@+id/title"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:background="@color/big_wheel_bg_color"
-            android:layout_below="@id/big_wheel_title_line"
-            android:gravity="center"
-            android:textColor="@color/title_txt_color"
-            android:textSize="20sp"/>
-
-    <TextView
-            android:id="@+id/info"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/title"
-            android:background="@color/big_wheel_bg_color"
-            android:gravity="center"
-            android:textColor="@color/info_txt_color"
-            android:textSize="25sp"/>
-
-    <FrameLayout
-            android:id="@+id/wheel_award"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/info"
-            android:gravity="center">
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:layout_below="@id/action_bar"
+            android:src="@drawable/big_wheel_image_title"
+            />
 
-        <!-- 转盘中间的扇形区域，也就是奖项设置 -->
-        <com.hoyotech.ctgames.viewdef.LotteryView
-                android:id="@+id/lotteryView"
-                android:layout_width="wrap_content"
+    <RelativeLayout
+            android:id="@+id/layout_big_wheel_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/image_title"
+            android:background="#270022"
+            >
+
+            <!-- 顶部栏-->
+            <LinearLayout
+                    android:id="@+id/layout_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:orientation="vertical"
+                    android:background="@color/new_bg_secondary_color"
+                    android:layout_margin="3dp"
+                    android:padding="5dp"
+                >
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@color/new_bg_secondary_color"
+                        android:layout_alignParentBottom="true"
+                        android:paddingBottom="5dp"
+                        >
+
+                    <TextView
+                            android:id="@+id/tv_prize_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableLeft="@drawable/myzone_button_luckypean"
+                            android:lines="1"
+                            android:gravity="bottom"
+                            android:text=" 剩余18次机会"
+                            android:textSize="15sp"
+                            android:textColor="@color/new_text_grey_color"
+                            />
+                    <Button
+                            android:id="@+id/btn_get_chance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="2dp"
+                            android:lines="1"
+                            android:text="拿机会"
+                            android:gravity="center"
+                            android:background="@drawable/button_orange"
+                            />
+                </LinearLayout>
+
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/new_border_color"
+                        />
+
+                <LinearLayout
+                        android:id="@+id/layout_bottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@color/new_bg_secondary_color"
+                        android:layout_marginTop="5dp"
+                        >
+
+                    <TextView
+                            android:id="@+id/tv_prize_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lines="1"
+                            android:gravity="left|center"
+                            android:layout_weight="1"
+                            android:text="您本月还剩约280M流量，还能获得约20次获奖机会"
+                            android:textSize="10sp"
+                            android:textColor="@color/new_text_grey_color"
+                            />
+                    <Button
+                            android:id="@+id/btn_get_traffic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:lines="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="充流量"
+                            android:textSize="10sp"
+                            android:gravity="center"
+                            android:background="@drawable/button_orange"
+                            />
+                </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+        <!-- 中间的大转盘-->
+        <FrameLayout
+                android:id="@+id/wheel_award"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_below="@id/layout_up"
+                android:layout_above="@id/layout_bottom"
+                android:background="@drawable/wheel_real_bg">
 
-        <!-- 转盘的箭头 -->
-        <ImageView
-                android:id="@+id/arrow"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
+            <!-- 转盘中间的扇形区域，也就是奖项设置 -->
+            <com.hoyotech.ctgames.viewdef.LotteryView
+                    android:id="@+id/lotteryView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+
+            <!-- 转盘的箭头 -->
+            <ImageView
+                    android:id="@+id/arrow"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/wheel_arrow"
+                    />
+
+            <!-- 转盘的外框 -->
+            <ImageView
+                    android:id="@+id/bg"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/wheel_bg"
+                    />
+
+            <!-- 转盘的按钮 -->
+            <com.hoyotech.ctgames.viewdef.DynamicImage
+                    android:id="@+id/arrowBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_wheel_bg"/>
+
+        </FrameLayout>
+
+
+
+
+
+
+        <!-- 底部栏-->
+        <LinearLayout
+                android:id="@+id/layout_bottom"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/wheel_arrow"
-                />
+                android:orientation="horizontal"
+                android:background="@color/new_bg_secondary_color"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:padding="10dp"
+                >
+
+            <TextView
+                    android:id="@+id/tv_luckypean_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/myzone_button_luckypean"
+                    android:lines="1"
+                    android:gravity="bottom"
+                    android:text=" 您有180幸运豆"
+                    android:textSize="15sp"
+                    android:textColor="@color/new_text_grey_color"
+                    />
+            <Button
+                    android:id="@+id/btn_get_prize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="2dp"
+                    android:lines="1"
+                    android:text="去换奖品"
+                    android:gravity="center"
+                    android:background="@drawable/button_orange"
+                    />
+        </LinearLayout>
 
 
-        <!-- 转盘的外框 -->
-        <ImageView
-                android:id="@+id/bg"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:background="@drawable/wheel_bg"
-                />
+    </RelativeLayout>
 
-        <!-- 转盘的按钮 -->
-        <com.hoyotech.ctgames.viewdef.DynamicImage
-                android:id="@+id/arrowBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/button_wheel_bg"/>
-
-    </FrameLayout>
 
 </RelativeLayout>

@@ -42,10 +42,6 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
     // 程序会根据这个概率数组自动抽奖
     // public void onClick(View v)方法中设置了开始是扣除幸运豆的操作，以及最后控制转盘停下来的位置
 
-    //文字提示
-    private TextView title;
-    //中奖显示
-    private TextView info;
     //抽奖转盘
     private LotteryView lotteryView;
     //指针按钮
@@ -134,8 +130,6 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
      */
     public void initView() {
         initItem();
-        title = (TextView) this.findViewById(R.id.title);
-        info = (TextView) this.findViewById(R.id.info);
         arrowBtn = (DynamicImage) this.findViewById(R.id.arrowBtn);
         lotteryView = (LotteryView) this.findViewById(R.id.lotteryView);
 
@@ -183,11 +177,11 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
 
     public Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
-            info.setText((CharSequence) msg.obj);
+            //info.setText((CharSequence) msg.obj);
             if (!lotteryView.isRotateEnabled()) {
                 if(soundPool != null)
                     soundPool.stop(playSourceId);
-                title.setText("恭喜您获得");
+                //title.setText("恭喜您获得");
                 arrowBtn.stopRotation();
             }
         }
@@ -206,7 +200,7 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
     public void onClick(View v) {
         // 没有旋转状态
         if (!lotteryView.isRotateEnabled()) {
-            title.setText("抽奖按钮变红时按下更容易中奖哦");
+            //title.setText("抽奖按钮变红时按下更容易中奖哦");
 
             // 在扣除了一定的金币之后就开始下载
             begin(Math.abs(50), 8, false);
@@ -224,7 +218,7 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
 
                 //设置为缓慢停止
                 lotteryView.setRoating(true);
-                title.setText("");
+                //title.setText("");
             }
         }
     }

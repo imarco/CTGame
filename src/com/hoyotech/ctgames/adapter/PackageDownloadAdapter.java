@@ -104,10 +104,6 @@ public class PackageDownloadAdapter extends BaseAdapter{
         public void onClick(View v) {
 
             switch (v.getId()) {
-                case R.id.btn_app_bonus:
-                    // 补充响应
-                    // 应该弹出应用详情信息
-                    break;
                 case R.id.btn_options:
                     // TODO 按键处理
                     // 补充响应
