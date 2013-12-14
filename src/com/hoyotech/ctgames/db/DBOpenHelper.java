@@ -28,6 +28,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         // prize_count chance of big wheel
         // luckpean_count luck pea in app
         // state 下载状态，包含了正常状态(0), 下载中(1)，下载完成未安装(2), 下载完成已安装(3), 已安装并打开(4)
+        // hasDownloaded 应用是否曾经下载过
         // 需要添加其它状态的可以自己指定
         String sql = "CREATE TABLE app(" +
                 "appId BIGINT PRIMARY KEY, " +
@@ -43,7 +44,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "ad TEXT, " +
                 "appPicUrls TEXT, " +
                 "mode INTEGER DEFAULT 0, " +
-                "state INTEGER DEFAULT 0)";
+                "state INTEGER DEFAULT 0, " +
+                "hasDownloaded INTEGER DEFAULT 0)";
 
         db.execSQL(sql);
     }
