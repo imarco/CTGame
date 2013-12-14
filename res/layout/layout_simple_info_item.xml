@@ -154,7 +154,7 @@
                         android:lines="1"
                         android:ellipsize="end"
                         android:textColor="@color/new_text_grey_color"
-                        android:textSize="@dimen/new_app_info_button_text_size"
+                        android:textSize="@dimen/new_app_info_button_prize_text_size"
                         android:layout_weight="1"/>
             </LinearLayout>
 
@@ -163,6 +163,7 @@
         <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
                 >
 
             <!-- 由于按钮的文字采用了两行，因此静态布局智能采用这样的形式，当disable时，设置下面的visibility为gone-->
