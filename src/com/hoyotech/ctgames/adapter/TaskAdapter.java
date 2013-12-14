@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.hoyotech.ctgames.fragment.TaskCompletedFragment;
+import com.hoyotech.ctgames.fragment.TaskCompleteFragment;
 import com.hoyotech.ctgames.fragment.TaskDownloadFragment;
 import com.hoyotech.ctgames.fragment.TaskInstallFragment;
 
@@ -28,7 +28,7 @@ public class TaskAdapter extends FragmentPagerAdapter {
         } else if (1 == position) {
             return new TaskInstallFragment();
         } else if (2 == position) {
-            return new TaskCompletedFragment();
+            return new TaskCompleteFragment();
         }else {
             System.out.println("创建子TaskFragment_" + position + "失败");
             return null;

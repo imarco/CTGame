@@ -102,7 +102,6 @@ public class TaskInstallAdapter extends BaseAdapter {
 
         //设置事件监听响应
         holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
-        holder.btnAppBonus.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
 
         return convertView;
     }
@@ -248,6 +247,9 @@ public class TaskInstallAdapter extends BaseAdapter {
                             // 从任务列表中删除
                             data.remove(info);
                             notifyDataSetChanged();
+                            break;
+                        default:
+                            Toast.makeText(context, "错误的应用状态：" + info.getState(), Toast.LENGTH_SHORT).show();
                     }
                     break;
                 default:
