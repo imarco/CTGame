@@ -96,7 +96,6 @@ public class TaskDownloadAdapter extends BaseAdapter{
 
         //设置事件监听响应
         holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
-        holder.btnAppBonus.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
         return convertView;
     }
 
