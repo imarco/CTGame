@@ -65,6 +65,7 @@ public class TaskInstallFragment extends Fragment  {
         lv = (ListView) v.findViewById(R.id.list_task_install);
 
         // 获取已下载且任务未完成的应用信息
+        apps.clear();
         AppDao appDao = new AppDao(getActivity());
         apps.addAll(appDao.queryAppsByState(TaskState.STATE_COMPLETE));
         apps.addAll(appDao.queryAppsByState(TaskState.STATE_INSTALLED));
