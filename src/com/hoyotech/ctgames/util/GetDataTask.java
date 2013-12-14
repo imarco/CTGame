@@ -56,6 +56,9 @@ public class GetDataTask extends AsyncTask<String, Integer, String> {
 		case Constant.GETHOTAPPLIST: // 获取热门应用列表
 			response = TestResponse.getHotAppList();
 			break;
+        case Constant.GETPACKLIST: // 获取礼包列表
+            response = TestResponse.getPackList();
+                break;
 		default:
 			response = "";
 			break;

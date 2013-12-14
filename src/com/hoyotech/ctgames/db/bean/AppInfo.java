@@ -16,7 +16,7 @@ public class AppInfo implements Serializable {
     // 字段
     public static final transient String APPINFO_TABLE_NAME = "app";
     public static final transient String APPINFO_APPID = "appId";
-    public static final transient String APPINFO_APPLOGOURL = "appLogUrl";
+    public static final transient String APPINFO_APPLOGOURL = "appLogoUrl";
     public static final transient String APPINFO_APPNAME = "appName";
     public static final transient String APPINFO_APPSIZE = "appSize";
     public static final transient String APPINFO_LUCKYBEANSNUM = "luckyBeansNum";
@@ -55,6 +55,8 @@ public class AppInfo implements Serializable {
     private int rate;            // 下载速度 bps
     private int state;           // 目前的状态，下载还是安装 数字在TaskState中定义
     private boolean hasDownloaded;   // 应用是否下载过
+
+    public AppInfo() {}
 
     public AppInfo(long appId, String appLogoUrl, String appName, long appSize,
                    int luckyBeansNum, int lotteryNum, String appDesc, String appUrl,

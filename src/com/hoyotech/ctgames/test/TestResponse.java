@@ -114,4 +114,60 @@ public class TestResponse {
         }
         return result.toString();
     }
+
+    // 获取礼包列表
+    public static String getPackList() {
+
+        JSONObject result = new JSONObject();
+
+        try {
+
+            JSONArray packageList = new JSONArray();
+            JSONObject package1 = new JSONObject();
+            package1.put("id", 1);
+            package1.put("name", "塔防游戏礼包");
+            package1.put("picUrl","http://www.kmgtp.org/tianyutest/package_image_sample1.png");
+            package1.put("description","好玩的");
+            package1.put("size",104857600L);
+            package1.put("luckyBeansNum",10);
+            package1.put("lotteryNum",5);
+
+
+            JSONObject package2 = new JSONObject();
+            package2.put("id", 2);
+            package2.put("name", "儿童游戏礼包");
+            package2.put("picUrl","http://www.kmgtp.org/tianyutest/package_image_sample2.png");
+            package2.put("description","仍然好玩");
+            package2.put("size",314572800L);
+            package2.put("luckyBeansNum",20);
+            package2.put("lotteryNum",10);
+
+            JSONObject package3 = new JSONObject();
+            package3.put("id", 3);
+            package3.put("name", "经典游戏礼包");
+            package3.put("picUrl","http://www.kmgtp.org/tianyutest/package_image_sample3.png");
+            package3.put("description","持续好玩");
+            package3.put("size",314572800L);
+            package3.put("luckyBeansNum",30);
+            package3.put("lotteryNum",15);
+
+
+            packageList.add(package1);
+            packageList.add(package2);
+            packageList.add(package3);
+
+            JSONObject data = new JSONObject();
+            data.put("packList", packageList);
+
+            result.put("returnCode", "000");
+            result.put("message", "请求成功");
+            result.put("data", data);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return result.toString();
+
+    }
 }

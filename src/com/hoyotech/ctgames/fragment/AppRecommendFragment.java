@@ -70,7 +70,7 @@ public class AppRecommendFragment extends Fragment implements GetDataCallback {
         gallery.setOnItemClickListener(listener);
         gallery.setOnItemSelectedListener(selected_listener);
 
-        // new GetDataTask(this, Constant.GETRECOMMENDLIST).execute("");// 获取推荐轮播的图片列表
+        //new GetDataTask(this, Constant.GETRECOMMENDLIST).execute("");// 获取推荐轮播的图片列表
         new GetDataTask(this, Constant.GETHOTAPPLIST).execute(""); // 获取热门应用列表
 
         return v;

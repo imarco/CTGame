@@ -28,7 +28,7 @@ public class PackageInfoAdapter extends BaseAdapter {
     private PackageInfo packageInfo;
 
     //构造函数
-    public PackageInfoAdapter(List<PackageInfo> data, Context context) {
+    public PackageInfoAdapter(Context context, List<PackageInfo> data) {
         this.data = data;
         this.context = context;
     }
@@ -65,7 +65,7 @@ public class PackageInfoAdapter extends BaseAdapter {
         holder.info = packageInfo;
 
         //设置事件监听响应
-        holder.btnOpen.setOnClickListener(new ButtonClickListener(packageInfo, holder));
+        holder.image.setOnClickListener(new ButtonClickListener(packageInfo, holder));
 
         return convertView;
     }
@@ -83,13 +83,13 @@ public class PackageInfoAdapter extends BaseAdapter {
         @Override
         public void onClick(View v) {
 
-            /*switch (v.getId()) {
-                case R.id.btn_open:
+            switch (v.getId()) {
+                case R.id.image_app_package:
                     // 打开礼包的详情，打开PackageDetailActivity
                     Intent intent = new Intent(context, PackageDetailActivity.class);
                     context.startActivity(intent);
                     break;
-            }*/
+            }
         }
 
     }

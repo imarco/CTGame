@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.db.bean.PackageInfo;
+import com.hoyotech.ctgames.util.CTGameImageLoader;
+import com.hoyotech.ctgames.util.StorageUtils;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,12 +22,9 @@ public class PackageInfoHolder {
     public ImageView image;              //应用图标
     public TextView tvPackageName;         // 应用名
     public TextView tvPackageSize;         // 应用安装包大小
-    public Button btnOpen;               // 应用的状态（安装或者打开）
     public TextView tvPrizeCount;        // 应用的抽奖次数
     public TextView tvLuckyBeanCount;    // 幸运豆个数
 
-    //应用的简介部分
-    public TextView tvSummary; // 应用的简介
 
     public PackageInfo info;
 
@@ -39,7 +38,6 @@ public class PackageInfoHolder {
         this.tvPackageSize = (TextView) convertView.findViewById(R.id.package_size);
         this.tvPrizeCount = (TextView) convertView.findViewById(R.id.tv_prize_count);
         this.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckypean_count);
-        this.tvSummary = (TextView) convertView.findViewById(R.id.tv_summary);
     }
 
     /**
@@ -48,12 +46,11 @@ public class PackageInfoHolder {
      */
     public void setData(Context context, PackageInfo packageInfo) {
 
-        this.image.setBackgroundDrawable(packageInfo.getImg());
+        CTGameImageLoader.loadImage(context, packageInfo.getUrl(), image);
         this.tvPackageName.setText(packageInfo.getName());
-        this.tvPackageSize.setText(String.valueOf(packageInfo.getSize()) + "M");
+        this.tvPackageSize.setText(StorageUtils.getSizeFormatted(packageInfo.getSize()));
         this.tvPrizeCount.setText(String.valueOf(packageInfo.getPrizeCount()));
         this.tvLuckyBeanCount.setText(String.valueOf(packageInfo.getLuckybeanCount()));
-        this.tvSummary.setText(packageInfo.getSummary());
 
     }
 

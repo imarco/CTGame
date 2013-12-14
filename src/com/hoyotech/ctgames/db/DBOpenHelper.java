@@ -32,7 +32,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         // 需要添加其它状态的可以自己指定
         String sql = "CREATE TABLE app(" +
                 "appId BIGINT PRIMARY KEY, " +
-                "appLogUrl TEXT, " +
+                "appLogoUrl TEXT, " +
                 "appName TEXT, " +
                 "appSize BIGINT, " +
                 "luckyBeansNum INTEGER, " +

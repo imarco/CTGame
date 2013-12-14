@@ -1,24 +1,18 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"  
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/new_bg_secondary_color">
 
-    <!-- 中间的fragment内容 -->
-    <FrameLayout
-            android:id="@+id/frame_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/new_home_margin_footer">
-    </FrameLayout>
 
     <!-- 底边栏信息 -->
     <LinearLayout
+            android:id="@+id/tab_layout_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@drawable/foot_bg"
-            android:layout_gravity="bottom">
+            android:layout_alignParentBottom="true">
 
         <RelativeLayout
                 android:id="@+id/button_app"
@@ -142,13 +136,29 @@
         </RelativeLayout>
     </LinearLayout>
 
+    <!-- 中间的fragment内容 -->
+    <FrameLayout
+            android:id="@+id/frame_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/tab_layout_bottom">
+    </FrameLayout>
+
     <!-- 大转盘入口按钮 -->
-    <ImageView
+    <RelativeLayout
             android:id="@+id/button_big_wheel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/foot_wheel"
-            android:layout_gravity="bottom|center"
-            />
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            >
+        <ImageView
+                android:id="@+id/image_big_wheel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:background="@drawable/foot_wheel"
+                />
+    </RelativeLayout>
 
-</FrameLayout>
+</RelativeLayout>

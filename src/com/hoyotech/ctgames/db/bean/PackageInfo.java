@@ -1,6 +1,10 @@
 package com.hoyotech.ctgames.db.bean;
 
-import android.graphics.drawable.Drawable;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,34 +15,64 @@ import android.graphics.drawable.Drawable;
  */
 public class PackageInfo {
 
-    private Drawable img;        // 图标
+    private int id;
+    private String url;        // 图标
     private String name;      // 名称
-    private float size;       // 大小
-    private int state;           //目前的状态，下载还是安装 数字在AppTaskManagerState中定义
-    private String summary = "";  //应用的简介
+    private long size;       // 大小
     private int prizeCount;       // 抽奖次数
     private int luckybeanCount;   // 幸运豆个数
 
-    public PackageInfo(Drawable img, String name, float size, int state, String summary, int prizeCount, int luckybeanCount) {
-        this.img = img;
-        this.name = name;
-        this.size = size;
-        this.state = state;
-        this.summary = summary;
-        this.prizeCount = prizeCount;
-        this.luckybeanCount = luckybeanCount;
+    private String summary;
+
+    public static List<PackageInfo> parseJson(JSONArray jsonArray) {
+        List<PackageInfo> packageList = new ArrayList<PackageInfo>();
+        if (null != jsonArray && jsonArray.size() > 0) {
+            for (int i = 0; i < jsonArray.size(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+
+                PackageInfo packageInfo = new PackageInfo();
+                packageInfo.setId(obj.getIntValue("id"));
+                packageInfo.setName(obj.getString("name"));
+                packageInfo.setUrl(obj.getString("picUrl"));
+                packageInfo.setSummary(obj.getString("description"));
+                packageInfo.setSize(obj.getLongValue("size"));
+                packageInfo.setLuckybeanCount(obj.getIntValue("luckyBeansNum"));
+                packageInfo.setPrizeCount(obj.getIntValue("lotteryNum"));
+
+                packageList.add(packageInfo);
+            }
+        }
+
+        return packageList;
     }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public PackageInfo() {
 
     }
 
-    public Drawable getImg() {
-        return img;
+    public String getUrl() {
+        return url;
     }
 
-    public void setImg(Drawable img) {
-        this.img = img;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getName() {
@@ -49,28 +83,12 @@ public class PackageInfo {
         this.name = name;
     }
 
-    public float getSize() {
+    public long getSize() {
         return size;
     }
 
-    public void setSize(float size) {
+    public void setSize(long size) {
         this.size = size;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
     }
 
     public int getPrizeCount() {

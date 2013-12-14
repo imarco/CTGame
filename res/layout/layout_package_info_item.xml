@@ -31,7 +31,7 @@
 
         <!-- 礼包的图片-->
         <ImageView
-                android:id="@+id/image_package"
+                android:id="@+id/image_app_package"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/package_image_sample"
@@ -44,8 +44,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/package_image_tranangle"
-                android:layout_alignTop="@id/image_package"
-                android:layout_alignLeft="@id/image_package"
+                android:layout_alignTop="@id/image_app_package"
+                android:layout_alignLeft="@id/image_app_package"
                 >
             <TextView
                     android:id="@+id/package_size"
@@ -67,8 +67,8 @@
                 android:id="@+id/layout_prize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@id/image_package"
-                android:layout_alignBottom="@id/image_package"
+                android:layout_alignRight="@id/image_app_package"
+                android:layout_alignBottom="@id/image_app_package"
                 android:orientation="horizontal"
                 android:background="@drawable/package_bg_prize_info"
                 android:paddingRight="5dp"
