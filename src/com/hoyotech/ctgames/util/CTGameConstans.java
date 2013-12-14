@@ -39,6 +39,9 @@ public class CTGameConstans {
     /* 应用根目录 */
     public static final String CTGAME_ROOT = STORAGE_ROOT + "ctgames/";
 
+    /* 下载应用目录 */
+    public static final String CTGAME_APP_DOWNLOAD_DIR = CTGAME_ROOT + "apps/";
+
     /* 应用最小需要空间 */
     public static final int STORAGE_THRESHOLD_LOW = 1024 *1024 *10;
 

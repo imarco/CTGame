@@ -126,11 +126,12 @@ public class TaskDownloadAdapter extends BaseAdapter{
                         holder.setButtonState(context, info);
                         // 通知service开始下载
                         downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
+                        downloadIntet.putExtra(TaskState.DOWNLOAD_APPID, info.getAppId());
                         downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
                         downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
                         context.startService(downloadIntet);
 
-                        // 将下载任务放入数据库备用
+                        // 下载应用信息存入数据库
                         AppDao appDao = new AppDao(context);
                         appDao.addApp(info);
                     } else if(info.getState() == TaskState.STATE_DOWNLOADING) {

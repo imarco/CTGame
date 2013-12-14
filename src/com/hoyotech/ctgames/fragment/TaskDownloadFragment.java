@@ -134,7 +134,6 @@ public class TaskDownloadFragment extends Fragment implements GetDataCallback {
                         }
                         break;
                     case TaskState.STATE_COMPLETE:
-                        // TODO 下载完成应该从下载列表中删除，加入到完成列表中
                         url = downloadIntent.getStringExtra(TaskState.DOWNLOAD_URL);
                         convertView = lv.findViewWithTag(url);
                         if (null != convertView) {

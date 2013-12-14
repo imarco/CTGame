@@ -5,11 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.db.dao.AppDao;
 import com.hoyotech.ctgames.util.CTGameConstans;
-import com.hoyotech.ctgames.util.ConfigUtils;
+import com.hoyotech.ctgames.util.Constant;
+import com.hoyotech.ctgames.util.GetDataCallback;
+import com.hoyotech.ctgames.util.GetDataTask;
 import com.hoyotech.ctgames.util.StorageUtils;
 import com.hoyotech.ctgames.util.TaskState;
 
@@ -120,10 +124,11 @@ public class DownloadManager extends Thread {
 
     /**
      * 添加下载任务
+     * @param appId 应用ID
      * @param url 下载url
      * @return
      */
-    public int addTask(String url) {
+    public int addTask(long appId, String url) {
         DownloadTask task = null;
         if (!StorageUtils.hasSDCard()) {
             return CTGameConstans.DOWNLOAD_TASK_ADD_NO_SDCARD;
@@ -139,6 +144,7 @@ public class DownloadManager extends Thread {
 
         try {
             task = newDownloadTask(url);
+            task.setAppId(appId);
             addTask(task);
         } catch (MalformedURLException e) {
             System.out.println(5 + url + getClass().getName());
@@ -152,7 +158,28 @@ public class DownloadManager extends Thread {
         DownloadTaskListener listener = new DownloadTaskListener() {
             @Override
             public void preDownload(DownloadTask task) {
-                ConfigUtils.storeURL(mContext, task.getId(), task.getUrl());
+
+                // TODO 向服务器发送开始下载请求
+                JSONObject request = new JSONObject();
+                JSONObject data = new JSONObject();
+                data.put("id", task.getAppId());
+                data.put("download", Constant.REQUEST_APP_TYPE_START_DOWNLOAD);
+                data.put("downloadSize", 0);
+                request.put("type", CTGameConstans.REQUEST_TYPE_DOWNLOADAPP);
+                request.put("sessionId", StorageUtils.getSessionID());
+                request.put("versionId", CTGameConstans.VERSION);
+                request.put("phone", StorageUtils.getUserPhoneNumber());
+                request.put("data", data);
+                new GetDataTask(new GetDataCallback() {
+                    @Override
+                    public void AddData(String data, int flag) {
+                    }
+
+                    @Override
+                    public Handler GetHandle() {
+                        return null;
+                    }
+                }, Constant.DOWNLOADAPP).execute(request.toJSONString());
             }
 
             @Override
@@ -168,11 +195,54 @@ public class DownloadManager extends Thread {
             @Override
             public void finishDownload(DownloadTask task) {
                 completeTask(task);
+
+                // TODO 向服务器发送下载完成请求
+                JSONObject request = new JSONObject();
+                JSONObject data = new JSONObject();
+                data.put("id", task.getAppId());
+                data.put("download", Constant.REQUEST_APP_TYPE_DOWNLOAD_COMPLETED);
+                data.put("downloadSize", task.getTotalSize());
+                request.put("type", CTGameConstans.REQUEST_TYPE_DOWNLOADAPP);
+                request.put("sessionId", StorageUtils.getSessionID());
+                request.put("versionId", CTGameConstans.VERSION);
+                request.put("phone", StorageUtils.getUserPhoneNumber());
+                request.put("data", data);
+                new GetDataTask(new GetDataCallback() {
+                    @Override
+                    public void AddData(String data, int flag) {
+                    }
+
+                    @Override
+                    public Handler GetHandle() {
+                        return null;
+                    }
+                }, Constant.DOWNLOADAPP).execute(request.toJSONString());
             }
 
             @Override
             public void errorDownload(DownloadTask task, Throwable error) {
                 // TODO 异常处理
+                // TODO 向服务器发送下载异常请求
+                JSONObject request = new JSONObject();
+                JSONObject data = new JSONObject();
+                data.put("id", task.getAppId());
+                data.put("download", Constant.REQUEST_APP_TYPE_DOWNLOAD_ERROR);
+                data.put("downloadSize", task.getDownloadSize());
+                request.put("type", CTGameConstans.REQUEST_TYPE_DOWNLOADAPP);
+                request.put("sessionId", StorageUtils.getSessionID());
+                request.put("versionId", CTGameConstans.VERSION);
+                request.put("phone", StorageUtils.getUserPhoneNumber());
+                request.put("data", data);
+                new GetDataTask(new GetDataCallback() {
+                    @Override
+                    public void AddData(String data, int flag) {
+                    }
+
+                    @Override
+                    public Handler GetHandle() {
+                        return null;
+                    }
+                }, Constant.DOWNLOADAPP).execute(request.toJSONString());
             }
         };
 
@@ -181,7 +251,8 @@ public class DownloadManager extends Thread {
     }
 
     private void addTask(DownloadTask task) {
-        broadcastAddTask(task.getId(), task.getUrl());
+        // 开始下载，通知UI改变，现在不需要这样做，因此注释掉
+//        broadcastAddTask(task.getAppId(), task.getUrl());
         mTaskQueue.offer(task);
         if (!this.isAlive()) {
             this.startManager();
@@ -195,7 +266,7 @@ public class DownloadManager extends Thread {
     private void broadcastAddTask(long id, String url, boolean isInterrupt) {
         Intent nofityIntent = new Intent(action);
         nofityIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
-        nofityIntent.putExtra(TaskState.DOWNLOAD_ID, id);
+        nofityIntent.putExtra(TaskState.DOWNLOAD_APPID, id);
         nofityIntent.putExtra(TaskState.DOWNLOAD_URL, url);
         nofityIntent.putExtra(TaskState.DOWNLOAD_PAUSED, isInterrupt);
         mContext.sendBroadcast(nofityIntent);
@@ -206,23 +277,27 @@ public class DownloadManager extends Thread {
         DownloadTask task;
         for (int i = 0; i < mDownloadingTasks.size(); i++) {
             task = mDownloadingTasks.get(i);
-            broadcastAddTask(task.getId(), task.getUrl(), task.isInterrupt());
+            broadcastAddTask(task.getAppId(), task.getUrl(), task.isInterrupt());
         }
         for (int i = 0; i < mTaskQueue.size(); i++) {
             task = mTaskQueue.get(i);
-            broadcastAddTask(task.getId(), task.getUrl());
+            broadcastAddTask(task.getAppId(), task.getUrl());
         }
         for (int i = 0; i < mPausingTasks.size(); i++) {
             task = mPausingTasks.get(i);
-            broadcastAddTask(task.getId(), task.getUrl());
+            broadcastAddTask(task.getAppId(), task.getUrl());
         }
     }
 
+    /**
+     * 下载service重新启动时，检查上次未完成下载
+     */
     public void checkUncompleteTasks() {
-        List<String> urlList = ConfigUtils.getURLArray(mContext);
-        if (urlList != null && urlList.size() > 0) {
-            for (int i = 0; i < urlList.size(); i++) {
-                addTask(urlList.get(i));
+        AppDao appDao = new AppDao(mContext);
+        List<AppInfo> downloadingTasks = appDao.queryAppsByState(TaskState.STATE_DOWNLOADING);
+        if (downloadingTasks != null && downloadingTasks.size() > 0) {
+            for (AppInfo app : downloadingTasks) {
+                addTask(app.getAppId(), app.getAppUrl());
             }
         }
     }
@@ -400,7 +475,6 @@ public class DownloadManager extends Thread {
      */
     public synchronized void completeTask(DownloadTask task) {
         if (mDownloadingTasks.contains(task)) {
-            ConfigUtils.clearURL(mContext, task.getId());
             mDownloadingTasks.remove(task);
 
             // 更新任务状态为完成
@@ -412,7 +486,7 @@ public class DownloadManager extends Thread {
 
             Intent nofityIntent = new Intent(action);
             nofityIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_COMPLETE);
-            nofityIntent.putExtra(TaskState.DOWNLOAD_ID, task.getId());
+            nofityIntent.putExtra(TaskState.DOWNLOAD_APPID, task.getAppId());
             nofityIntent.putExtra(TaskState.DOWNLOAD_URL, task.getUrl());
             mContext.sendBroadcast(nofityIntent);
         }

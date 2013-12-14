@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.db.bean.AppInfo;
+import com.hoyotech.ctgames.db.dao.AppDao;
 import com.hoyotech.ctgames.util.CTGameImageLoader;
 import com.hoyotech.ctgames.util.TaskState;
 
@@ -51,8 +52,15 @@ public class AppInfoHolder {
         this.btnOptions.setText(TaskState.getTaskStateMap().get(appInfo.getState()));
         this.tvPrizeCount.setText(String.valueOf(appInfo.getLotteryNum()));
         this.tvLuckyBeanCount.setText(String.valueOf(appInfo.getLuckyBeansNum()));
-        TaskState.setButtonView(appInfo.getState(), context, btnOptions);
 
+        // 应用已经开始下载，显示当前状态
+        AppDao appDao = new AppDao(context);
+        AppInfo app = appDao.queryAppById(appInfo.getAppId());
+        if (null == app) {
+            TaskState.setButtonView(appInfo.getState(), context, btnOptions);
+        } else {
+            TaskState.setButtonView(app.getState(), context, btnOptions);
+        }
     }
 
     public void setButtonState(Context context, AppInfo appInfo) {

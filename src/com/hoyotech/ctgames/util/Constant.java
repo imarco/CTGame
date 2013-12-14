@@ -26,4 +26,12 @@ public class Constant {
 	public static final int FEEDBACK 			= 31; // 意见反馈
 	public static final int REPLY 				= 32; // 获取反馈回复的列表
 
+    /* 安装应用请求类型，0表示下载，1表示下载中，2表示下载完成，3表示下载错误，4表示安装，5表示打开，6表示领取奖励 */
+    public static final int REQUEST_APP_TYPE_START_DOWNLOAD = 0;
+    public static final int REQUEST_APP_TYPE_DOWNLOADING = 1;
+    public static final int REQUEST_APP_TYPE_DOWNLOAD_COMPLETED = 2;
+    public static final int REQUEST_APP_TYPE_DOWNLOAD_ERROR = 3;
+    public static final int REQUEST_APP_TYPE_INSTALL = 4;
+    public static final int REQUEST_APP_TYPE_OPEN = 5;
+    public static final int REQUEST_APP_TYPE_GET_PRIZE = 6;
 }
