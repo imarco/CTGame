@@ -75,6 +75,7 @@ public class TaskState {
         map.put(STATE_DOWNLOAD_ALL, TEXT_DOWNLOAD_ALL);
         map.put(STATE_PAUSE_ALL, TEXT_PAUSE_ALL);
         map.put(STATE_CONTINUE_ALL, TEXT_CONTINUE_ALL);
+        map.put(STATE_TASK_COMPLETE, TEXT_GET_PRIZE);
     }
 
     /**
@@ -88,26 +89,34 @@ public class TaskState {
             case STATE_PREPARE:
             case STATE_DOWNLOADING:
             case STATE_PAUSED:
-            case STATE_INSTALLED:
             case STATE_OPENED:
             case STATE_DOWNLOAD_ALL:
             case STATE_PAUSE_ALL:
             case STATE_CONTINUE_ALL:
                 button.setText(map.get(stateCode));
-                button.setTextColor(context.getResources().getColor(R.color.tab_text_normal));
-                button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.button_small_blue));
+                button.setTextColor(context.getResources().getColor(R.color.new_text_grey_color));
+                button.setBackground(context.getResources().getDrawable(R.drawable.button_green));
                 break;
             case STATE_COMPLETE:
                 button.setText(map.get(stateCode));
-                button.setTextColor(context.getResources().getColor(R.color.tab_text_normal));
-                button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.button_small_green));
+                button.setTextColor(context.getResources().getColor(R.color.new_text_grey_color));
+                button.setBackground(context.getResources().getDrawable(R.drawable.button_green));
                 break;
             case STATE_INSTALLING:
                 button.setText(map.get(stateCode));
-                button.setTextColor(context.getResources().getColor(R.color.tab_text));
-                button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.button_small_white));
+                button.setTextColor(context.getResources().getColor(R.color.new_text_grey_color));
+                button.setBackground(context.getResources().getDrawable(R.drawable.button_grey));
                 button.setEnabled(false);    // 安装中不能点击button
                 break;
+            case STATE_TASK_COMPLETE:
+                button.setText(map.get(stateCode));
+                button.setTextColor(context.getResources().getColor(R.color.new_text_grey_color));
+                button.setBackground(context.getResources().getDrawable(R.drawable.button_orange));
+                break;
+            case STATE_INSTALLED:
+                button.setText(map.get(stateCode));
+                button.setTextColor(context.getResources().getColor(R.color.new_text_grey_color));
+                button.setBackground(context.getResources().getDrawable(R.drawable.button_green));
             default:
                 break;
         }

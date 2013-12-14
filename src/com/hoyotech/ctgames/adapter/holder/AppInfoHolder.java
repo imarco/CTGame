@@ -48,7 +48,7 @@ public class AppInfoHolder {
         this.appVersion = (TextView) convertView.findViewById(R.id.app_version);
         this.appPackageSize = (TextView) convertView.findViewById(R.id.app_package_size);
         this.tvPrizeCount = (TextView) convertView.findViewById(R.id.tv_prize_count);
-        this.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckybean_count);
+        this.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckypean_count);
 
         this.layoutDownloadEnabled = (LinearLayout) convertView.findViewById(R.id.layout_download_button_enabled);
         this.layoutDownloadDisabled = (LinearLayout) convertView.findViewById(R.id.layout_download_button_disabled);
@@ -56,7 +56,7 @@ public class AppInfoHolder {
         this.layoutInstallDisabled = (LinearLayout) convertView.findViewById(R.id.layout_install_button_disabled);
 
         this.tvPrizeCount1 = (TextView) convertView.findViewById(R.id.tv_prize_count1);
-        this.tvLuckyBeanCount1 = (TextView) convertView.findViewById(R.id.tv_luckybean_count1);
+        this.tvLuckyBeanCount1 = (TextView) convertView.findViewById(R.id.tv_luckypean_count1);
 
         this.tvDownload = (TextView) convertView.findViewById(R.id.tv_download);
         this.tvInstall = (TextView) convertView.findViewById(R.id.tv_install);

@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:orientation="vertical" >
+              android:orientation="vertical"
+              android:background="@color/new_bg_color">
 
     <ListView
             android:id="@+id/list_package_info"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
-            android:dividerHeight="1dip"
-            android:divider="@color/task_download_line_color"
+            android:divider="@android:color/holo_red_light"
             />
 
 </LinearLayout>
