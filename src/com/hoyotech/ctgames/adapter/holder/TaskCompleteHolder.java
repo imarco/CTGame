@@ -37,7 +37,7 @@ public class TaskCompleteHolder {
         this.appPackageSize = (TextView) convertView.findViewById(R.id.tv_app_size);
         this.btnOptions = (Button) convertView.findViewById(R.id.btn_app_options);
         this.tvPrizeCount = (TextView) convertView.findViewById(R.id.tv_prize_count);
-        this.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckybean_count);
+        this.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckypean_count);
         this.tvSummary = (TextView) convertView.findViewById(R.id.tv_summary);
     }
 

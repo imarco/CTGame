@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.util.CTGameImageLoader;
+import com.hoyotech.ctgames.util.StorageUtils;
 import com.hoyotech.ctgames.util.TaskState;
 
 /**
@@ -41,7 +42,7 @@ public class TaskInstallHolder {
         this.appPackageSize = (TextView) convertView.findViewById(R.id.tv_app_size);
         this.btnOptions = (Button) convertView.findViewById(R.id.btn_app_options);
         this.tvPrizeCount = (TextView) convertView.findViewById(R.id.tv_prize_count);
-        this.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckybean_count);
+        this.tvLuckyBeanCount = (TextView) convertView.findViewById(R.id.tv_luckypean_count);
         this.tvSummary = (TextView) convertView.findViewById(R.id.tv_summary);
     }
 
@@ -53,7 +54,7 @@ public class TaskInstallHolder {
         CTGameImageLoader.loadImage(context, appInfo.getAppLogoUrl(), this.appImageHeader);
         this.appName.setText(appInfo.getAppName());
         this.appVersion.setText(appInfo.getVersion());
-        this.appPackageSize.setText(String.valueOf(appInfo.getAppSize())+"M");
+        this.appPackageSize.setText(StorageUtils.getSizeFormatted(appInfo.getAppSize()));
         this.btnOptions.setText(TaskState.getTaskStateMap().get(appInfo.getState()));
         this.tvPrizeCount.setText(String.valueOf(appInfo.getLotteryNum()));
         this.tvLuckyBeanCount.setText(String.valueOf(appInfo.getLuckyBeansNum()));

@@ -28,7 +28,7 @@
 
     <!-- 幸运豆 -->
     <TextView
-            android:id="@+id/tv_luckpean_count"
+            android:id="@+id/tv_luckypean_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

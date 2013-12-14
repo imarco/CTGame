@@ -192,7 +192,7 @@
                         android:textSize="@dimen/new_app_info_button_text_size"
                         android:layout_weight="1"/>
                 <TextView
-                        android:id="@+id/tv_luckybean_count"
+                        android:id="@+id/tv_luckypean_count"
                         android:text="获1幸运豆"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -231,7 +231,7 @@
                         android:textSize="@dimen/new_app_info_button_text_size"
                         android:layout_weight="1"/>
                 <TextView
-                        android:id="@+id/tv_luckybean_count1"
+                        android:id="@+id/tv_luckypean_count1"
                         android:text="获1幸运豆"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"

@@ -93,17 +93,9 @@ public class TaskState {
             case STATE_DOWNLOAD_ALL:
             case STATE_PAUSE_ALL:
             case STATE_CONTINUE_ALL:
-                System.out.println("bottom: " + button.getPaddingBottom());
-                System.out.println("top: " + button.getPaddingTop());
-                System.out.println("left: " + button.getPaddingLeft());
-                System.out.println("right: " + button.getPaddingRight());
                 button.setText(map.get(stateCode));
                 button.setTextColor(context.getResources().getColor(R.color.new_text_grey_color));
                 button.setBackground(context.getResources().getDrawable(R.drawable.button_green));
-                System.out.println("bottom: " + button.getPaddingBottom());
-                System.out.println("top: " + button.getPaddingTop());
-                System.out.println("left: " + button.getPaddingLeft());
-                System.out.println("right: " + button.getPaddingRight());
                 break;
             case STATE_COMPLETE:
                 button.setText(map.get(stateCode));
