@@ -4,9 +4,12 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="激活"></TextView>
+    <ListView
+        android:id="@+id/list_task_complete"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:dividerHeight="1dip"
+        android:divider="#CED3D6"
+        />
 
 </LinearLayout>

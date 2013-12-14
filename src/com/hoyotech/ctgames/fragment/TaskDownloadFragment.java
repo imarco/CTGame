@@ -61,6 +61,7 @@ public class TaskDownloadFragment extends Fragment implements GetDataCallback {
         getActivity().registerReceiver(mReceiver, filter);
 
         // 获取正在下载的应用列表
+        apps.clear();
         AppDao appDao = new AppDao(getActivity());
         List<AppInfo> downloading = appDao.queryAppsByState(TaskState.STATE_DOWNLOADING);
         List<AppInfo> paused = appDao.queryAppsByState(TaskState.STATE_PAUSED);
