@@ -99,6 +99,7 @@
                     android:visibility="visible"
                     android:background="@drawable/button_orange">
                 <TextView
+                        android:id="@+id/tv_download1"
                         android:text="下载"
                         android:layout_width="fill_parent"
                         android:gravity="center_horizontal"
@@ -220,6 +221,7 @@
                     android:alpha="0"
                     android:onClick="onClick">
                 <TextView
+                        android:id="@+id/tv_install1"
                         android:text="安装打开"
                         android:layout_width="fill_parent"
                         android:gravity="center_horizontal"
