@@ -38,7 +38,6 @@ public class TaskInstallFragment extends Fragment  {
     private static final String KEY_CONTENT = "TaskInstallFragment:Content";
     private ListView lv;
     private Bundle bundle;
-    private Handler handler = new Handler();
     private List<AppInfo> apps = new ArrayList<AppInfo>();
     private TaskInstallAdapter adapter;
     private InstallReceiver receiver;
@@ -65,9 +64,11 @@ public class TaskInstallFragment extends Fragment  {
         View v = inflater.inflate(R.layout.fragment_task_install, container, false);
         lv = (ListView) v.findViewById(R.id.list_task_install);
 
-        // 获取已下载应用信息
+        // 获取已下载且任务未完成的应用信息
         AppDao appDao = new AppDao(getActivity());
-        apps = appDao.queryAppsByState(TaskState.STATE_COMPLETE);
+        apps.addAll(appDao.queryAppsByState(TaskState.STATE_COMPLETE));
+        apps.addAll(appDao.queryAppsByState(TaskState.STATE_INSTALLED));
+        apps.addAll(appDao.queryAppsByState(TaskState.STATE_OPENED));
         adapter = new TaskInstallAdapter(getActivity(), apps);
         lv.setAdapter(adapter);
 
