@@ -24,6 +24,9 @@ public class TaskState {
     public static final String DOWNLOAD_APPID = "id";
     public static final String DOWNLOAD_PAUSED = "paused";
 
+    public static final int APP_DOWNLOADED_NEVER = 0;
+    public static final int APP_DOWNLOADED_HAS = 1;
+
     public static final int STATE_START = 0;            // 启动下载service
     public static final int STATE_PREPARE = 1;          // 应用未下载，对应文字为下载
     public static final int STATE_DOWNLOADING = 2;      // 下载中，对应文字暂停   //////在数据库中有

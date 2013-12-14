@@ -349,7 +349,6 @@ public class DownloadManager extends Thread {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -482,6 +481,7 @@ public class DownloadManager extends Thread {
             AppInfo info = appDao.queryAppByUrl(task.getUrl());
             ContentValues values = new ContentValues();
             values.put(AppInfo.APPINFO_STATE, TaskState.STATE_COMPLETE);
+            values.put(AppInfo.APPINFO_HASDOWNLOADED, TaskState.APP_DOWNLOADED_HAS);
             appDao.updateApp(values, AppInfo.APPINFO_APPURL + "=?", new String[] {info.getAppUrl()});
 
             Intent nofityIntent = new Intent(action);

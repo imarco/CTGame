@@ -136,7 +136,7 @@ public class TaskInstallAdapter extends BaseAdapter {
                             // 数据库更新应用状态
                             AppDao appDao = new AppDao(context);
                             ContentValues values = new ContentValues();
-                            values.put(AppInfo.APPINFO_STATE, TaskState.STATE_INSTALLING);
+                            values.put(AppInfo.APPINFO_STATE, TaskState.STATE_INSTALLED);
                             appDao.updateApp(values, AppInfo.APPINFO_APPURL + "=?", new String[] {info.getAppUrl()});
 
                             // TODO 向服务器发送安装应用请求

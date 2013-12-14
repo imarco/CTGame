@@ -31,6 +31,7 @@ public class AppInfo implements Serializable {
     public static final transient String APPINFO_PROGRESS = "progress";
     public static final transient String APPINFO_RATE = "rate";
     public static final transient String APPINFO_STATE = "state";
+    public static final transient String APPINFO_HASDOWNLOADED = "hasDownloaded";
 
     // 应用基本信息
     private long appId;             //应用id
