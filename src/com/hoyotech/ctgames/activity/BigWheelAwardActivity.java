@@ -1,20 +1,15 @@
 package com.hoyotech.ctgames.activity;
 
 import android.app.Activity;
-import android.inputmethodservice.Keyboard;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.viewdef.DynamicImage;
 import com.hoyotech.ctgames.viewdef.LotteryView;
@@ -75,7 +70,7 @@ public class BigWheelAwardActivity extends Activity implements RotateListener, V
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.actity_layout_big_wheel_award);
+        setContentView(R.layout.fragment_big_wheel);
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 

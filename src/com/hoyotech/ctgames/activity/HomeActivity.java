@@ -13,10 +13,7 @@ import android.view.View.OnClickListener;
 
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.db.DBOpenHelper;
-import com.hoyotech.ctgames.fragment.AppFragment;
-import com.hoyotech.ctgames.fragment.AwardFragment;
-import com.hoyotech.ctgames.fragment.VideoFragment;
-import com.hoyotech.ctgames.fragment.ZoneFragment;
+import com.hoyotech.ctgames.fragment.*;
 import com.hoyotech.ctgames.service.CTGameReceiver;
 import com.hoyotech.ctgames.service.DownloadService;
 import com.hoyotech.ctgames.util.TaskState;
@@ -30,19 +27,20 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private VideoFragment fragmentVideo;
     private AwardFragment fragmentAward;
     private ZoneFragment fragmentZone;
+    private BigWheelFragment fragmentBigWheel;
 
     // 切换Fragment
     private Fragment from;
     private Fragment to;
 
     // 定义布局对象
-    private RelativeLayout appFg, videoFg, awardFg, zoneFg;
+    private RelativeLayout appFg, videoFg, awardFg, zoneFg, wheelFg;
 
     // 定义图片组件对象
-    private ImageView appIv, videoIv, awardIv, zoneIv;
+    private ImageView appIv, videoIv, awardIv, zoneIv, wheelIv;
 
     // 定义文字组件对象
-    private TextView appTv, videoTv, awardTv, zoneTv;
+    private TextView appTv, videoTv, awardTv, zoneTv, wheelTv;
 
     // 定义布局组件和图片组件数组，便于管理
     private ImageView[] imageViews;
@@ -79,6 +77,10 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         initView();
         initData();
         startService();
+
+        // 默认出来在大转盘
+        switchToBigWheelFragment();
+
     }
 
     /**
@@ -90,6 +92,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         videoFg = (RelativeLayout) findViewById(R.id.button_video);
         awardFg = (RelativeLayout) findViewById(R.id.button_award);
         zoneFg = (RelativeLayout) findViewById(R.id.button_zone);
+        wheelFg = (RelativeLayout) findViewById(R.id.button_big_wheel);
 
         // 实例化图片组件对象
         appIv = (ImageView) findViewById(R.id.image_app);
@@ -104,10 +107,10 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         zoneTv = (TextView) findViewById(R.id.text_zone);
 
         // 实例化按钮图片组件
-        bigWheelIv = (ImageView) findViewById(R.id.button_big_wheel);
+        bigWheelIv = (ImageView) findViewById(R.id.image_big_wheel);
 
         // 放入数组，便于管理
-        relativeLayouts = new RelativeLayout[] {appFg, videoFg, awardFg, zoneFg};
+        relativeLayouts = new RelativeLayout[] {appFg, videoFg, awardFg, zoneFg, wheelFg};
         imageViews = new ImageView[] {appIv, videoIv, awardIv, zoneIv};
         textViews = new TextView[] {appTv, videoTv, awardTv, zoneTv};
     }
@@ -148,7 +151,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
                 clickZoneButton();
                 break;
             // 点击中间按钮
-            case R.id.button_big_wheel:
+            case R.id.image_big_wheel:
                 clickBigWheelButton();
                 break;
             // 点击actionbar home按钮
@@ -260,11 +263,23 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private void clickBigWheelButton() {
         bigWheelIv.setSelected(true);
 
-        Intent intent = new Intent();
-        intent.setClass(HomeActivity.this, BigWheelAwardActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.anim_activity_enter, R.anim.anim_activity_normal_exit);
+        // 实例化Fragment页面
+        fragmentBigWheel = new BigWheelFragment();
+        from = to;
+        to = fragmentBigWheel;
 
+        // 切换Fragm
+        switchContent(from, to);
+
+        setItemSelected(-1);
+
+    }
+
+    /**
+     * 切换到大转盘
+     */
+    private void switchToBigWheelFragment() {
+        clickBigWheelButton();
     }
 
     /**

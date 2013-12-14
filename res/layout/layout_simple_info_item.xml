@@ -6,7 +6,9 @@
               android:orientation="vertical"
               android:gravity="top"
               android:paddingTop="4dp"
-              android:paddingLeft="5dp">
+              android:paddingLeft="5dp"
+              android:paddingRight="5dp"
+              android:paddingBottom="5dp">
 
     <RelativeLayout
             android:layout_width="wrap_content"
@@ -68,154 +70,180 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom|left"
             >
-
-        <!-- 由于按钮的文字采用了两行，因此静态布局智能采用这样的形式，当disable时，设置下面的visibility为gone-->
-        <!-- 获奖机会文字每次都要设置两个textview -->
-        <LinearLayout
-                android:id="@+id/left_button_enabled_layout"
+        <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="2dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="onClick"
-                android:visibility="visible"
-                android:background="@drawable/button_orange">
-            <TextView
-                    android:text="下载"
-                    android:layout_width="fill_parent"
-                    android:gravity="center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/new_text_grey_color"
-                    android:textSize="@dimen/new_app_info_button_text_size"
-                    android:layout_weight="1"/>
-            <TextView
-                    android:id="@+id/tv_prize_count"
-                    android:text="获1次机会"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/new_text_grey_color"
-                    android:textSize="@dimen/new_app_info_button_text_size"
-                    android:layout_weight="1"/>
-        </LinearLayout>
+                >
 
-        <!-- 由于按钮的文字采用了两行，因此静态布局智能采用这样的形式，当disable时，设置alpha为0-->
-        <!-- 获奖机会文字每次都要设置两个textview -->
-        <LinearLayout
-                android:id="@+id/left_button_disabled_layout"
+            <!-- 由于按钮的文字采用了两行，因此静态布局智能采用这样的形式，当disable时，设置下面的visibility为gone-->
+            <!-- 获奖机会文字每次都要设置两个textview -->
+            <LinearLayout
+                    android:id="@+id/layout_download_button_enabled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="2dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="onClick"
+                    android:visibility="visible"
+                    android:background="@drawable/button_orange">
+                <TextView
+                        android:text="下载"
+                        android:layout_width="fill_parent"
+                        android:gravity="center_horizontal"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/new_text_grey_color"
+                        android:textSize="@dimen/new_app_info_button_text_size"
+                        android:layout_weight="1"/>
+                <TextView
+                        android:id="@+id/tv_prize_count"
+                        android:text="获1次机会"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/new_text_grey_color"
+                        android:textSize="@dimen/new_app_info_button_prize_text_size"
+                        android:layout_weight="1"/>
+            </LinearLayout>
+
+            <!-- 由于按钮的文字采用了两行，因此静态布局智能采用这样的形式，当disable时，设置alpha为0-->
+            <!-- 获奖机会文字每次都要设置两个textview -->
+            <LinearLayout
+                    android:id="@+id/layout_download_button_disabled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/layout_download_button_enabled"
+                    android:orientation="vertical"
+                    android:paddingTop="2dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="4dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:alpha="0"
+                    android:background="@drawable/button_grey">
+                <TextView
+                        android:id="@+id/tv_download"
+                        android:text="下载"
+                        android:layout_width="fill_parent"
+                        android:gravity="center_horizontal"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/new_text_grey_color"
+                        android:textSize="@dimen/new_app_info_button_text_size"
+                        android:layout_weight="1"/>
+                <TextView
+                        android:id="@+id/tv_prize_count1"
+                        android:text="获1次机会"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/new_text_grey_color"
+                        android:textSize="@dimen/new_app_info_button_text_size"
+                        android:layout_weight="1"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="2dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="4dp"
-                android:clickable="false"
-                android:focusable="false"
-                android:alpha="0"
-                android:layout_alignStart="@id/left_button_enabled_layout"
-                android:background="@drawable/button_grey">
-            <TextView
-                    android:text="下载"
-                    android:layout_width="fill_parent"
-                    android:gravity="center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/new_text_grey_color"
-                    android:textSize="@dimen/new_app_info_button_text_size"
-                    android:layout_weight="1"/>
-            <TextView
-                    android:id="@+id/tv_prize_count1"
-                    android:text="获1次机会"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/new_text_grey_color"
-                    android:textSize="@dimen/new_app_info_button_text_size"
-                    android:layout_weight="1"/>
-        </LinearLayout>
+                >
 
-        <!-- 由于按钮的文字采用了两行，因此静态布局智能采用这样的形式，当disable时，设置下面的visibility为gone-->
-        <!-- 幸运豆文字每次都要设置两个textview -->
-        <LinearLayout
-                android:id="@+id/right_button_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_toRightOf="@id/left_button_disabled_layout"
-                android:paddingTop="2dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="4dp"
-                android:background="@drawable/button_green"
-                android:clickable="true"
-                android:focusable="true"
-                android:visibility="visible"
-                android:onClick="onClick">
-            <TextView
-                    android:text="安装打开"
-                    android:layout_width="fill_parent"
-                    android:gravity="center_horizontal"
+            <!-- 由于按钮的文字采用了两行，因此静态布局智能采用这样的形式，当disable时，设置下面的visibility为gone-->
+            <!-- 幸运豆文字每次都要设置两个textview -->
+            <LinearLayout
+                    android:id="@+id/layout_install_button_enabled"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/new_text_grey_color"
-                    android:textSize="@dimen/new_app_info_button_text_size"
-                    android:layout_weight="1"/>
-            <TextView
-                    android:id="@+id/tv_luckybean_count"
-                    android:text="获1幸运豆"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/new_text_grey_color"
-                    android:textSize="@dimen/new_app_info_button_text_size"
-                    android:layout_weight="1"/>
-        </LinearLayout>
+                    android:orientation="vertical"
+                    android:paddingTop="2dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="4dp"
+                    android:background="@drawable/button_green"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="visible"
+                    android:onClick="onClick">
+                <TextView
+                        android:id="@+id/tv_install"
+                        android:text="安装打开"
+                        android:layout_width="fill_parent"
+                        android:gravity="center_horizontal"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/new_text_grey_color"
+                        android:textSize="@dimen/new_app_info_button_text_size"
+                        android:layout_weight="1"/>
+                <TextView
+                        android:id="@+id/tv_luckybean_count"
+                        android:text="获1幸运豆"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/new_text_grey_color"
+                        android:textSize="@dimen/new_app_info_button_prize_text_size"
+                        android:layout_weight="1"/>
+            </LinearLayout>
 
-        <!-- 由于按钮的文字采用了两行，因此静态布局智能采用这样的形式，当disable时，设置alpha为0-->
-        <!-- 幸运豆文字每次都要设置两个textview -->
-        <LinearLayout
-                android:id="@+id/right_button_enabled_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_toRightOf="@id/left_button_disabled_layout"
-                android:paddingTop="2dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="4dp"
-                android:background="@drawable/button_grey"
-                android:clickable="false"
-                android:focusable="false"
-                android:alpha="0"
-                android:onClick="onClick">
-            <TextView
-                    android:text="安装打开"
-                    android:layout_width="fill_parent"
-                    android:gravity="center_horizontal"
+            <!-- 由于按钮的文字采用了两行，因此静态布局智能采用这样的形式，当disable时，设置alpha为0-->
+            <!-- 幸运豆文字每次都要设置两个textview -->
+            <LinearLayout
+                    android:id="@+id/layout_install_button_disabled"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/new_text_grey_color"
-                    android:textSize="@dimen/new_app_info_button_text_size"
-                    android:layout_weight="1"/>
-            <TextView
-                    android:id="@+id/tv_luckybean_count1"
-                    android:text="获1幸运豆"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/new_text_grey_color"
-                    android:textSize="@dimen/new_app_info_button_text_size"
-                    android:layout_weight="1"/>
-        </LinearLayout>
+                    android:layout_alignStart="@id/layout_install_button_enabled"
+                    android:orientation="vertical"
+                    android:paddingTop="2dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="4dp"
+                    android:background="@drawable/button_grey"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:alpha="0"
+                    android:onClick="onClick">
+                <TextView
+                        android:text="安装打开"
+                        android:layout_width="fill_parent"
+                        android:gravity="center_horizontal"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/new_text_grey_color"
+                        android:textSize="@dimen/new_app_info_button_text_size"
+                        android:layout_weight="1"/>
+                <TextView
+                        android:id="@+id/tv_luckybean_count1"
+                        android:text="获1幸运豆"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/new_text_grey_color"
+                        android:textSize="@dimen/new_app_info_button_prize_text_size"
+                        android:layout_weight="1"/>
+            </LinearLayout>
 
-    </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

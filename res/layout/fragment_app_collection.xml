@@ -4,11 +4,14 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:shadowColor="#ff0000ff"
+    android:background="@color/new_bg_color"
     android:shadowDx="5"
     android:shadowDy="5"
     android:shadowRadius="10">
     <ListView
             android:id="@+id/list_package_info"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:dividerHeight="1dip"

@@ -55,8 +55,8 @@ public class AppInfoAdapter extends BaseAdapter {
         holder.info = appInfo;
 
         //设置事件监听响应
-        holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
-        holder.btnAppBonus.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
+        holder.layoutDownloadEnabled.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
+        holder.layoutInstallEnabled.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
 
         return convertView;
     }
@@ -82,13 +82,12 @@ public class AppInfoAdapter extends BaseAdapter {
             Intent downloadIntet = new Intent(DownloadService.DOWNLOAD_SERVICE_NAME);
 
             switch (v.getId()) {
-                case R.id.btn_options:
+                case R.id.layout_download_button_enabled:
                     // 补充响应
                     // 根据按钮的状态决定操作
                     // 点击下载-暂停 点击暂停-继续 点击继续-暂停
                     if(info.getState() == TaskState.STATE_PREPARE) {
                         info.setState(TaskState.STATE_DOWNLOADING);
-                        holder.setButtonState(context, info);
                         // 通知service开始下载
                         downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
                         downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
@@ -100,7 +99,6 @@ public class AppInfoAdapter extends BaseAdapter {
                         appDao.addApp(info);
                     } else if(info.getState() == TaskState.STATE_DOWNLOADING) {
                         info.setState(TaskState.STATE_PAUSED);
-                        holder.setButtonState(context, info);
                         // 通知service暂停下载
                         downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_PAUSED);
                         downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
@@ -108,13 +106,14 @@ public class AppInfoAdapter extends BaseAdapter {
                         context.startService(downloadIntet);
                     } else if(info.getState() == TaskState.STATE_PAUSED) {
                         info.setState(TaskState.STATE_DOWNLOADING);
-                        holder.setButtonState(context, info);
                         // 通知service继续下载
                         downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_CONTINUE);
                         downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
                         downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
                         context.startService(downloadIntet);
                     }
+                    break;
+                case R.id.layout_install_button_enabled:
                     break;
                 default:
                     // 补充默认情况
