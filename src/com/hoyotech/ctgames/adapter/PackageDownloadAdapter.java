@@ -31,10 +31,9 @@ public class PackageDownloadAdapter extends BaseAdapter{
     private List<Integer> cbClick = new ArrayList<Integer>();
 
     //构造函数
-    public PackageDownloadAdapter(ArrayList<AppInfo> data, Context context) {
+    public PackageDownloadAdapter(List<AppInfo> data, Context context) {
         this.data = data;
         this.context = context;
-
         //在这个地方对点击的进行初始化
         for (int i = 0; i < data.size(); i ++){
             cbClick.add(i, 0);

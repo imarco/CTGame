@@ -59,6 +59,7 @@ public class PackageDownloadHolder {
 
         CTGameImageLoader.loadImage(context, appInfo.getAppLogoUrl(), this.appImageHeader);// app logo
         this.appName.setText(appInfo.getAppName());         // app name
+        this.tvSummary.setText(appInfo.getAppDesc());
         this.appPackageSize.setText(String.valueOf(appInfo.getAppSize())+"M");    // app size
 
         //三种状态，选择状态，下载状态，安装状态

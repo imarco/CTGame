@@ -1,5 +1,6 @@
 package com.hoyotech.ctgames.service;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import java.util.Queue;
 /**
  * Created by GGCoke on 13-12-6.
  */
+@SuppressLint("NewApi")
 public class DownloadManager extends Thread {
     private static final String TAG = DownloadManager.class.getSimpleName();
     private Context mContext;

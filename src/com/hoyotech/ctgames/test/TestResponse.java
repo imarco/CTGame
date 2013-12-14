@@ -48,6 +48,163 @@ public class TestResponse {
 				"}"+
 			"}";
 
+public static String GETAPPLISTBYPACK = "{" + "returnCode: '000', " + // 返回代码
+		"message: '请求成功'," + // 返回信息描述
+		"data: {" + 
+		"id: '1'," + // 大礼包ID
+		"name: 'aaa', " + // 礼包名称
+		"picUrl: 'http://58.53.197.136/sp/image/t1.png', " + // 大礼包图片地址
+		"size: '15', " + // 礼包大小
+		"luckyBeansNum: '1', " + // 下载可获得幸运豆
+		"lotteryNum: '1', " + // 下载可获得抽奖次数
+		"description: '9999999999'," + // 大礼包描述
+		
+		"appList: " + "[" + "{" +
+		
+		"id: '0', " + // id
+		"logoUrl: 'http://58.53.197.136/sp/image/t3.png', " + // 应用logo地址
+		"name: '3333', " + // 应用名称
+		"size: '10'," + // 应用大小
+		"luckyBeansNum: '1', " + // 下载可获幸运豆
+		"lotteryNum: '1' ," + // 下载可获抽奖次数
+		"description: 'ffffff' ," + // 应用描述
+		"appUrl: '' ," + // 应用下载地址
+		"version: '1', " + // 应用版本信息
+		"MD5: '', " + // md5数值
+		"adUrl: '', " + // 最后一张截图的广告
+		"picUrls: []" + // 截图地址
+
+		"}," + "{" + 
+		"id: '0', " + // id
+		"logoUrl: 'http://58.53.197.136/sp/image/t3.png', " + // 应用logo地址
+		"name: '3333', " + // 应用名称
+		"size: '10'," + // 应用大小
+		"luckyBeansNum: '1', " + // 下载可获幸运豆
+		"lotteryNum: '1' ," + // 下载可获抽奖次数
+		"description: 'ffffff' ," + // 应用描述
+		"appUrl: '' ," + // 应用下载地址
+		"version: '1', " + // 应用版本信息
+		"MD5: '', " + // md5数值
+		"adUrl: '', " + // 最后一张截图的广告
+		"picUrls: []" + // 截图地址
+
+		"}," +
+
+		"{" + 
+		"id: '0', " + // id
+		"logoUrl: 'http://58.53.197.136/sp/image/t3.png', " + // 应用logo地址
+		"name: '3333', " + // 应用名称
+		"size: '10'," + // 应用大小
+		"luckyBeansNum: '1', " + // 下载可获幸运豆
+		"lotteryNum: '1' ," + // 下载可获抽奖次数
+		"description: 'ffffff' ," + // 应用描述
+		"appUrl: '' ," + // 应用下载地址
+		"version: '1', " + // 应用版本信息
+		"MD5: '', " + // md5数值
+		"adUrl: '', " + // 最后一张截图的广告
+		"picUrls: []" + // 截图地址
+
+		"}," + "{" + 
+		"id: '0', " + // id
+		"logoUrl: 'http://58.53.197.136/sp/image/t3.png', " + // 应用logo地址
+		"name: '3333', " + // 应用名称
+		"size: '10'," + // 应用大小
+		"luckyBeansNum: '1', " + // 下载可获幸运豆
+		"lotteryNum: '1' ," + // 下载可获抽奖次数
+		"description: 'ffffff' ," + // 应用描述
+		"appUrl: '' ," + // 应用下载地址
+		"version: '1', " + // 应用版本信息
+		"MD5: '', " + // md5数值
+		"adUrl: '', " + // 最后一张截图的广告
+		"picUrls: []" + // 截图地址
+
+		"}," + "{" + 
+		"id: '0', " + // id
+		"logoUrl: 'http://58.53.197.136/sp/image/t3.png', " + // 应用logo地址
+		"name: '3333', " + // 应用名称
+		"size: '10'," + // 应用大小
+		"luckyBeansNum: '1', " + // 下载可获幸运豆
+		"lotteryNum: '1' ," + // 下载可获抽奖次数
+		"description: 'ffffff' ," + // 应用描述
+		"appUrl: '' ," + // 应用下载地址
+		"version: '1', " + // 应用版本信息
+		"MD5: '', " + // md5数值
+		"adUrl: '', " + // 最后一张截图的广告
+		"picUrls: []" + // 截图地址
+
+		"}," + "{" + 
+		"id: '0', " + // id
+		"logoUrl: 'http://58.53.197.136/sp/image/t3.png', " + // 应用logo地址
+		"name: '3333', " + // 应用名称
+		"size: '10'," + // 应用大小
+		"luckyBeansNum: '1', " + // 下载可获幸运豆
+		"lotteryNum: '1' ," + // 下载可获抽奖次数
+		"description: 'ffffff' ," + // 应用描述
+		"appUrl: '' ," + // 应用下载地址
+		"version: '1', " + // 应用版本信息
+		"MD5: '', " + // md5数值
+		"adUrl: '', " + // 最后一张截图的广告
+		"picUrls: []" + // 截图地址
+
+		"}," + "{" + 
+		"id: '0', " + // id
+		"logoUrl: 'http://58.53.197.136/sp/image/t3.png', " + // 应用logo地址
+		"name: '3333', " + // 应用名称
+		"size: '10'," + // 应用大小
+		"luckyBeansNum: '1', " + // 下载可获幸运豆
+		"lotteryNum: '1' ," + // 下载可获抽奖次数
+		"description: 'ffffff' ," + // 应用描述
+		"appUrl: '' ," + // 应用下载地址
+		"version: '1', " + // 应用版本信息
+		"MD5: '', " + // md5数值
+		"adUrl: '', " + // 最后一张截图的广告
+		"picUrls: []" + // 截图地址
+
+		"}," + "{" + 
+		"id: '0', " + // id
+		"logoUrl: 'http://58.53.197.136/sp/image/t3.png', " + // 应用logo地址
+		"name: '3333', " + // 应用名称
+		"size: '10'," + // 应用大小
+		"luckyBeansNum: '1', " + // 下载可获幸运豆
+		"lotteryNum: '1' ," + // 下载可获抽奖次数
+		"description: 'ffffff' ," + // 应用描述
+		"appUrl: '' ," + // 应用下载地址
+		"version: '1', " + // 应用版本信息
+		"MD5: '', " + // md5数值
+		"adUrl: '', " + // 最后一张截图的广告
+		"picUrls: []" + // 截图地址
+
+		"}," + "{" + 
+		"id: '0', " + // id
+		"logoUrl: 'http://58.53.197.136/sp/image/t3.png', " + // 应用logo地址
+		"name: '3333', " + // 应用名称
+		"size: '10'," + // 应用大小
+		"luckyBeansNum: '1', " + // 下载可获幸运豆
+		"lotteryNum: '1' ," + // 下载可获抽奖次数
+		"description: 'ffffff' ," + // 应用描述
+		"appUrl: '' ," + // 应用下载地址
+		"version: '1', " + // 应用版本信息
+		"MD5: '', " + // md5数值
+		"adUrl: '', " + // 最后一张截图的广告
+		"picUrls: []" + // 截图地址
+
+		"}," + "{" + 
+		
+		"id: '0', " + // id
+		"logoUrl: 'http://58.53.197.136/sp/image/t3.png', " + // 应用logo地址
+		"name: '', " + // 应用名称
+		"size: '10'," + // 应用大小
+		"luckyBeansNum: '1', " + // 下载可获幸运豆
+		"lotteryNum: '1' ," + // 下载可获抽奖次数
+		"description: 'ffffff' ," + // 应用描述
+		"appUrl: '' ," + // 应用下载地址
+		"version: '1', " + // 应用版本信息
+		"MD5: '', " + // md5数值
+		"adUrl: '', " + // 最后一张截图的广告
+		"picUrls: []" + // 截图地址
+
+		"}" + "]" + "}" + "}";;
+		
     public static String getHotAppList() {
         JSONObject result = new JSONObject();
         try {

@@ -244,4 +244,6 @@ public class AppInfo implements Serializable {
     public void setHasDownloaded(boolean hasDownloaded) {
         this.hasDownloaded = hasDownloaded;
     }
+
+
 }
