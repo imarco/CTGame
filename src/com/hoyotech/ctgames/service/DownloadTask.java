@@ -31,7 +31,7 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
     public static final String ACTION_DOWNLOAD = "com.hoyotech.ctgames.service.DownloadTask";
     private static final String TAG = DownloadTask.class.getSimpleName();
     private static final String TEMP_SUFFIX = ".download";
-    private long id;
+    private long appId;
     private Context context;
     private String url;    // 下载文件url
     private File file;     // 下载目的文件
@@ -64,7 +64,6 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
 
     public DownloadTask(Context context, String url, String path, boolean downloadOnly3G, DownloadTaskListener listener) throws MalformedURLException {
         super();
-        this.id = System.currentTimeMillis();
         this.context = context;
         this.url = url;
         this.srcURL = new URL(url);
@@ -79,7 +78,12 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
         this.listener = listener;
     }
 
-    public long getId() { return id; }
+    public long getAppId() {
+        return appId;
+    }
+    public void setAppId(long appId) {
+        this.appId = appId;
+    }
 
     public String getUrl() {
         return url;

@@ -1,4 +1,4 @@
-package com.hoyotech.ctgames.adapter.holder;
+﻿package com.hoyotech.ctgames.adapter.holder;
 
 import android.content.Context;
 import android.view.View;

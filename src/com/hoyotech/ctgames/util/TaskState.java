@@ -21,22 +21,23 @@ public class TaskState {
     public static final String DOWNLOAD_PROGRESS = "download_progress";
     public static final String DOWNLOAD_APPINFO = "download_appinfo";
     public static final String DOWNLOAD_URL = "url";
-    public static final String DOWNLOAD_ID = "id";
+    public static final String DOWNLOAD_APPID = "id";
     public static final String DOWNLOAD_PAUSED = "paused";
 
     public static final int STATE_START = 0;            // 启动下载service
     public static final int STATE_PREPARE = 1;          // 应用未下载，对应文字为下载
-    public static final int STATE_DOWNLOADING = 2;      // 下载中，对应文字暂停
-    public static final int STATE_PAUSED = 3;           // 暂停中，对应文字继续
-    public static final int STATE_COMPLETE = 4;         // 下载完成，对应文字安装
+    public static final int STATE_DOWNLOADING = 2;      // 下载中，对应文字暂停   //////在数据库中有
+    public static final int STATE_PAUSED = 3;           // 暂停中，对应文字继续   //////在数据库中有
+    public static final int STATE_COMPLETE = 4;         // 下载完成，对应文字安装 //////在数据库中有
     public static final int STATE_INSTALLING = 5;      // 安装中，对应文字安装中
-    public static final int STATE_INSTALLED = 6;        // 安装完成，显示文字打开
-    public static final int STATE_OPENED = 7;           // 完成打开，显示文字获取奖励
+    public static final int STATE_INSTALLED = 6;        // 安装完成，显示文字打开 //////在数据库中有
+    public static final int STATE_OPENED = 7;           // 完成打开，显示文字获取奖励  ///////在数据库中有
     public static final int STATE_CONTINUE = 8;
     public static final int STATE_DOWNLOAD_ALL = 9;
     public static final int STATE_PAUSE_ALL = 10;
     public static final int STATE_CONTINUE_ALL = 11;
     public static final int STATE_STOP = 12;            // 取消下载,暂时没用到
+    public static final int STATE_TASK_COMPLETE = 13;   // 任务已完成  //////在数据库中有
 
     // app task的各种状态描述
     public static final String TEXT_DOWNLOAD = "下载";
@@ -102,12 +103,15 @@ public class TaskState {
                 button.setText(map.get(stateCode));
                 button.setTextColor(context.getResources().getColor(R.color.tab_text));
                 button.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.button_small_white));
+                button.setEnabled(false);    // 安装中不能点击button
                 break;
             default:
                 break;
         }
 
     }
+
+
 
     public static Map<Integer, String> getTaskStateMap()    {   return map; }
 

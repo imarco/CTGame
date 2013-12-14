@@ -37,7 +37,7 @@ public class DownloadService extends Service {
         super.onStart(intent, startId);
         String action = intent.getStringExtra("action");
         boolean downloadOnly3G = intent.getBooleanExtra("downloadOnly3G", false);
-        manager.init(CTGameConstans.CTGAME_ROOT + "apps/", action, downloadOnly3G);
+        manager.init(CTGameConstans.CTGAME_APP_DOWNLOAD_DIR, action, downloadOnly3G);
 
         // 接收界面点击事件发送的intent，调用downloadmanager的对应方法
         if (intent.getAction().equals(DOWNLOAD_SERVICE_NAME)) {
@@ -50,14 +50,15 @@ public class DownloadService extends Service {
                     if (!manager.isRunning()) {
                         manager.startManager();
                     } else {
-                        manager.reBroadcastAddAllTask();
+//                        manager.reBroadcastAddAllTask();
                     }
                     break;
                 case TaskState.STATE_DOWNLOADING:
                     // 添加下载任务
                     url = intent.getStringExtra(TaskState.DOWNLOAD_URL);
+                    long appId = intent.getLongExtra(TaskState.DOWNLOAD_APPID, -1);
                     if (!StringUtils.isEmpty(url) && !manager.hasTask(url)) {
-                        manager.addTask(url);
+                        manager.addTask(appId, url);
                     }
                     break;
                 case TaskState.STATE_PAUSED:
@@ -107,8 +108,8 @@ public class DownloadService extends Service {
         }
 
         @Override
-        public void addTask(String url) throws RemoteException {
-            manager.addTask(url);
+        public void addTask(long appId, String url) throws RemoteException {
+            manager.addTask(appId, url);
         }
 
         @Override

@@ -81,8 +81,7 @@ public class TaskHomeActivity extends FragmentActivity implements View.OnClickLi
         String[] titles = new String[] {
                 getString(R.string.task_download),
                 getString(R.string.task_install),
-                getString(R.string.task_activate),
-                getString(R.string.task_registe)
+                getString(R.string.task_completed)
         };
 
         mAdapter = new TaskAdapter(getSupportFragmentManager(), titles);

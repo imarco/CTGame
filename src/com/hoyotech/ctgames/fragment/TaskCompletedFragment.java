@@ -12,8 +12,8 @@ import com.hoyotech.ctgames.R;
 /**
  * Created by GGCoke on 13-12-3.
  */
-public class TaskRegisterFragment extends Fragment {
-    private static final String KEY_CONTENT = "TaskRegisterFragment:Content";
+public class TaskCompletedFragment extends Fragment {
+    private static final String KEY_CONTENT = "TaskCompletedFragment:Content";
     private Bundle bundle;
 
     @Override
@@ -27,7 +27,7 @@ public class TaskRegisterFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_task_register, container, false);
+        View v = inflater.inflate(R.layout.fragment_task_activite, container, false);
 
         return v;
     }

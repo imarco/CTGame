@@ -3,6 +3,7 @@ package com.hoyotech.ctgames.util;
 import com.hoyotech.ctgames.test.TestResponse;
 
 import android.os.AsyncTask;
+import android.os.Handler;
 
 public class GetDataTask extends AsyncTask<String, Integer, String> {
 
@@ -16,26 +17,31 @@ public class GetDataTask extends AsyncTask<String, Integer, String> {
 	}
 
 	@Override
-	protected String doInBackground(String... params) {
+    protected String doInBackground(String... params) {
+        Handler handler = mCallback.GetHandle();
+        if (null != handler) {
+            handler.post(new Runnable() {
+                public void run() {
+                }
+            });
+        }
 
-		(mCallback).GetHandle().post(new Runnable() {
-			public void run() {
-			}
-		});
-		return getDate(params[0]);
-	}
-	
-	@Override
+        return getDate(params[0]);
+    }
+
+    @Override
 	protected void onPostExecute(final String result) {
 
 		if (result != null && result.length() > 0) {
 			mCallback.AddData(result, mFlag);
 		} else {
-			mCallback.GetHandle().post(new Runnable() {
-				public void run() {
-
-				}
-			});
+            Handler handler = mCallback.GetHandle();
+            if (null != handler) {
+                handler.post(new Runnable() {
+                    public void run() {
+                    }
+                });
+            }
 		}
 		super.onPostExecute(result);
 	}
