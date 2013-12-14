@@ -54,6 +54,7 @@ public class AppInfo implements Serializable {
     private int progress;        // 下载进度 0-100%
     private int rate;            // 下载速度 bps
     private int state;           // 目前的状态，下载还是安装 数字在TaskState中定义
+    private boolean hasDownloaded;   // 应用是否下载过
 
     public AppInfo(long appId, String appLogoUrl, String appName, long appSize,
                    int luckyBeansNum, int lotteryNum, String appDesc, String appUrl,
@@ -232,5 +233,13 @@ public class AppInfo implements Serializable {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public boolean isHasDownloaded() {
+        return hasDownloaded;
+    }
+
+    public void setHasDownloaded(boolean hasDownloaded) {
+        this.hasDownloaded = hasDownloaded;
     }
 }

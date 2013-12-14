@@ -21,9 +21,9 @@ public class TaskInstallHolder {
 
     public ImageView appImageHeader; //应用图标
     public TextView appName;         // 应用名
+    public TextView appVersion;     // 应用版本
     public TextView appPackageSize;  // 应用安装包大小
     public Button btnOptions;        // 应用的状态（安装或者打开获取奖励等）
-    public Button btnAppBonus;       // 应用的所有奖励按钮
     public TextView tvPrizeCount;    // 应用的抽奖次数
     public TextView tvLuckyBeanCount; // 幸运豆个数
     public TextView tvSummary; // 应用的简介
@@ -37,6 +37,7 @@ public class TaskInstallHolder {
     public TaskInstallHolder(View convertView) {
         this.appImageHeader = (ImageView) convertView.findViewById(R.id.image_app);
         this.appName = (TextView) convertView.findViewById(R.id.tv_app_name);
+        this.appVersion = (TextView) convertView.findViewById(R.id.tv_app_version);
         this.appPackageSize = (TextView) convertView.findViewById(R.id.tv_app_size);
         this.btnOptions = (Button) convertView.findViewById(R.id.btn_app_options);
         this.tvPrizeCount = (TextView) convertView.findViewById(R.id.tv_prize_count);
@@ -51,6 +52,7 @@ public class TaskInstallHolder {
     public void setData(Context context, AppInfo appInfo) {
         CTGameImageLoader.loadImage(context, appInfo.getAppLogoUrl(), this.appImageHeader);
         this.appName.setText(appInfo.getAppName());
+        this.appVersion.setText(appInfo.getVersion());
         this.appPackageSize.setText(String.valueOf(appInfo.getAppSize())+"M");
         this.btnOptions.setText(TaskState.getTaskStateMap().get(appInfo.getState()));
         this.tvPrizeCount.setText(String.valueOf(appInfo.getLotteryNum()));

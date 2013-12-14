@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.db.DBOpenHelper;
+import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +103,7 @@ public class AppDao {
 
             appInfo.setMode(cursor.getInt(12));     // mode
             appInfo.setState(cursor.getInt(13));    // state
-
+            appInfo.setHasDownloaded(cursor.getInt(14) == TaskState.APP_DOWNLOADED_HAS ? true:false);
             apps.add(appInfo);
             cursor.moveToNext();
         }

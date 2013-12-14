@@ -28,7 +28,6 @@ public class TaskDownloadHolder {
     public TextView appVersion;      // 应用版本
     public TextView appPackageSize;  // 应用安装包大小
     public Button btnOptions;        // 应用的状态（安装或者打开获取奖励等）
-    public Button btnAppBonus;       // 应用的所有奖励按钮
     public TextView tvPrizeCount;    // 应用的抽奖次数
     public ProgressBar progressBar; // 下载进度条
     public TextView tvDownloadRate; // 下载速度
