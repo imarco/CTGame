@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.activity.AppDetailActivity;
 import com.hoyotech.ctgames.adapter.holder.TaskCompleteHolder;
 import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.util.CTGameConstans;
@@ -65,6 +67,7 @@ public class TaskCompleteAdapter extends BaseAdapter {
         holder.info = appInfo;
 
         holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
+        holder.appImageHeader.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
         return view;
     }
 
@@ -101,6 +104,14 @@ public class TaskCompleteAdapter extends BaseAdapter {
                             Toast.makeText(context, "错误的应用信息状态：" + mAppInfo.getState(), Toast.LENGTH_SHORT).show();
                             break;
                     }
+                    break;
+                case R.id.image_app:
+                    // 响应app的图标点击的事件
+                    Intent intent = new Intent(context, AppDetailActivity.class);
+                    Bundle data = new Bundle();
+                    data.putSerializable("appInfo", mAppInfo);
+                    intent.putExtras(data);
+                    context.startActivity(intent);
                     break;
                 default:
                     break;

@@ -66,5 +66,11 @@
     <color name="new_big_wheel_award_divider_color">#d36207</color>
     <color name="new_big_wheel_no_award_divider_color">#da4406</color>
 
+    <!-- 任务管理中的颜色-->
+    <color name="new_task_prize_info_grey">#bbbcc5</color>
+    <color name="new_task_prize_info_red">#ef6e64</color>
+    <color name="new_task_app_summary_grey">#9697a4</color>
+    <color name="new_task_app_name_grey">#5a5c71</color>
+
 
 </resources>

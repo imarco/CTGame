@@ -9,9 +9,11 @@
     <!-- app的图像 -->
     <ImageView
             android:id="@+id/image_app"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/image_app_sample" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:src="@drawable/image_app_sample" />
 
     <!-- 抽奖的机会 -->
     <TextView
@@ -22,7 +24,7 @@
             android:layout_below="@id/image_app"
             android:layout_marginTop="20dp"
             android:text="下载完成可获得0.6次获奖机会"
-            android:textColor="@color/new_text_grey_color"
+            android:textColor="@color/new_task_prize_info_grey"
             android:textSize="@dimen/task_install_prize_count_text_size"
             />
 
@@ -35,7 +37,7 @@
             android:layout_below="@id/image_app"
             android:layout_marginTop="20dp"
             android:text="安装打开后可获得5幸运豆"
-            android:textColor="@color/new_text_red_color"
+            android:textColor="@color/new_task_prize_info_red"
             android:textSize="@dimen/task_install_prize_count_text_size"
             />
 
@@ -47,7 +49,7 @@
             android:layout_marginLeft="8dip"
             android:layout_toRightOf="@id/image_app"
             android:text="神庙逃亡"
-            android:textColor="@color/new_text_grey_color"
+            android:textColor="@color/new_task_app_name_grey"
             android:textSize="@dimen/text_size_item_name" />
 
     <!-- app的版本 -->
@@ -57,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tv_app_name"
             android:text="（1.0.5）"
-            android:textColor="@color/new_text_grey_color"
+            android:textColor="@color/new_task_app_name_grey"
             android:textSize="@dimen/text_size_item_name" />
 
     <!-- app的大小 -->
@@ -69,7 +71,7 @@
             android:layout_alignLeft="@id/tv_app_name"
             android:layout_marginTop="2dp"
             android:text="10M"
-            android:textColor="@color/new_text_grey_color"
+            android:textColor="@color/new_task_app_name_grey"
             android:textSize="@dimen/text_size_item_size" />
 
     <!-- 下载暂停等按钮 -->
@@ -100,7 +102,7 @@
             android:lines="2"
             android:ellipsize="end"
             android:text="神庙逃亡是一款相当经典的游戏，哥天天都玩一把，并且乐此不疲"
-            android:textColor="@color/new_text_light_grey_color"
+            android:textColor="@color/new_task_app_summary_grey"
             android:textSize="@dimen/task_install_text_summary"
             />
 

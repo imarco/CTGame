@@ -75,7 +75,7 @@ public class TaskState {
         map.put(STATE_DOWNLOAD_ALL, TEXT_DOWNLOAD_ALL);
         map.put(STATE_PAUSE_ALL, TEXT_PAUSE_ALL);
         map.put(STATE_CONTINUE_ALL, TEXT_CONTINUE_ALL);
-        map.put(STATE_TASK_COMPLETE, TEXT_GET_PRIZE);
+        map.put(STATE_TASK_COMPLETE, TEXT_OPEN);
     }
 
     /**
@@ -87,6 +87,10 @@ public class TaskState {
     public static void setButtonView(int stateCode, Context context, Button button) {
         switch (stateCode) {
             case STATE_PREPARE:
+                button.setText(map.get(stateCode));
+                button.setTextColor(context.getResources().getColor(R.color.new_text_grey_color));
+                button.setBackground(context.getResources().getDrawable(R.drawable.button_orange));
+                break;
             case STATE_DOWNLOADING:
             case STATE_PAUSED:
             case STATE_OPENED:

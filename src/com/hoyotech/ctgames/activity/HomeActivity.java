@@ -58,6 +58,8 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
     private CTGameReceiver receiver = new CTGameReceiver();
 
+    private static int position;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +79,6 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         initView();
         initData();
         startService();
-
         // 默认出来在大转盘
         switchToBigWheelFragment();
 
@@ -130,29 +131,30 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         bigWheelIv.setOnClickListener(this);
     }
 
+
     @Override
     public void onClick(View v) {
         Intent intent = null;
         switch (v.getId()) {
             // 点击动态按钮
             case R.id.button_app:
-                clickAppButton();
+                clickAppButton(true);
                 break;
             // 点击与我相关按钮
             case R.id.button_video:
-                clickVideoButton();
+                clickAwardButton(true);
                 break;
             // 点击我的空间按钮
             case R.id.button_award:
-                clickAwardButton();
+                clickOrderProductButton(true);
                 break;
             // 点击更多按钮
             case R.id.button_zone:
-                clickZoneButton();
+                clickZoneButton(true);
                 break;
             // 点击中间按钮
             case R.id.image_big_wheel:
-                clickBigWheelButton();
+                clickBigWheelButton(true);
                 break;
             // 点击actionbar home按钮
             case R.id.action_bar_button_home:
@@ -171,7 +173,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     /**
      * 点击了“动态”按钮
      */
-    private void clickAppButton() {
+    public void clickAppButton(boolean click) {
+        if (click && position == 0) return;
+        position = 0;
         // 实例化Fragment页面
         fragmentApp = new AppFragment();
         from = to;
@@ -184,16 +188,16 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         // 标题栏标题更改为玩应用
         title.setText(R.string.play_app);
         // 显示首页和管理button
-        ImageView btHome = (ImageView) findViewById(R.id.action_bar_button_home);
-        ImageView btDownload = (ImageView) findViewById(R.id.action_bar_button_task);
-        btHome.setVisibility(View.VISIBLE);
-        btDownload.setVisibility(View.VISIBLE);
+        ImageView ivTaskManager = (ImageView) findViewById(R.id.action_bar_button_task);
+        ivTaskManager.setVisibility(View.VISIBLE);
     }
 
     /**
      * 点击了“与我相关”按钮
      */
-    private void clickVideoButton() {
+    public void clickAwardButton(boolean click) {
+        if (click && position == 1) return;
+        position = 1;
         // 实例化Fragment页面
         fragmentAward = new AwardFragment();
         from = to;
@@ -202,12 +206,20 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         // 切换Fragm
         switchContent(from, to);
         setItemSelected(1);
+
+        // 标题栏标题更改为玩应用
+        title.setText(R.string.get_award);
+        // 显示首页和管理button
+        ImageView ivTaskManager = (ImageView) findViewById(R.id.action_bar_button_task);
+        ivTaskManager.setVisibility(View.VISIBLE);
     }
 
     /**
      * 点击了“我的空间”按钮
      */
-    private void clickAwardButton() {
+    public void clickOrderProductButton(boolean click) {
+        if (click && position == 2) return;
+        position = 2;
         // 实例化Fragment页面
         fragmentOrderProduct = new OrderProductFragment();
         from = to;
@@ -218,12 +230,20 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
         setItemSelected(2);
 
+        // 标题栏标题更改为玩应用
+        title.setText(R.string.order_goods);
+        // 显示首页和管理button
+        ImageView ivTaskManager = (ImageView) findViewById(R.id.action_bar_button_task);
+        ivTaskManager.setVisibility(View.VISIBLE);
+
     }
 
     /**
      * 点击了“更多”按钮
      */
-    private void clickZoneButton() {
+    public void clickZoneButton(boolean click) {
+        if (click && position == 3) return;
+        position = 3;
         // 实例化Fragment页面
         fragmentMore = new MoreFragment();
         from = to;
@@ -233,6 +253,11 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         switchContent(from, to);
 
         setItemSelected(3);
+        // 标题栏标题更改为玩应用
+        title.setText(R.string.more);
+        // 显示首页和管理button
+        ImageView ivTaskManager = (ImageView) findViewById(R.id.action_bar_button_task);
+        ivTaskManager.setVisibility(View.VISIBLE);
 
     }
 
@@ -260,7 +285,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     /**
      * 点击了中间按钮
      */
-    private void clickBigWheelButton() {
+    public void clickBigWheelButton(boolean click) {
+        if (click && position ==-1) return;
+        position = -1;
         bigWheelIv.setSelected(true);
 
         // 实例化Fragment页面
@@ -273,13 +300,19 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
         setItemSelected(-1);
 
+        // 标题栏标题更改为玩应用
+        title.setText(R.string.big_wheel);
+        // 显示首页和管理button
+        ImageView ivTaskManager = (ImageView) findViewById(R.id.action_bar_button_task);
+        ivTaskManager.setVisibility(View.VISIBLE);
+
     }
 
     /**
      * 切换到大转盘
      */
     private void switchToBigWheelFragment() {
-        clickBigWheelButton();
+        clickBigWheelButton(false);
     }
 
     /**

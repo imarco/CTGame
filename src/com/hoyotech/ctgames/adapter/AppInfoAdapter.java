@@ -1,20 +1,32 @@
 package com.hoyotech.ctgames.adapter;
 
+import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.activity.AppDetailActivity;
 import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.AppInfoHolder;
 import com.hoyotech.ctgames.db.dao.AppDao;
 import com.hoyotech.ctgames.service.DownloadService;
 import com.hoyotech.ctgames.service.DownloadTask;
-import com.hoyotech.ctgames.util.TaskState;
+import com.hoyotech.ctgames.util.*;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -57,6 +69,7 @@ public class AppInfoAdapter extends BaseAdapter {
         //设置事件监听响应
         holder.layoutDownloadEnabled.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
         holder.layoutInstallEnabled.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
+        holder.appImageHeader.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
 
         return convertView;
     }
@@ -115,6 +128,30 @@ public class AppInfoAdapter extends BaseAdapter {
                     notifyDataSetChanged();
                     break;
                 case R.id.layout_install_button_enabled:
+                    info.setState(TaskState.STATE_INSTALLING);
+                    // 数据库更新应用状态
+                    AppDao appDao = new AppDao(context);
+                    ContentValues values = new ContentValues();
+                    values.put(AppInfo.APPINFO_STATE, TaskState.STATE_INSTALLED);
+                    appDao.updateApp(values, AppInfo.APPINFO_APPURL + "=?", new String[] {info.getAppUrl()});
+
+                    // 安装应用，安装成功后再向服务器发送安装成功的请求
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        String fileName = new File(new URL(info.getAppUrl()).getFile()).getName();
+                        Uri uri = Uri.fromFile(new File(CTGameConstans.CTGAME_APP_DOWNLOAD_DIR + fileName));
+                        intent.setDataAndType(uri,"application/vnd.android.package-archive");
+                        context.startActivity(intent);
+                    } catch (MalformedURLException e) {}
+                    notifyDataSetChanged();
+                    break;
+                case R.id.app_img_head:
+                    // 响应app的图标点击的事件
+                    Intent intent = new Intent(context, AppDetailActivity.class);
+                    Bundle data = new Bundle();
+                    data.putSerializable("appInfo", info);
+                    intent.putExtras(data);
+                    context.startActivity(intent);
                     break;
                 default:
                     // 补充默认情况

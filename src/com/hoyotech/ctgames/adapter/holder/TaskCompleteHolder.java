@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.util.CTGameImageLoader;
+import com.hoyotech.ctgames.util.StorageUtils;
 import com.hoyotech.ctgames.util.TaskState;
 
 /**
@@ -49,10 +50,11 @@ public class TaskCompleteHolder {
         CTGameImageLoader.loadImage(context, appInfo.getAppLogoUrl(), this.appImageHeader);
         this.appName.setText(appInfo.getAppName());
         this.appVersion.setText(appInfo.getVersion());
-        this.appPackageSize.setText(String.valueOf(appInfo.getAppSize())+"M");
+        this.appPackageSize.setText(StorageUtils.getSizeFormatted(appInfo.getAppSize()));
         this.btnOptions.setText(TaskState.getTaskStateMap().get(appInfo.getState()));
-        this.tvPrizeCount.setText(String.valueOf(appInfo.getLotteryNum()));
-        this.tvLuckyBeanCount.setText(String.valueOf(appInfo.getLuckyBeansNum()));
+        this.tvPrizeCount.setText("下载完成已获"+appInfo.getLotteryNum()+"次获奖机会");
+        this.tvLuckyBeanCount.setText(appInfo.getLuckyBeansNum()+"幸运豆奖励已获取");
+        this.tvLuckyBeanCount.setTextColor(context.getResources().getColor(R.color.new_task_prize_info_grey));
         this.tvSummary.setText(appInfo.getAppDesc());
         TaskState.setButtonView(appInfo.getState(), context, btnOptions);
     }

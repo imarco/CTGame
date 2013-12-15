@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.webkit.WebView;
+import android.widget.LinearLayout;
 import com.hoyotech.ctgames.R;
 
 /**
@@ -13,7 +15,13 @@ import com.hoyotech.ctgames.R;
  * @author Tian
  *
  */
-public class AwardFragment extends Fragment implements View.OnClickListener {
+public class AwardFragment extends Fragment {
+
+    String url = "http://g.hoyotech.com:27088/redeem/index_android";
+    String testURL = "http://192.168.88.85:3000/redeem/index_android";
+
+    LinearLayout baseLayout;
+    WebView webView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,18 +30,11 @@ public class AwardFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_award, container, false);
-//        Button button = (Button) v.findViewById(R.id.btn_app_get_info);
 
-
-        return v;
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-//            case R.id.btn_app_get_info:
-//                break;
-        }
+        baseLayout = (LinearLayout) inflater.inflate(R.layout.fragment_award, null);
+        webView = (WebView) baseLayout.findViewById(R.id.award_webview);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(testURL);
+        return baseLayout;
     }
 }

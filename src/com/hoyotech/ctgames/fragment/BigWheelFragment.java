@@ -1,6 +1,6 @@
 package com.hoyotech.ctgames.fragment;
 
-import android.media.AudioManager;
+import android.content.Intent;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,11 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.*;
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.activity.HomeActivity;
 import com.hoyotech.ctgames.viewdef.DynamicImage;
 import com.hoyotech.ctgames.viewdef.LotteryView;
 import com.hoyotech.ctgames.viewdef.RotateListener;
@@ -99,6 +97,12 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
     private RelativeLayout relativeLayout; // 整个页面的布局xml layout
     private static int bgHeight = 0;
 
+
+    private Button btnGetChance;
+    private Button btnGetPrize;
+    private Button btnGetTraffic;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         System.out.println("in onCreate");
@@ -147,12 +151,20 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
         hover = (ImageView) relativeLayout.findViewById(R.id.wheel_hover);
         tvPrizeCount = (TextView) relativeLayout.findViewById(R.id.tv_prize_count);
 
+        btnGetChance = (Button) relativeLayout.findViewById(R.id.btn_get_chance);
+        btnGetPrize = (Button) relativeLayout.findViewById(R.id.btn_get_prize);
+        btnGetTraffic = (Button) relativeLayout.findViewById(R.id.btn_get_traffic);
+
         setCount();
 
         setDimens();
 
         arrowBtn.setOnClickListener(this);
         lotteryView.setRotateListener(this);
+
+        btnGetChance.setOnClickListener(this);
+        btnGetPrize.setOnClickListener(this);
+        btnGetTraffic.setOnClickListener(this);
 
         // 监听可以measured的事件
         vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener()
@@ -277,21 +289,42 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
 
     @Override
     public void onClick(View v) {
-        // 没有旋转状态
-        if (!lotteryView.isRotateEnabled()) {
-            //title.setText("抽奖按钮变红时按下更容易中奖哦");
+        HomeActivity homeActivity = (HomeActivity) getActivity();
+        switch (v.getId()) {
 
-            // 在扣除了一定的金币之后就开始下载
-            if(chanceCount > 0) {
-                begin(Math.abs(50), 8, false);
-                chanceCount--;
-                setCount();
-            }
+            case R.id.arrowBtn:
+                // 没有旋转状态
+                if (!lotteryView.isRotateEnabled()) {
+                    //title.setText("抽奖按钮变红时按下更容易中奖哦");
 
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    //一直旋转状态
+                    // 在扣除了一定的金币之后就开始下载
+                    if(chanceCount > 0) {
+                        begin(Math.abs(50), 8, false);
+                        chanceCount--;
+                        setCount();
+                    }
+
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            //一直旋转状态
+                            if (!lotteryView.isRoating()) {
+
+                                //在这个地方设置获奖的奖项
+                                //lotteryView.setAwards(0);
+                                lotteryView.setAwardsByPercent(); // 根据奖项抽中的概率设置最终的获得项目
+
+                                //设置为缓慢停止
+                                lotteryView.setRoating(true);
+                                //title.setText("");
+                            }
+                        }
+                    }, 500);
+                    //arrowBtn.startRoation(new int[]{R.drawable.arrow_green, R.drawable.arrow_red}, 200);
+                }
+                //旋转状态
+                else {
+                    /*//一直旋转状态
                     if (!lotteryView.isRoating()) {
 
                         //在这个地方设置获奖的奖项
@@ -301,26 +334,19 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
                         //设置为缓慢停止
                         lotteryView.setRoating(true);
                         //title.setText("");
-                    }
+                    }*/
                 }
-            }, 3000);
-            //arrowBtn.startRoation(new int[]{R.drawable.arrow_green, R.drawable.arrow_red}, 200);
-        }
-        //旋转状态
-        else {
-            /*//一直旋转状态
-            if (!lotteryView.isRoating()) {
+                break;
+            case R.id.btn_get_chance:
+                homeActivity.clickAppButton(false);
+                break;
+            case R.id.btn_get_prize:
+                homeActivity.clickAwardButton(false);
+                break;
+            case R.id.btn_get_traffic:
+                homeActivity.clickOrderProductButton(false);
+                break;
 
-                //在这个地方设置获奖的奖项
-                //lotteryView.setAwards(0);
-                lotteryView.setAwardsByPercent(); // 根据奖项抽中的概率设置最终的获得项目
-
-                //设置为缓慢停止
-                lotteryView.setRoating(true);
-                //title.setText("");
-            }*/
         }
     }
-
-
 }

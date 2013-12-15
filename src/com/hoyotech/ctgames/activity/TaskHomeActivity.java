@@ -44,11 +44,9 @@ public class TaskHomeActivity extends FragmentActivity implements View.OnClickLi
         title.setText(R.string.task_title);
 
         // 显示home按钮和我的地盘按钮
-        ImageView btHome = (ImageView) findViewById(R.id.action_bar_button_home);
-        ImageView btZone = (ImageView) findViewById(R.id.action_bar_button_zone);
+        ImageView btBack = (ImageView) findViewById(R.id.action_bar_button_back);
 
-        btHome.setVisibility(View.VISIBLE);
-        btZone.setVisibility(View.VISIBLE);
+        btBack.setVisibility(View.VISIBLE);
 
         taskHomeFragment = new TaskHomeFragment();
         // 得到Fragment事务管理器
@@ -63,11 +61,8 @@ public class TaskHomeActivity extends FragmentActivity implements View.OnClickLi
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
-            case R.id.action_bar_button_home:
-                intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.action_bar_button_zone:
+            case R.id.action_bar_button_back:
+                finish();
                 break;
             default:
                 break;

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.activity.AppDetailActivity;
 import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.TaskInstallHolder;
 import com.hoyotech.ctgames.db.dao.AppDao;
@@ -103,7 +105,7 @@ public class TaskInstallAdapter extends BaseAdapter {
 
         //设置事件监听响应
         holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
-
+        holder.appImageHeader.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
         return convertView;
     }
 
@@ -234,6 +236,14 @@ public class TaskInstallAdapter extends BaseAdapter {
                         default:
                             Toast.makeText(context, "错误的应用状态：" + info.getState(), Toast.LENGTH_SHORT).show();
                     }
+                    break;
+                case R.id.image_app:
+                    // 响应app的图标点击的事件
+                    Intent intent = new Intent(context, AppDetailActivity.class);
+                    Bundle data = new Bundle();
+                    data.putSerializable("appInfo", info);
+                    intent.putExtras(data);
+                    context.startActivity(intent);
                     break;
                 default:
                     // 补充默认情况

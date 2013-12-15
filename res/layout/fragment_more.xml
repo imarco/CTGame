@@ -185,6 +185,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:clickable="true"
+                    android:onClick="onClick"
                     android:src="@drawable/myzone_button_my_app"
                     />
 

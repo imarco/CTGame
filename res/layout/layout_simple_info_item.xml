@@ -17,11 +17,13 @@
         <!-- app头像-->
         <ImageView
                 android:id="@+id/app_img_head"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="1dp"
+                android:clickable="true"
+                android:onClick="onClick"
                 android:src="@drawable/image_app_sample"
                 />
 
@@ -61,8 +63,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/app_package_size"
+                android:layout_toRightOf="@id/app_img_head"
                 android:layout_alignLeft="@id/app_name"
-                android:layout_marginBottom="2dp"
+                android:layout_marginTop="5dp"
                 android:text="版本："
                 android:textColor="@color/new_text_light_grey_color"
                 android:textSize="@dimen/new_app_info_app_version_text_size"

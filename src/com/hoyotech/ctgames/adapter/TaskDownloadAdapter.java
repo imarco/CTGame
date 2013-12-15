@@ -2,11 +2,13 @@ package com.hoyotech.ctgames.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.activity.AppDetailActivity;
 import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
 import com.hoyotech.ctgames.db.dao.AppDao;
@@ -96,6 +98,7 @@ public class TaskDownloadAdapter extends BaseAdapter{
 
         //设置事件监听响应
         holder.btnOptions.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
+        holder.appImageHeader.setOnClickListener(new ButtonClickListener(appInfo.getAppUrl(), appInfo, holder));
         return convertView;
     }
 
@@ -152,6 +155,14 @@ public class TaskDownloadAdapter extends BaseAdapter{
                         downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
                         context.startService(downloadIntet);
                     }
+                    break;
+                case R.id.image_app:
+                    // 响应app的图标点击的事件
+                    Intent intent = new Intent(context, AppDetailActivity.class);
+                    Bundle data = new Bundle();
+                    data.putSerializable("appInfo", info);
+                    intent.putExtras(data);
+                    context.startActivity(intent);
                     break;
                 default:
                     // 补充默认情况

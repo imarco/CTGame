@@ -26,6 +26,18 @@
             android:visibility="gone"/>
 
     <ImageView
+            android:id="@+id/action_bar_button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:src="@drawable/action_bar_back"
+            android:layout_marginLeft="@dimen/new_action_bar_image_margin_left"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+
+    <ImageView
             android:id="@+id/action_bar_button_down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -56,8 +56,8 @@ public class TaskInstallHolder {
         this.appVersion.setText("("+appInfo.getVersion()+")");
         this.appPackageSize.setText(StorageUtils.getSizeFormatted(appInfo.getAppSize()));
         this.btnOptions.setText(TaskState.getTaskStateMap().get(appInfo.getState()));
-        this.tvPrizeCount.setText("下载完成可获得"+appInfo.getLotteryNum()+"次获奖机会");
-        this.tvLuckyBeanCount.setText("安装打开后可获得"+appInfo.getLuckyBeansNum()+"幸运豆");
+        this.tvPrizeCount.setText("下载完成，已获"+appInfo.getLotteryNum()+"次抽奖机会");
+        this.tvLuckyBeanCount.setText("安装打开后可获"+appInfo.getLuckyBeansNum()+"幸运豆");
         this.tvSummary.setText(appInfo.getAppDesc());
         TaskState.setButtonView(appInfo.getState(), context, btnOptions);
     }

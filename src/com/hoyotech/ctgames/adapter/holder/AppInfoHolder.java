@@ -72,8 +72,8 @@ public class AppInfoHolder {
     public void setData(Context context, AppInfo appInfo) {
         CTGameImageLoader.loadImage(context, appInfo.getAppLogoUrl(), this.appImageHeader);
         this.appName.setText(appInfo.getAppName());
-        this.appPackageSize.setText(StorageUtils.getSizeFormatted(appInfo.getAppSize()));
-        this.appVersion.setText("(" + String.valueOf(appInfo.getVersion()) + ")");
+        this.appPackageSize.setText("大小：" + StorageUtils.getSizeFormatted(appInfo.getAppSize()));
+        this.appVersion.setText("版本：" + String.valueOf(appInfo.getVersion()));
         setPrizeCount(appInfo.getLotteryNum());
         setLuckyBeanCount(appInfo.getLuckyBeansNum());
 
