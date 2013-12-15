@@ -13,12 +13,15 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.viewdef.DynamicImage;
 import com.hoyotech.ctgames.viewdef.LotteryView;
 import com.hoyotech.ctgames.viewdef.RotateListener;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created with IntelliJ IDEA.
@@ -47,6 +50,10 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
     private ImageView arrow;
     // bg
     private ImageView bg;
+    // 抛光
+    private ImageView hover;
+
+    private int chanceCount = 10;
 
     private int[] itemColor;//选项颜色
     private String[] itemText;//选项文字
@@ -65,12 +72,15 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
             R.color.wheel_award_color10}; // 转盘奖品的颜色
 
     private int[] awardImageIds = new int[] {
-            R.drawable.big_wheel_image_prize_samle,
-            R.drawable.big_wheel_image_prize_samle,
-            R.drawable.big_wheel_image_prize_samle,
-            R.drawable.big_wheel_image_prize_samle,
-            R.drawable.big_wheel_image_prize_samle,
-            R.drawable.big_wheel_image_prize_samle };
+            R.drawable.big_wheel_image_prize_samle1,
+            R.drawable.big_wheel_image_prize_samle2,
+            R.drawable.big_wheel_image_prize_samle3,
+            R.drawable.big_wheel_image_prize_samle4,
+            R.drawable.big_wheel_image_prize_samle5,
+            R.drawable.big_wheel_image_prize_samle6,
+            R.drawable.big_wheel_image_prize_samle7,
+            R.drawable.big_wheel_image_prize_samle8,
+            R.drawable.big_wheel_image_prize_samle9 };
 
     public ArrayList<String> arrayList;
     private float surfacViewWidth = 0;
@@ -80,11 +90,14 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
     private int explosionId = 0;    //内存加载ID
     private int playSourceId = 0;    //播放ID
 
+    private TextView tvPrizeCount;
+
 
     private boolean hasMeasured = false; // 用于监听已经开始度量事件
     private float radius; // 转盘的半径
 
     private RelativeLayout relativeLayout; // 整个页面的布局xml layout
+    private static int bgHeight = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,13 +118,11 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
 
     @Override
     public void onStop() {
-        System.out.println("in onStop");
         super.onStop();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public void onDestroyView() {
-        System.out.println("in onDestroyView");
         super.onDestroyView();    //To change body of overridden methods use File | Settings | File Templates.
         hasMeasured = false;
         if (lotteryView != null) {
@@ -123,7 +134,6 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        System.out.println("in onCreateView");
         relativeLayout = (RelativeLayout) inflater.inflate(R.layout.fragment_big_wheel, null);
 
         final FrameLayout layout = (FrameLayout) relativeLayout.findViewById(R.id.wheel_award);
@@ -134,11 +144,12 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
         arrowBtn = (DynamicImage) relativeLayout.findViewById(R.id.arrowBtn);
         lotteryView = (LotteryView) relativeLayout.findViewById(R.id.lotteryView);
         arrow = (ImageView) relativeLayout.findViewById(R.id.arrow);
+        hover = (ImageView) relativeLayout.findViewById(R.id.wheel_hover);
+        tvPrizeCount = (TextView) relativeLayout.findViewById(R.id.tv_prize_count);
 
-        int arrowWidth = arrow.getDrawable().getIntrinsicWidth();
-        int arrowHeight = arrow.getDrawable().getIntrinsicHeight();
-        arrow.getLayoutParams().width = (int)(arrowWidth * 286/410f);
-        arrow.getLayoutParams().height = (int)(arrowHeight * 286/410f);
+        setCount();
+
+        setDimens();
 
         arrowBtn.setOnClickListener(this);
         lotteryView.setRotateListener(this);
@@ -152,6 +163,7 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
                 if (!hasMeasured)
                 {
                     initView();
+                    setDimens();
                     hasMeasured = true;
                 }
                 return true;
@@ -161,16 +173,36 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
         return relativeLayout;
     }
 
+    private void setDimens() {
+
+        if(bgHeight != 0) {
+            arrow.getLayoutParams().width = (int)(bgHeight * 250/410f);
+            arrow.getLayoutParams().height = (int)(bgHeight * 250/410f);
+
+            hover.getLayoutParams().width = (int)(bgHeight * 144/224f);
+            hover.getLayoutParams().height = (int)(bgHeight * 144/224f);
+
+            arrowBtn.getLayoutParams().width = (int)(bgHeight * 138/440f);
+            arrowBtn.getLayoutParams().height = (int)(bgHeight * 138/440f);
+        }
+
+    }
+
+    public void setCount() {
+        tvPrizeCount.setText("剩余" + chanceCount + "次机会");
+    }
+
 
     /**
      * Description:初始化界面元素
      */
     public void initView() {
         initItem();
-        radius = bg.getMeasuredWidth() / 2 * (360/410f);
+        bgHeight = bg.getMeasuredHeight();
+        radius = bg.getMeasuredWidth() / 2 * (415/440f);
         //获取到宽度和高度后，可用于计算
 
-        lotteryView.initAll(itemColor, itemText, itemImage, radius, hitPercent);
+        lotteryView.initAll(itemColor, itemText, itemImage, radius, hitPercent, bgHeight, hover.getDrawable());
         lotteryView.start();
 
         surfacViewHeight = lotteryView.getHeight();
@@ -193,10 +225,22 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
             itemColor[i] = allWheelAwardColors[i % allWheelAwardColors.length];
         }
 
+        itemColor = new int[] {
+                R.color.new_big_wheel_no_award_color,
+                R.color.new_big_wheel_award_color,
+                R.color.new_big_wheel_no_award_color,
+                R.color.new_big_wheel_award_color,
+                R.color.new_big_wheel_no_award_color,
+                R.color.new_big_wheel_award_color,
+                R.color.new_big_wheel_no_award_color,
+                R.color.new_big_wheel_award_color,
+                R.color.new_big_wheel_no_award_color
+        };
+
         // 转盘选项的名称
-        itemText = new String[]{"土豪金", "幸运豆400", "幸运豆300", "幸运豆200", "幸运豆100", "谢谢参与"};
+        itemText = new String[]{"谢谢参与", "幸运豆5", "土豪金", "幸运豆10", "京东卡50", "幸运豆50", "幸运豆1", "京东卡300", "幸运豆25"};
         itemImage = awardImageIds;
-        hitPercent = new int[] {0, 60, 60, 80, 100, 9700}; // 中奖概率分别为0% 0.6% 0.8% 0.6% 0.4% 97%加起来应该是1
+        hitPercent = new int[] {1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 2000}; // 中奖概率分别为0% 0.6% 0.8% 0.6% 0.4% 97%加起来应该是1
     }
 
     /**
@@ -238,13 +282,33 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
             //title.setText("抽奖按钮变红时按下更容易中奖哦");
 
             // 在扣除了一定的金币之后就开始下载
-            begin(Math.abs(50), 8, false);
+            if(chanceCount > 0) {
+                begin(Math.abs(50), 8, false);
+                chanceCount--;
+                setCount();
+            }
 
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    //一直旋转状态
+                    if (!lotteryView.isRoating()) {
+
+                        //在这个地方设置获奖的奖项
+                        //lotteryView.setAwards(0);
+                        lotteryView.setAwardsByPercent(); // 根据奖项抽中的概率设置最终的获得项目
+
+                        //设置为缓慢停止
+                        lotteryView.setRoating(true);
+                        //title.setText("");
+                    }
+                }
+            }, 3000);
             //arrowBtn.startRoation(new int[]{R.drawable.arrow_green, R.drawable.arrow_red}, 200);
         }
         //旋转状态
         else {
-            //一直旋转状态
+            /*//一直旋转状态
             if (!lotteryView.isRoating()) {
 
                 //在这个地方设置获奖的奖项
@@ -254,7 +318,7 @@ public class BigWheelFragment extends Fragment implements RotateListener, View.O
                 //设置为缓慢停止
                 lotteryView.setRoating(true);
                 //title.setText("");
-            }
+            }*/
         }
     }
 

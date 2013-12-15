@@ -60,4 +60,11 @@
     <color name = "new_border_color">#9f9eaa</color>
     <color name = "new_divider_line_color">#adacb0</color>
 
+
+    <color name="new_big_wheel_no_award_color">#f95f1f</color>
+    <color name="new_big_wheel_award_color">#ed8f43</color>
+    <color name="new_big_wheel_award_divider_color">#d36207</color>
+    <color name="new_big_wheel_no_award_divider_color">#da4406</color>
+
+
 </resources>
