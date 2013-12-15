@@ -3,6 +3,7 @@ package com.hoyotech.ctgames.viewdef;
 import android.content.Context;
 import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.util.Log;
@@ -41,6 +42,8 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap[] itemBitmaps; // 选项图片
     private int[] hitPercent; // 中奖概率，按10000来分
 
+    private Bitmap bitmapHover;
+
 
     private Paint mPaint;
     private Paint textPaint;
@@ -55,15 +58,27 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
     private boolean isRoating = false;
 
     private RotateListener listern;
+    private boolean hasPaint = false;
+    Bitmap bg;
+    Bitmap bitmapBg;
+    int bgHeight;
 
     public LotteryView(Context context, AttributeSet attr) {
         super(context, attr);
     }
 
-    public void initAll(int[] itemColor, String[] itemText, int[] itemImage, float awardRadius, int[] hitPercent) {
+    public void initAll(int[] itemColor, String[] itemText, int[] itemImage, float awardRadius, int[] hitPercent, int bgHeight, Drawable hoverDrawable) {
         // 创建一个新的SurfaceHolder， 并分配这个类作为它的回调(callback)
         holder = getHolder();
         holder.addCallback(this);
+        this.bgHeight = bgHeight;
+
+        /*setBackgroundColor(Color.TRANSPARENT);
+        setZOrderOnTop(true); //necessary
+        getHolder().setFormat(PixelFormat.TRANSPARENT);*/
+
+
+
 
         this.itemColor = itemColor;
         this.itemText = itemText;
@@ -74,7 +89,13 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
         itemBitmaps = new Bitmap[itemImage.length];
         for (int i = 0 ; i < itemImage.length; i++) {
             itemBitmaps[i] = BitmapFactory.decodeResource(getResources(), itemImage[i]);
+            itemBitmaps[i] = Bitmap.createScaledBitmap(itemBitmaps[i], (int)(bgHeight * 85 / 440f), (int)(bgHeight * 125 / 440f), true);
         }
+
+        Bitmap bitmapHover1 = ((BitmapDrawable)hoverDrawable).getBitmap();
+
+        bitmapHover = Bitmap.createScaledBitmap(bitmapHover1, (int)(bgHeight * 144/224f), (int)(bgHeight * 144/224f), true);
+
 
         // 图像画笔
         mPaint = new Paint();
@@ -89,12 +110,13 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
         startAngle = 0;
         // 加速度
         acceleration = 1;
+
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
                                int height) {
-        if (myThread != null) {
+        if (myThread != null && !myThread.isAlive()) {
             myThread.start();
         }
     }
@@ -102,9 +124,13 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         surfaceExist = true;
-        // 高度
+        done = false;
         screenHight = getHeight();
         screenWidth = getWidth();
+        bg = ((BitmapDrawable)getResources().getDrawable(R.drawable.wheel_real_bg)).getBitmap();
+        bitmapBg = Bitmap.createScaledBitmap(bg, (int)screenWidth, (int)screenHight, true);
+
+        start();
     }
 
     @Override
@@ -124,6 +150,12 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 
             SurfaceHolder surfaceHolder = holder;
             mCanvas = surfaceHolder.lockCanvas();
+
+            // 下面开始画图片
+            Matrix matrix = new Matrix();
+            matrix.postTranslate(0f, 0f);
+            mCanvas.drawBitmap(bitmapBg, matrix, mPaint);
+            mCanvas.save();
 
             float f1 = screenWidth / 2;
             float f2 = screenHight / 2;
@@ -205,12 +237,14 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
             float picNewX = newX - bitmap.getWidth() / 2;
             float picNewY = newY - bitmap.getHeight() / 2;
             matrix.postTranslate(picNewX, picNewY); // 按照图片的比例设置
-            matrix.postRotate(90 - (int)Math.toDegrees(rotateAngle), picNewX + bitmap.getWidth() / 2, picNewY + bitmap.getHeight() / 2);
+            matrix.postRotate(90 - (int) Math.toDegrees(rotateAngle), picNewX + bitmap.getWidth() / 2, picNewY + bitmap.getHeight() / 2);
 
-            mCanvas.drawBitmap(bitmap, matrix, mPaint);
+            // 谢谢参与不画图
+            if(!itemText[0].equals(str)) {
+                mCanvas.drawBitmap(bitmap, matrix, mPaint);
+                mCanvas.save();
+            }
 
-            // 上面开始画图片
-            mCanvas.save();
         }
 
         // *********************************画每个扇形*********************************
@@ -227,9 +261,31 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 				 */
                 mCanvas.drawArc(localRectf, temp, sweepAngle, true, mPaint);
                 mCanvas.save();
-                drawAward(localRectf, temp, sweepAngle, itemText[i], itemBitmaps[i]);
+                // 下面开始画图片
                 temp += sweepAngle;
             }
+
+            if(!hasPaint) {
+                Matrix matrix = new Matrix();
+                matrix.postTranslate(screenWidth / 2 - bitmapHover.getWidth() / 2, screenHight / 2 - bitmapHover.getWidth() / 2);
+                mCanvas.drawBitmap(bitmapHover, matrix, mPaint);
+                mCanvas.save();
+            }
+
+            temp = startAngle;
+            for (int i = 0; i < itemCount; i++) {
+                mPaint.setColor(getResources().getColor(itemColor[i]));
+                // startAngle为每次移动的角度大小
+                sweepAngle = (float) (360 / itemCount);
+
+                drawAward(localRectf, temp, sweepAngle, itemText[i], itemBitmaps[i]);
+                // 下面开始画图片
+                temp += sweepAngle;
+            }
+
+
+
+
         }
 
         @Override
@@ -264,7 +320,7 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
         if (myThread == null) {
             myThread = new SurfaceViewThread();
         }
-        if (surfaceExist) {
+        if (surfaceExist && !myThread.isAlive()) {
             myThread.start();
         }
     }

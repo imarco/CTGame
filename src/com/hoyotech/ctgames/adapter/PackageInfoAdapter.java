@@ -86,8 +86,8 @@ public class PackageInfoAdapter extends BaseAdapter {
             switch (v.getId()) {
                 case R.id.image_app_package:
                     // 打开礼包的详情，打开PackageDetailActivity
-                    Intent intent = new Intent(context, PackageDetailActivity.class);
-                    context.startActivity(intent);
+                    /*Intent intent = new Intent(context, PackageDetailActivity.class);
+                    context.startActivity(intent);*/
                     break;
             }
         }
