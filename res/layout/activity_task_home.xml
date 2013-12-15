@@ -13,24 +13,6 @@
         android:id="@+id/task_home_action_bar"
         layout="@layout/action_bar_layout"></include>
 
-    <!--
-    <RelativeLayout
-        android:layout_below="@id/task_home_action_bar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <com.viewpagerindicator.TabPageIndicator
-            android:id="@+id/task_indicator"
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent" />
-
-        <com.hoyotech.ctgames.viewdef.CTGameViewPager
-            android:id="@+id/task_pager"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-    </RelativeLayout>
-    -->
     <FrameLayout
         android:id="@+id/task_frame_content"
         android:layout_below="@id/task_home_action_bar"

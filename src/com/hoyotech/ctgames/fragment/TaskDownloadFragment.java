@@ -142,6 +142,8 @@ public class TaskDownloadFragment extends Fragment implements GetDataCallback {
                             }
                         }
                         adapter.notifyDataSetChanged();
+                        Intent updateIntent = new Intent(INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD);
+                        getActivity().sendBroadcast(updateIntent);
                         break;
                     case TaskState.STATE_STOP:
                         break;
@@ -152,3 +154,4 @@ public class TaskDownloadFragment extends Fragment implements GetDataCallback {
         }
     }
 }
+

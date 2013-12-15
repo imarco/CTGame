@@ -18,6 +18,7 @@ import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.TaskInstallHolder;
 import com.hoyotech.ctgames.db.dao.AppDao;
+import com.hoyotech.ctgames.fragment.TaskInstallFragment;
 import com.hoyotech.ctgames.util.CTGameConstans;
 import com.hoyotech.ctgames.util.Constant;
 import com.hoyotech.ctgames.util.GetDataCallback;
@@ -227,6 +228,8 @@ public class TaskInstallAdapter extends BaseAdapter {
                             // 从任务列表中删除
                             data.remove(info);
                             notifyDataSetChanged();
+                            Intent updateIntent = new Intent(TaskInstallFragment.INTENT_FILTER_ACTION_NAME_TASK_COMPLETE);
+                            context.sendBroadcast(updateIntent);
                             break;
                         default:
                             Toast.makeText(context, "错误的应用状态：" + info.getState(), Toast.LENGTH_SHORT).show();

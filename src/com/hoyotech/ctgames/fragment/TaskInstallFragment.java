@@ -40,12 +40,14 @@ import java.util.List;
  * Created by GGCoke on 13-12-3.
  */
 public class TaskInstallFragment extends Fragment  {
+    public static final String INTENT_FILTER_ACTION_NAME_TASK_COMPLETE = "com.hoyitech.ctgames.fragment.TaskInstallFragment";
     private static final String KEY_CONTENT = "TaskInstallFragment:Content";
     private ListView lv;
     private Bundle bundle;
     private List<AppInfo> apps = new ArrayList<AppInfo>();
     private TaskInstallAdapter adapter;
     private InstallReceiver receiver;
+    private DownloadCompleteReceiver dcReceiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,14 +56,7 @@ public class TaskInstallFragment extends Fragment  {
         if ((savedInstanceState != null) && savedInstanceState.containsKey(KEY_CONTENT)) {
             bundle = savedInstanceState.getBundle(KEY_CONTENT);
         }
-        if (null == receiver) {
-            receiver = new InstallReceiver();
-            IntentFilter filter = new IntentFilter();
-            filter.addAction(Intent.ACTION_PACKAGE_ADDED);
-            filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
-            filter.addDataScheme("package");    // 这里需要设置scheme，否则接收不到
-            getActivity().registerReceiver(receiver, filter);
-        }
+
     }
 
     @Override
@@ -79,6 +74,21 @@ public class TaskInstallFragment extends Fragment  {
         adapter = new TaskInstallAdapter(getActivity(), apps);
         lv.setAdapter(adapter);
 
+        if (null == receiver) {
+            receiver = new InstallReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Intent.ACTION_PACKAGE_ADDED);
+            filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
+            filter.addDataScheme("package");    // 这里需要设置scheme，否则接收不到
+            getActivity().registerReceiver(receiver, filter);
+        }
+
+        if (null == dcReceiver) {
+            dcReceiver = new DownloadCompleteReceiver();
+            IntentFilter filter = new IntentFilter(TaskDownloadFragment.INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD);
+            getActivity().registerReceiver(dcReceiver, filter);
+        }
+
         return v;
     }
 
@@ -90,10 +100,13 @@ public class TaskInstallFragment extends Fragment  {
 
     @Override
     public void onDestroy () {
+        super.onDestroy();
         if (null != receiver) {
             getActivity().unregisterReceiver(receiver);
         }
-        super.onDestroy();
+        if (null != dcReceiver) {
+            getActivity().unregisterReceiver(dcReceiver);
+        }
     }
 
     @Override
@@ -172,6 +185,21 @@ public class TaskInstallFragment extends Fragment  {
                         }
                     } catch (MalformedURLException e) {}
                 }
+            }
+        }
+    }
+
+    private class DownloadCompleteReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(TaskDownloadFragment.INTENT_FILTER_ACTION_NAME_TASK_DOWNLOAD)) {
+                apps.clear();
+                AppDao appDao = new AppDao(getActivity());
+                apps.addAll(appDao.queryAppsByState(TaskState.STATE_COMPLETE));
+                apps.addAll(appDao.queryAppsByState(TaskState.STATE_INSTALLED));
+                apps.addAll(appDao.queryAppsByState(TaskState.STATE_OPENED));
+                adapter.notifyDataSetChanged();
             }
         }
     }

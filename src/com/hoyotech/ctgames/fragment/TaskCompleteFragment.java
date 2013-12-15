@@ -1,6 +1,10 @@
 package com.hoyotech.ctgames.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,6 +30,7 @@ public class TaskCompleteFragment extends Fragment {
     private ListView lv;
     private List<AppInfo> apps = new ArrayList<AppInfo>();
     private TaskCompleteAdapter adapter;
+    private TaskCompleteReceiver receiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,12 @@ public class TaskCompleteFragment extends Fragment {
         apps = appDao.queryAppsByState(TaskState.STATE_TASK_COMPLETE);
         adapter = new TaskCompleteAdapter(getActivity(), apps);
         lv.setAdapter(adapter);
+
+        if (null == receiver) {
+            receiver = new TaskCompleteReceiver();
+            IntentFilter filter = new IntentFilter(TaskInstallFragment.INTENT_FILTER_ACTION_NAME_TASK_COMPLETE);
+            getActivity().registerReceiver(receiver, filter);
+        }
         return v;
     }
 
@@ -53,10 +64,26 @@ public class TaskCompleteFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBundle(KEY_CONTENT, bundle);
-
-
     }
 
+    @Override
+    public void onDestroy () {
+        super.onDestroy();
+        if (null != receiver) {
+            getActivity().unregisterReceiver(receiver);
+        }
+    }
 
+    private class TaskCompleteReceiver extends BroadcastReceiver{
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(TaskInstallFragment.INTENT_FILTER_ACTION_NAME_TASK_COMPLETE)) {
+                apps.clear();
+                AppDao appDao = new AppDao(getActivity());
+                apps = appDao.queryAppsByState(TaskState.STATE_TASK_COMPLETE);
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
 }

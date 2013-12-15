@@ -68,9 +68,6 @@ public class TaskHomeActivity extends FragmentActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.action_bar_button_zone:
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("text", "好冷啊");
-                SocialShareUtils.share(this,false,SinaWeibo.NAME,params,null,null);
                 break;
             default:
                 break;
