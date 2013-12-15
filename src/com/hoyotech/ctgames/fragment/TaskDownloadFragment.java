@@ -136,12 +136,12 @@ public class TaskDownloadFragment extends Fragment implements GetDataCallback {
                         break;
                     case TaskState.STATE_COMPLETE:
                         url = downloadIntent.getStringExtra(TaskState.DOWNLOAD_URL);
-                        convertView = lv.findViewWithTag(url);
-                        if (null != convertView) {
-                            holder = new TaskDownloadHolder(convertView);
-                            apps.remove(holder.info);
-                            adapter.notifyDataSetChanged();
+                        for (AppInfo info : apps) {
+                            if (info.getAppUrl().equals(url)) {
+                                apps.remove(info);
+                            }
                         }
+                        adapter.notifyDataSetChanged();
                         break;
                     case TaskState.STATE_STOP:
                         break;

@@ -188,7 +188,7 @@ public class DownloadManager extends Thread {
             public void updateProcess(DownloadTask task) {
                 Intent updateIntent = new Intent(action);
                 updateIntent.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
-                updateIntent.putExtra(TaskState.DOWNLOAD_SPEED, task.getDownloadSpeed() + "kbps");
+                updateIntent.putExtra(TaskState.DOWNLOAD_SPEED, task.getDownloadSpeed() + "KB/S");
                 updateIntent.putExtra(TaskState.DOWNLOAD_PROGRESS, task.getDownloadPercent() + "");
                 updateIntent.putExtra(TaskState.DOWNLOAD_URL, task.getUrl());
                 mContext.sendBroadcast(updateIntent);

@@ -53,11 +53,11 @@ public class TaskInstallHolder {
     public void setData(Context context, AppInfo appInfo) {
         CTGameImageLoader.loadImage(context, appInfo.getAppLogoUrl(), this.appImageHeader);
         this.appName.setText(appInfo.getAppName());
-        this.appVersion.setText(appInfo.getVersion());
+        this.appVersion.setText("("+appInfo.getVersion()+")");
         this.appPackageSize.setText(StorageUtils.getSizeFormatted(appInfo.getAppSize()));
         this.btnOptions.setText(TaskState.getTaskStateMap().get(appInfo.getState()));
-        this.tvPrizeCount.setText(String.valueOf(appInfo.getLotteryNum()));
-        this.tvLuckyBeanCount.setText(String.valueOf(appInfo.getLuckyBeansNum()));
+        this.tvPrizeCount.setText("下载完成可获得"+appInfo.getLotteryNum()+"次获奖机会");
+        this.tvLuckyBeanCount.setText("安装打开后可获得"+appInfo.getLuckyBeansNum()+"幸运豆");
         this.tvSummary.setText(appInfo.getAppDesc());
         TaskState.setButtonView(appInfo.getState(), context, btnOptions);
     }

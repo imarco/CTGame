@@ -14,9 +14,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 public class CTGameImageLoader {
     private static final ImageLoader imageLoader = ImageLoader.getInstance();
     private static final DisplayImageOptions options = new DisplayImageOptions.Builder()
-            .showStubImage(R.drawable.ic_launcher)                      // 加载过程中图片
-            .showImageForEmptyUri(R.drawable.ic_launcher)               // 错误url图片
-            .showImageOnFail(R.drawable.ic_launcher)                    // 加载失败图片
             .cacheInMemory(true)
             .cacheOnDisc(true)
             .build();

@@ -58,9 +58,9 @@ public class TaskDownloadHolder {
     public void setData(Context context, AppInfo appInfo) {
         CTGameImageLoader.loadImage(context, appInfo.getAppLogoUrl(), this.appImageHeader);
         this.appName.setText(appInfo.getAppName());
-        this.appVersion.setText(appInfo.getVersion());
+        this.appVersion.setText("("+appInfo.getVersion()+")");
         this.appPackageSize.setText(StorageUtils.getSizeFormatted(appInfo.getAppSize()));
-        this.tvPrizeCount.setText(String.valueOf(appInfo.getLotteryNum()));
+        this.tvPrizeCount.setText("下载完成可获得"+appInfo.getLotteryNum()+"次获奖机会");
         this.tvDownloadRate.setText(String.valueOf(appInfo.getRate())+"KB/S");
         this.progressBar.setProgress(appInfo.getProgress());
         this.tvDownloadPercent.setText(appInfo.getProgress() + "%");

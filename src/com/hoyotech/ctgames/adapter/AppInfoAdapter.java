@@ -112,6 +112,7 @@ public class AppInfoAdapter extends BaseAdapter {
                         downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
                         context.startService(downloadIntet);
                     }
+                    notifyDataSetChanged();
                     break;
                 case R.id.layout_install_button_enabled:
                     break;

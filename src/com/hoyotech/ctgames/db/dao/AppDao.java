@@ -37,7 +37,6 @@ public class AppDao {
         SQLiteDatabase database = null;
 
         try {
-            database = helper.getWritableDatabase();
             // 查询是否下载过，如果已经完成过下载，则更新状态为下载中，否则添加新纪录
             AppInfo existApp = queryAppById(appInfo.getAppId());
             if (existApp != null && existApp.isHasDownloaded()) {
@@ -47,10 +46,15 @@ public class AppDao {
             } else {
                 ContentValues values = contentWrapper(appInfo);
                 // 插入应用信息
-                database.insert(AppInfo.APPINFO_TABLE_NAME, null, values);
+                database = helper.getWritableDatabase();
+                long result = database.insert(AppInfo.APPINFO_TABLE_NAME, null, values);
+                if (-1 == result) {
+                    System.out.println("插入失败 in AppDap.addApp");
+                }
             }
             flag = true;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return flag;
         } finally {
             if (null != database) {
