@@ -323,11 +323,11 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
 
         if (null != from) {
-            fragmentTransaction.hide(from);
+            fragmentTransaction.detach(from);
         }
 
         if (!to.isAdded()) {
-            fragmentTransaction.add(R.id.frame_content, to).show(to).commit();
+            fragmentTransaction.add(R.id.frame_content, to).attach(to).commit();
         }
     }
 }
