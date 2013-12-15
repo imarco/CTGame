@@ -138,27 +138,7 @@ public class TaskInstallAdapter extends BaseAdapter {
                             values.put(AppInfo.APPINFO_STATE, TaskState.STATE_INSTALLED);
                             appDao.updateApp(values, AppInfo.APPINFO_APPURL + "=?", new String[] {info.getAppUrl()});
 
-                            // TODO 向服务器发送安装应用请求
-                            d.put("id", info.getAppId());
-                            d.put("download", Constant.REQUEST_APP_TYPE_OPEN);
-                            d.put("downloadSize", 0);
-                            request.put("type", CTGameConstans.REQUEST_TYPE_DOWNLOADAPP);
-                            request.put("sessionId", StorageUtils.getSessionID());
-                            request.put("versionId", CTGameConstans.VERSION);
-                            request.put("phone", StorageUtils.getUserPhoneNumber());
-                            request.put("data", d);
-                            new GetDataTask(new GetDataCallback() {
-                                @Override
-                                public void AddData(String data, int flag) {
-                                }
-
-                                @Override
-                                public Handler GetHandle() {
-                                    return null;
-                                }
-                            }, Constant.DOWNLOADAPP).execute(request.toJSONString());
-
-                            // 安装应用
+                            // 安装应用，安装成功后再向服务器发送安装成功的请求
                             try {
                                 Intent intent = new Intent(Intent.ACTION_VIEW);
                                 String fileName = new File(new URL(info.getAppUrl()).getFile()).getName();
@@ -184,7 +164,7 @@ public class TaskInstallAdapter extends BaseAdapter {
                             cv.put(AppInfo.APPINFO_STATE, TaskState.STATE_OPENED);
                             dao.updateApp(cv, AppInfo.APPINFO_APPURL + "=?", new String[] {info.getAppUrl()});
 
-                            // TODO 向服务器发送打开应用请求
+                            // TODO 向服务器发送打开应用请求，由服务器判断是否是第一次打开
                             d.put("id", info.getAppId());
                             d.put("download", Constant.REQUEST_APP_TYPE_OPEN);
                             d.put("downloadSize", 0);

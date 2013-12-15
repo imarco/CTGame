@@ -38,11 +38,16 @@ public class AppDao {
 
         try {
             database = helper.getWritableDatabase();
-            ContentValues values = contentWrapper(appInfo);
-            // 插入应用信息
-            long result = database.insert(AppInfo.APPINFO_TABLE_NAME, null, values);
-            if (-1 == result) {
-                System.out.println("Insert into result is " + result);
+            // 查询是否下载过，如果已经完成过下载，则更新状态为下载中，否则添加新纪录
+            AppInfo existApp = queryAppById(appInfo.getAppId());
+            if (existApp != null && existApp.isHasDownloaded()) {
+                ContentValues values = new ContentValues();
+                values.put(AppInfo.APPINFO_STATE, TaskState.STATE_DOWNLOADING);
+                updateApp(values, AppInfo.APPINFO_APPURL + "=?", new String[] {existApp.getAppUrl()});
+            } else {
+                ContentValues values = contentWrapper(appInfo);
+                // 插入应用信息
+                database.insert(AppInfo.APPINFO_TABLE_NAME, null, values);
             }
             flag = true;
         } catch (Exception e) {
@@ -50,7 +55,6 @@ public class AppDao {
         } finally {
             if (null != database) {
                 database.close();
-                ;
             }
         }
 
