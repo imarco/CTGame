@@ -61,7 +61,7 @@ public class TaskDownloadHolder {
         this.appVersion.setText("("+appInfo.getVersion()+")");
         this.appPackageSize.setText(StorageUtils.getSizeFormatted(appInfo.getAppSize()));
         this.tvPrizeCount.setText("下载完成可获得"+appInfo.getLotteryNum()+"次获奖机会");
-        this.tvDownloadRate.setText(String.valueOf(appInfo.getRate())+"KB/S");
+        this.tvDownloadRate.setText(String.valueOf((int)(appInfo.getRate() / 8f))+"KB/S");
         this.progressBar.setProgress(appInfo.getProgress());
         this.tvDownloadPercent.setText(appInfo.getProgress() + "%");
         this.btnOptions.setText(TaskState.getTaskStateMap().get(appInfo.getState()));

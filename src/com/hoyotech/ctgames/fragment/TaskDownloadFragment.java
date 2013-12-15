@@ -139,6 +139,7 @@ public class TaskDownloadFragment extends Fragment implements GetDataCallback {
                         for (AppInfo info : apps) {
                             if (info.getAppUrl().equals(url)) {
                                 apps.remove(info);
+                                break;
                             }
                         }
                         adapter.notifyDataSetChanged();
