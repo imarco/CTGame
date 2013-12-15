@@ -14,6 +14,6 @@ import com.hoyotech.ctgames.R;
 public class TestActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_zone);
+        setContentView(R.layout.fragment_more);
     }
 }

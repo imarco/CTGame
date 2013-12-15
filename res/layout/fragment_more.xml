@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/new_bg_color">
+
+    <!-- 个人的一些信息-->
+    <LinearLayout
+            android:id="@+id/layout_my_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:orientation="vertical"
+            android:background="@color/new_bg_secondary_color"
+            >
+
+        <TextView
+                android:id="@+id/tv_tel_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="8dp"
+                android:text="手机号15888888888的用户"
+                android:textColor="@color/new_text_grey_color"
+                android:textSize="10sp"
+                />
+
+        <!-- 分割线-->
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/new_border_color"
+                />
+
+        <!-- 下边-->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+            <!-- 左边-->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:layout_weight="1.25"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    >
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="本月流量"
+                        android:textColor="@color/new_text_grey_color"
+                        android:textSize="14sp"
+                        android:lines="1"
+                        />
+
+                <TextView
+                        android:id="@+id/tv_traffic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="100/200M"
+                        android:textColor="@color/new_text_orange_color"
+                        android:textSize="16sp"
+                        android:lines="1"
+                        />
+
+            </LinearLayout>
+
+            <!-- 分割线-->
+            <ImageView
+                    android:layout_width="0.1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/new_border_color"
+                    />
+
+            <!-- 右边-->
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    >
+
+
+                <TextView
+                        android:id="@+id/tv_prize_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:gravity="right"
+                        android:text="10"
+                        android:textSize="22sp"
+                        android:textColor="@color/new_text_orange_color"
+                        />
+
+                <TextView
+                    android:id="@+id/tv_luckypean_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_prize_count"
+                    android:layout_marginTop="2dp"
+                    android:gravity="right"
+                    android:text="1680"
+                    android:textSize="22sp"
+                    android:textColor="@color/new_text_orange_color"
+                    />
+
+                <TextView
+                        android:id="@+id/chance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:drawableLeft="@drawable/myzone_button_wheel_chance"
+                        android:layout_alignBaseline="@id/tv_prize_count"
+                        android:gravity="bottom"
+                        android:text=" 抽奖机会"
+                        android:textSize="14sp"
+                        android:textColor="@color/new_text_grey_color"
+
+                        />
+                <TextView
+                        android:id="@+id/pea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_alignBaseline="@id/tv_luckypean_count"
+                        android:drawableLeft="@drawable/myzone_button_luckypean"
+                        android:gravity="bottom"
+                        android:text=" 幸运豆"
+                        android:textSize="14sp"
+                        android:textColor="@color/new_text_grey_color"
+                        />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 分割线-->
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/new_border_color"
+            />
+
+    <!-- 分割线-->
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/new_border_color"
+            android:layout_marginTop="12dp"
+            />
+
+    <!-- 关于应用的一些信息-->
+    <LinearLayout
+            android:id="@+id/layout_app_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/new_bg_secondary_color"
+            >
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                >
+
+            <ImageView
+                    android:id="@+id/image_myzone_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/myzone_button_my_app"
+                    />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_myzone_app"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10sp"
+                    android:gravity="center"
+                    android:text="应用"
+                    android:textColor="@color/new_text_grey_color"
+                    android:textSize="12sp"
+                    />
+
+        </RelativeLayout>
+
+        <!-- 分割线-->
+        <ImageView
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/new_border_color"
+                />
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                >
+
+            <ImageView
+                    android:id="@+id/image_myzone_award"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/myzone_button_awards"
+                    />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_myzone_award"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10sp"
+                    android:gravity="center"
+                    android:text="奖品"
+                    android:textColor="@color/new_text_grey_color"
+                    android:textSize="12sp"
+                    />
+
+        </RelativeLayout>
+
+        <!-- 分割线-->
+        <ImageView
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/new_border_color"
+                />
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                >
+
+            <ImageView
+                    android:id="@+id/image_myzone_expect_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/myzone_button_expect_more"
+                    />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_myzone_expect_more"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10sp"
+                    android:gravity="center"
+                    android:text="敬请期待"
+                    android:textColor="@color/new_text_grey_color"
+                    android:textSize="12sp"
+                    />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- 分割线-->
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/new_border_color"
+            />
+
+    <!-- 分割线-->
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/new_border_color"
+            android:layout_marginTop="12dp"
+            />
+
+    <!-- 关于产品的一些信息-->
+    <LinearLayout
+            android:id="@+id/layout_product_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/new_bg_secondary_color"
+            >
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                >
+
+            <ImageView
+                    android:id="@+id/image_myzone_order_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/myzone_button_order_product"
+                    />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_myzone_order_product"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10sp"
+                    android:gravity="center"
+                    android:text="产品订购"
+                    android:textColor="@color/new_text_grey_color"
+                    android:textSize="12sp"
+                    />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                >
+
+            <LinearLayout
+                    android:id="@+id/layout_bank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:layout_centerHorizontal="true"
+                    android:onClick="onClick"
+                    android:visibility="visible"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:background="@drawable/myzone_button_traffic_bank">
+                <TextView
+                        android:text="离12-06还有6天"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:textColor="@color/new_text_grey_color"
+                        android:textSize="9sp"
+                        android:layout_weight="1"/>
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="33/80M"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:layout_weight="1"/>
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layout_bank"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10sp"
+                    android:gravity="center"
+                    android:text="流量银行"
+                    android:textColor="@color/new_text_grey_color"
+                    android:textSize="12sp"
+                    />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                >
+
+            <ImageView
+                    android:id="@+id/image_myzone_traffic_consume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/myzone_button_traffic_consume"
+                    />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_myzone_traffic_consume"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10sp"
+                    android:gravity="center"
+                    android:text="流量消耗"
+                    android:textColor="@color/new_text_grey_color"
+                    android:textSize="12sp"
+                    />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- 最下面-->
+    <LinearLayout
+            android:id="@+id/layout_product_summary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/new_bg_secondary_color"
+            >
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                >
+
+            <ImageView
+                    android:id="@+id/image_myzone_specification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/myzone_button_specification"
+                    />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_myzone_specification"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10sp"
+                    android:gravity="center"
+                    android:text="说明"
+                    android:textColor="@color/new_text_grey_color"
+                    android:textSize="12sp"
+                    />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                >
+
+            <ImageView
+                    android:id="@+id/image_myzone_feedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/myzone_button_feedback"
+                    />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_myzone_feedback"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10sp"
+                    android:gravity="center"
+                    android:text="反馈"
+                    android:textColor="@color/new_text_grey_color"
+                    android:textSize="12sp"
+                    />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                >
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    
+
+</LinearLayout>

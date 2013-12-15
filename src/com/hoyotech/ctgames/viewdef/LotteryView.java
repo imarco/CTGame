@@ -1,15 +1,14 @@
 package com.hoyotech.ctgames.viewdef;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.RectF;
+import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import com.hoyotech.ctgames.R;
 
 import java.util.Random;
 
@@ -38,6 +37,8 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 
     private int[] itemColor;// 选项颜色
     private String[] itemText;// 选项文字
+    private int[] itemImage;// 选项图片
+    private Bitmap[] itemBitmaps; // 选项图片
     private int[] hitPercent; // 中奖概率，按10000来分
 
 
@@ -59,15 +60,21 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
         super(context, attr);
     }
 
-    public void initAll(int[] itemColor, String[] itemText, float awardRadius, int[] hitPercent) {
+    public void initAll(int[] itemColor, String[] itemText, int[] itemImage, float awardRadius, int[] hitPercent) {
         // 创建一个新的SurfaceHolder， 并分配这个类作为它的回调(callback)
         holder = getHolder();
         holder.addCallback(this);
 
         this.itemColor = itemColor;
         this.itemText = itemText;
+        this.itemImage = itemImage;
         this.itemCount = itemText.length;
         this.hitPercent = hitPercent;
+
+        itemBitmaps = new Bitmap[itemImage.length];
+        for (int i = 0 ; i < itemImage.length; i++) {
+            itemBitmaps[i] = BitmapFactory.decodeResource(getResources(), itemImage[i]);
+        }
 
         // 图像画笔
         mPaint = new Paint();
@@ -105,6 +112,7 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
         surfaceExist = false;
         myThread = null;
         done = true;
+
     }
 
     class SurfaceViewThread extends Thread {
@@ -119,9 +127,10 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 
             float f1 = screenWidth / 2;
             float f2 = screenHight / 2;
+
             // 填充背景色
-            mCanvas.drawColor(0xff639EC3);
-            mCanvas.save();
+            //mCanvas.drawColor(Color.TRANSPARENT);
+            //mCanvas.save();
 
             // *********************************确定参考区域*************************************
             float f3 = f1 - radius;// X轴 - 左
@@ -174,7 +183,7 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 
         // *********************************画上各个Item的名称*********************************
         public void drawAward(RectF localRectf, float localStartAngle,
-                              float localSweepAngle, String str) {
+                              float localSweepAngle, String str, Bitmap bitmap) {
             // 旋转弧度
             float rotateAngle = (float) ((-(localStartAngle + sweepAngle / 2) * Math.PI) / 180);
 
@@ -183,20 +192,24 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
             float centerY = screenHight / 2;
 
             // 初始位置
-            float pointX = screenWidth / 2 + radius;
+            float pointX = screenWidth / 2 + radius * 2 / 3; // 按照图片的比例设置图片顶点的位置
             float pointY = screenHight / 2;
             float newX = (float) ((pointX - centerX) * Math.cos(rotateAngle)
                     + (pointY - centerY) * Math.sin(rotateAngle) + centerX);
             float newY = (float) (-(pointX - centerX) * Math.sin(rotateAngle)
                     + (pointY - centerY) * Math.cos(rotateAngle) + centerY);
 
-            path = new Path();
-            path.moveTo(screenWidth / 2, screenHight / 2);
-            path.lineTo(newX, newY);
+            // 下面开始画图片
+            Matrix matrix = new Matrix();
 
-            float hOffset = 90; // 越大离圆心越远
-            float vOffset = 10;
-            mCanvas.drawTextOnPath(str, path, hOffset, vOffset, textPaint);
+            float picNewX = newX - bitmap.getWidth() / 2;
+            float picNewY = newY - bitmap.getHeight() / 2;
+            matrix.postTranslate(picNewX, picNewY); // 按照图片的比例设置
+            matrix.postRotate(90 - (int)Math.toDegrees(rotateAngle), picNewX + bitmap.getWidth() / 2, picNewY + bitmap.getHeight() / 2);
+
+            mCanvas.drawBitmap(bitmap, matrix, mPaint);
+
+            // 上面开始画图片
             mCanvas.save();
         }
 
@@ -214,7 +227,7 @@ public class LotteryView extends SurfaceView implements SurfaceHolder.Callback {
 				 */
                 mCanvas.drawArc(localRectf, temp, sweepAngle, true, mPaint);
                 mCanvas.save();
-                drawAward(localRectf, temp, sweepAngle, itemText[i]);
+                drawAward(localRectf, temp, sweepAngle, itemText[i], itemBitmaps[i]);
                 temp += sweepAngle;
             }
         }

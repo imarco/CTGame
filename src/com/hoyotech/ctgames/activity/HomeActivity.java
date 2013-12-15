@@ -24,9 +24,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
     // 定义Fragment页面
     private AppFragment fragmentApp;
-    private VideoFragment fragmentVideo;
     private AwardFragment fragmentAward;
-    private ZoneFragment fragmentZone;
+    private OrderProductFragment fragmentOrderProduct;
+    private MoreFragment fragmentMore;
     private BigWheelFragment fragmentBigWheel;
 
     // 切换Fragment
@@ -34,13 +34,13 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private Fragment to;
 
     // 定义布局对象
-    private RelativeLayout appFg, videoFg, awardFg, zoneFg, wheelFg;
+    private RelativeLayout appFg, awardFg, orderProductFg, moreFg, wheelFg;
 
     // 定义图片组件对象
-    private ImageView appIv, videoIv, awardIv, zoneIv, wheelIv;
+    private ImageView appIv, awardIv, orderPruductIv, moreIv, wheelIv;
 
     // 定义文字组件对象
-    private TextView appTv, videoTv, awardTv, zoneTv, wheelTv;
+    private TextView appTv, awardTv, orderProductTv, moreTv, wheelTv;
 
     // 定义布局组件和图片组件数组，便于管理
     private ImageView[] imageViews;
@@ -89,30 +89,30 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private void initView() {
         // 实例化布局对象
         appFg = (RelativeLayout) findViewById(R.id.button_app);
-        videoFg = (RelativeLayout) findViewById(R.id.button_video);
-        awardFg = (RelativeLayout) findViewById(R.id.button_award);
-        zoneFg = (RelativeLayout) findViewById(R.id.button_zone);
+        awardFg = (RelativeLayout) findViewById(R.id.button_video);
+        orderProductFg = (RelativeLayout) findViewById(R.id.button_award);
+        moreFg = (RelativeLayout) findViewById(R.id.button_zone);
         wheelFg = (RelativeLayout) findViewById(R.id.button_big_wheel);
 
         // 实例化图片组件对象
         appIv = (ImageView) findViewById(R.id.image_app);
-        videoIv = (ImageView) findViewById(R.id.image_video);
-        awardIv = (ImageView) findViewById(R.id.image_award);
-        zoneIv = (ImageView) findViewById(R.id.image_zone);
+        awardIv = (ImageView) findViewById(R.id.image_video);
+        orderPruductIv = (ImageView) findViewById(R.id.image_award);
+        moreIv = (ImageView) findViewById(R.id.image_zone);
 
         // 实例化文字组件对象
         appTv = (TextView) findViewById(R.id.text_app);
-        videoTv = (TextView) findViewById(R.id.text_video);
-        awardTv = (TextView) findViewById(R.id.text_award);
-        zoneTv = (TextView) findViewById(R.id.text_zone);
+        awardTv = (TextView) findViewById(R.id.text_video);
+        orderProductTv = (TextView) findViewById(R.id.text_award);
+        moreTv = (TextView) findViewById(R.id.text_zone);
 
         // 实例化按钮图片组件
         bigWheelIv = (ImageView) findViewById(R.id.image_big_wheel);
 
         // 放入数组，便于管理
-        relativeLayouts = new RelativeLayout[] {appFg, videoFg, awardFg, zoneFg, wheelFg};
-        imageViews = new ImageView[] {appIv, videoIv, awardIv, zoneIv};
-        textViews = new TextView[] {appTv, videoTv, awardTv, zoneTv};
+        relativeLayouts = new RelativeLayout[] {appFg, awardFg, orderProductFg, moreFg, wheelFg};
+        imageViews = new ImageView[] {appIv, awardIv, orderPruductIv, moreIv};
+        textViews = new TextView[] {appTv, awardTv, orderProductTv, moreTv};
     }
 
 
@@ -122,9 +122,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private void initData() {
         // 给布局对象设置监听
         appFg.setOnClickListener(this);
-        videoFg.setOnClickListener(this);
         awardFg.setOnClickListener(this);
-        zoneFg.setOnClickListener(this);
+        orderProductFg.setOnClickListener(this);
+        moreFg.setOnClickListener(this);
 
         // 给按钮图片设置监听
         bigWheelIv.setOnClickListener(this);
@@ -195,9 +195,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
      */
     private void clickVideoButton() {
         // 实例化Fragment页面
-        fragmentVideo = new VideoFragment();
+        fragmentAward = new AwardFragment();
         from = to;
-        to = fragmentVideo;
+        to = fragmentAward;
 
         // 切换Fragm
         switchContent(from, to);
@@ -209,9 +209,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
      */
     private void clickAwardButton() {
         // 实例化Fragment页面
-        fragmentAward = new AwardFragment();
+        fragmentOrderProduct = new OrderProductFragment();
         from = to;
-        to = fragmentAward;
+        to = fragmentOrderProduct;
 
         // 切换Fragm
         switchContent(from, to);
@@ -225,9 +225,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
      */
     private void clickZoneButton() {
         // 实例化Fragment页面
-        fragmentZone = new ZoneFragment();
+        fragmentMore = new MoreFragment();
         from = to;
-        to = fragmentZone;
+        to = fragmentMore;
 
         // 切换Fragm
         switchContent(from, to);

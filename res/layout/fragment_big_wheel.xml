@@ -4,25 +4,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <ImageView
+<!--    <com.hoyotech.ctgames.viewdef.AspectRatioWidthImageView
             android:id="@+id/image_title"
+            android:src="@drawable/big_wheel_image_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop"
             android:layout_below="@id/action_bar"
-            android:src="@drawable/big_wheel_image_title"
-            />
+            android:adjustViewBounds="true"
+            />-->
 
     <RelativeLayout
             android:id="@+id/layout_big_wheel_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/image_title"
             android:background="#270022"
             >
+        <!--android:layout_below="@id/image_title"-->
 
-            <!-- 顶部栏-->
+
+        <!-- 顶部栏-->
             <LinearLayout
                     android:id="@+id/layout_up"
                     android:layout_width="match_parent"
@@ -125,14 +126,21 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layout_up"
                 android:layout_above="@id/layout_bottom"
-                android:background="@drawable/wheel_real_bg">
+                >
+            <ImageView
+                    android:id="@+id/big_wheel_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/wheel_real_bg"
+                    />
 
             <!-- 转盘中间的扇形区域，也就是奖项设置 -->
             <com.hoyotech.ctgames.viewdef.LotteryView
                     android:id="@+id/lotteryView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"/>
 
             <!-- 转盘的箭头 -->
             <ImageView
@@ -140,17 +148,17 @@
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/wheel_arrow"
+                    android:src="@drawable/wheel_arrow"
                     />
 
             <!-- 转盘的外框 -->
-            <ImageView
+            <com.hoyotech.ctgames.viewdef.AspectRatioHeightImageView
                     android:id="@+id/bg"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="wrap_content"
+                    android:src="@drawable/wheel_bg"
+                    android:layout_height="match_parent"
                     android:layout_width="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/wheel_bg"
+                    android:layout_gravity="center_horizontal"
+                    android:adjustViewBounds="true"
                     />
 
             <!-- 转盘的按钮 -->
@@ -159,7 +167,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/button_wheel_bg"/>
+                    android:src="@drawable/wheel_button"/>
 
         </FrameLayout>
 

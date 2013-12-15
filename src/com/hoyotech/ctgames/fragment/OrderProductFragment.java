@@ -8,16 +8,12 @@ import android.view.ViewGroup;
 
 import com.hoyotech.ctgames.R;
 
-/**
- * 个人中心页面
- * @author Tian
- *
- */
-public class ZoneFragment extends Fragment {
+
+public class OrderProductFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_zone, null);
+        return inflater.inflate(R.layout.fragment_order_product, null);
     }
 }

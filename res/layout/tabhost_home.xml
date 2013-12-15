@@ -55,14 +55,14 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/tab_button_video_bg" />
+                    android:src="@drawable/tab_button_award_bg" />
 
             <TextView
                     android:id="@+id/text_video"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
-                    android:text="打游戏"
+                    android:text="兑奖品"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/image_video"
                     android:layout_marginTop="1dp"
@@ -91,14 +91,14 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/tab_button_award_bg" />
+                    android:src="@drawable/tab_button_order_product_bg" />
 
             <TextView
                     android:id="@+id/text_award"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
-                    android:text="兑奖品"
+                    android:text="订购产品"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/image_award"
                     android:layout_marginTop="1dp"
@@ -120,14 +120,14 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/tab_button_zone_bg" />
+                    android:src="@drawable/tab_button_more_bg" />
 
             <TextView
                     android:id="@+id/text_zone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
-                    android:text="我的"
+                    android:text="更多"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/image_zone"
                     android:layout_marginTop="1dp"

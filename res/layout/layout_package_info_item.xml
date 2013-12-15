@@ -25,18 +25,17 @@
 
     <!-- 下面的内容-->
     <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
 
         <!-- 礼包的图片-->
-        <ImageView
+        <com.hoyotech.ctgames.viewdef.AspectRatioWidthImageView
+                android:src="@drawable/package_image_sample"
                 android:id="@+id/image_app_package"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/package_image_sample"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
                 />
 
 
