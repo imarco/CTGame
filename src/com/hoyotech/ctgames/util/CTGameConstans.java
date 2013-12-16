@@ -48,13 +48,13 @@ public class CTGameConstans {
     /* 所有任务最大数，包括，等待下载，正在下载和暂停状态 */
     public static final int MAX_DOWNLOAD_TASK_COUNT = 10;
     /* 同时下载任务最大数 */
-    public static final int MAX_DOWNLOADIND_TASK_COUNT = 5;
+    public static final int MAX_DOWNLOADIND_TASK_COUNT = 3;
 
     /* 连接超时时间 */
     public static final int CONNECTION_TIMEOUT = 5 * 1000;
 
     /* 下载缓存 8K */
-    public static final int DOWNLOAD_BUFFER_SIZE = 8 * 1024;
+    public static final int DOWNLOAD_BUFFER_SIZE = 1024 * 1024;
 
     /* 是否只允许3G下载 */
     public static final boolean DOWNLOAD_ONLY_3G_YES = true;

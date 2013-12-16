@@ -119,7 +119,6 @@ public class TaskDownloadFragment extends Fragment implements GetDataCallback {
             if (downloadIntent != null && downloadIntent.getAction().equals(DownloadTask.ACTION_DOWNLOAD)) {
                 int state = downloadIntent.getIntExtra(TaskState.DOWNLOAD_STATE, -1);
                 String url;
-                View convertView;
                 TaskDownloadHolder holder;
 
                 switch (state) {
@@ -128,11 +127,15 @@ public class TaskDownloadFragment extends Fragment implements GetDataCallback {
                         break;
                     case TaskState.STATE_DOWNLOADING:
                         url = downloadIntent.getStringExtra(TaskState.DOWNLOAD_URL);
-                        convertView = lv.findViewWithTag(url);
-                        if (null != convertView) {
-                            holder = new TaskDownloadHolder(convertView);
-                            holder.updateProgress(getActivity(), downloadIntent.getStringExtra(TaskState.DOWNLOAD_SPEED),
-                                    downloadIntent.getStringExtra(TaskState.DOWNLOAD_PROGRESS));
+                        if (lv != null && lv.getChildCount() > 0) {
+                            for (int i = 0; i < lv.getChildCount(); i++) {
+                                holder = (TaskDownloadHolder) lv.getChildAt(i).getTag();
+                                if (holder.info.getAppUrl().equals(url)) {
+                                    holder.updateProgress(getActivity(), downloadIntent.getStringExtra(TaskState.DOWNLOAD_SPEED),
+                                            downloadIntent.getStringExtra(TaskState.DOWNLOAD_PROGRESS));
+                                    break;
+                                }
+                            }
                         }
                         break;
                     case TaskState.STATE_COMPLETE:

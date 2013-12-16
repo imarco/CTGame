@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.activity.AppDetailActivity;
+import com.hoyotech.ctgames.adapter.holder.TaskInstallHolder;
 import com.hoyotech.ctgames.db.bean.AppInfo;
 import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
 import com.hoyotech.ctgames.db.dao.AppDao;
@@ -85,14 +86,18 @@ public class TaskDownloadAdapter extends BaseAdapter{
 
     @Override
     public View getView(final int position, View convertView, ViewGroup arg2) {
-        if (convertView == null) {
+        TaskDownloadHolder holder = null;
+
+
+        if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.layout_task_download_item, null);
+            holder = new TaskDownloadHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = (TaskDownloadHolder) convertView.getTag();
         }
 
         appInfo = data.get(position);
-        convertView.setTag(appInfo.getAppUrl());// 便于通过url找view
-
-        TaskDownloadHolder holder = new TaskDownloadHolder(convertView);
         holder.setData(convertView.getContext(), appInfo);
         holder.info = appInfo;
 

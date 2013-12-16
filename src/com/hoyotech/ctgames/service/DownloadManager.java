@@ -158,9 +158,10 @@ public class DownloadManager extends Thread {
     private DownloadTask newDownloadTask(String url) throws MalformedURLException {
         DownloadTask task = new DownloadTask(mContext, url, path, downloadOnly3G);
         DownloadTaskListener listener = new DownloadTaskListener() {
+            long lastPercent = 0;
             @Override
             public void preDownload(DownloadTask task) {
-
+                lastPercent = 0;
                 // TODO 向服务器发送开始下载请求
                 JSONObject request = new JSONObject();
                 JSONObject data = new JSONObject();
@@ -192,6 +193,7 @@ public class DownloadManager extends Thread {
                 updateIntent.putExtra(TaskState.DOWNLOAD_PROGRESS, task.getDownloadPercent() + "");
                 updateIntent.putExtra(TaskState.DOWNLOAD_URL, task.getUrl());
                 mContext.sendBroadcast(updateIntent);
+                lastPercent = task.getDownloadPercent();
             }
 
             @Override
