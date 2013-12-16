@@ -7,5 +7,17 @@
     android:shadowDx="5"
     android:shadowDy="5"
     android:shadowRadius="10">
-
+<GridView
+        android:id="@+id/gv_app_categories"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        android:horizontalSpacing="1dip"
+        android:listSelector="@null"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:numColumns="2"
+        android:verticalSpacing="1dip"
+        android:background="@color/new_border_color">
+    </GridView>
     </RelativeLayout>
