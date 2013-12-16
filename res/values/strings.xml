@@ -25,4 +25,9 @@
     <string name="task_completed">已完成任务</string>
     <string name="task_activate">已完成任务</string>
     <string name="task_registe">已完成任务</string>
+
+    <string name="network_no_network">无网络连接，请打开3G进行下载</string>
+    <string name="network_open_3g">亲，一定要打开数据连接下载才能拿抽奖机会哟~</string>
+    <string name="network_open_3g_confirm">帮我打开数据连接</string>
+    <string name="network_open_3g_cancel">算了，不下载了</string>
 </resources>

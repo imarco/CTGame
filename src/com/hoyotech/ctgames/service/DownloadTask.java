@@ -215,11 +215,12 @@ public class DownloadTask extends AsyncTask<Void, Integer, Long> {
         }
 
         if (!NetworkUtils.isNetworkAvailable(context)) {
-            throw new Exception(String.valueOf(CTGameConstans.DOWNLOAD_ERROR_NO_NETWORK));
+            return 0;
         }
 
         if (!NetworkUtils.is3GNetwork(context) && downloadOnly3G) {
-            throw new Exception(String.valueOf(CTGameConstans.DOWNLOAD_ERROR_WITH_WIFI));
+            NetworkUtils.set3GNetworkStatus(context, true);
+            NetworkUtils.setWifiStatus(context, false);
         }
 
         client = AndroidHttpClient.newInstance("CTGame.DownloadTask");

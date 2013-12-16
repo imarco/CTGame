@@ -1,6 +1,7 @@
 package com.hoyotech.ctgames.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.*;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -213,24 +214,63 @@ public class AppDetailActivity extends Activity implements View.OnClickListener 
 
             case R.id.app_detail_btn_download:
                 if(app_detail_btn_download.isEnabled()) {
-                    Intent downloadIntet = new Intent(DownloadService.DOWNLOAD_SERVICE_NAME);
-                    // 补充响应
-                    // 根据按钮的状态决定操作
-                    // 点击下载
-                    if(info.getState() == TaskState.STATE_PREPARE) {
+                    // 判断网络情况，如果不是3G则不允许下载
+                    if (!NetworkUtils.isNetworkAvailable(this)) {
+                        Toast.makeText(this, R.string.network_no_network, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (!NetworkUtils.is3GNetwork(this)) {
+
+                        new AlertDialog.Builder(this).setMessage(R.string.network_open_3g).setPositiveButton(R.string.network_open_3g_confirm,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // 打开3G网络并关闭WIFI
+                                        NetworkUtils.set3GNetworkStatus(AppDetailActivity.this, true);
+                                        NetworkUtils.setWifiStatus(AppDetailActivity.this, false);
+                                        info.setState(TaskState.STATE_DOWNLOADING);
+                                        app_detail_btn_download.setEnabled(false);
+                                        app_detail_btn_download.setBackground(getResources().getDrawable(R.drawable.button_grey));
+                                        app_detail_btn_install.setEnabled(false);
+                                        app_detail_btn_install.setBackground(getResources().getDrawable(R.drawable.button_grey));
+
+                                        // 通知service开始下载
+                                        Intent downloadIntet = new Intent(DownloadService.DOWNLOAD_SERVICE_NAME);
+                                        downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
+                                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
+                                        downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
+                                        AppDetailActivity.this.startService(downloadIntet);
+
+                                        // 将下载任务放入数据库备用
+                                        AppDao appDao = new AppDao(AppDetailActivity.this);
+                                        appDao.addApp(info);
+                                    }
+                                }).setNegativeButton(R.string.network_open_3g_cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).create().show();
+                    } else {
                         info.setState(TaskState.STATE_DOWNLOADING);
+                        app_detail_btn_download.setEnabled(false);
+                        app_detail_btn_download.setBackground(getResources().getDrawable(R.drawable.button_grey));
+                        app_detail_btn_install.setEnabled(false);
+                        app_detail_btn_install.setBackground(getResources().getDrawable(R.drawable.button_grey));
+
                         // 通知service开始下载
+                        Intent downloadIntet = new Intent(DownloadService.DOWNLOAD_SERVICE_NAME);
                         downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
                         downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
                         downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
-                        startService(downloadIntet);
+                        AppDetailActivity.this.startService(downloadIntet);
 
                         // 将下载任务放入数据库备用
-                        AppDao appDao = new AppDao(this);
+                        AppDao appDao = new AppDao(AppDetailActivity.this);
                         appDao.addApp(info);
                     }
                 }
-
                 break;
             case R.id.app_detail_btn_install:
                 if(app_detail_btn_install.isEnabled()) {
@@ -372,10 +412,7 @@ public class AppDetailActivity extends Activity implements View.OnClickListener 
                         break;
                     case TaskState.STATE_DOWNLOADING:
                         if (info.getAppUrl().equals(url)) {
-                            app_detail_btn_download.setEnabled(false);
-                            app_detail_btn_download.setBackground(getResources().getDrawable(R.drawable.button_grey));
-                            app_detail_btn_install.setEnabled(false);
-                            app_detail_btn_install.setBackground(getResources().getDrawable(R.drawable.button_grey));
+
                         }
                         break;
                     case TaskState.STATE_COMPLETE:

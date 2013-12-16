@@ -1,6 +1,8 @@
 package com.hoyotech.ctgames.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
 import com.hoyotech.ctgames.db.dao.AppDao;
 import com.hoyotech.ctgames.service.DownloadService;
 import com.hoyotech.ctgames.service.DownloadTask;
+import com.hoyotech.ctgames.util.NetworkUtils;
 import com.hoyotech.ctgames.util.TaskState;
 
 import java.util.List;
@@ -128,19 +131,53 @@ public class TaskDownloadAdapter extends BaseAdapter{
                     // 根据按钮的状态决定操作
                     // 点击下载-暂停 点击暂停-继续 点击继续-暂停
                     if(info.getState() == TaskState.STATE_PREPARE) {
-                        // 开始下载
-                        info.setState(TaskState.STATE_DOWNLOADING);
-                        holder.setButtonState(context, info);
-                        // 通知service开始下载
-                        downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
-                        downloadIntet.putExtra(TaskState.DOWNLOAD_APPID, info.getAppId());
-                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
-                        downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
-                        context.startService(downloadIntet);
+                        if (!NetworkUtils.isNetworkAvailable(context)) {
+                            Toast.makeText(context, R.string.network_no_network, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                        // 下载应用信息存入数据库
-                        AppDao appDao = new AppDao(context);
-                        appDao.addApp(info);
+                        if (!NetworkUtils.is3GNetwork(context)) {
+
+                            new AlertDialog.Builder(context).setMessage(R.string.network_open_3g).setPositiveButton(R.string.network_open_3g_confirm,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // 打开3G网络并关闭WIFI
+                                            NetworkUtils.set3GNetworkStatus(context, true);
+                                            NetworkUtils.setWifiStatus(context, false);
+                                            info.setState(TaskState.STATE_DOWNLOADING);
+                                            holder.setButtonState(context, info);
+                                            // 通知service开始下载
+                                            Intent downloadIntet = new Intent(DownloadService.DOWNLOAD_SERVICE_NAME);
+                                            downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
+                                            downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
+                                            downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
+                                            context.startService(downloadIntet);
+
+                                            // 将下载任务放入数据库备用
+                                            AppDao appDao = new AppDao(context);
+                                            appDao.addApp(info);
+                                        }
+                                    }).setNegativeButton(R.string.network_open_3g_cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).create().show();
+                        } else {
+                            info.setState(TaskState.STATE_DOWNLOADING);
+                            holder.setButtonState(context, info);
+                            // 通知service开始下载
+                            downloadIntet = new Intent(DownloadService.DOWNLOAD_SERVICE_NAME);
+                            downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
+                            downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
+                            downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
+                            context.startService(downloadIntet);
+
+                            // 将下载任务放入数据库备用
+                            AppDao appDao = new AppDao(context);
+                            appDao.addApp(info);
+                        }
                     } else if(info.getState() == TaskState.STATE_DOWNLOADING) {
                         // 暂停
                         info.setState(TaskState.STATE_PAUSED);
