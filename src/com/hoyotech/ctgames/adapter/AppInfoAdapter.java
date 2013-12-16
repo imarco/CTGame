@@ -159,4 +159,9 @@ public class AppInfoAdapter extends BaseAdapter {
             }
         }
     }
+
+    public void setListData(List<AppInfo> apps) {
+        this.data = apps;
+    }
+
 }

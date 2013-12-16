@@ -1,8 +1,19 @@
 package com.hoyotech.ctgames.fragment;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,11 +35,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.AppInfoAdapter;
 import com.hoyotech.ctgames.adapter.GalleryAdapter;
+import com.hoyotech.ctgames.adapter.holder.TaskDownloadHolder;
 import com.hoyotech.ctgames.db.bean.AppInfo;
-import com.hoyotech.ctgames.util.CTGameConstans;
-import com.hoyotech.ctgames.util.Constant;
-import com.hoyotech.ctgames.util.GetDataCallback;
-import com.hoyotech.ctgames.util.GetDataTask;
+import com.hoyotech.ctgames.service.DownloadTask;
+import com.hoyotech.ctgames.util.*;
 import com.hoyotech.ctgames.viewdef.FlowIndicator;
 
 /**
@@ -42,6 +52,10 @@ public class AppRecommendFragment extends Fragment implements GetDataCallback {
     private FlowIndicator indicator;
     private Timer timer;
     private final String TAG = "AppRecommendFragment";
+    private List<AppInfo> apps = new ArrayList<AppInfo>();
+    private AppInfoAdapter adapter;
+    private DownloadReceiver mDownloadReceiver;
+    private InstallReceiver mInstallReceiver;
 
 
     @Override
@@ -73,6 +87,24 @@ public class AppRecommendFragment extends Fragment implements GetDataCallback {
         //new GetDataTask(this, Constant.GETRECOMMENDLIST).execute("");// 获取推荐轮播的图片列表
         new GetDataTask(this, Constant.GETHOTAPPLIST).execute(""); // 获取热门应用列表
 
+        adapter = new AppInfoAdapter(getActivity(), apps);
+        gridView.setAdapter(adapter);
+
+        if (mDownloadReceiver == null) {
+            mDownloadReceiver = new DownloadReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(DownloadTask.ACTION_DOWNLOAD);
+            getActivity().registerReceiver(mDownloadReceiver, filter);
+        }
+
+        if (mInstallReceiver == null) {
+            mInstallReceiver = new InstallReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Intent.ACTION_PACKAGE_ADDED);
+            filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
+            filter.addDataScheme("package");    // 这里需要设置scheme，否则接收不到
+            getActivity().registerReceiver(mInstallReceiver, filter);
+        }
         return v;
     }
 
@@ -80,6 +112,18 @@ public class AppRecommendFragment extends Fragment implements GetDataCallback {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBundle(KEY_CONTENT, bundle);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
+        if (mDownloadReceiver != null) {
+            getActivity().unregisterReceiver(mDownloadReceiver);
+        }
+
+        if (mInstallReceiver != null) {
+            getActivity().unregisterReceiver(mInstallReceiver);
+        }
     }
 
     Handler handler = new Handler(){
@@ -155,8 +199,9 @@ public class AppRecommendFragment extends Fragment implements GetDataCallback {
 		        break;
 			case Constant.GETHOTAPPLIST:
 				Log.v(TAG, "GETHOTAPPLIST");
-		        AppInfoAdapter adapter = new AppInfoAdapter(getActivity(), AppInfo.parseJson((JSONArray) ((JSONObject) JsonObject.get("data")).get("appList")));
-		        gridView.setAdapter(adapter);
+                apps = AppInfo.parseJson((JSONArray) ((JSONObject) JsonObject.get("data")).get("appList"));
+                adapter.setListData(apps);
+                adapter.notifyDataSetChanged();
 		        break;
 		    default:
 		    	break;
@@ -167,4 +212,90 @@ public class AppRecommendFragment extends Fragment implements GetDataCallback {
 	public Handler GetHandle() {
 		return handler;
 	}
+
+    private class DownloadReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent downloadIntent) {
+
+            handleIntent(downloadIntent);
+
+        }
+
+        private void handleIntent(Intent downloadIntent) {
+
+            if (downloadIntent != null && downloadIntent.getAction().equals(DownloadTask.ACTION_DOWNLOAD)) {
+                int state = downloadIntent.getIntExtra(TaskState.DOWNLOAD_STATE, -1);
+
+                switch (state) {
+                    case TaskState.STATE_PREPARE:
+                        break;
+                    case TaskState.STATE_DOWNLOADING:
+                        break;
+                    case TaskState.STATE_COMPLETE:
+                        String url = downloadIntent.getStringExtra(TaskState.DOWNLOAD_URL);
+                        for (AppInfo info : apps) {
+                            if (info.getAppUrl().equals(url)) {
+                                info.setState(TaskState.STATE_COMPLETE);
+                                break;
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case TaskState.STATE_STOP:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    /**
+     * 安装完成监听接口
+     */
+    private class InstallReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED) || intent.getAction().equals(Intent.ACTION_PACKAGE_REPLACED)) {
+                String packageName = intent.getData().getSchemeSpecificPart();
+                for (AppInfo app : apps) {
+                    try {
+                        String fileName = new File(new URL(app.getAppUrl()).getFile()).getName();
+                        String apkName = CTGameConstans.CTGAME_APP_DOWNLOAD_DIR + fileName;
+                        PackageManager pm = context.getPackageManager();
+                        PackageInfo packageInfo = pm.getPackageArchiveInfo(apkName, PackageManager.GET_ACTIVITIES);
+                        if (packageName.equals(packageInfo.packageName)) {
+                            // 安装完成，adapter更新显示
+                            app.setState(TaskState.STATE_INSTALLED);
+                            adapter.notifyDataSetChanged();
+
+                            // TODO 向服务器发送安装应用请求，由服务器判断是否是第一次安装
+                            JSONObject request = new JSONObject();
+                            JSONObject d = new JSONObject();
+                            d.put("id", app.getAppId());
+                            d.put("download", Constant.REQUEST_APP_TYPE_INSTALL);
+                            d.put("downloadSize", 0);
+                            request.put("type", CTGameConstans.REQUEST_TYPE_DOWNLOADAPP);
+                            request.put("sessionId", StorageUtils.getSessionID());
+                            request.put("versionId", CTGameConstans.VERSION);
+                            request.put("phone", StorageUtils.getUserPhoneNumber());
+                            request.put("data", d);
+                            new GetDataTask(new GetDataCallback() {
+                                @Override
+                                public void AddData(String data, int flag) {
+                                }
+
+                                @Override
+                                public Handler GetHandle() {
+                                    return null;
+                                }
+                            }, Constant.DOWNLOADAPP).execute(request.toJSONString());
+                            break;
+                        }
+                    } catch (MalformedURLException e) {}
+                }
+            }
+        }
+    }
 }

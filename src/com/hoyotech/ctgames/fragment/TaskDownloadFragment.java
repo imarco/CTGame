@@ -54,11 +54,12 @@ public class TaskDownloadFragment extends Fragment implements GetDataCallback {
 
         // TODO 获取用户流量信息
 //        new GetDataTask(this, Constant.GETUSERINFO).execute();
-
-        mReceiver = new DownloadReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(DownloadTask.ACTION_DOWNLOAD);
-        getActivity().registerReceiver(mReceiver, filter);
+        if (null == mReceiver) {
+            mReceiver = new DownloadReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(DownloadTask.ACTION_DOWNLOAD);
+            getActivity().registerReceiver(mReceiver, filter);
+        }
 
         // 获取正在下载的应用列表
         apps.clear();
@@ -84,9 +85,9 @@ public class TaskDownloadFragment extends Fragment implements GetDataCallback {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
         if(mReceiver != null)
             getActivity().unregisterReceiver(mReceiver);
-        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
@@ -104,7 +105,7 @@ public class TaskDownloadFragment extends Fragment implements GetDataCallback {
     }
 
 
-    public class DownloadReceiver extends BroadcastReceiver {
+    private class DownloadReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent downloadIntent) {

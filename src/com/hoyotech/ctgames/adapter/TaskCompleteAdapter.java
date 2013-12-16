@@ -118,4 +118,8 @@ public class TaskCompleteAdapter extends BaseAdapter {
             }
         }
     }
+
+    public void setData(List<AppInfo> data) {
+        this.data = data;
+    }
 }

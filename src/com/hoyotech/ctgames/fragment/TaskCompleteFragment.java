@@ -82,6 +82,7 @@ public class TaskCompleteFragment extends Fragment {
                 apps.clear();
                 AppDao appDao = new AppDao(getActivity());
                 apps = appDao.queryAppsByState(TaskState.STATE_TASK_COMPLETE);
+                adapter.setData(apps);
                 adapter.notifyDataSetChanged();
             }
         }
