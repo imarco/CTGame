@@ -105,4 +105,12 @@ public class CTGameConstans {
     public static final String REQUEST_TYPE_GETMARQUEECONTENT = "GETMARQUEECONTENT";
     public static final String REQUEST_TYPE_FEEDBACK = "FEEDBACK";
     public static final String REQUEST_TYPE_REPLY = "REPLY";
+
+
+    public static final String AWARD_WEB_URL = "http://g.hoyotech.com:27088/redeem/index_android";
+    public static final String AWARD_WEB_TEST_URL = "http://192.168.88.85:3000/redeem/index_android";
+
+    public static final String ORDER_PRODUCT_WEB_URL = "http://g.hoyotech.com:27088/vas/index_android";
+    public static final String ORDER_PRODUCT_WEB_TEST_URL = "http://192.168.88.85:3000/vas/index_android";
+
 }

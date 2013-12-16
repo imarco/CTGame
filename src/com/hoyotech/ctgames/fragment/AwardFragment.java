@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.util.CTGameConstans;
 
 /**
  * 看视频页面
@@ -34,7 +35,7 @@ public class AwardFragment extends Fragment {
         baseLayout = (LinearLayout) inflater.inflate(R.layout.fragment_award, null);
         webView = (WebView) baseLayout.findViewById(R.id.award_webview);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(testURL);
+        webView.loadUrl(CTGameConstans.AWARD_WEB_URL);
         return baseLayout;
     }
 }

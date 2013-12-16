@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.util.CTGameConstans;
 
 
 public class OrderProductFragment extends Fragment {
@@ -26,7 +27,7 @@ public class OrderProductFragment extends Fragment {
         baseLayout = (LinearLayout) inflater.inflate(R.layout.fragment_order_product, null);
         webView = (WebView) baseLayout.findViewById(R.id.order_product_webview);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(testURL);
+        webView.loadUrl(CTGameConstans.ORDER_PRODUCT_WEB_URL);
         return baseLayout;
     }
 }
