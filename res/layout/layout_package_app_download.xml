@@ -1,159 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff" >
 
-    <!-- 礼包的图片-->
+    <!-- 礼包的图片 -->
+
     <ImageView
-            android:id="@+id/image_package"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/package_image_sample"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
-            />
+        android:id="@+id/image_package"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        android:src="@drawable/package_image_sample" />
 
     <RelativeLayout
-            android:id="@+id/layout_package_app_download"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/image_package"
-            android:background="@color/big_wheel_title_color"
-            android:paddingBottom="10dip"
-            >
+        android:id="@+id/layout_package_app_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_package"
+        android:background="@color/big_wheel_title_color"
+        android:paddingBottom="10dip" >
 
         <LinearLayout
-                android:id="@+id/layout_left"
+            android:id="@+id/layout_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/new_text_orange_color"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="8dp" >
+
+            <TextView
+                android:id="@+id/size_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:paddingTop="8dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:orientation="vertical"
+                android:layout_marginTop="6dp"
                 android:gravity="center"
-                android:background="@color/new_text_orange_color">
+                android:text="下载本礼包共需"
+                android:textColor="@color/new_text_white_color"
+                android:textSize="9sp" />
 
             <TextView
-                    android:id="@+id/size_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:gravity="center"
-                    android:text="下载本礼包共需"
-                    android:textColor="@color/new_text_white_color"
-                    android:textSize="9sp" />
-
-            <TextView
-                    android:id="@+id/tv_package_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="6dp"
-                    android:gravity="center"
-                    android:text="100M"
-                    android:textColor="@color/new_text_white_color"
-                    android:textSize="20sp" />
-
+                android:id="@+id/tv_package_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="100M"
+                android:textColor="@color/new_text_white_color"
+                android:textSize="20sp" />
         </LinearLayout>
 
-
         <Button
-                android:id="@+id/btn_package_download"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5dip"
-                android:padding="5dp"
-                android:gravity="center"
-                android:background="@drawable/button_orange"
-                android:textSize="10sp"
-                android:textColor="@color/tab_text_normal"
-                android:text="开始下载" />
+            android:id="@+id/btn_package_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dip"
+            android:background="@drawable/button_orange"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="开始下载"
+            android:textColor="@color/tab_text_normal"
+            android:textSize="10sp" />
 
         <TextView
-                android:id="@+id/tv_package_summary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/image_package"
-                android:layout_alignTop="@id/image_package"
-                android:layout_marginTop="10dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_toLeftOf="@id/btn_package_download"
-                android:layout_toRightOf="@id/layout_left"
-                android:gravity="center_vertical"
-                android:text="这个大礼包里包括各种类型的精品游戏。包括动作类，剧情类，射击类，游戏类，搞笑类，益智类。"
-                android:textColor="@color/new_text_grey_color"
-                android:lines="3"
-                android:maxLines="3"
-                android:ellipsize="end"
-                android:textSize="11sp" />
+            android:id="@+id/tv_package_summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/image_package"
+            android:layout_alignTop="@id/image_package"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="10dip"
+            android:layout_toLeftOf="@id/btn_package_download"
+            android:layout_toRightOf="@id/layout_left"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="3"
+            android:maxLines="3"
+            android:text="这个大礼包里包括各种类型的精品游戏。包括动作类，剧情类，射击类，游戏类，搞笑类，益智类。"
+            android:textColor="@color/new_text_grey_color"
+            android:textSize="11sp" />
 
         <TextView
-                android:id="@+id/tv_prize_hint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/layout_left"
-                android:layout_below="@id/tv_package_summary"
-                android:layout_alignLeft="@id/tv_package_summary"
-                android:layout_marginTop="3dp"
-                android:gravity="center_vertical"
-                android:text="完全下载本礼包可获得"
-                android:textColor="@color/new_text_orange_color"
-                android:maxLines="1"
-                android:textSize="10sp" />
+            android:id="@+id/tv_prize_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_package_summary"
+            android:layout_below="@id/tv_package_summary"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/layout_left"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="完全下载本礼包可获得"
+            android:textColor="@color/new_text_orange_color"
+            android:textSize="10sp" />
 
         <TextView
-                android:id="@+id/tv_prize_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/tv_prize_hint"
-                android:layout_alignBaseline="@id/tv_prize_hint"
-                android:drawableLeft="@drawable/package_download_image_love"
-                android:layout_marginLeft="5dp"
-                android:gravity="center_vertical"
-                android:text=" 抽奖机会"
-                android:textColor="@color/new_text_orange_color"
-                android:maxLines="1"
-                android:textSize="10sp" />
+            android:id="@+id/tv_prize_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_prize_hint"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tv_prize_hint"
+            android:drawableLeft="@drawable/package_download_image_love"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text=" 抽奖机会"
+            android:textColor="@color/new_text_orange_color"
+            android:textSize="10sp" />
 
         <TextView
-                android:id="@+id/tv_luckypean_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/tv_prize_count"
-                android:layout_alignBaseline="@id/tv_prize_hint"
-                android:drawableLeft="@drawable/package_download_image_star"
-                android:layout_marginLeft="5dp"
-                android:gravity="center_vertical"
-                android:text=" 抽奖机会"
-                android:textColor="@color/new_text_orange_color"
-                android:maxLines="1"
-                android:textSize="10sp" />
+            android:id="@+id/tv_luckypean_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_prize_hint"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tv_prize_count"
+            android:drawableLeft="@drawable/package_download_image_star"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text=" 抽奖机会"
+            android:textColor="@color/new_text_orange_color"
+            android:textSize="10sp" />
 
         <ImageView
-                android:id="@+id/image_line_divider"
-                android:layout_width="1dip"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/tv_package_size"
-                android:layout_alignLeft="@id/tv_package_summary"
-                android:layout_alignTop="@id/tv_package_size"
-                android:background="@color/app_divider_line_color" />
-
+            android:id="@+id/image_line_divider"
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_package_size"
+            android:layout_alignLeft="@id/tv_package_summary"
+            android:layout_alignTop="@id/tv_package_size"
+            android:background="@color/app_divider_line_color" />
     </RelativeLayout>
 
     <ListView
-            android:id="@+id/list_package_app"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:layout_below="@id/layout_package_app_download"
-            android:layout_marginTop="1dip"
-            android:divider="@color/app_divider_line_color"
-            android:dividerHeight="1dip"
-            />
+        android:id="@+id/list_package_app"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/layout_package_app_download"
+        android:layout_marginTop="1dip"
+        android:divider="@color/app_divider_line_color"
+        android:dividerHeight="1dip"
+        android:scrollbars="none" />
 
 </RelativeLayout>

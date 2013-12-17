@@ -99,7 +99,7 @@ public class PackageDownloadAdapter extends BaseAdapter{
             this.holder = holder;
         }
 
-        @Override
+    
         public void onClick(View v) {
 
             switch (v.getId()) {

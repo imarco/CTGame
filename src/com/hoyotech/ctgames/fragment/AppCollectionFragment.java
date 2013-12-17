@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.activity.HomeActivity;
 import com.hoyotech.ctgames.adapter.AppInfoAdapter;
 import com.hoyotech.ctgames.adapter.GalleryAdapter;
 import com.hoyotech.ctgames.adapter.PackageInfoAdapter;
@@ -38,6 +39,7 @@ public class AppCollectionFragment extends Fragment implements GetDataCallback {
     private PackageInfoAdapter adapter;
     private Handler handler;
 
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,10 @@ public class AppCollectionFragment extends Fragment implements GetDataCallback {
 
     }
 
-    @Override
+   public void name() {
+	
+
+}
     public void AddData(String data, int flag) {
 
         JSONObject JsonObject = JSON.parseObject(data);

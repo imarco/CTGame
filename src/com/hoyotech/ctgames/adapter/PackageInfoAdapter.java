@@ -1,12 +1,15 @@
 package com.hoyotech.ctgames.adapter;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.hoyotech.ctgames.R;
+import com.hoyotech.ctgames.activity.HomeActivity;
 import com.hoyotech.ctgames.activity.PackageDetailActivity;
 import com.hoyotech.ctgames.db.bean.PackageInfo;
 import com.hoyotech.ctgames.adapter.holder.PackageInfoHolder;
@@ -26,7 +29,9 @@ public class PackageInfoAdapter extends BaseAdapter {
     private List<PackageInfo> data;
     private Context context;
     private PackageInfo packageInfo;
-
+    Fragment from;
+    Fragment to;
+	PackageDetailActivity packageDetailFragment;
     //构造函数
     public PackageInfoAdapter(Context context, List<PackageInfo> data) {
         this.data = data;
@@ -59,13 +64,25 @@ public class PackageInfoAdapter extends BaseAdapter {
         } else {
             holder = (PackageInfoHolder) convertView.getTag();
         }
-
         packageInfo = data.get(position);
         holder.setData(context, packageInfo);
         holder.info = packageInfo;
-
         //设置事件监听响应
-        holder.image.setOnClickListener(new ButtonClickListener(packageInfo, holder));
+        holder.image.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			      switch (v.getId()) {
+	                case R.id.image_app_package:
+	                    Intent intent = new Intent(context, PackageDetailActivity.class);
+	                    intent.putExtra("packagename",data.get(position).getName());
+	                    intent.putExtra("packagID",data.get(position).getId());
+	                    intent.putExtra("packimageurl", data.get(position).getUrl());
+	                    context.startActivity(intent);
+	                    break;
+	            }
+			}
+		});
 
         return convertView;
     }
@@ -78,16 +95,15 @@ public class PackageInfoAdapter extends BaseAdapter {
         public ButtonClickListener(PackageInfo info, PackageInfoHolder holder) {
             this.info = info;
             this.holder = holder;
-        }
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 
         @Override
         public void onClick(View v) {
 
             switch (v.getId()) {
                 case R.id.image_app_package:
-                    // 打开礼包的详情，打开PackageDetailActivity
-                    /*Intent intent = new Intent(context, PackageDetailActivity.class);
-                    context.startActivity(intent);*/
+                    Intent intent = new Intent(context, PackageDetailActivity.class);
+                    context.startActivity(intent);
                     break;
             }
         }

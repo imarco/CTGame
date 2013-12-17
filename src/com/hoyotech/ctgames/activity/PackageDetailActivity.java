@@ -8,11 +8,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.R.integer;
+import android.R.string;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,6 +31,7 @@ import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.adapter.PackageDownloadAdapter;
 import com.hoyotech.ctgames.adapter.PackageInfoAdapter;
 import com.hoyotech.ctgames.db.bean.AppInfo;
+import com.hoyotech.ctgames.util.CTGameImageLoader;
 import com.hoyotech.ctgames.util.Constant;
 import com.hoyotech.ctgames.util.DataUtils;
 import com.hoyotech.ctgames.util.GetDataCallback;
@@ -34,26 +42,39 @@ import com.hoyotech.ctgames.util.NetworkUtils;
  * Created with IntelliJ IDEA. User: Tian Date: 13-12-6 Time: 下午9:39 To change
  * this template use File | Settings | File Templates.
  */
-public class PackageDetailActivity extends Activity implements GetDataCallback {
+public class PackageDetailActivity extends Activity implements GetDataCallback,OnClickListener {
+
+    private static final String KEY_CONTENT = "PackageDetailActivity:Content";
+    private Bundle bundle;
+
 
 	ListView packagedetaiListView;// 礼包详情列表
 	PackageDownloadAdapter adapter;// 礼包详情列表适配器
+	TextView PackgeName;//
 	TextView PackgeSize;// 礼包大小
 	TextView PackgeDice;// 列表描述
 	TextView PrizeCount;// 列表抽奖次数
 	TextView LuckypeanCount;// 幸运豆数量
 	ImageView PackgeImage;// 礼包图片
+	
 	Handler mHandler;
-
+	String packname;
+	String packID;
+	String packImageURL;
 	Button openDownButton;// 开始下载按钮
-
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_package_detail);
+		
+		
 	}
 
 	protected void onStart() {
 		super.onStart();
+		Intent intent=getIntent();
+		 packname=intent.getStringExtra("packagename");
+		 packID=intent.getStringExtra("packagID");
+		 packImageURL=intent.getStringExtra("packimageurl");
 		InitControlView();
 		SetControlViewClickListener();
 		GetDateFormSever();
@@ -64,6 +85,7 @@ public class PackageDetailActivity extends Activity implements GetDataCallback {
 	 */
 	public void InitControlView() {
 		mHandler = new Handler();
+		PackgeName=(TextView) findViewById(R.id.action_bar_title);
 		openDownButton = (Button) findViewById(R.id.btn_package_download);
 		PackgeImage = (ImageView) findViewById(R.id.image_package);
 		packagedetaiListView = (ListView) findViewById(R.id.list_package_app);
@@ -71,6 +93,8 @@ public class PackageDetailActivity extends Activity implements GetDataCallback {
 		PackgeDice = (TextView) findViewById(R.id.tv_package_summary);
 		PrizeCount = (TextView) findViewById(R.id.tv_prize_count);
 		LuckypeanCount = (TextView) findViewById(R.id.tv_luckypean_count);
+		PackgeName.setText(packname);
+		CTGameImageLoader.loadImage(PackageDetailActivity.this, packImageURL, PackgeImage);
 	}
 
 	/**
@@ -94,8 +118,8 @@ public class PackageDetailActivity extends Activity implements GetDataCallback {
 			switch (view.getId()) {
 			case R.id.btn_package_download:
 				// 此处按钮监听请根据实际情况进行逻辑修改
-				Toast.makeText(PackageDetailActivity.this, "请相关人员根据实际情况进行逻辑修改",
-						Toast.LENGTH_LONG).show();
+		
+				
 				break;
 			default:
 				break;
@@ -114,15 +138,13 @@ public class PackageDetailActivity extends Activity implements GetDataCallback {
 			try {
 				JSONObject jsonObject = new JSONObject(data);
 				JSONObject mJsonObject = jsonObject.getJSONObject("data");
-
 				PackgeDice.setText(mJsonObject.getString("description"));
 				PackgeSize.setText(mJsonObject.getString("size") + "MB");
-				PrizeCount.setText(mJsonObject.getString("lotteryNum"));
+				PrizeCount.setText("抽奖机会 "+mJsonObject.getString("lotteryNum"));
 				if (null != LuckypeanCount) {
-					LuckypeanCount.setText(mJsonObject
+					LuckypeanCount.setText("幸运豆 "+mJsonObject
 							.getString("luckyBeansNum"));
 				}
-
 				JSONArray mJsonArray = mJsonObject.getJSONArray("appList");
 				List<AppInfo> mAppInfos = new ArrayList<AppInfo>();
 				for (int i = 0; i < mJsonArray.length(); i++) {
@@ -152,8 +174,7 @@ public class PackageDetailActivity extends Activity implements GetDataCallback {
 					// mAppInfo.setAppPicUrls(((mJsonArray.getJSONArray(i))));
 					mAppInfos.add(mAppInfo);
 				}
-
-				adapter = new PackageDownloadAdapter(mAppInfos, this);// 初始化大礼包列表适配器
+				adapter = new PackageDownloadAdapter(mAppInfos, PackageDetailActivity.this);// 初始化大礼包列表适配器
 				packagedetaiListView.setAdapter(adapter);
 			} catch (JSONException e) {
 				System.out.println("JSONException  " + e);
@@ -165,5 +186,22 @@ public class PackageDetailActivity extends Activity implements GetDataCallback {
 	public Handler GetHandle() {
 		// TODO Auto-generated method stub
 		return mHandler;
+	}
+
+	@Override
+	public void onClick(View v) {
+	Intent intent;
+		switch (v.getId()) {
+        // 点击actionbar home按钮
+        case R.id.action_bar_button_back:
+    		getApplicationContext().sendBroadcast(new Intent("finish"));
+    		this.finish();
+            break;
+        // 点击actionbar 任务管理按钮
+        case R.id.action_bar_button_task:
+            intent = new Intent(this, TaskHomeActivity.class);
+            startActivity(intent);
+            break;
+    }
 	}
 }

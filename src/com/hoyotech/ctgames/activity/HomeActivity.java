@@ -28,10 +28,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private OrderProductFragment fragmentOrderProduct;
     private MoreFragment fragmentMore;
     private BigWheelFragment fragmentBigWheel;
-
     // 切换Fragment
-    private Fragment from;
-    private Fragment to;
+    public Fragment from;
+    public Fragment to;
 
     // 定义布局对象
     private RelativeLayout appFg, awardFg, orderProductFg, moreFg, wheelFg;
@@ -351,10 +350,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
      * @param from
      * @param to
      */
-    private void switchContent(Fragment from, Fragment to) {
+    public  void switchContent(Fragment from, Fragment to) {
         // 得到Fragment事务管理器
-        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
-
+        FragmentTransaction fragmentTransaction = super.getSupportFragmentManager().beginTransaction();
         if (null != from) {
             fragmentTransaction.detach(from);
         }
@@ -363,4 +361,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
             fragmentTransaction.add(R.id.frame_content, to).attach(to).commit();
         }
     }
+
+	
+    
 }
