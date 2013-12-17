@@ -1,9 +1,7 @@
 package com.hoyotech.ctgames.adapter;
 
-import android.content.BroadcastReceiver;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.*;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -14,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import android.widget.Toast;
 import com.alibaba.fastjson.JSONObject;
 import com.hoyotech.ctgames.R;
 import com.hoyotech.ctgames.activity.AppDetailActivity;
@@ -100,16 +99,52 @@ public class AppInfoAdapter extends BaseAdapter {
                     // 根据按钮的状态决定操作
                     // 点击下载-暂停 点击暂停-继续 点击继续-暂停
                     if(info.getState() == TaskState.STATE_PREPARE) {
-                        info.setState(TaskState.STATE_DOWNLOADING);
-                        // 通知service开始下载
-                        downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
-                        downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
-                        downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
-                        context.startService(downloadIntet);
+                        // 判断网络情况，如果不是3G则不允许下载
+                        if (!NetworkUtils.isNetworkAvailable(context)) {
+                            Toast.makeText(context, R.string.network_no_network, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                        // 将下载任务放入数据库备用
-                        AppDao appDao = new AppDao(context);
-                        appDao.addApp(info);
+                        if (!NetworkUtils.is3GNetwork(context)) {
+
+                            new AlertDialog.Builder(context).setMessage(R.string.network_open_3g).setPositiveButton(R.string.network_open_3g_confirm,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // 打开3G网络并关闭WIFI
+                                            NetworkUtils.set3GNetworkStatus(context, true);
+                                            NetworkUtils.setWifiStatus(context, false);
+                                            info.setState(TaskState.STATE_DOWNLOADING);
+                                            // 通知service开始下载
+                                            Intent downloadIntet = new Intent(DownloadService.DOWNLOAD_SERVICE_NAME);
+                                            downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
+                                            downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
+                                            downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
+                                            context.startService(downloadIntet);
+
+                                            // 将下载任务放入数据库备用
+                                            AppDao appDao = new AppDao(context);
+                                            appDao.addApp(info);
+                                        }
+                                    }).setNegativeButton(R.string.network_open_3g_cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).create().show();
+                        } else {
+                            info.setState(TaskState.STATE_DOWNLOADING);
+                            // 通知service开始下载
+                            downloadIntet = new Intent(DownloadService.DOWNLOAD_SERVICE_NAME);
+                            downloadIntet.putExtra(TaskState.DOWNLOAD_STATE, TaskState.STATE_DOWNLOADING);
+                            downloadIntet.putExtra(TaskState.DOWNLOAD_URL, info.getAppUrl());
+                            downloadIntet.putExtra("action", DownloadTask.ACTION_DOWNLOAD);
+                            context.startService(downloadIntet);
+
+                            // 将下载任务放入数据库备用
+                            AppDao appDao = new AppDao(context);
+                            appDao.addApp(info);
+                        }
                     } else if(info.getState() == TaskState.STATE_DOWNLOADING) {
                         info.setState(TaskState.STATE_PAUSED);
                         // 通知service暂停下载

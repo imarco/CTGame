@@ -142,10 +142,10 @@ public class AppInfoHolder {
     public void setDownloadButtonEnabledOrNot(boolean enabled) {
         if(enabled) {
             layoutDownloadEnabled.setVisibility(View.VISIBLE);
-            layoutDownloadDisabled.setAlpha(0f);
+//            layoutDownloadDisabled.setAlpha(0f);
         } else {
             layoutDownloadEnabled.setVisibility(View.GONE);
-            layoutDownloadDisabled.setAlpha(1f);
+//            layoutDownloadDisabled.setAlpha(1f);
         }
     }
 
@@ -156,10 +156,10 @@ public class AppInfoHolder {
     public void setInstallButtonEnabledOrNot(boolean enabled) {
         if(enabled) {
             layoutInstallEnabled.setVisibility(View.VISIBLE);
-            layoutInstallDisabled.setAlpha(0f);
+//            layoutInstallDisabled.setAlpha(0f);
         } else {
             layoutInstallEnabled.setVisibility(View.GONE);
-            layoutInstallDisabled.setAlpha(1f);
+//            layoutInstallDisabled.setAlpha(1f);
         }
     }
 

@@ -36,7 +36,7 @@ public class DownloadService extends Service {
     public void onStart(Intent intent, int startId) {
         super.onStart(intent, startId);
         String action = intent.getStringExtra("action");
-        boolean downloadOnly3G = intent.getBooleanExtra("downloadOnly3G", false);
+        boolean downloadOnly3G = intent.getBooleanExtra("downloadOnly3G", true);
         manager.init(CTGameConstans.CTGAME_APP_DOWNLOAD_DIR, action, downloadOnly3G);
 
         // 接收界面点击事件发送的intent，调用downloadmanager的对应方法

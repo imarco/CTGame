@@ -398,7 +398,8 @@ public class DownloadManager extends Thread {
      */
     public synchronized void continueTask(DownloadTask task) {
         if (null != task) {
-            mPausingTasks.remove(task);
+            if (mPausingTasks.contains(task))
+                mPausingTasks.remove(task);
             mTaskQueue.offer(task);
             if (!this.isAlive()) {
                 this.startManager();
